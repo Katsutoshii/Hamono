@@ -193,7 +193,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1431613575
+--- !u!1001 &1357259105
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -231,46 +231,6 @@ Prefab:
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114474713282005244, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: autoPathing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114474713282005244, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: kp
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 50404783047066720, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114474713282005244, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: maxSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 61671867867945532, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: -0.029511213
-      objectReference: {fileID: 0}
-    - target: {fileID: 61671867867945532, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 0.55642796
-      objectReference: {fileID: 0}
-    - target: {fileID: 61671867867945532, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: -0.2459681
-      objectReference: {fileID: 0}
-    - target: {fileID: 61671867867945532, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 1.1954489
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
