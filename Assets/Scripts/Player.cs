@@ -9,6 +9,9 @@ public class Player : MonoBehaviour {
 	public float jumpPower = 300f;
 	public float kp = 100f;
 
+	// counter for double jumps
+	public int canJump;
+
 	public bool grounded;
 	public bool autoPathing;
 
@@ -25,9 +28,18 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if(Input.GetKeyDown(key:KeyCode.W)) {
+		if(Input.GetKeyDown(key:KeyCode.W) && canJump < 1) {
 			rb.AddForce(Vector2.up * jumpPower);
 			autoPathing = false;
+			canJump += 1;
+		}
+
+		// boolean to check if player is touching ground
+		if(rb.velocity.y == 0.0) {
+			grounded = true;
+			canJump = 0;
+		} else {
+			grounded = false;
 		}
 
 		// turn the sprite around
