@@ -68,7 +68,12 @@ public class Player : MonoBehaviour {
 
             Vector3 worldSpaceClickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetA = new Vector2(worldSpaceClickPosition.x, worldSpaceClickPosition.y);
-         
+
+			// turn the sprite around
+			if(targetA.x > transform.position.x)
+				transform.localScale = new Vector3(1, 1, 1);
+			else 
+				transform.localScale = new Vector3(-1, 1, 1);
 		}
 
 		if (autoPathing) {
@@ -91,8 +96,5 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(20, 20, 100, 100), "Player velocity = " + rb.velocity.ToString());
-    }
+	
 }
