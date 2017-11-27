@@ -401,6 +401,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: slashIndicator
+      value: 
+      objectReference: {fileID: 1690490367}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
@@ -476,7 +481,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1690490364}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.54, y: 0.07, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
@@ -496,6 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetA: {x: 0, y: 0, z: 0}
   drawing: 0
+  spriteRenderer: {fileID: 0}
 --- !u!1 &1930983478
 GameObject:
   m_ObjectHideFlags: 0

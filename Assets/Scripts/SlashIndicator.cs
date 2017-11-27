@@ -7,7 +7,7 @@ public class SlashIndicator : MonoBehaviour {
 	public Vector3 targetA;
 	public bool drawing = false;
 
-	private SpriteRenderer spriteRenderer;
+	public SpriteRenderer spriteRenderer;
 
 	// Use this for initialization
 	void Start () {
@@ -38,7 +38,7 @@ public class SlashIndicator : MonoBehaviour {
 			transform.position = clickWorldPoint;
 			targetA = clickWorldPoint;
 		}
-		else if (Input.GetMouseButtonUp(0)) {
+		else if (!Input.GetMouseButton(0)) {
 			drawing = false;
 		}
 
