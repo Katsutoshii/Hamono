@@ -36,12 +36,13 @@ public class Player : MonoBehaviour {
     private Animator anim;
 
 	// constants
-	public const float SLASHING_X_DIST = 1f;
-	public const float SLASHING_Y_DIST = 0.5f;
-	public const float SLASHING_THRESHOLD = 2f;
-	public const float AUTO_JUMP_FACTOR = 175;
-	public const float TURNING_THRESHOLD = 0.1f;
-	public const float KP = 20;
+	public float SLASHING_X_DIST;
+	public float SLASHING_Y_DIST;
+	public float SLASHING_THRESHOLD;
+	public float AUTO_JUMP_FACTOR;
+	public float TURNING_THRESHOLD;
+	public float KP;
+	public float GRAVITY_SCALE;
 
 	// Use this for initialization
 	void Start () {
@@ -54,10 +55,17 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// turn the sprite around
-		if(rb.velocity.x > TURNING_THRESHOLD) 
+		if(rb.velocity.x > TURNING_THRESHOLD) {
 			transform.localScale = new Vector3(1, 1, 1);
-		else if(rb.velocity.x < -TURNING_THRESHOLD) 
+			if(state == State.idle)
+				state = State.running;
+		}
+		else if(rb.velocity.x < -TURNING_THRESHOLD) {
 			transform.localScale = new Vector3(-1, 1, 1);
+			if(state == State.idle)
+				state = State.running;
+		}
+		else if(state == State.running) state = State.idle;
 
         anim.SetBool("grounded", grounded);
         anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
@@ -113,7 +121,7 @@ public class Player : MonoBehaviour {
 			else slashIndicator.spriteRenderer.color = Color.red;
 		}
 		else {
-			rb.gravityScale = 1;
+			rb.gravityScale = GRAVITY_SCALE;
 		}
 
 		// if we releast the mouse click, then we have finished drawing a slash
@@ -177,7 +185,7 @@ public class Player : MonoBehaviour {
 		// if we need to jump and aren't already jumping
 		if(yDist >= 0 && Mathf.Abs(rb.velocity.y) < 0.01f) {
 			Debug.Log("jump!");
-			rb.AddForce(Vector2.up * yDist * AUTO_JUMP_FACTOR);
+			rb.AddForce(Vector2.up * Mathf.Sqrt(yDist) * AUTO_JUMP_FACTOR);
 			jumps--;
 		}
 	}
@@ -205,7 +213,7 @@ public class Player : MonoBehaviour {
 		if(state == State.autoPathing || state == State.dashing) {
 				rb.WakeUp();
 				rb.velocity = new Vector3(0, 0, 0);
-				rb.gravityScale = 1;
+				rb.gravityScale = GRAVITY_SCALE;
 			}
 	}
 }
