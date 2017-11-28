@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 43cea8376dec14d828175e4ed841718a
-timeCreated: 1511854133
+guid: 8e231806679d96f46a4a1db826c4e67d
+timeCreated: 1511906188
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: idle_animation_bigger_0
-    21300002: idle_animation_bigger_1
-    21300004: idle_animation_bigger_2
-    21300006: idle_animation_bigger_3
-    21300008: idle_animation_bigger_4
-    21300010: idle_animation_bigger_5
-    21300012: idle_animation_bigger_6
-    21300014: idle_animation_bigger_7
+    21300000: Idle Animation Bigger_0
+    21300002: Idle Animation Bigger_1
+    21300004: Idle Animation Bigger_2
+    21300006: Idle Animation Bigger_3
+    21300008: Idle Animation Bigger_4
+    21300010: Idle Animation Bigger_5
+    21300012: Idle Animation Bigger_6
+    21300014: Idle Animation Bigger_7
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -84,11 +84,21 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: idle_animation_bigger_0
+      name: Idle Animation Bigger_0
       rect:
         serializedVersion: 2
         x: 0
@@ -102,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: idle_animation_bigger_1
+      name: Idle Animation Bigger_1
       rect:
         serializedVersion: 2
         x: 128
@@ -116,7 +126,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: idle_animation_bigger_2
+      name: Idle Animation Bigger_2
       rect:
         serializedVersion: 2
         x: 256
@@ -130,7 +140,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: idle_animation_bigger_3
+      name: Idle Animation Bigger_3
       rect:
         serializedVersion: 2
         x: 384
@@ -144,7 +154,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: idle_animation_bigger_4
+      name: Idle Animation Bigger_4
       rect:
         serializedVersion: 2
         x: 512
@@ -158,7 +168,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: idle_animation_bigger_5
+      name: Idle Animation Bigger_5
       rect:
         serializedVersion: 2
         x: 640
@@ -172,7 +182,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: idle_animation_bigger_6
+      name: Idle Animation Bigger_6
       rect:
         serializedVersion: 2
         x: 768
@@ -186,7 +196,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: idle_animation_bigger_7
+      name: Idle Animation Bigger_7
       rect:
         serializedVersion: 2
         x: 896

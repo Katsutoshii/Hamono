@@ -1,17 +1,16 @@
 fileFormatVersion: 2
-guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1
-timeCreated: 1511905848
+guid: 4f4757c58dc3a3340b2bb88446b53300
+timeCreated: 1511907018
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Run Rough Cut_1_0
-    21300002: Run Rough Cut_1_1
-    21300004: Run Rough Cut_1_2
-    21300006: Run Rough Cut_1_3
-    21300008: Run Rough Cut_1_4
-    21300010: Run Rough Cut_1_5
-    21300012: Run Rough Cut_1_6
-    21300014: Run Rough Cut_1_7
+    21300000: Upper Swing Test Sprite Sheet 3_0
+    21300002: Upper Swing Test Sprite Sheet 3_1
+    21300004: Upper Swing Test Sprite Sheet 3_2
+    21300006: Upper Swing Test Sprite Sheet 3_3
+    21300008: Upper Swing Test Sprite Sheet 3_4
+    21300010: Upper Swing Test Sprite Sheet 3_5
+    21300012: Upper Swing Test Sprite Sheet 3_6
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -98,113 +97,99 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Run Rough Cut_1_0
+      name: Upper Swing Test Sprite Sheet 3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 144
+        width: 260
         height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.3, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Run Rough Cut_1_1
+      name: Upper Swing Test Sprite Sheet 3_1
       rect:
         serializedVersion: 2
-        x: 144
+        x: 260
         y: 0
-        width: 144
+        width: 260
         height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Run Rough Cut_1_2
+      name: Upper Swing Test Sprite Sheet 3_2
       rect:
         serializedVersion: 2
-        x: 288
+        x: 520
         y: 0
-        width: 144
+        width: 260
         height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Run Rough Cut_1_3
+      name: Upper Swing Test Sprite Sheet 3_3
       rect:
         serializedVersion: 2
-        x: 432
+        x: 780
         y: 0
-        width: 144
+        width: 260
         height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Run Rough Cut_1_4
+      name: Upper Swing Test Sprite Sheet 3_4
       rect:
         serializedVersion: 2
-        x: 576
+        x: 1040
         y: 0
-        width: 144
+        width: 260
         height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Run Rough Cut_1_5
+      name: Upper Swing Test Sprite Sheet 3_5
       rect:
         serializedVersion: 2
-        x: 720
+        x: 1300
         y: 0
-        width: 144
+        width: 260
         height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Run Rough Cut_1_6
+      name: Upper Swing Test Sprite Sheet 3_6
       rect:
         serializedVersion: 2
-        x: 864
+        x: 1560
         y: 0
-        width: 144
+        width: 260
         height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Run Rough Cut_1_7
-      rect:
-        serializedVersion: 2
-        x: 1008
-        y: 0
-        width: 144
-        height: 148
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
