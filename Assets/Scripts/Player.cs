@@ -31,6 +31,7 @@ public class Player : MonoBehaviour {
 	public State state;
 	public SlashType slashType;
 	public bool grounded;
+	public bool autoPathing;
 
 	public Vector2 targetA; 	// start point of a slash
 	public Vector2 targetB;		// end point of a slash
