@@ -132,7 +132,6 @@ public class Player : MonoBehaviour {
 			targetB = MouseWorldPosition2D();
 			if (Vector2.Distance(targetA, targetB) > SLASHING_THRESHOLD) {
 				state = State.dashing;
-			
 			}
 			else {
 				state = State.slashing;
@@ -191,20 +190,19 @@ public class Player : MonoBehaviour {
 
 	// method to handle dashing
 	private void Dash() {
-		Vector2 distance = Vector2.MoveTowards(transform.position, targetB, speed);
-		float xDist = distance.x - transform.position.x;
-		float yDist = distance.y - transform.position.y;
+		Vector2 location = Vector2.MoveTowards(transform.position, targetB, speed);
+		float xDist = location.x - transform.position.x;
+		float yDist = location.y - transform.position.y;
 
-		// float xDist = targetB.x - transform.position.x;
-		// float yDist = targetB.y - transform.position.y;
-
-		Debug.Log(distance);
-		// Debug.Log (xDist + "   " + yDist + "     " + SLASHING_X_DIST);
-		if (Mathf.Abs (xDist) != targetB.x) {
-			rb.velocity = new Vector2 (xDist * KP, yDist * KP);
-			Debug.Log ("waddup pimps: " + rb.velocity);
+			float distance = Vector3.Distance(transform.position, targetB);
+		if (distance > .2) {
+			rb.velocity = new Vector2 (xDist * KP * 1.5f, yDist * KP * 1.5f);
+		} else {
+			rb.gravityScale = 0;
+			rb.velocity = new Vector3(0, 0);
+			state = State.idle;
+			return;
 		}
-		return;
 	}
 
 	private Vector2 MouseWorldPosition2D(){
