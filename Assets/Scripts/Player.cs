@@ -143,7 +143,7 @@ public class Player : MonoBehaviour {
 			rb.gravityScale = GRAVITY_SCALE;
 		}
 
-		// if we releast the mouse click, then we have finished drawing a slash
+		// if we release the mouse click, then we have finished drawing a slash
 		if (Input.GetMouseButtonUp(0)) {
 			if (state == State.autoPathing) {
 				CancelAutomation();
