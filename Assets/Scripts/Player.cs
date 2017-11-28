@@ -9,6 +9,9 @@ public class Player : MonoBehaviour {
 	public float jumpPower;
 	public int jumps;
 
+	// counter for double jumps
+	public int canJump;
+
 	public enum State {
 		idle,
 		running,
@@ -54,6 +57,21 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		if(Input.GetKeyDown(key:KeyCode.W) && canJump < 1) {
+			rb.AddForce(Vector2.up * jumpPower);
+			autoPathing = false;
+			canJump += 1;
+		}
+
+		// boolean to check if player is touching ground
+		if(rb.velocity.y == 0.0) {
+			grounded = true;
+			canJump = 0;
+		} else {
+			grounded = false;
+    }
+    
 		// turn the sprite around
 		if(rb.velocity.x > TURNING_THRESHOLD) {
 			transform.localScale = new Vector3(1, 1, 1);
