@@ -9,9 +9,6 @@ public class Player : MonoBehaviour {
 	public float jumpPower;
 	public int jumps;
 
-	// counter for double jumps
-	public int canJump;
-
 	public enum State {
 		idle,
 		running,
@@ -58,17 +55,10 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-		if(Input.GetKeyDown(key:KeyCode.W) && canJump < 1) {
-			rb.AddForce(Vector2.up * jumpPower);
-			autoPathing = false;
-			canJump += 1;
-		}
 
 		// boolean to check if player is touching ground
 		if(rb.velocity.y == 0.0) {
 			grounded = true;
-			canJump = 0;
 		} else {
 			grounded = false;
     }
@@ -98,14 +88,14 @@ public class Player : MonoBehaviour {
 		// for move left and right manually
 		if (Input.GetKey(key:KeyCode.A)) {
 			CancelAutomation();
-			rb.AddForce(Vector2.left * speed);
+			rb.velocity += Vector2.left * speed;
 			state = State.running;
 		}
 		else if (state == State.running) state = State.idle;
 
 		if(Input.GetKey(key:KeyCode.D)) {
 			CancelAutomation();
-			rb.AddForce(Vector2.right * speed);
+			rb.velocity += Vector2.right * speed;
 			state = State.running;
 		}
 		else if (state == State.running) state = State.idle;
@@ -114,16 +104,14 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(key: KeyCode.W) && jumps > 0)
         {
 			CancelAutomation();
-
-            rb.velocity = new Vector2(rb.velocity.x, 0); // prevents stacking velocity
-            rb.Sleep();
-            rb.AddForce(Vector2.up * jumpPower);
-			jumps--;
+			Jump(jumpPower);
+			
             state = State.idle;
         }
 
         // if we clicked, start autopathing towards that direction
         if (Input.GetMouseButtonDown(0)) { // if left click
+			jumps = 0;
             state = State.autoPathing;
 
             targetA = MouseWorldPosition2D();
@@ -190,22 +178,14 @@ public class Player : MonoBehaviour {
 		// if we are at the position to start slashing, freeze!
 		if(Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
 			rb.gravityScale = 0;
-			rb.velocity = new Vector3(0, 0, 0);
+			rb.velocity = new Vector3(0, 0);
 			state = State.idle;
-			rb.Sleep();
 			return;
 		}
 
 		// otherwise, if we need to move in the x direction, do so
 		if (Mathf.Abs(xDist) >= SLASHING_X_DIST) {
-			rb.AddForce(Vector2.right * (xDist * Mathf.Abs(xDist)) * KP);
-		}
-
-		// if we need to jump and aren't already jumping
-		if(yDist >= 0 && Mathf.Abs(rb.velocity.y) < 0.01f) {
-			Debug.Log("jump!");
-			rb.AddForce(Vector2.up * Mathf.Sqrt(yDist) * AUTO_JUMP_FACTOR);
-			jumps--;
+			rb.velocity = new Vector2(xDist * KP, yDist * KP);
 		}
 	}
 
@@ -230,9 +210,14 @@ public class Player : MonoBehaviour {
 
 	private void CancelAutomation() {
 		if(state == State.autoPathing || state == State.dashing) {
-				rb.WakeUp();
 				rb.velocity = new Vector3(0, 0, 0);
 				rb.gravityScale = GRAVITY_SCALE;
 			}
+	}
+
+	private void Jump(float power) {
+		rb.velocity = new Vector2(rb.velocity.x, 0); // prevents stacking velocity
+		rb.velocity += Vector2.up * power;
+		jumps--;
 	}
 }

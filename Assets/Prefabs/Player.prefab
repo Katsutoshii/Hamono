@@ -185,19 +185,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  maxSpeed: 4
-  jumpPower: 450
+  maxSpeed: 7
+  jumpPower: 10
   jumps: 2
   state: 0
   slashType: 0
   grounded: 1
+  autoPathing: 0
   targetA: {x: 0.9956711, y: 1.9547617}
   targetB: {x: 3.5064938, y: -0.66428566}
   slashIndicator: {fileID: 0}
   SLASHING_X_DIST: 1
   SLASHING_Y_DIST: 0.5
   SLASHING_THRESHOLD: 2
-  AUTO_JUMP_FACTOR: 400
+  AUTO_JUMP_FACTOR: 2
   TURNING_THRESHOLD: 0.1
   KP: 20
   GRAVITY_SCALE: 2
