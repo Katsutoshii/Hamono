@@ -57,17 +57,15 @@ public class Player : MonoBehaviour {
 	void Update () {
     
 		// turn the sprite around
-		if(rb.velocity.x > TURNING_THRESHOLD) {
-			transform.localScale = new Vector3(1, 1, 1);
-			if(state == State.idle)
+		if (rb.velocity.x > TURNING_THRESHOLD) {
+			transform.localScale = new Vector3 (1, 1, 1);
+			if (state == State.idle)
 				state = State.running;
-		}
-		else if(rb.velocity.x < -TURNING_THRESHOLD) {
-			transform.localScale = new Vector3(-1, 1, 1);
-			if(state == State.idle)
+		} else if (rb.velocity.x < -TURNING_THRESHOLD) {
+			transform.localScale = new Vector3 (-1, 1, 1);
+			if (state == State.idle)
 				state = State.running;
-		}
-		else if(state == State.running) state = State.idle;
+		} else if (state == State.running) state = State.idle;
 
         anim.SetBool("grounded", grounded);
         anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
@@ -134,6 +132,7 @@ public class Player : MonoBehaviour {
 			targetB = MouseWorldPosition2D();
 			if (Vector2.Distance(targetA, targetB) > SLASHING_THRESHOLD) {
 				state = State.dashing;
+			
 			}
 			else {
 				state = State.slashing;
@@ -192,8 +191,20 @@ public class Player : MonoBehaviour {
 
 	// method to handle dashing
 	private void Dash() {
-		float xDist = targetA.x - transform.position.x;
-		float yDist = targetA.y - transform.position.y;
+		Vector2 distance = Vector2.MoveTowards(transform.position, targetB, speed);
+		float xDist = distance.x - transform.position.x;
+		float yDist = distance.y - transform.position.y;
+
+		// float xDist = targetB.x - transform.position.x;
+		// float yDist = targetB.y - transform.position.y;
+
+		Debug.Log(distance);
+		// Debug.Log (xDist + "   " + yDist + "     " + SLASHING_X_DIST);
+		if (Mathf.Abs (xDist) != targetB.x) {
+			rb.velocity = new Vector2 (xDist * KP, yDist * KP);
+			Debug.Log ("waddup pimps: " + rb.velocity);
+		}
+		return;
 	}
 
 	private Vector2 MouseWorldPosition2D(){
