@@ -55,13 +55,6 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		// boolean to check if player is touching ground
-		if(rb.velocity.y == 0.0) {
-			grounded = true;
-		} else {
-			grounded = false;
-    }
     
 		// turn the sprite around
 		if(rb.velocity.x > TURNING_THRESHOLD) {
