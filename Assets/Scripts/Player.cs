@@ -128,7 +128,7 @@ public class Player : MonoBehaviour {
 
 		// if we release the mouse click, then we have finished drawing a slash
 		if (Input.GetMouseButtonUp(0)) {
-			if (state == State.autoPathing) {
+			if (state == State.autoPathing && Vector3.Distance(transform.position, targetA) <= .3f) {
 				CancelAutomation();
 				state = State.idle;
 			}
@@ -138,7 +138,7 @@ public class Player : MonoBehaviour {
 				state = State.dashing;
 				// dashing is handle on a frame-by-frame basis
 			}
-			else {
+			else if (Vector2.Distance(targetA, targetB) > .2 ) {
 				state = State.slashing;
 				CalcSlashType(); 	// sets slashType to the correct type of slash
 				Slash();			// start the slash
