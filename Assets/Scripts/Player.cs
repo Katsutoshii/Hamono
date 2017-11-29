@@ -44,6 +44,7 @@ public class Player : MonoBehaviour {
 	public float TURNING_THRESHOLD;
 	public float KP;
 	public float GRAVITY_SCALE;
+	public float DASH_SPEED = 40f;
 	public float JAB_THRESHOLD;
 
 	private float slashStartTime;
@@ -60,17 +61,15 @@ public class Player : MonoBehaviour {
 	void Update () {
     
 		// turn the sprite around
-		if(rb.velocity.x > TURNING_THRESHOLD) {
-			transform.localScale = new Vector3(1, 1, 1);
-			if(state == State.idle)
+		if (rb.velocity.x > TURNING_THRESHOLD) {
+			transform.localScale = new Vector3 (1, 1, 1);
+			if (state == State.idle)
 				state = State.running;
-		}
-		else if(rb.velocity.x < -TURNING_THRESHOLD) {
-			transform.localScale = new Vector3(-1, 1, 1);
-			if(state == State.idle)
+		} else if (rb.velocity.x < -TURNING_THRESHOLD) {
+			transform.localScale = new Vector3 (-1, 1, 1);
+			if (state == State.idle)
 				state = State.running;
-		}
-		else if(state == State.running) state = State.idle;
+		} else if (state == State.running) state = State.idle;
 
         anim.SetBool("grounded", grounded);
         anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
@@ -209,8 +208,16 @@ public class Player : MonoBehaviour {
 
 	// method to handle dashing
 	private void Dash() {
-		float xDist = targetA.x - transform.position.x;
-		float yDist = targetA.y - transform.position.y;
+		float distance = Vector3.Distance(transform.position, targetB);
+
+		if (distance > .8) {
+			transform.position = Vector2.MoveTowards(transform.position, targetB, DASH_SPEED * Time.deltaTime);
+		} else {
+			rb.gravityScale = 0;
+			rb.velocity = new Vector3(0, 0);
+			state = State.idle;
+			return;
+		}
 	}
 
 	private Vector2 MouseWorldPosition2D(){
