@@ -44,6 +44,7 @@ public class Player : MonoBehaviour {
 	public float TURNING_THRESHOLD;
 	public float KP;
 	public float GRAVITY_SCALE;
+	public float DASH_SPEED = 40f;
 
 	// Use this for initialization
 	void Start () {
@@ -190,13 +191,10 @@ public class Player : MonoBehaviour {
 
 	// method to handle dashing
 	private void Dash() {
-		Vector2 location = Vector2.MoveTowards(transform.position, targetB, speed);
-		float xDist = location.x - transform.position.x;
-		float yDist = location.y - transform.position.y;
+		float distance = Vector3.Distance(transform.position, targetB);
 
-			float distance = Vector3.Distance(transform.position, targetB);
-		if (distance > .2) {
-			rb.velocity = new Vector2 (xDist * KP * 1.5f, yDist * KP * 1.5f);
+		if (distance > .8) {
+			transform.position = Vector2.MoveTowards(transform.position, targetB, DASH_SPEED * Time.deltaTime);
 		} else {
 			rb.gravityScale = 0;
 			rb.velocity = new Vector3(0, 0);
