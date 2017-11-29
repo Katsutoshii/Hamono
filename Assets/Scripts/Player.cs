@@ -44,6 +44,9 @@ public class Player : MonoBehaviour {
 	public float TURNING_THRESHOLD;
 	public float KP;
 	public float GRAVITY_SCALE;
+	public float JAB_THRESHOLD;
+
+	private float slashStartTime;
 
 	// Use this for initialization
 	void Start () {
@@ -134,9 +137,12 @@ public class Player : MonoBehaviour {
 			targetB = MouseWorldPosition2D();
 			if (Vector2.Distance(targetA, targetB) > SLASHING_THRESHOLD) {
 				state = State.dashing;
+				// dashing is handle on a frame-by-frame basis
 			}
 			else {
 				state = State.slashing;
+				CalcSlashType(); 	// sets slashType to the correct type of slash
+				Slash();			// start the slash
 			}
 		}
 
@@ -148,6 +154,17 @@ public class Player : MonoBehaviour {
 			
 			case State.dashing:
 				Dash();
+				break;
+
+			case State.slashing:
+				// check if the slash is over by seeing if the current playing animation is idle
+				if (anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle") && Time.time > slashStartTime + 0.1) {
+					Debug.Log("Slash ended!");
+					rb.WakeUp();
+					state = State.idle;
+				}
+				else rb.Sleep();
+
 				break;
 
 			default:
@@ -201,8 +218,8 @@ public class Player : MonoBehaviour {
 		return new Vector2(worldSpaceClickPosition.x, worldSpaceClickPosition.y);
 	}
 
-	private void CancelAutomation() {
-		if(state == State.autoPathing || state == State.dashing) {
+	public void CancelAutomation() {
+		if(state == State.autoPathing || state == State.dashing || state == State.slashing) {
 				rb.velocity = new Vector3(0, 0, 0);
 				rb.gravityScale = GRAVITY_SCALE;
 			}
@@ -212,5 +229,53 @@ public class Player : MonoBehaviour {
 		rb.velocity = new Vector2(rb.velocity.x, 0); // prevents stacking velocity
 		rb.velocity += Vector2.up * power;
 		jumps--;
+	}
+
+	// method to perform the slash
+	private void Slash(){
+		Debug.Log("Slashing");
+		rb.Sleep();
+		slashStartTime = Time.time;
+
+		switch (slashType) {
+			case SlashType.upJab:
+				break;
+
+			case SlashType.jab:
+				break;
+
+			case SlashType.downJab:
+				break;
+
+			case SlashType.upSlash:
+			
+				rb.gravityScale = 0;
+				anim.Play("PlayerUpSlash");
+				break;
+
+			case SlashType.downSlash:
+				break;
+		}
+	}
+
+	// method to get the slash type based on targetA and targetB
+	private void CalcSlashType(){
+		Debug.Log("finding slash type");
+		// if this is a jab
+		if(Vector2.Distance(transform.position, targetA) < JAB_THRESHOLD) {
+			float angle = Mathf.Atan2(targetB.y - targetA.y, 
+				targetB.x - targetA.x) * 180 / Mathf.PI;
+			Debug.Log("It's a jab! Angle = " + angle);
+
+			if(angle > 30) slashType = SlashType.upJab;
+			else if(angle < -30) slashType = SlashType.downJab;
+			else slashType = SlashType.jab;
+		}
+		// otherwise this must be a slash
+		else {
+			Debug.Log("It's a slash!");
+			if(targetA.y >= targetB.y) slashType = SlashType.downSlash;
+			else slashType = SlashType.upSlash;
+		}
 	}
 }
