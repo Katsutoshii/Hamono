@@ -52,7 +52,6 @@ public class SlashIndicator : MonoBehaviour {
 			) * 100 / spriteRenderer.sprite.rect.width;
 				
 			transform.localScale = new Vector3(width, 0.05f, 0.05f);
-		
 
 			float angle = Mathf.Atan2(clickWorldPoint.y - targetA.y, 
 				clickWorldPoint.x - targetA.x) * 180 / Mathf.PI;
