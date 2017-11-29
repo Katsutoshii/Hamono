@@ -207,6 +207,7 @@ public class Player : MonoBehaviour {
 				rb.gravityScale = GRAVITY_SCALE;
 			}
 	}
+	
 
 	private void Jump(float power) {
 		rb.velocity = new Vector2(rb.velocity.x, 0); // prevents stacking velocity
