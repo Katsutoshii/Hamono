@@ -29,6 +29,7 @@ public class Player : MonoBehaviour {
 	public SlashType slashType;
 	public bool grounded;
 	public bool autoPathing;
+	public bool completedAutoPathing; // triggeers dash/slash after completed autopathing
 
 	public Vector2 targetA; 	// start point of a slash
 	public Vector2 targetB;		// end point of a slash
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour {
 		rb = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
 		state = State.idle;
+		completedAutoPathing = false;
 	}
 	
 	// Update is called once per frame
@@ -108,7 +110,7 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) { // if left click
 			jumps = 0;
             state = State.autoPathing;
-
+						completedAutoPathing = false;
             targetA = MouseWorldPosition2D();
 
 			// turn the sprite around
@@ -148,7 +150,7 @@ public class Player : MonoBehaviour {
 		// actions based on the state
 		switch (state) {
 			case State.autoPathing:
-				AutoPath();
+				AutoPath("none");
 				break;
 			
 			case State.dashing:
@@ -180,7 +182,9 @@ public class Player : MonoBehaviour {
 	}
 
 	// method to handle the autopathing
-	private void AutoPath() {
+	/// <param name="type"> label that tells function if it has a successor action </param>
+
+	private int AutoPath(string type) {
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y;
 
@@ -188,14 +192,16 @@ public class Player : MonoBehaviour {
 		if(Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
 			rb.gravityScale = 0;
 			rb.velocity = new Vector3(0, 0);
-			state = State.idle;
-			return;
+			if (type == "none") state = State.idle;
+			// state = State.idle;
+			return 1;
 		}
 
 		// otherwise, if we need to move in the x direction, do so
 		if (Mathf.Abs(xDist) >= SLASHING_X_DIST) {
 			rb.velocity = new Vector2(xDist * KP, yDist * KP);
 		}
+		return 0;
 	}
 
 	/// <summary>
@@ -209,14 +215,19 @@ public class Player : MonoBehaviour {
 	// method to handle dashing
 	private void Dash() {
 		float distance = Vector3.Distance(transform.position, targetB);
-
-		if (distance > .8) {
-			transform.position = Vector2.MoveTowards(transform.position, targetB, DASH_SPEED * Time.deltaTime);
+		if (completedAutoPathing == true) {
+			if (distance > .8f) {
+				transform.position = Vector2.MoveTowards(transform.position, targetB, DASH_SPEED * Time.deltaTime);
+			} else {
+				rb.gravityScale = 0;
+				rb.velocity = new Vector3(0, 0, 0);
+				state = State.idle;
+				completedAutoPathing = false;
+			}
 		} else {
-			rb.gravityScale = 0;
-			rb.velocity = new Vector3(0, 0);
-			state = State.idle;
-			return;
+			if (AutoPath("dash") == 1) {
+				completedAutoPathing = true;
+			}
 		}
 	}
 
