@@ -45,7 +45,7 @@ public class Player : MonoBehaviour {
 	public float TURNING_THRESHOLD;
 	public float KP;
 	public float GRAVITY_SCALE;
-	public float DASH_SPEED = 40f;
+	public float DASH_SPEED;
 	public float JAB_THRESHOLD;
 
 	private float slashStartTime;
