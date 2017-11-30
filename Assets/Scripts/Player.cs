@@ -46,6 +46,7 @@ public class Player : MonoBehaviour {
 	public float KP;
 	public float GRAVITY_SCALE;
 	public float DASH_SPEED;
+	public float DASH_TARGET_THRESHOLD;
 	public float JAB_THRESHOLD;
 
 	private float slashStartTime;
@@ -75,6 +76,7 @@ public class Player : MonoBehaviour {
 
         anim.SetBool("grounded", grounded);
         anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+		anim.SetBool("dashing", state == State.dashing);
 	}
 
 	/// <summary>
@@ -105,12 +107,14 @@ public class Player : MonoBehaviour {
 				break;
 		}		
 
-		// limit the speed
-		if (rb.velocity.x > maxSpeed) {
-			rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
-		}
-		else if (rb.velocity.x < -maxSpeed) {
-			rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
+		if(state != State.dashing) {
+			// limit the speed
+			if (rb.velocity.x > maxSpeed) {
+				rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
+			}
+			else if (rb.velocity.x < -maxSpeed) {
+				rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
+			}
 		}
 	}
 
@@ -218,12 +222,12 @@ public class Player : MonoBehaviour {
 
 	// method to handle dashing
 	private void Dash() {
-		float distance = Vector3.Distance(transform.position, targetB);
+		float distanceB = Vector2.Distance(rb.position, targetB);
 		if (completedAutoPathing == true) {
-			if (distance > .8f) {
-				transform.position = Vector2.MoveTowards(transform.position, targetB, DASH_SPEED * Time.deltaTime);
-			} else {
+			if (distanceB > DASH_TARGET_THRESHOLD) {
 				rb.gravityScale = 0;
+				rb.velocity = (targetB - rb.position) * DASH_SPEED;
+			} else {
 				rb.velocity = new Vector3(0, 0, 0);
 				state = State.idle;
 				completedAutoPathing = false;
