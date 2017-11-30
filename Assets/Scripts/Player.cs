@@ -272,7 +272,7 @@ public class Player : MonoBehaviour {
 				break;
 
 			case SlashType.downJab:
-				anim.Play("PlayerJab");
+				anim.Play("PlayerDownJab");
 				break;
 
 			case SlashType.upSlash:
