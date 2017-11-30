@@ -411,6 +411,16 @@ Prefab:
       propertyPath: slashIndicator
       value: 
       objectReference: {fileID: 1690490367}
+    - target: {fileID: 50404783047066720, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50404783047066720, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
