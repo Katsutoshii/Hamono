@@ -85,17 +85,18 @@ public class Player : MonoBehaviour {
 		// for move left and right manually
 		if (Input.GetKey(key:KeyCode.A)) {
 			CancelAutomation();
-			rb.velocity += Vector2.left * speed;
+			rb.velocity = new Vector2(-speed, rb.velocity.y);
 			state = State.running;
 		}
-		else if (state == State.running) state = State.idle;
-
-		if(Input.GetKey(key:KeyCode.D)) {
+		else if(Input.GetKey(key:KeyCode.D)) {
 			CancelAutomation();
-			rb.velocity += Vector2.right * speed;
+			rb.velocity = new Vector2(speed, rb.velocity.y);
 			state = State.running;
 		}
-		else if (state == State.running) state = State.idle;
+		else if (state == State.running) {
+			rb.velocity = new Vector2(0, rb.velocity.y);
+			state = State.idle;
+		}
 
         // for jumping
         if (Input.GetKeyDown(key: KeyCode.W) && jumps > 0)
