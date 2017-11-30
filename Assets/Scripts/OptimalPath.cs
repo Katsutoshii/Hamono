@@ -58,7 +58,6 @@ public class OptimalPath : MonoBehaviour {
     }
 
     public void populateEdges() {
-      Debug.Log(this.vertices.Count);
       foreach(Vertex item in this.vertices) {
         foreach(Vertex compareItem in this.vertices) {
           if (item != compareItem) {
@@ -195,9 +194,8 @@ public class OptimalPath : MonoBehaviour {
 			space.addVertex(dest);
 		}
     space.populateEdges();
-		Debug.Log(space.getVertex(new Vector2(transform.position.x, transform.position.y)));
-  	Stack<Vector2> list = AStar(space.getVertex(new Vector2(transform.position.x, transform.position.y)), space.getVertex(targetA));
-		return list;
+  	reversedAutoPath = AStar(space.getVertex(new Vector2(transform.position.x, transform.position.y)), space.getVertex(targetA));
+		return reversedAutoPath;
   }
 
   private Stack<Vector2> backchain(Dictionary<Vertex, Vertex> path, Vertex destination) {
@@ -228,8 +226,8 @@ public class OptimalPath : MonoBehaviour {
 
 		if (start == null || dest == null) return new Stack<Vector2>();
 
-		Debug.Log("Start: " + start.data);
-    Debug.Log("Dest: " + dest.data);
+		// Debug.Log("Start: " + start.data);
+    // Debug.Log("Dest: " + dest.data);
 
     // Queue<Vertex> frontier = new Queue<Vertex>();
     PriorityQueue<Vertex> frontier = new PriorityQueue<Vertex>();
