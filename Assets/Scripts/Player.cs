@@ -62,7 +62,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
     
-		// turn the sprite around
+		// turn the sprite around based on velocity
 		if (rb.velocity.x > TURNING_THRESHOLD) {
 			transform.localScale = new Vector3 (1, 1, 1);
 			if (state == State.idle)
@@ -82,6 +82,40 @@ public class Player : MonoBehaviour {
 	/// </summary>
 	void FixedUpdate()
 	{
+		// if we are not slashing then handle control inputs
+		if(state != State.slashing) 
+			Controls();
+
+
+		// actions based on the state
+		switch (state) {
+			case State.autoPathing:
+				AutoPath("none");
+				break;
+			
+			case State.dashing:
+				Dash();
+				break;
+
+			case State.slashing:
+				CheckForSlashEnd();
+				break;
+
+			default:
+				break;
+		}		
+
+		// limit the speed
+		if (rb.velocity.x > maxSpeed) {
+			rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
+		}
+		else if (rb.velocity.x < -maxSpeed) {
+			rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
+		}
+	}
+
+	// method to handle all control inputs inside main loop
+	private void Controls() {
 		// for move left and right manually
 		if (Input.GetKey(key:KeyCode.A)) {
 			CancelAutomation();
@@ -97,22 +131,24 @@ public class Player : MonoBehaviour {
 			rb.velocity = new Vector2(0, rb.velocity.y);
 			state = State.idle;
 		}
+		
 
-        // for jumping
-        if (Input.GetKeyDown(key: KeyCode.W) && jumps > 0)
-        {
+		// for jumping
+		if (Input.GetKeyDown(key: KeyCode.W) && jumps > 0)
+		{
 			CancelAutomation();
 			Jump(jumpPower);
 			
-            state = State.idle;
-        }
+			state = State.idle;
+		}
 
-        // if we clicked, start autopathing towards that direction
-        if (Input.GetMouseButtonDown(0)) { // if left click
+			
+		// if we clicked, start autopathing towards that direction
+		if (Input.GetMouseButtonDown(0)) { // if left click
 			jumps = 0;
-            state = State.autoPathing;
+			state = State.autoPathing;
 						completedAutoPathing = false;
-            targetA = MouseWorldPosition2D();
+			targetA = MouseWorldPosition2D();
 
 			// turn the sprite around
 			if (targetA.x > transform.position.x)
@@ -146,39 +182,6 @@ public class Player : MonoBehaviour {
 				CalcSlashType(); 	// sets slashType to the correct type of slash
 				Slash();			// start the slash
 			}
-		}
-
-		// actions based on the state
-		switch (state) {
-			case State.autoPathing:
-				AutoPath("none");
-				break;
-			
-			case State.dashing:
-				Dash();
-				break;
-
-			case State.slashing:
-				// check if the slash is over by seeing if the current playing animation is idle
-				if (anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle") && Time.time > slashStartTime + 0.1) {
-					Debug.Log("Slash ended!");
-					rb.WakeUp();
-					state = State.idle;
-				}
-				else rb.Sleep();
-
-				break;
-
-			default:
-				break;
-		}		
-
-		// limit the speed
-		if (rb.velocity.x > maxSpeed) {
-			rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
-		}
-		else if (rb.velocity.x < -maxSpeed) {
-			rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
 		}
 	}
 
@@ -254,26 +257,30 @@ public class Player : MonoBehaviour {
 	// method to perform the slash
 	private void Slash(){
 		Debug.Log("Slashing");
+		
+		rb.gravityScale = 0;
 		rb.Sleep();
 		slashStartTime = Time.time;
 
 		switch (slashType) {
 			case SlashType.upJab:
+				anim.Play("PlayerJab");
 				break;
 
 			case SlashType.jab:
+				anim.Play("PlayerJab");
 				break;
 
 			case SlashType.downJab:
+				anim.Play("PlayerJab");
 				break;
 
 			case SlashType.upSlash:
-			
-				rb.gravityScale = 0;
 				anim.Play("PlayerUpSlash");
 				break;
 
 			case SlashType.downSlash:
+				anim.Play("PlayerJab");
 				break;
 		}
 	}
@@ -297,5 +304,15 @@ public class Player : MonoBehaviour {
 			if(targetA.y >= targetB.y) slashType = SlashType.downSlash;
 			else slashType = SlashType.upSlash;
 		}
+	}
+
+	private void CheckForSlashEnd() {
+		// check if the slash is over by seeing if the current playing animation is idle
+		if (anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle") && Time.time > slashStartTime + 0.2) {
+			Debug.Log("Slash ended!");
+			rb.WakeUp();
+			state = State.idle;
+		}
+		else rb.Sleep();
 	}
 }
