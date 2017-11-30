@@ -6,6 +6,7 @@ public class SlashIndicator : MonoBehaviour {
 
 	public Vector3 targetA;
 	public bool drawing = false;
+	public Player player;
 
 	public SpriteRenderer spriteRenderer;
 
@@ -30,7 +31,7 @@ public class SlashIndicator : MonoBehaviour {
 	void FixedUpdate()
 	{
 		// start or stop the drawing the indicator
-		if (Input.GetMouseButtonDown(0)) {
+		if (Input.GetMouseButtonDown(0) && !drawing) {
 			Debug.Log("Mouse clicked!");
 			drawing = true;
 			Vector3 clickWorldPoint =ScreenToWorldPoint(Input.mousePosition);
@@ -38,8 +39,9 @@ public class SlashIndicator : MonoBehaviour {
 			transform.position = clickWorldPoint;
 			targetA = clickWorldPoint;
 		}
-		else if (!Input.GetMouseButton(0)) {
+		else if (!Input.GetMouseButton(0) && drawing) {
 			drawing = false;
+			player.GetAttackType();
 		}
 
 		// when drawing, scale the UI indicator based on the start position and the current mouse position

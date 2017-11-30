@@ -36,7 +36,7 @@ public class Player : MonoBehaviour {
 	public Vector2 targetA; 	// start point of a slash
 	public Vector2 targetB;		// end point of a slash
 	public SlashIndicator slashIndicator;
-	private Rigidbody2D rb;
+	public Rigidbody2D rb;
     private Animator anim;
 
 	// constants
@@ -170,24 +170,6 @@ public class Player : MonoBehaviour {
 		else {
 			rb.gravityScale = GRAVITY_SCALE;
 		}
-
-		// if we release the mouse click, then we have finished drawing a slash
-		if (Input.GetMouseButtonUp(0)) {
-			if (state == State.autoPathing && Vector3.Distance(transform.position, targetA) <= .3f) {
-				CancelAutomation();
-				state = State.idle;
-			}
-
-			targetB = MouseWorldPosition2D();
-
-			if (Vector2.Distance(targetA, targetB) > SLASHING_THRESHOLD) {
-				attackType = AttackType.dash;
-				// dashing is handle on a frame-by-frame basis
-			}
-			else if (Vector2.Distance(targetA, targetB) > .2 ) {
-				attackType = CalcSlashType(); 	// sets slashType to the correct type of slash
-			}
-		}
 	}
 
 	// method to handle the autopathing
@@ -307,6 +289,15 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	public void GetAttackType() {
+		
+		targetB = MouseWorldPosition2D();
+		if (Vector2.Distance(targetA, targetB) > SLASHING_THRESHOLD) {
+			attackType = AttackType.dash;
+			// dashing is handle on a frame-by-frame basis
+		}
+		else attackType = CalcSlashType(); 	// sets slashType to the correct type of slash
+	}
 	// method to get the slash type based on targetA and targetB
 	private AttackType CalcSlashType(){
 		AttackType slashType;
@@ -341,4 +332,5 @@ public class Player : MonoBehaviour {
 		}
 		else rb.Sleep();
 	}
+
 }
