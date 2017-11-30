@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -8,6 +9,9 @@ public class Player : MonoBehaviour {
 	public float maxSpeed;
 	public float jumpPower;
 	public int jumps;
+
+	Graph space;
+	Stack<Vector2> reversedAutoPath;
 
 	public enum State {
 		idle,
@@ -57,6 +61,7 @@ public class Player : MonoBehaviour {
         anim = gameObject.GetComponent<Animator>();
 		state = State.idle;
 		completedAutoPathing = false;
+		space = new Graph();
 	}
 	
 	// Update is called once per frame
@@ -112,7 +117,7 @@ public class Player : MonoBehaviour {
             state = State.autoPathing;
 						completedAutoPathing = false;
             targetA = MouseWorldPosition2D();
-
+						reversedAutoPath = GenerateGraph(targetA);
 			// turn the sprite around
 			if (targetA.x > transform.position.x)
 				transform.localScale = new Vector3(1, 1, 1);
@@ -185,11 +190,7 @@ public class Player : MonoBehaviour {
 	/// <param name="type"> label that tells function if it has a successor action </param>
 
 	private int AutoPath(string type) {
-		float xDist = targetA.x - transform.position.x;
-		float yDist = targetA.y - transform.position.y;
-
-		// if we are at the position to start slashing, freeze!
-		if(Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
+		if (reversedAutoPath.Count == 0) {
 			rb.gravityScale = 0;
 			rb.velocity = new Vector3(0, 0);
 			if (type == "none") state = State.idle;
@@ -197,12 +198,34 @@ public class Player : MonoBehaviour {
 			return 1;
 		}
 
-		// otherwise, if we need to move in the x direction, do so
-		if (Mathf.Abs(xDist) >= SLASHING_X_DIST) {
-			rb.velocity = new Vector2(xDist * KP, yDist * KP);
-		}
+		Vector2 nextLocation = reversedAutoPath.Pop();
+
+		float xDist = nextLocation.x - transform.position.x;
+		float yDist = nextLocation.y - transform.position.y;
+
+		transform.position = Vector2.MoveTowards(transform.position, nextLocation, DASH_SPEED * Time.deltaTime);
 		return 0;
 	}
+
+		// float xDist = targetA.x - transform.position.x;
+		// float yDist = targetA.y - transform.position.y;
+
+		// if we are at the position to start slashing, freeze!
+	// 	if(Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
+
+	// 		rb.gravityScale = 0;
+	// 		rb.velocity = new Vector3(0, 0);
+	// 		if (type == "none") state = State.idle;
+	// 		// state = State.idle;
+	// 		return 1;
+	// 	}
+
+	// 	// otherwise, if we need to move in the x direction, do so
+	// 	if (Mathf.Abs(xDist) >= SLASHING_X_DIST) {
+	// 		rb.velocity = new Vector2(xDist * KP, yDist * KP);
+	// 	}
+	// 	return 0;
+	// }
 
 	/// <summary>
 	/// OnGUI is called for rendering and handling GUI events.
@@ -297,4 +320,241 @@ public class Player : MonoBehaviour {
 			else slashType = SlashType.upSlash;
 		}
 	}
+
+
+	// AutoPathing Script
+
+	private class Graph {
+    HashSet<Vertex> vertices = new HashSet<Vertex>();
+    Dictionary<Vertex, HashSet<Vertex>> edges = new Dictionary<Vertex, HashSet<Vertex>>();
+
+    public Graph() {}
+
+    public void addEdge(Vertex pointA, Vertex pointB) {
+      if (!edges.ContainsKey(pointA)) {
+        HashSet<Vertex> list = new HashSet<Vertex>();
+        edges[pointA] = list;
+      }
+      if (!edges.ContainsKey(pointB)) {
+        HashSet<Vertex> list = new HashSet<Vertex>();
+        edges[pointB] = list;
+      }
+      HashSet<Vertex> listA = edges[pointA];
+      HashSet<Vertex> listB = edges[pointB];
+      listA.Add(pointB);
+      listB.Add(pointA);
+      edges[pointA] = listA;
+      edges[pointB] = listB;
+    }
+
+    public void addVertex(Vertex point) {
+      vertices.Add(point);
+    }
+
+    public HashSet<Vertex> getEdges(Vertex point) {
+      HashSet<Vertex> output = null;
+      this.edges.TryGetValue(point, out output);
+      return output;
+    }
+
+    public Vertex getVertex(Vector2 data) {
+      foreach(Vertex item in this.vertices) {
+        if (item.data == data) {
+          return item;
+        }
+      }
+      return null;
+    }
+
+    public void populateEdges() {
+      Debug.Log(this.vertices.Count);
+      foreach(Vertex item in this.vertices) {
+        foreach(Vertex compareItem in this.vertices) {
+          if (item != compareItem) {
+            float distance = Vector2.Distance(item.data, compareItem.data);
+            if (distance <= .5f) {
+              this.addEdge(item, compareItem);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private class Vertex : IComparable<Vertex> {
+    public Vector2 data;
+    public float priority;
+
+    public Vertex(Vector2 data) {
+      this.data = data;
+    }
+
+    public int CompareTo(Vertex other) {
+      if (other == null) {
+        return -1;
+      }
+      if (this.priority == other.priority) return 0;
+      else if (this.priority > other.priority) return -1;
+      return 1;
+    }
+  }
+
+  private class PriorityQueue <T> where T : IComparable <T> {
+    private List <T> data;
+
+    public PriorityQueue()
+    {
+      this.data = new List <T>();
+    }
+
+    public void Enqueue(T item) {
+      data.Add(item);
+      int ci = data.Count - 1;
+      while (ci  > 0)
+      {
+        int pi = (ci - 1) / 2;
+        if (data[ci].CompareTo(data[pi]) >= 0)
+          break;
+        T tmp = data[ci]; data[ci] = data[pi]; data[pi] = tmp;
+        ci = pi;
+      }
+    }
+
+    public T Dequeue() {
+      // Assumes pq isn't empty
+      int li = data.Count - 1;
+      T frontItem = data[0];
+      data[0] = data[li];
+      data.RemoveAt(li);
+
+      --li;
+      int pi = 0;
+      while (true)
+      {
+        int ci = pi * 2 + 1;
+        if (ci  > li) break;
+        int rc = ci + 1;
+        if (rc  <= li && data[rc].CompareTo(data[ci])  < 0)
+          ci = rc;
+        if (data[pi].CompareTo(data[ci])  <= 0) break;
+        T tmp = data[pi]; data[pi] = data[ci]; data[ci] = tmp;
+        pi = ci;
+      }
+      return frontItem;
+    }
+
+    public int Count() {
+      return data.Count;
+    }
+  }
+
+  private Stack<Vector2> GenerateGraph(Vector2 targetA) {
+    space = new Graph();
+    float xDist = targetA.x - transform.position.x;
+    float yDist = targetA.y - transform.position.y;
+    float currentX = transform.position.x;
+    float startingY = transform.position.y;
+    if (xDist > 0) {
+      while (targetA.x - currentX > .2f) {
+        float currentY = startingY;
+        if (yDist > 0) {
+          while (targetA.y - currentY > .2f) {
+            Vertex point = new Vertex(new Vector2(currentX, currentY));
+            space.addVertex(point);
+            currentY = currentY + .2f;
+          }
+        } else {
+          while (targetA.y - currentY < .2f) {
+            Vertex point = new Vertex(new Vector2(currentX, currentY));
+            space.addVertex(point);
+            currentY = currentY - .2f;
+          }
+        }
+        currentX = currentX + .2f;
+      }
+    } else {
+      while (targetA.x - currentX < .2f) {
+        float currentY = startingY;
+        if (yDist > 0) {
+          while (targetA.y - currentY > .2f) {
+            Vertex point = new Vertex(new Vector2(currentX, currentY));
+            space.addVertex(point);
+            currentY = currentY + .2f;
+          }
+        } else {
+          while (targetA.y - currentY < .2f) {
+            Vertex point = new Vertex(new Vector2(currentX, currentY));
+            space.addVertex(point);
+            currentY = currentY - .2f;
+          }
+        }
+        currentX = currentX - .2f;
+      }
+    }
+    space.addVertex(new Vertex(new Vector2(targetA.x, targetA.y)));
+    space.populateEdges();
+  	Stack<Vector2> list = a_star(space.getVertex(new Vector2(transform.position.x, transform.position.y)), space.getVertex(targetA));
+		return list;
+  }
+
+  private Stack<Vector2> backchain(Dictionary<Vertex, Vertex> path, Vertex destination) {
+    string pathString = "";
+    pathString = pathString + destination.data + " -> ";
+    Vertex current = path[destination];
+    int count = 0;
+		Stack<Vector2> reversedPath = new Stack<Vector2>();
+		reversedPath.Push(destination.data);
+
+    while (current != null) {
+      count++;
+      pathString = pathString + current.data + " -> ";
+			reversedPath.Push(current.data);
+      current = path[current];
+    }
+    Debug.Log("path: " + pathString);
+    Debug.Log("count: " + count);
+		return reversedPath;
+  }
+
+  // AStar Seach Algorithm
+  private Stack<Vector2> a_star(Vertex start, Vertex dest) {
+
+    Debug.Log("Start: " + start.data);
+    Debug.Log("Dest: " + dest.data);
+
+    // Queue<Vertex> frontier = new Queue<Vertex>();
+    PriorityQueue<Vertex> frontier = new PriorityQueue<Vertex>();
+    start.priority = 0;
+    frontier.Enqueue(start);
+    Dictionary<Vertex, Vertex> cameFrom = new Dictionary<Vertex, Vertex>();
+    Dictionary<Vertex, float> costSoFar = new Dictionary<Vertex, float>();
+    cameFrom[start] = null;
+    costSoFar[start] = 0;
+
+    while (frontier.Count() > 0) {
+      Vertex current = frontier.Dequeue();
+      if (current.data == dest.data) {
+        Debug.Log("found the solution");
+        return backchain(cameFrom, dest);
+      }
+      foreach (Vertex next in space.getEdges(current)) {
+        float newCost = costSoFar[current] + Vector2.Distance(current.data, next.data);
+        if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next]) {
+          costSoFar[next] = newCost;
+          next.priority = newCost + heuristic(dest, next);
+          frontier.Enqueue(next);
+          cameFrom[next] = current;
+        }
+      }
+    }
+    return null;
+    
+  }
+
+  private float heuristic(Vertex a, Vertex b) {
+   float dx = Mathf.Abs(a.data.x - b.data.x);
+   float dy = Mathf.Abs(a.data.y - b.data.y);
+  //  return Mathf.Sqrt(dx * dx + dy * dy);
+  return dx + dy;
+  }
 }
