@@ -119,6 +119,7 @@ public class Player : MonoBehaviour {
 						completedAutoPathing = false;
             targetA = MouseWorldPosition2D();
 						reversedAutoPath = GenerateGraph(targetA);
+						// Debug.Log("fixing this right now: " + Physics2D.OverlapPoint(targetA).gameObject.layer);
 			// turn the sprite around
 			if (targetA.x > transform.position.x)
 				transform.localScale = new Vector3(1, 1, 1);
@@ -449,10 +450,16 @@ public class Player : MonoBehaviour {
     }
   }
 
+	// private Stack<Vector2> GenerateGraph(Vector2 targetA) {
+	// 	Debug.Log("game object layer: " + Physics2D.OverlapPoint(new Vector2(2.8f, 0.1f)).gameObject.layer);
+	// 	return new Stack<Vector2>();
+	// }
+
   private Stack<Vector2> GenerateGraph(Vector2 targetA) {
     space = new Graph();
     float xDist = targetA.x - transform.position.x;
     float yDist = targetA.y - transform.position.y;
+		// float yDist = 10f;	
     float currentX = transform.position.x;
     float startingY = transform.position.y;
 		// space.addVertex(new Vertex(transform.position));
@@ -460,23 +467,19 @@ public class Player : MonoBehaviour {
       while (targetA.x - currentX > .2f) {
         float currentY = startingY;
         if (yDist > 0) {
-          while (targetA.y - currentY > .2f) {
-
+          while (3f - currentY > .2f) {
             Vertex point = new Vertex(new Vector2(currentX, currentY));
-						if (Physics2D.OverlapPoint(point.data, 2) == null) {
+						if (!GameObject.Find("Obstacle").GetComponent<Collider>().bounds.Contains(point.data)) {
 							space.addVertex(point);
-						} else {
-							Debug.Log("conlict1: " + Physics2D.OverlapPoint(point.data, 1).name);
 						}
             currentY = currentY + .2f;
           }
         } else {
-          while (targetA.y - currentY < .2f) {
+          while (3f - currentY < .2f) {
             Vertex point = new Vertex(new Vector2(currentX, currentY));
-            if (Physics2D.OverlapPoint(point.data, 2) == null) {
+						// space.addVertex(point);
+						if (!GameObject.Find("Obstacle").GetComponent<Collider>().bounds.Contains(point.data)) {
 							space.addVertex(point);
-						} else {
-							Debug.Log("conlict2: " + point.data);
 						}
             currentY = currentY - .2f;
           }
@@ -487,22 +490,20 @@ public class Player : MonoBehaviour {
       while (targetA.x - currentX < .2f) {
         float currentY = startingY;
         if (yDist > 0) {
-          while (targetA.y - currentY > .2f) {
-            Vertex point = new Vertex(new Vector2(currentX, currentY));
-            if (Physics2D.OverlapPoint(point.data, 2) == null) {
+          while (3f - currentY > .2f) {
+						Vertex point = new Vertex(new Vector2(currentX, currentY));
+						// space.addVertex(point);
+						if (!GameObject.Find("Obstacle").GetComponent<Collider>().bounds.Contains(point.data)) {
 							space.addVertex(point);
-						} else {
-							Debug.Log("conlict3: " + Physics2D.OverlapPoint(point.data, 1));
 						}
             currentY = currentY + .2f;
           }
         } else {
-          while (targetA.y - currentY < .2f) {
-            Vertex point = new Vertex(new Vector2(currentX, currentY));
-            if (Physics2D.OverlapPoint(point.data, 2) == null) {
+          while (3f - currentY < .2f) {
+						Vertex point = new Vertex(new Vector2(currentX, currentY));
+						// space.addVertex(point);
+						if (!GameObject.Find("Obstacle").GetComponent<Collider>().bounds.Contains(point.data)) {
 							space.addVertex(point);
-						} else {
-							Debug.Log("conlict4: " + point.data);
 						}
             currentY = currentY - .2f;
           }
@@ -510,11 +511,11 @@ public class Player : MonoBehaviour {
         currentX = currentX - .2f;
       }
     }
-		Vertex dest = new Vertex(new Vector2(targetA.x, targetA.y));
-		if (Physics2D.OverlapPoint(dest.data, 2) == null) {
-			Debug.Log("right in here: " + space.vertices.Count);
+		Vertex dest = new Vertex(targetA);
+		if (!GameObject.Find("Obstacle").GetComponent<Collider>().bounds.Contains(dest.data)) {
 			space.addVertex(dest);
 		}
+		// space.addVertex(dest);
     space.populateEdges();
 		Debug.Log(space.getVertex(new Vector2(transform.position.x, transform.position.y)));
   	Stack<Vector2> list = AStar(space.getVertex(new Vector2(transform.position.x, transform.position.y)), space.getVertex(targetA));
@@ -543,7 +544,9 @@ public class Player : MonoBehaviour {
   // AStar Seach Algorithm
   private Stack<Vector2> AStar(Vertex start, Vertex dest) {
 
-    Debug.Log("Start: " + start.data);
+		if (start == null || dest == null) return new Stack<Vector2>();
+
+		Debug.Log("Start: " + start.data);
     Debug.Log("Dest: " + dest.data);
 
     // Queue<Vertex> frontier = new Queue<Vertex>();
