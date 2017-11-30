@@ -7,7 +7,10 @@ public class OptimalPath : MonoBehaviour {
 
   Graph space;
   public Stack<Vector2> reversedAutoPath;
-  public Vector2 targetA;
+
+  // Constants
+  public float AUTO_PATH_Y_THRESHOLD;
+  public float NODE_SPACE;
 
   void Start() {
     space = new Graph();
@@ -145,48 +148,48 @@ public class OptimalPath : MonoBehaviour {
     float currentX = transform.position.x;
     float startingY = transform.position.y;
     if (xDist > 0) {
-      while (targetA.x - currentX > .2f) {
+      while (targetA.x - currentX > NODE_SPACE) {
         float currentY = startingY;
         if (yDist > 0) {
-          while (3f - currentY > .2f) {
+          while (AUTO_PATH_Y_THRESHOLD - currentY > NODE_SPACE) {
             Vertex point = new Vertex(new Vector2(currentX, currentY));
 						if (!GameObject.Find("Obstacle").GetComponent<Collider>().bounds.Contains(point.data)) {
 							space.addVertex(point);
 						}
-            currentY = currentY + .2f;
+            currentY = currentY + NODE_SPACE;
           }
         } else {
-          while (3f - currentY < .2f) {
+          while (AUTO_PATH_Y_THRESHOLD - currentY < NODE_SPACE) {
             Vertex point = new Vertex(new Vector2(currentX, currentY));
 						if (!GameObject.Find("Obstacle").GetComponent<Collider>().bounds.Contains(point.data)) {
 							space.addVertex(point);
 						}
-            currentY = currentY - .2f;
+            currentY = currentY - NODE_SPACE;
           }
         }
-        currentX = currentX + .2f;
+        currentX = currentX + NODE_SPACE;
       }
     } else {
-      while (targetA.x - currentX < .2f) {
+      while (targetA.x - currentX < NODE_SPACE) {
         float currentY = startingY;
         if (yDist > 0) {
-          while (3f - currentY > .2f) {
+          while (AUTO_PATH_Y_THRESHOLD - currentY > NODE_SPACE) {
 						Vertex point = new Vertex(new Vector2(currentX, currentY));
 						if (!GameObject.Find("Obstacle").GetComponent<Collider>().bounds.Contains(point.data)) {
 							space.addVertex(point);
 						}
-            currentY = currentY + .2f;
+            currentY = currentY + NODE_SPACE;
           }
         } else {
-          while (3f - currentY < .2f) {
+          while (AUTO_PATH_Y_THRESHOLD - currentY < NODE_SPACE) {
 						Vertex point = new Vertex(new Vector2(currentX, currentY));
 						if (!GameObject.Find("Obstacle").GetComponent<Collider>().bounds.Contains(point.data)) {
 							space.addVertex(point);
 						}
-            currentY = currentY - .2f;
+            currentY = currentY - NODE_SPACE;
           }
         }
-        currentX = currentX - .2f;
+        currentX = currentX - NODE_SPACE;
       }
     }
 		Vertex dest = new Vertex(targetA);

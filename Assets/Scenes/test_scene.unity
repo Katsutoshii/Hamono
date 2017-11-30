@@ -327,8 +327,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.2, y: 0.1995195, z: 0.2}
+  m_Center: {x: 0, y: -0.00024031579, z: 0}
 --- !u!212 &368943799
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -464,6 +464,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6520019358b694196bb30a77a9721880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AUTO_PATH_Y_THRESHOLD: 3
+  NODE_SPACE: 0.3
+  EDGE_LENGTH: 0.3
 --- !u!1001 &1357259105
 Prefab:
   m_ObjectHideFlags: 0
@@ -508,6 +511,16 @@ Prefab:
       propertyPath: slashIndicator
       value: 
       objectReference: {fileID: 1690490367}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: autoPathing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
