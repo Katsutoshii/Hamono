@@ -198,8 +198,8 @@ public class Player : MonoBehaviour {
 			return 1;
 		}
 
-		// otherwise, if we need to move in the x direction, do so
-		if (Mathf.Abs(xDist) >= SLASHING_X_DIST) {
+		// otherwise, if we need to move in the x or y direction, do so
+		if (Mathf.Abs(xDist) >= SLASHING_X_DIST || Mathf.Abs(yDist) >= SLASHING_Y_DIST) {
 			rb.velocity = new Vector2(xDist * KP, yDist * KP);
 		}
 		return 0;
