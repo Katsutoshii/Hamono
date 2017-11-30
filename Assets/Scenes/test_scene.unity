@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 368943800}
   - component: {fileID: 368943799}
   - component: {fileID: 368943798}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6520019358b694196bb30a77a9721880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetA: {x: 0, y: 0}
 --- !u!1001 &1357259105
 Prefab:
   m_ObjectHideFlags: 0
@@ -623,7 +622,7 @@ GameObject:
   - component: {fileID: 1930983481}
   - component: {fileID: 1930983480}
   - component: {fileID: 1930983479}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Platform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,8 +685,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1346692145
-  m_SortingLayer: 2
+  m_SortingLayerID: -186237661
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 729ed5f9c6e32de47a8aee1f3ceceb35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

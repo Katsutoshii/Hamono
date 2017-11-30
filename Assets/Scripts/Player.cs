@@ -62,6 +62,7 @@ public class Player : MonoBehaviour {
 		state = State.idle;
 		completedAutoPathing = false;
 		space = new Graph();
+		reversedAutoPath = new Stack<Vector2>();
 	}
 	
 	// Update is called once per frame
@@ -325,8 +326,8 @@ public class Player : MonoBehaviour {
 	// AutoPathing Script
 
 	private class Graph {
-    HashSet<Vertex> vertices = new HashSet<Vertex>();
-    Dictionary<Vertex, HashSet<Vertex>> edges = new Dictionary<Vertex, HashSet<Vertex>>();
+    public HashSet<Vertex> vertices = new HashSet<Vertex>();
+    public Dictionary<Vertex, HashSet<Vertex>> edges = new Dictionary<Vertex, HashSet<Vertex>>();
 
     public Graph() {}
 
@@ -394,8 +395,8 @@ public class Player : MonoBehaviour {
         return -1;
       }
       if (this.priority == other.priority) return 0;
-      else if (this.priority > other.priority) return -1;
-      return 1;
+      else if (this.priority > other.priority) return 1;
+      return -1;
     }
   }
 
@@ -454,19 +455,29 @@ public class Player : MonoBehaviour {
     float yDist = targetA.y - transform.position.y;
     float currentX = transform.position.x;
     float startingY = transform.position.y;
+		// space.addVertex(new Vertex(transform.position));
     if (xDist > 0) {
       while (targetA.x - currentX > .2f) {
         float currentY = startingY;
         if (yDist > 0) {
           while (targetA.y - currentY > .2f) {
+
             Vertex point = new Vertex(new Vector2(currentX, currentY));
-            space.addVertex(point);
+						if (Physics2D.OverlapPoint(point.data, 2) == null) {
+							space.addVertex(point);
+						} else {
+							Debug.Log("conlict1: " + Physics2D.OverlapPoint(point.data, 1).name);
+						}
             currentY = currentY + .2f;
           }
         } else {
           while (targetA.y - currentY < .2f) {
             Vertex point = new Vertex(new Vector2(currentX, currentY));
-            space.addVertex(point);
+            if (Physics2D.OverlapPoint(point.data, 2) == null) {
+							space.addVertex(point);
+						} else {
+							Debug.Log("conlict2: " + point.data);
+						}
             currentY = currentY - .2f;
           }
         }
@@ -478,22 +489,35 @@ public class Player : MonoBehaviour {
         if (yDist > 0) {
           while (targetA.y - currentY > .2f) {
             Vertex point = new Vertex(new Vector2(currentX, currentY));
-            space.addVertex(point);
+            if (Physics2D.OverlapPoint(point.data, 2) == null) {
+							space.addVertex(point);
+						} else {
+							Debug.Log("conlict3: " + Physics2D.OverlapPoint(point.data, 1));
+						}
             currentY = currentY + .2f;
           }
         } else {
           while (targetA.y - currentY < .2f) {
             Vertex point = new Vertex(new Vector2(currentX, currentY));
-            space.addVertex(point);
+            if (Physics2D.OverlapPoint(point.data, 2) == null) {
+							space.addVertex(point);
+						} else {
+							Debug.Log("conlict4: " + point.data);
+						}
             currentY = currentY - .2f;
           }
         }
         currentX = currentX - .2f;
       }
     }
-    space.addVertex(new Vertex(new Vector2(targetA.x, targetA.y)));
+		Vertex dest = new Vertex(new Vector2(targetA.x, targetA.y));
+		if (Physics2D.OverlapPoint(dest.data, 2) == null) {
+			Debug.Log("right in here: " + space.vertices.Count);
+			space.addVertex(dest);
+		}
     space.populateEdges();
-  	Stack<Vector2> list = a_star(space.getVertex(new Vector2(transform.position.x, transform.position.y)), space.getVertex(targetA));
+		Debug.Log(space.getVertex(new Vector2(transform.position.x, transform.position.y)));
+  	Stack<Vector2> list = AStar(space.getVertex(new Vector2(transform.position.x, transform.position.y)), space.getVertex(targetA));
 		return list;
   }
 
@@ -517,7 +541,7 @@ public class Player : MonoBehaviour {
   }
 
   // AStar Seach Algorithm
-  private Stack<Vector2> a_star(Vertex start, Vertex dest) {
+  private Stack<Vector2> AStar(Vertex start, Vertex dest) {
 
     Debug.Log("Start: " + start.data);
     Debug.Log("Dest: " + dest.data);
@@ -547,14 +571,11 @@ public class Player : MonoBehaviour {
         }
       }
     }
-    return null;
+    return new Stack<Vector2>();
     
   }
 
   private float heuristic(Vertex a, Vertex b) {
-   float dx = Mathf.Abs(a.data.x - b.data.x);
-   float dy = Mathf.Abs(a.data.y - b.data.y);
-  //  return Mathf.Sqrt(dx * dx + dy * dy);
-  return dx + dy;
+	return Vector2.Distance(a.data, b.data);
   }
 }
