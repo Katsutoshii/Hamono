@@ -16,7 +16,9 @@ public class Player : MonoBehaviour {
 		running,
 		autoPathing,
 		dashing,
-		slashing
+		slashing,
+		damaged,
+		dead,
 	};
 
 	public enum AttackType {
