@@ -27,6 +27,14 @@ public class Player : MonoBehaviour {
 		none
 	}
 
+	public enum AttackResponse {
+		normal,
+		strong,
+		blocked,
+		missed,
+		none
+	}
+
 	public State state;
 	public AttackType attackType = AttackType.none;
 	public bool grounded;
