@@ -327,8 +327,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.1995195, z: 0.2}
-  m_Center: {x: 0, y: -0.00024031579, z: 0}
+  m_Size: {x: 0.34428322, y: 0.23580301, z: 0.2}
+  m_Center: {x: 0.0005507317, y: 0.017901417, z: 0}
 --- !u!212 &368943799
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -464,9 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6520019358b694196bb30a77a9721880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AUTO_PATH_Y_THRESHOLD: 3
-  NODE_SPACE: 0.3
-  EDGE_LENGTH: 0.3
+  NODE_SPACE: 0.2
 --- !u!1001 &1357259105
 Prefab:
   m_ObjectHideFlags: 0

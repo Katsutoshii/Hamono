@@ -9,7 +9,7 @@ public class OptimalPath : MonoBehaviour {
   public Stack<Vector2> reversedAutoPath;
 
   // Constants
-  public float AUTO_PATH_Y_THRESHOLD;
+  float AUTO_PATH_Y_THRESHOLD;
   public float NODE_SPACE;
 
   void Start() {
@@ -145,6 +145,7 @@ public class OptimalPath : MonoBehaviour {
     space = new Graph();
     float xDist = targetA.x - transform.position.x;
     float yDist = targetA.y - transform.position.y;
+    if (yDist > 0) AUTO_PATH_Y_THRESHOLD = Mathf.Max(yDist, 5f);
     float currentX = transform.position.x;
     float startingY = transform.position.y;
     if (xDist > 0) {
