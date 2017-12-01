@@ -83,21 +83,6 @@ public class Player : MonoBehaviour {
 	
 		Controls();
 
-		// turn the sprite around based on velocity
-		if (rb.velocity.x > TURNING_THRESHOLD) {
-			transform.localScale = new Vector3 (1, 1, 1);
-			if (state == State.idle)
-				state = State.running;
-		} else if (rb.velocity.x < -TURNING_THRESHOLD) {
-			transform.localScale = new Vector3 (-1, 1, 1);
-			if (state == State.idle)
-				state = State.running;
-		} else if (state == State.running) state = State.idle;
-
-    	anim.SetBool("grounded", grounded);
-    	anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
-		anim.SetBool("dashing", state == State.dashing);
-
 		// actions based on the state
 		switch (state) {
 			case State.autoPathing:
@@ -106,6 +91,7 @@ public class Player : MonoBehaviour {
 			
 			case State.dashing:
 				Dash();
+				SpawnAfterimages();
 				break;
 
 			case State.slashing:
@@ -117,23 +103,13 @@ public class Player : MonoBehaviour {
 				break;
 		}		
 
-		if(state != State.dashing) {
-			// limit the speed
-			if (rb.velocity.x > maxSpeed) {
-				rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
-			}
-			else if (rb.velocity.x < -maxSpeed) {
-				rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
-			}
-		}
-	}
+		RotateSpriteForVelocity();
+		if(state != State.dashing) LimitVelocity();
 
-	/// <summary>
-	/// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
-	/// </summary>
-	void FixedUpdate()
-	{
-		
+		// update animator variables
+    	anim.SetBool("grounded", grounded);
+    	anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+		anim.SetBool("dashing", state == State.dashing);
 	}
 
 	// method to handle all control inputs inside main loop
@@ -181,6 +157,28 @@ public class Player : MonoBehaviour {
 				transform.localScale = new Vector3(1, 1, 1);
 			else 
 				transform.localScale = new Vector3(-1, 1, 1);
+		}
+	}
+
+	private void RotateSpriteForVelocity() {
+		// turn the sprite around based on velocity
+		if (rb.velocity.x > TURNING_THRESHOLD) {
+			transform.localScale = new Vector3 (1, 1, 1);
+			if (state == State.idle)
+				state = State.running;
+		} else if (rb.velocity.x < -TURNING_THRESHOLD) {
+			transform.localScale = new Vector3 (-1, 1, 1);
+			if (state == State.idle)
+				state = State.running;
+		} else if (state == State.running) state = State.idle;
+	}
+	private void LimitVelocity() {
+		// limit the velocity
+		if (rb.velocity.x > maxSpeed) {
+			rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
+		}
+		else if (rb.velocity.x < -maxSpeed) {
+			rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
 		}
 	}
 
@@ -234,6 +232,38 @@ public class Player : MonoBehaviour {
 			completedAutoPathing = false;
 		}
 	}
+
+	private int afterimageCount = 0;
+	// method to create the after images for the dash
+	private void SpawnAfterimages() {
+		
+		afterimageCount++;
+		if(afterimageCount % 3 != 0) return;
+		Debug.Log(afterimageCount);
+
+		GameObject trailPart = new GameObject();
+        SpriteRenderer trailPartRenderer = trailPart.AddComponent<SpriteRenderer>();
+		trailPartRenderer.sortingLayerName = "EntityBackground";
+        trailPartRenderer.sprite = GetComponent<SpriteRenderer>().sprite;
+
+		trailPartRenderer.color = new Color(0.2f, 0.2f, 1f);
+		trailPart.transform.position = transform.position;
+		trailPart.transform.localScale = transform.localScale;
+		Destroy(trailPart, 0.3f); // replace 0.5f with needed lifeTime
+ 
+        StartCoroutine("FadeTrailPart", trailPartRenderer);
+    }
+ 
+    IEnumerator FadeTrailPart(SpriteRenderer trailPartRenderer)
+    {
+        Color color = trailPartRenderer.color;
+        for (float f = 0.8f; f >= 0; f -= 0.08f) {
+            Color c = trailPartRenderer.color;
+            c.a = f;
+            trailPartRenderer.color = c;
+            yield return new WaitForEndOfFrame();
+        }
+    }
 
 	private Vector2 MouseWorldPosition2D(){
 		Vector3 worldSpaceClickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -310,6 +340,7 @@ public class Player : MonoBehaviour {
 		}
 		else attackType = CalcSlashType(); 	// sets slashType to the correct type of slash
 	}
+	
 	// method to get the slash type based on targetA and targetB
 	private AttackType CalcSlashType(){
 		AttackType slashType;
@@ -344,5 +375,4 @@ public class Player : MonoBehaviour {
 		}
 		else rb.Sleep();
 	}
-
 }
