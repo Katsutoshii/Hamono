@@ -80,7 +80,9 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-    
+	
+		Controls();
+
 		// turn the sprite around based on velocity
 		if (rb.velocity.x > TURNING_THRESHOLD) {
 			transform.localScale = new Vector3 (1, 1, 1);
@@ -95,16 +97,6 @@ public class Player : MonoBehaviour {
     	anim.SetBool("grounded", grounded);
     	anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
 		anim.SetBool("dashing", state == State.dashing);
-	}
-
-	/// <summary>
-	/// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
-	/// </summary>
-	void FixedUpdate()
-	{
-		// if we are not slashing then handle control inputs
-		Controls();
-
 
 		// actions based on the state
 		switch (state) {
@@ -136,11 +128,24 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+	/// </summary>
+	void FixedUpdate()
+	{
+		
+	}
+
 	// method to handle all control inputs inside main loop
 	private void Controls() {
 
 		// for move left and right manually
-		if (Input.GetKey(key:KeyCode.A)) {
+		if (Input.GetKey(key:KeyCode.D) && Input.GetKey(key:KeyCode.A)) {
+			CancelAutomation();
+			rb.velocity = new Vector2(0, rb.velocity.y);
+			state = State.idle;
+		}
+		else if (Input.GetKey(key:KeyCode.A)) {
 			CancelAutomation();
 			rb.velocity = new Vector2(-speed, rb.velocity.y);
 			state = State.running;
@@ -178,8 +183,8 @@ public class Player : MonoBehaviour {
 				transform.localScale = new Vector3(-1, 1, 1);
 		}
 	}
-	// method to handle the autopathing
 
+	// method to handle the autopathing
 	private void AutoPath() {
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y;

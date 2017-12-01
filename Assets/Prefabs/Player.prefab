@@ -215,12 +215,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebeb5ef8aeb3bba4b8d6b3a8d3b0865f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  maxSpeed: 7
+  speed: 7
+  maxSpeed: 15
   jumpPower: 10
   jumps: 2
+  comboCount: 0
   state: 0
   attackType: 6
+  attackResponse: 5
   grounded: 1
   autoPathing: 0
   completedAutoPathing: 0
@@ -235,7 +237,7 @@ MonoBehaviour:
   TURNING_THRESHOLD: 0.1
   KP: 6.5
   GRAVITY_SCALE: 2
-  DASH_SPEED: 7
+  DASH_SPEED: 8
   DASH_TARGET_THRESHOLD: 0.8
   JAB_THRESHOLD: 0.4
   ATTACK_TIMEOUT: 0.5
