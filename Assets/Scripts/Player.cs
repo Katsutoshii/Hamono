@@ -239,7 +239,6 @@ public class Player : MonoBehaviour {
 		
 		afterimageCount++;
 		if(afterimageCount % 3 != 0) return;
-		Debug.Log(afterimageCount);
 
 		GameObject trailPart = new GameObject();
         SpriteRenderer trailPartRenderer = trailPart.AddComponent<SpriteRenderer>();
