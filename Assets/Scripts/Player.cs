@@ -77,8 +77,8 @@ public class Player : MonoBehaviour {
 				state = State.running;
 		} else if (state == State.running) state = State.idle;
 
-        anim.SetBool("grounded", grounded);
-        anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+    anim.SetBool("grounded", grounded);
+    anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
 		anim.SetBool("dashing", state == State.dashing);
 	}
 
@@ -122,6 +122,7 @@ public class Player : MonoBehaviour {
 
 	// method to handle all control inputs inside main loop
 	private void Controls() {
+
 		// for move left and right manually
 		if (Input.GetKey(key:KeyCode.A)) {
 			CancelAutomation();
@@ -284,6 +285,7 @@ public class Player : MonoBehaviour {
 				break;
 			
 			case AttackType.none:
+				state = State.idle;
 				break;
 
 		}
