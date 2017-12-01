@@ -205,26 +205,6 @@ public class Player : MonoBehaviour {
 		return 0;
 	}
 
-		// float xDist = targetA.x - transform.position.x;
-		// float yDist = targetA.y - transform.position.y;
-
-		// if we are at the position to start slashing, freeze!
-	// 	if(Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
-
-	// 		rb.gravityScale = 0;
-	// 		rb.velocity = new Vector3(0, 0);
-	// 		if (type == "none") state = State.idle;
-	// 		// state = State.idle;
-	// 		return 1;
-	// 	}
-
-	// 	// otherwise, if we need to move in the x direction, do so
-	// 	if (Mathf.Abs(xDist) >= SLASHING_X_DIST) {
-	// 		rb.velocity = new Vector2(xDist * KP, yDist * KP);
-	// 	}
-	// 	return 0;
-	// }
-
 	/// <summary>
 	/// OnGUI is called for rendering and handling GUI events.
 	/// This function can be called multiple times per frame (one call per event).
