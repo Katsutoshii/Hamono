@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashingTrail : MonoBehaviour {
+public class DashingTrailSpawner : MonoBehaviour {
 
 	private Player player;
 
@@ -13,11 +13,8 @@ public class DashingTrail : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-		
-
 		if (player.state == Player.State.dashing) {
-			if (player.rb.velocity.x < 0) transform.localScale = new Vector3(-1, 1, 1);
-			else transform.localScale = new Vector3(1, 1, 1);
+			transform.localScale = new Vector3(1, 1, 1);
 			SpawnTrail();
 		}
 		else {
@@ -31,8 +28,9 @@ public class DashingTrail : MonoBehaviour {
         SpriteRenderer trailPartRenderer = trailPart.AddComponent<SpriteRenderer>();
         trailPartRenderer.sprite = GetComponent<SpriteRenderer>().sprite;
         trailPart.transform.position = transform.position;
-		trailPartRenderer.color = Color.white;
-        Destroy(trailPart, 0.1f); // replace 0.5f with needed lifeTime
+        trailPart.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(player.targetB.y - player.targetA.y, 
+				player.targetB.x - player.targetA.x) * 180 / Mathf.PI);
+        Destroy(trailPart, 0.2f); // replace 0.5f with needed lifeTime
  
         StartCoroutine("FadeTrailPart", trailPartRenderer);
     }
@@ -40,9 +38,11 @@ public class DashingTrail : MonoBehaviour {
     IEnumerator FadeTrailPart(SpriteRenderer trailPartRenderer)
     {
         Color color = trailPartRenderer.color;
-        color.a -= 0.1f; // replace 0.5f with needed alpha decrement
-        trailPartRenderer.color = color;
- 
-        yield return new WaitForEndOfFrame();
+        for (float f = 1f; f >= 0; f -= 0.1f) {
+            Color c = trailPartRenderer.color;
+            c.a = f;
+            trailPartRenderer.color = c;
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

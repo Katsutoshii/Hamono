@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4178188463563648}
   - component: {fileID: 212431273832584702}
   - component: {fileID: 114742312546721590}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DashingTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1214456289450178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e75baa1bfb798324dbddf957c2389b4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a8340f145df60548b46c0d50bbc58bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212073600475020504
