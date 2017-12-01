@@ -23,16 +23,18 @@ public class Player : MonoBehaviour {
 		slashing
 	};
 
-	public enum SlashType {
+	public enum AttackType {
 		upSlash,
 		downSlash,
 		jab,
 		upJab,
-		downJab
+		downJab,
+		dash,
+		none
 	}
 
 	public State state;
-	public SlashType slashType;
+	public AttackType attackType = AttackType.none;
 	public bool grounded;
 	public bool autoPathing;
 	public bool completedAutoPathing; // triggeers dash/slash after completed autopathing
@@ -40,7 +42,7 @@ public class Player : MonoBehaviour {
 	public Vector2 targetA; 	// start point of a slash
 	public Vector2 targetB;		// end point of a slash
 	public SlashIndicator slashIndicator;
-	private Rigidbody2D rb;
+	public Rigidbody2D rb;
     private Animator anim;
 
 	// constants
@@ -51,10 +53,12 @@ public class Player : MonoBehaviour {
 	public float TURNING_THRESHOLD;
 	public float KP;
 	public float GRAVITY_SCALE;
-	public float DASH_SPEED = 40f;
+	public float DASH_SPEED;
+	public float DASH_TARGET_THRESHOLD;
 	public float JAB_THRESHOLD;
+	public float ATTACK_TIMEOUT;
 
-	private float slashStartTime;
+	private float attackStartTime;
 
 	// Use this for initialization
 	void Start () {
@@ -63,13 +67,14 @@ public class Player : MonoBehaviour {
     anim = gameObject.GetComponent<Animator>();
 		optimalPath = gameObject.GetComponent<OptimalPath>();
 		state = State.idle;
+		attackType = AttackType.none;
 		completedAutoPathing = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
     
-		// turn the sprite around
+		// turn the sprite around based on velocity
 		if (rb.velocity.x > TURNING_THRESHOLD) {
 			transform.localScale = new Vector3 (1, 1, 1);
 			if (state == State.idle)
@@ -80,8 +85,9 @@ public class Player : MonoBehaviour {
 				state = State.running;
 		} else if (state == State.running) state = State.idle;
 
-        anim.SetBool("grounded", grounded);
-        anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+    	anim.SetBool("grounded", grounded);
+    	anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+		anim.SetBool("dashing", state == State.dashing);
 	}
 
 	/// <summary>
@@ -89,75 +95,14 @@ public class Player : MonoBehaviour {
 	/// </summary>
 	void FixedUpdate()
 	{
-		// for move left and right manually
-		if (Input.GetKey(key:KeyCode.A)) {
-			CancelAutomation();
-			rb.velocity += Vector2.left * speed;
-			state = State.running;
-		}
-		else if (state == State.running) state = State.idle;
+		// if we are not slashing then handle control inputs
+		Controls();
 
-		if(Input.GetKey(key:KeyCode.D)) {
-			CancelAutomation();
-			rb.velocity += Vector2.right * speed;
-			state = State.running;
-		}
-		else if (state == State.running) state = State.idle;
-
-        // for jumping
-        if (Input.GetKeyDown(key: KeyCode.W) && jumps > 0)
-        {
-			CancelAutomation();
-			Jump(jumpPower);
-			
-            state = State.idle;
-        }
-
-        // if we clicked, start autopathing towards that direction
-        if (Input.GetMouseButtonDown(0)) { // if left click
-			jumps = 0;
-            state = State.autoPathing;
-						completedAutoPathing = false;
-            targetA = MouseWorldPosition2D();
-						optimalPath.GenerateGraph(targetA);
-			// turn the sprite around
-			if (targetA.x > transform.position.x)
-				transform.localScale = new Vector3(1, 1, 1);
-			else 
-				transform.localScale = new Vector3(-1, 1, 1);
-		}
-		else if (Input.GetMouseButton(0)) {
-			if (Vector2.Distance(targetA, MouseWorldPosition2D()) > SLASHING_THRESHOLD)
-				slashIndicator.spriteRenderer.color = Color.blue;
-			else slashIndicator.spriteRenderer.color = Color.red;
-		}
-		else {
-			rb.gravityScale = GRAVITY_SCALE;
-		}
-
-		// if we release the mouse click, then we have finished drawing a slash
-		if (Input.GetMouseButtonUp(0)) {
-			if (state == State.autoPathing && Vector3.Distance(transform.position, targetA) <= .3f) {
-				CancelAutomation();
-				state = State.idle;
-			}
-
-			targetB = MouseWorldPosition2D();
-			if (Vector2.Distance(targetA, targetB) > SLASHING_THRESHOLD) {
-				state = State.dashing;
-				// dashing is handle on a frame-by-frame basis
-			}
-			else if (Vector2.Distance(targetA, targetB) > .2 ) {
-				state = State.slashing;
-				CalcSlashType(); 	// sets slashType to the correct type of slash
-				Slash();			// start the slash
-			}
-		}
 
 		// actions based on the state
 		switch (state) {
 			case State.autoPathing:
-				AutoPath("none");
+				AutoPath();
 				break;
 			
 			case State.dashing:
@@ -165,41 +110,92 @@ public class Player : MonoBehaviour {
 				break;
 
 			case State.slashing:
-				// check if the slash is over by seeing if the current playing animation is idle
-				if (anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle") && Time.time > slashStartTime + 0.1) {
-					Debug.Log("Slash ended!");
-					rb.WakeUp();
-					state = State.idle;
-				}
-				else rb.Sleep();
-
+				CheckForSlashEnd();
 				break;
 
 			default:
+				rb.gravityScale = GRAVITY_SCALE;
 				break;
 		}		
 
-		// limit the speed
-		if (rb.velocity.x > maxSpeed) {
-			rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
-		}
-		else if (rb.velocity.x < -maxSpeed) {
-			rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
+		if(state != State.dashing) {
+			// limit the speed
+			if (rb.velocity.x > maxSpeed) {
+				rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
+			}
+			else if (rb.velocity.x < -maxSpeed) {
+				rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
+			}
 		}
 	}
 
-	// method to handle the autopathing
-	/// <param name="type"> label that tells function if it has a successor action </param>
+	// method to handle all control inputs inside main loop
+	private void Controls() {
 
-	private int AutoPath(string type) {
-		if (optimalPath.reversedAutoPath.Count == 0) {
-			rb.gravityScale = 0;
-			rb.velocity = new Vector3(0, 0);
-			if (type == "none") state = State.idle;
-			// state = State.idle;
-			return 1;
+		// for move left and right manually
+		if (Input.GetKey(key:KeyCode.A)) {
+			CancelAutomation();
+			rb.velocity = new Vector2(-speed, rb.velocity.y);
+			state = State.running;
+		}
+		else if(Input.GetKey(key:KeyCode.D)) {
+			CancelAutomation();
+			rb.velocity = new Vector2(speed, rb.velocity.y);
+			state = State.running;
+		}
+		else if (state == State.running) {
+			rb.velocity = new Vector2(0, rb.velocity.y);
+			state = State.idle;
+		}
+		
+
+		// for jumping
+		if (Input.GetKeyDown(key: KeyCode.W) && jumps > 0)
+		{
+			CancelAutomation();
+			Jump(jumpPower);
+			
+			state = State.idle;
 		}
 
+		if (Input.GetMouseButtonDown(0)) {
+			jumps = 0;
+<<<<<<< HEAD
+            state = State.autoPathing;
+						completedAutoPathing = false;
+            targetA = MouseWorldPosition2D();
+						optimalPath.GenerateGraph(targetA);
+=======
+			state = State.autoPathing;
+			completedAutoPathing = false;
+			targetA = MouseWorldPosition2D();
+
+>>>>>>> 1367b0e91855e7e32f09668d3a42837d605f89da
+			// turn the sprite around
+			if (targetA.x > transform.position.x)
+				transform.localScale = new Vector3(1, 1, 1);
+			else 
+				transform.localScale = new Vector3(-1, 1, 1);
+		}
+	}
+	// method to handle the autopathing
+	private void AutoPath() {
+		float xDist = targetA.x - transform.position.x;
+		float yDist = targetA.y - transform.position.y;
+
+		// if we are at the position to start slashing, freeze until we have an attack!
+		if(Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
+			completedAutoPathing = true;
+			rb.gravityScale = 0;
+			rb.velocity = new Vector3(0, 0);
+			Attack();	// will do nothing unless an attack is set
+		}
+
+		// otherwise, if we need to move in the x or y direction, do so
+		// if (Mathf.Abs(xDist) >= SLASHING_X_DIST || Mathf.Abs(yDist) >= SLASHING_Y_DIST) {
+		// 	completedAutoPathing = false;
+		// 	rb.velocity = new Vector2(xDist * KP, yDist * KP);
+		// }
 		Vector2 nextLocation = optimalPath.reversedAutoPath.Pop();
 
 		float xDist = nextLocation.x - transform.position.x;
@@ -238,21 +234,25 @@ public class Player : MonoBehaviour {
 	}
 
 	// method to handle dashing
+	// this is only called when auto pathing is completed!
 	private void Dash() {
-		float distance = Vector3.Distance(transform.position, targetB);
-		if (completedAutoPathing == true) {
-			if (distance > .8f) {
-				transform.position = Vector2.MoveTowards(transform.position, targetB, DASH_SPEED * Time.deltaTime);
-			} else {
-				rb.gravityScale = 0;
-				rb.velocity = new Vector3(0, 0, 0);
-				state = State.idle;
-				completedAutoPathing = false;
-			}
-		} else {
-			if (AutoPath("dash") == 1) {
-				completedAutoPathing = true;
-			}
+		if (Time.time > attackStartTime + ATTACK_TIMEOUT) {
+			state = State.idle;
+			attackType = AttackType.none;
+		}
+		float distanceB = Vector2.Distance(rb.position, targetB);
+		// if we are mid dash
+		if (distanceB > DASH_TARGET_THRESHOLD) {
+			rb.gravityScale = 0;
+			rb.velocity = (targetB - rb.position) * DASH_SPEED;
+		} 
+
+		// otherwise we have completed the dash
+		else {
+			rb.velocity = new Vector3(0, 0, 0);
+			state = State.idle;
+			attackType = AttackType.none;
+			completedAutoPathing = false;
 		}
 	}
 
@@ -263,6 +263,8 @@ public class Player : MonoBehaviour {
 
 	public void CancelAutomation() {
 		if(state == State.autoPathing || state == State.dashing || state == State.slashing) {
+				completedAutoPathing = false;
+				attackType = AttackType.none;
 				rb.velocity = new Vector3(0, 0, 0);
 				rb.gravityScale = GRAVITY_SCALE;
 			}
@@ -276,34 +278,62 @@ public class Player : MonoBehaviour {
 	}
 
 	// method to perform the slash
-	private void Slash(){
-		Debug.Log("Slashing");
+	private void Attack(){
+		Debug.Log("Attacking");
+		
+		rb.gravityScale = 0;
 		rb.Sleep();
-		slashStartTime = Time.time;
+		attackStartTime = Time.time;
 
-		switch (slashType) {
-			case SlashType.upJab:
+		switch (attackType) {
+			case AttackType.upJab:
+				state = State.slashing;
+				anim.Play("PlayerJab");
 				break;
 
-			case SlashType.jab:
+			case AttackType.jab:
+				state = State.slashing;
+				anim.Play("PlayerJab");
 				break;
 
-			case SlashType.downJab:
+			case AttackType.downJab:
+				state = State.slashing;
+				anim.Play("PlayerDownJab");
 				break;
 
-			case SlashType.upSlash:
-			
-				rb.gravityScale = 0;
+			case AttackType.upSlash:
+				state = State.slashing;
 				anim.Play("PlayerUpSlash");
 				break;
 
-			case SlashType.downSlash:
+			case AttackType.downSlash:
+				state = State.slashing;
+				anim.Play("PlayerJab");
 				break;
+
+			case AttackType.dash:
+				state = State.dashing;
+				break;
+			
+			case AttackType.none:
+				break;
+
 		}
 	}
 
+	public void GetAttackType() {
+		
+		targetB = MouseWorldPosition2D();
+		state = State.autoPathing;
+		if (Vector2.Distance(targetA, targetB) > SLASHING_THRESHOLD) {
+			attackType = AttackType.dash;
+			// dashing is handle on a frame-by-frame basis
+		}
+		else attackType = CalcSlashType(); 	// sets slashType to the correct type of slash
+	}
 	// method to get the slash type based on targetA and targetB
-	private void CalcSlashType(){
+	private AttackType CalcSlashType(){
+		AttackType slashType;
 		Debug.Log("finding slash type");
 		// if this is a jab
 		if(Vector2.Distance(transform.position, targetA) < JAB_THRESHOLD) {
@@ -311,15 +341,29 @@ public class Player : MonoBehaviour {
 				targetB.x - targetA.x) * 180 / Mathf.PI;
 			Debug.Log("It's a jab! Angle = " + angle);
 
-			if(angle > 30) slashType = SlashType.upJab;
-			else if(angle < -30) slashType = SlashType.downJab;
-			else slashType = SlashType.jab;
+			if(angle > 30) slashType = AttackType.upJab;
+			else if(angle < -30) slashType = AttackType.downJab;
+			else slashType = AttackType.jab;
 		}
 		// otherwise this must be a slash
 		else {
 			Debug.Log("It's a slash!");
-			if(targetA.y >= targetB.y) slashType = SlashType.downSlash;
-			else slashType = SlashType.upSlash;
+			if(targetA.y >= targetB.y) slashType = AttackType.downSlash;
+			else slashType = AttackType.upSlash;
 		}
+
+		return slashType;
 	}
+
+	private void CheckForSlashEnd() {
+		// check if the slash is over by seeing if the current playing animation is idle
+		if (anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle") && Time.time > attackStartTime + 0.2) {
+			Debug.Log("Slash ended!");
+			rb.WakeUp();
+			state = State.idle;
+			attackType = AttackType.none;
+		}
+		else rb.Sleep();
+	}
+
 }

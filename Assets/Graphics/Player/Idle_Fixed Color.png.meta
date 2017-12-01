@@ -1,16 +1,17 @@
 fileFormatVersion: 2
-guid: 4f4757c58dc3a3340b2bb88446b53300
-timeCreated: 1512066119
+guid: a4dd9787ddc3f51479b334dfebe7f244
+timeCreated: 1512064647
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Upper Swing Test Sprite Sheet 3_0
-    21300002: Upper Swing Test Sprite Sheet 3_1
-    21300004: Upper Swing Test Sprite Sheet 3_2
-    21300006: Upper Swing Test Sprite Sheet 3_3
-    21300008: Upper Swing Test Sprite Sheet 3_4
-    21300010: Upper Swing Test Sprite Sheet 3_5
-    21300012: Upper Swing Test Sprite Sheet 3_6
+    21300000: Idle_Fixed Color_0
+    21300002: Idle_Fixed Color_1
+    21300004: Idle_Fixed Color_2
+    21300006: Idle_Fixed Color_3
+    21300008: Idle_Fixed Color_4
+    21300010: Idle_Fixed Color_5
+    21300012: Idle_Fixed Color_6
+    21300014: Idle_Fixed Color_7
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -97,99 +98,113 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_0
+      name: Idle_Fixed Color_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 128
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Idle_Fixed Color_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 144
+        width: 128
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Idle_Fixed Color_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 144
+        width: 128
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Idle_Fixed Color_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 144
+        width: 128
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Idle_Fixed Color_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 259.57144
-        height: 145
-      alignment: 9
-      pivot: {x: 0.2, y: 0.5}
+        width: 128
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_1
+      name: Idle_Fixed Color_5
       rect:
         serializedVersion: 2
-        x: 259
+        x: 128
         y: 0
-        width: 259.57144
-        height: 145
-      alignment: 9
-      pivot: {x: 0.2, y: 0.5}
+        width: 128
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_2
+      name: Idle_Fixed Color_6
       rect:
         serializedVersion: 2
-        x: 518
+        x: 256
         y: 0
-        width: 259.57144
-        height: 145
-      alignment: 9
-      pivot: {x: 0.2, y: 0.5}
+        width: 128
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_3
+      name: Idle_Fixed Color_7
       rect:
         serializedVersion: 2
-        x: 777
+        x: 384
         y: 0
-        width: 259.57144
-        height: 145
-      alignment: 9
-      pivot: {x: 0.2, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_4
-      rect:
-        serializedVersion: 2
-        x: 1036
-        y: 0
-        width: 259.57144
-        height: 145
-      alignment: 9
-      pivot: {x: 0.2, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_5
-      rect:
-        serializedVersion: 2
-        x: 1295
-        y: 0
-        width: 259.57144
-        height: 145
-      alignment: 9
-      pivot: {x: 0.2, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_6
-      rect:
-        serializedVersion: 2
-        x: 1554
-        y: 0
-        width: 259.57144
-        height: 145
-      alignment: 9
-      pivot: {x: 0.2, y: 0.5}
+        width: 128
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

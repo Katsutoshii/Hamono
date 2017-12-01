@@ -1,16 +1,14 @@
 fileFormatVersion: 2
-guid: 4f4757c58dc3a3340b2bb88446b53300
-timeCreated: 1512066119
+guid: 87b322da8dd4e634a81b114c4855cb52
+timeCreated: 1512069519
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Upper Swing Test Sprite Sheet 3_0
-    21300002: Upper Swing Test Sprite Sheet 3_1
-    21300004: Upper Swing Test Sprite Sheet 3_2
-    21300006: Upper Swing Test Sprite Sheet 3_3
-    21300008: Upper Swing Test Sprite Sheet 3_4
-    21300010: Upper Swing Test Sprite Sheet 3_5
-    21300012: Upper Swing Test Sprite Sheet 3_6
+    21300000: Kiri_Jab Attack_Down_0
+    21300002: Kiri_Jab Attack_Down_1
+    21300004: Kiri_Jab Attack_Down_2
+    21300006: Kiri_Jab Attack_Down_3
+    21300008: Kiri_Jab Attack_Down_4
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -97,99 +95,71 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_0
+      name: Kiri_Jab Attack_Down_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 259.57144
-        height: 145
+        y: 368
+        width: 256
+        height: 144
       alignment: 9
-      pivot: {x: 0.2, y: 0.5}
+      pivot: {x: 0.3, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_1
+      name: Kiri_Jab Attack_Down_1
       rect:
         serializedVersion: 2
-        x: 259
-        y: 0
-        width: 259.57144
-        height: 145
+        x: 256
+        y: 368
+        width: 256
+        height: 144
       alignment: 9
-      pivot: {x: 0.2, y: 0.5}
+      pivot: {x: 0.3, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_2
+      name: Kiri_Jab Attack_Down_2
       rect:
         serializedVersion: 2
-        x: 518
-        y: 0
-        width: 259.57144
-        height: 145
+        x: 0
+        y: 224
+        width: 256
+        height: 144
       alignment: 9
-      pivot: {x: 0.2, y: 0.5}
+      pivot: {x: 0.3, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_3
+      name: Kiri_Jab Attack_Down_3
       rect:
         serializedVersion: 2
-        x: 777
-        y: 0
-        width: 259.57144
-        height: 145
+        x: 256
+        y: 224
+        width: 256
+        height: 144
       alignment: 9
-      pivot: {x: 0.2, y: 0.5}
+      pivot: {x: 0.3, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_4
+      name: Kiri_Jab Attack_Down_4
       rect:
         serializedVersion: 2
-        x: 1036
-        y: 0
-        width: 259.57144
-        height: 145
+        x: 0
+        y: 80
+        width: 256
+        height: 144
       alignment: 9
-      pivot: {x: 0.2, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_5
-      rect:
-        serializedVersion: 2
-        x: 1295
-        y: 0
-        width: 259.57144
-        height: 145
-      alignment: 9
-      pivot: {x: 0.2, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Upper Swing Test Sprite Sheet 3_6
-      rect:
-        serializedVersion: 2
-        x: 1554
-        y: 0
-        width: 259.57144
-        height: 145
-      alignment: 9
-      pivot: {x: 0.2, y: 0.5}
+      pivot: {x: 0.3, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
