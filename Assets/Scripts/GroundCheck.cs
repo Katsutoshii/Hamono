@@ -27,7 +27,34 @@ public class GroundCheck : MonoBehaviour
     {
         player.grounded = true;
         player.jumps = 2;
-    }
+
+        // Enemy - placeholder label for all enemy sprites
+        // TODO: change to use layer
+        if (other.name == "Enemy") {
+            if (state != State.jumping && state != State.idle) {
+                // We are in attack mode
+                // TODO: move following calculations to different scripts
+                // Calculate what type of enemy it is and distribute attack response
+                player.attackResponse = AttackResponse.normal;
+            }
+
+            // Handles the different types of attack responses
+            switch (player.attackResponse) {
+                case AttackResponse.normal:
+                    break;
+                case AttackResponse.strong:
+                    break;
+                case AttackResponse.blocked:
+                    break;
+                case AttackResponse.missed:
+                    break;
+                case AttackResponse.combo:
+                    break;
+                default:
+                    break;
+            }	
+        }
+    }	
 
     void OnTriggerExit2D(Collider2D collider2D)
     {

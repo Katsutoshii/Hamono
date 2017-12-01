@@ -40,6 +40,7 @@ public class Player : MonoBehaviour {
 
 	public State state;
 	public AttackType attackType = AttackType.none;
+	public AttackResponse attackResponse = AttackResponse.none;
 	public bool grounded;
 	public bool autoPathing;
 	public bool completedAutoPathing; // triggeers dash/slash after completed autopathing
@@ -69,7 +70,7 @@ public class Player : MonoBehaviour {
 	void Start () {
 		Debug.Log("Start");
 		rb = gameObject.GetComponent<Rigidbody2D>();
-        anim = gameObject.GetComponent<Animator>();
+    anim = gameObject.GetComponent<Animator>();
 		state = State.idle;
 		attackType = AttackType.none;
 		completedAutoPathing = false;
