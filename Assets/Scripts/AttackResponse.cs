@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackReponse : MonoBehaviour
+public class AttackResponse : MonoBehaviour
 {
     private Player player;
 
@@ -16,11 +16,11 @@ public class AttackReponse : MonoBehaviour
     {
         // Enemy - placeholder label for all enemy sprites
         // TODO: change to use layer
-        if (other.name == "Enemy") {
+        if (collider2D.name == "Enemy") {
             if (player.state != Player.State.running && player.state != Player.State.idle) {
                 // We are in attack mode
                 // TODO: Calculate what type of enemy it is and distribute attack response
-                if (player.attackRepons == Player.AttackReponse.combo) {
+                if (player.attackResponse == Player.AttackResponse.combo) {
                   // Handles future responses with combo in mind
                 } else {
                   player.attackResponse = Player.AttackResponse.normal;
@@ -52,13 +52,13 @@ public class AttackReponse : MonoBehaviour
     /// <param name="other">The other Collider2D involved in this collision.</param>
     void OnTriggerStay2D(Collider2D other)
     {
-      if (player.state == Player.State.idle || player.state == Player.State.jumping) {
+      if (player.state == Player.State.idle || player.state == Player.State.running) {
         // The player got hit
-        player.attackResponse = Player.AttackReponse.none;
+        player.attackResponse = Player.AttackResponse.none;
         player.comboCount = 0;
       } else {
         // The player is working with combos
-        player.attackResponse = Player.State.combo;
+        player.attackResponse = Player.AttackResponse.combo;
         player.comboCount++;
         // Resets the number of jumps
         player.jumps = 0;
