@@ -60,6 +60,7 @@ public class Player : MonoBehaviour {
 		rb = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
 		state = State.idle;
+		attackType = AttackType.none;
 		completedAutoPathing = false;
 	}
 	
@@ -77,8 +78,8 @@ public class Player : MonoBehaviour {
 				state = State.running;
 		} else if (state == State.running) state = State.idle;
 
-    anim.SetBool("grounded", grounded);
-    anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+    	anim.SetBool("grounded", grounded);
+    	anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
 		anim.SetBool("dashing", state == State.dashing);
 	}
 
@@ -106,6 +107,7 @@ public class Player : MonoBehaviour {
 				break;
 
 			default:
+				rb.gravityScale = GRAVITY_SCALE;
 				break;
 		}		
 
@@ -149,9 +151,7 @@ public class Player : MonoBehaviour {
 			state = State.idle;
 		}
 
-			
-		// if we clicked, start autopathing towards that direction
-		if (Input.GetMouseButtonDown(0)) { // if left click
+		if (Input.GetMouseButtonDown(0)) {
 			jumps = 0;
 			state = State.autoPathing;
 			completedAutoPathing = false;
@@ -163,16 +163,7 @@ public class Player : MonoBehaviour {
 			else 
 				transform.localScale = new Vector3(-1, 1, 1);
 		}
-		else if (Input.GetMouseButton(0)) {
-			if (Vector2.Distance(targetA, MouseWorldPosition2D()) > SLASHING_THRESHOLD)
-				slashIndicator.spriteRenderer.color = Color.blue;
-			else slashIndicator.spriteRenderer.color = Color.red;
-		}
-		else {
-			rb.gravityScale = GRAVITY_SCALE;
-		}
 	}
-
 	// method to handle the autopathing
 
 	private void AutoPath() {
@@ -285,7 +276,6 @@ public class Player : MonoBehaviour {
 				break;
 			
 			case AttackType.none:
-				state = State.idle;
 				break;
 
 		}
@@ -294,6 +284,7 @@ public class Player : MonoBehaviour {
 	public void GetAttackType() {
 		
 		targetB = MouseWorldPosition2D();
+		state = State.autoPathing;
 		if (Vector2.Distance(targetA, targetB) > SLASHING_THRESHOLD) {
 			attackType = AttackType.dash;
 			// dashing is handle on a frame-by-frame basis
