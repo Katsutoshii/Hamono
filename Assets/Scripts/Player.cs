@@ -9,6 +9,8 @@ public class Player : MonoBehaviour {
 	public float jumpPower;
 	public int jumps;
 
+	public int comboCount;
+
 	public enum State {
 		idle,
 		running,
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour {
 		strong,
 		blocked,
 		missed,
+		combo,
 		none
 	}
 
