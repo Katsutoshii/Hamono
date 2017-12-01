@@ -345,6 +345,16 @@ Prefab:
       propertyPath: slashIndicator
       value: 
       objectReference: {fileID: 1690490367}
+    - target: {fileID: 212073600475020504, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: 848748911
+      objectReference: {fileID: 0}
+    - target: {fileID: 212073600475020504, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
@@ -564,7 +574,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -186237661
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3fcbc68b6748a034a8ac182e7100eac0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
