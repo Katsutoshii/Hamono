@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -130,6 +131,17 @@ public class Player : MonoBehaviour {
 			CancelAutomation();
 			rb.velocity = new Vector2(speed, rb.velocity.y);
 			state = State.running;
+		} else if (Input.GetKey(key:KeyCode.S)) {
+			// talking with an NPC
+			Debug.Log("going to use TextTyper package");
+			GameObject NPC = GameObject.Find("Text");
+			Text NPCText = NPC.GetComponent<Text>();
+			string desiredString = "ijemma is a developer with the bokubois game dev team";
+			for(int printIndex = 0; printIndex < desiredString.Length; ++printIndex) {
+					NPCText.text = desiredString.Substring(0, printIndex);
+					Debug.Log(NPCText.text);
+					// new WaitForSeconds(2f);
+			}
 		}
 		else if (state == State.running) {
 			rb.velocity = new Vector2(0, rb.velocity.y);
