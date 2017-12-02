@@ -130,21 +130,28 @@ public class Player : MonoBehaviour {
 		// for move left and right manually
 		if (Input.GetKey(key:KeyCode.D) && Input.GetKey(key:KeyCode.A)) {
 			CancelAutomation();
-			rb.velocity = new Vector2(0, rb.velocity.y);
-			state = State.idle;
+			if (state != State.talking) {
+				rb.velocity = new Vector2(0, rb.velocity.y);
+				state = State.idle;
+			}
 		}
 		else if (Input.GetKey(key:KeyCode.A)) {
 			CancelAutomation();
-			rb.velocity = new Vector2(-speed, rb.velocity.y);
-			state = State.running;
+			if (state != State.talking) {
+				rb.velocity = new Vector2(-speed, rb.velocity.y);
+				state = State.running;
+			}
 		}
 		else if(Input.GetKey(key:KeyCode.D)) {
 			CancelAutomation();
-			rb.velocity = new Vector2(speed, rb.velocity.y);
-			state = State.running;
+			if (state != State.talking) {
+				rb.velocity = new Vector2(speed, rb.velocity.y);
+				state = State.running;
+			}
 		} else if (Input.GetKeyDown(key:KeyCode.S)) {
 			// triggers a speech bubble
-			if (completedSpeech && state == State.talking) {
+			if (NearNPC()) {
+				if (completedSpeech && state == State.talking) {
 				foreach (GameObject item in allSpeech)
 					Destroy(item);
 				state = State.idle;
@@ -156,6 +163,7 @@ public class Player : MonoBehaviour {
 				TextTyper NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
 				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me.");
 				completedSpeech = false;
+			}
 			}
 		}
 		else if (state == State.running) {
@@ -185,6 +193,19 @@ public class Player : MonoBehaviour {
 			else 
 				transform.localScale = new Vector3(-1, 1, 1);
 		}
+	}
+
+	private bool NearNPC() {
+		GameObject[] NPCList = GameObject.FindGameObjectsWithTag("NPC");
+		GameObject nearestNPC = null;
+		foreach (GameObject NPC in NPCList) {
+			Debug.Log(NPC.transform.position);
+			if (Vector2.Distance(transform.position, NPC.transform.position) <= 2.3f)
+				nearestNPC = NPC;
+		}
+		if (nearestNPC == null)
+			return false;
+		return true;
 	}
 
 	private void RotateSpriteForVelocity() {
