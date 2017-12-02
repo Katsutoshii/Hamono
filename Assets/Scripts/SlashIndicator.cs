@@ -23,7 +23,7 @@ public class SlashIndicator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// start or stop the drawing the indicator
-		if (Input.GetMouseButton(0) && !drawing) {
+		if (Input.GetMouseButton(0) && !drawing && player.state != Player.State.talking) {
 			drawing = true;
 
 			Vector3 clickWorldPoint =ScreenToWorldPoint(Input.mousePosition);
@@ -31,7 +31,7 @@ public class SlashIndicator : MonoBehaviour {
 			transform.position = clickWorldPoint;
 			targetA = clickWorldPoint;
 		}
-		else if (!Input.GetMouseButton(0) && drawing) {
+		else if (!Input.GetMouseButton(0) && drawing && player.state != Player.State.talking) {
 			drawing = false;
 			player.GetAttackType();
 		}

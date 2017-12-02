@@ -128,34 +128,39 @@ public class Player : MonoBehaviour {
 	private void Controls() {
 
 		// for move left and right manually
-		if (Input.GetKey(key:KeyCode.D) && Input.GetKey(key:KeyCode.A)) {
+		if (Input.GetKey(key:KeyCode.D) && Input.GetKey(key:KeyCode.A) && state != State.talking) {
 			CancelAutomation();
 			rb.velocity = new Vector2(0, rb.velocity.y);
 			state = State.idle;
 		}
-		else if (Input.GetKey(key:KeyCode.A)) {
+		else if (Input.GetKey(key:KeyCode.A) && state != State.talking) {
 			CancelAutomation();
 			rb.velocity = new Vector2(-speed, rb.velocity.y);
 			state = State.running;
 		}
-		else if(Input.GetKey(key:KeyCode.D)) {
+		else if(Input.GetKey(key:KeyCode.D) && state != State.talking) {
 			CancelAutomation();
 			rb.velocity = new Vector2(speed, rb.velocity.y);
 			state = State.running;
 		} else if (Input.GetKeyDown(key:KeyCode.S)) {
 			// triggers a speech bubble
-			if (completedSpeech && state == State.talking) {
+			GameObject nearestNPC = NearestNPC();
+			if (nearestNPC != null) {
+				if (completedSpeech && state == State.talking) {
 				foreach (GameObject item in allSpeech)
 					Destroy(item);
 				state = State.idle;
 				completedSpeech = false;
 			} else if (state != State.talking) {
 				state = State.talking;
+				// Need to trigger correct canvas
 				NPCText = Instantiate(SpeechText);
+				NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
 				allSpeech.Add(NPCText);
 				TextTyper NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
 				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me.");
 				completedSpeech = false;
+			}
 			}
 		}
 		else if (state == State.running) {
@@ -165,26 +170,39 @@ public class Player : MonoBehaviour {
 		
 
 		// for jumping
-		if (Input.GetKeyDown(key: KeyCode.W) && jumps > 0)
+		if (Input.GetKeyDown(key: KeyCode.W) && jumps > 0 && state != State.talking)
 		{
 			CancelAutomation();
 			Jump(jumpPower);
-			
 			state = State.idle;
 		}
 
-		if (Input.GetMouseButtonDown(0)) {
-			jumps = 0;
-			state = State.autoPathing;
-			completedAutoPathing = false;
-			targetA = MouseWorldPosition2D();
+		// for initiating action
+		if (Input.GetMouseButtonDown(0) && state != State.talking) {
+				jumps = 0;
+				state = State.autoPathing;
+				completedAutoPathing = false;
+				targetA = MouseWorldPosition2D();
 
-			// turn the sprite around
-			if (targetA.x > transform.position.x)
-				transform.localScale = new Vector3(1, 1, 1);
-			else 
-				transform.localScale = new Vector3(-1, 1, 1);
+				// turn the sprite around
+				if (targetA.x > transform.position.x)
+					transform.localScale = new Vector3(1, 1, 1);
+				else 
+					transform.localScale = new Vector3(-1, 1, 1);
 		}
+	}
+
+	// Grabs the nearest NPC able to chat
+	// distance defines the area space that picks up NPCs
+	private GameObject NearestNPC(float distance = 2.3f) {
+		GameObject[] NPCList = GameObject.FindGameObjectsWithTag("NPC");
+		GameObject nearestNPC = null;
+		foreach (GameObject NPC in NPCList) {
+			Debug.Log(NPC.transform.position);
+			if (Vector2.Distance(transform.position, NPC.transform.position) <= distance)
+				nearestNPC = NPC;
+		}
+		return nearestNPC;
 	}
 
 	private void RotateSpriteForVelocity() {
