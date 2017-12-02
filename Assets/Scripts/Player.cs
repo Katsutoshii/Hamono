@@ -142,11 +142,12 @@ public class Player : MonoBehaviour {
 			CancelAutomation();
 			rb.velocity = new Vector2(speed, rb.velocity.y);
 			state = State.running;
-		} else if (Input.GetKey(key:KeyCode.S)) {
+		} else if (Input.GetKeyDown(key:KeyCode.S)) {
 			// triggers a speech bubble
-			if (completedSpeech) {
+			if (completedSpeech && state == State.talking) {
 				foreach (GameObject item in allSpeech)
 					Destroy(item);
+				state = State.idle;
 				completedSpeech = false;
 			} else if (state != State.talking) {
 				state = State.talking;
