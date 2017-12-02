@@ -13,12 +13,15 @@ public class Player : MonoBehaviour {
 
 	public int comboCount;
 
+	public bool completedSpeech;
+
 	public enum State {
 		idle,
 		running,
 		autoPathing,
 		dashing,
 		slashing,
+		talking,
 		damaged,
 		dead,
 	};
@@ -46,6 +49,7 @@ public class Player : MonoBehaviour {
 	public AttackType attackType = AttackType.none;
 	public AttackResponse attackResponse = AttackResponse.none;
 
+	public GameObject NPCText;
 	public GameObject SpeechText;
 
 	public bool grounded;
@@ -81,6 +85,7 @@ public class Player : MonoBehaviour {
 		state = State.idle;
 		attackType = AttackType.none;
 		completedAutoPathing = false;
+		completedSpeech = false;
 	}
 	
 	// Update is called once per frame
@@ -137,10 +142,15 @@ public class Player : MonoBehaviour {
 			state = State.running;
 		} else if (Input.GetKey(key:KeyCode.S)) {
 			// triggers a speech bubble
-			
-			GameObject NPCText = Instantiate(SpeechText);
-			TextTyper NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
-			NPCTextChild.TypeText("ijemma onwuzulike");
+			if (completedSpeech)
+				Destroy(NPCText);
+			if (state != State.talking) {
+				state = State.talking;
+				NPCText = Instantiate(SpeechText);
+				TextTyper NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
+				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me.");
+				completedSpeech = false;
+			}
 		}
 		else if (state == State.running) {
 			rb.velocity = new Vector2(0, rb.velocity.y);
