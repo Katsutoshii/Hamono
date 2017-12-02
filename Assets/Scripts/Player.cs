@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RedBlueGames.Tools.TextTyper;
 
 public class Player : MonoBehaviour {
 
@@ -44,6 +45,9 @@ public class Player : MonoBehaviour {
 	public State state;
 	public AttackType attackType = AttackType.none;
 	public AttackResponse attackResponse = AttackResponse.none;
+
+	public GameObject SpeechText;
+
 	public bool grounded;
 	public bool autoPathing;
 	public bool completedAutoPathing; // triggeers dash/slash after completed autopathing
@@ -132,16 +136,11 @@ public class Player : MonoBehaviour {
 			rb.velocity = new Vector2(speed, rb.velocity.y);
 			state = State.running;
 		} else if (Input.GetKey(key:KeyCode.S)) {
-			// talking with an NPC
-			Debug.Log("going to use TextTyper package");
-			GameObject NPC = GameObject.Find("Text");
-			Text NPCText = NPC.GetComponent<Text>();
-			string desiredString = "ijemma is a developer with the bokubois game dev team";
-			for(int printIndex = 0; printIndex < desiredString.Length; ++printIndex) {
-					NPCText.text = desiredString.Substring(0, printIndex);
-					Debug.Log(NPCText.text);
-					// new WaitForSeconds(2f);
-			}
+			// triggers a speech bubble
+			
+			GameObject NPCText = Instantiate(SpeechText);
+			TextTyper NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
+			NPCTextChild.TypeText("ijemma onwuzulike");
 		}
 		else if (state == State.running) {
 			rb.velocity = new Vector2(0, rb.velocity.y);
