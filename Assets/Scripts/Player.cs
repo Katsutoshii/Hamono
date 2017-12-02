@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using RedBlueGames.Tools.TextTyper;
 
 public class Player : MonoBehaviour {
 
@@ -11,12 +13,16 @@ public class Player : MonoBehaviour {
 
 	public int comboCount;
 
+	public HashSet<GameObject> allSpeech;
+	public bool completedSpeech;
+
 	public enum State {
 		idle,
 		running,
 		autoPathing,
 		dashing,
 		slashing,
+		talking,
 		damaged,
 		dead,
 	};
@@ -43,6 +49,10 @@ public class Player : MonoBehaviour {
 	public State state;
 	public AttackType attackType = AttackType.none;
 	public AttackResponse attackResponse = AttackResponse.none;
+
+	public GameObject NPCText;
+	public GameObject SpeechText;
+
 	public bool grounded;
 	public bool autoPathing;
 	public bool completedAutoPathing; // triggeers dash/slash after completed autopathing
@@ -76,6 +86,8 @@ public class Player : MonoBehaviour {
 		state = State.idle;
 		attackType = AttackType.none;
 		completedAutoPathing = false;
+		completedSpeech = false;
+		allSpeech = new HashSet<GameObject>();
 	}
 	
 	// Update is called once per frame
@@ -130,6 +142,20 @@ public class Player : MonoBehaviour {
 			CancelAutomation();
 			rb.velocity = new Vector2(speed, rb.velocity.y);
 			state = State.running;
+		} else if (Input.GetKey(key:KeyCode.S)) {
+			// triggers a speech bubble
+			if (completedSpeech) {
+				foreach (GameObject item in allSpeech)
+					Destroy(item);
+				completedSpeech = false;
+			} else if (state != State.talking) {
+				state = State.talking;
+				NPCText = Instantiate(SpeechText);
+				allSpeech.Add(NPCText);
+				TextTyper NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
+				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me.");
+				completedSpeech = false;
+			}
 		}
 		else if (state == State.running) {
 			rb.velocity = new Vector2(0, rb.velocity.y);
