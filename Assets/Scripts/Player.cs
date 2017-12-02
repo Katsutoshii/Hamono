@@ -144,7 +144,7 @@ public class Player : MonoBehaviour {
 			// triggers a speech bubble
 			if (completedSpeech)
 				Destroy(NPCText);
-			if (state != State.talking) {
+			else if (state != State.talking) {
 				state = State.talking;
 				NPCText = Instantiate(SpeechText);
 				TextTyper NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
