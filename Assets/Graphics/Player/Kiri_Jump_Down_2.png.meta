@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 9f4fd038c1b87d145826dcda17d03d2a
-timeCreated: 1512346195
+guid: c12f94add8dc84aba841325b009ccc2c
+timeCreated: 1512349052
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Kiri_Jump_Down_2_0
-    21300002: Kiri_Jump_Down_2_1
-    21300004: Kiri_Jump_Down_2_2
-    21300006: Kiri_Jump_Down_2_3
-    21300008: Kiri_Jump_Down_2_4
+    21300000: kiri_jump_down_2_0
+    21300002: kiri_jump_down_2_1
+    21300004: kiri_jump_down_2_2
+    21300006: kiri_jump_down_2_3
+    21300008: kiri_jump_down_2_4
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -85,7 +85,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Kiri_Jump_Down_2_0
+      name: kiri_jump_down_2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -93,13 +93,13 @@ TextureImporter:
         width: 124
         height: 144
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Kiri_Jump_Down_2_1
+      name: kiri_jump_down_2_1
       rect:
         serializedVersion: 2
         x: 124
@@ -107,13 +107,13 @@ TextureImporter:
         width: 124
         height: 144
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Kiri_Jump_Down_2_2
+      name: kiri_jump_down_2_2
       rect:
         serializedVersion: 2
         x: 248
@@ -121,13 +121,13 @@ TextureImporter:
         width: 124
         height: 144
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Kiri_Jump_Down_2_3
+      name: kiri_jump_down_2_3
       rect:
         serializedVersion: 2
         x: 372
@@ -135,13 +135,13 @@ TextureImporter:
         width: 124
         height: 144
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Kiri_Jump_Down_2_4
+      name: kiri_jump_down_2_4
       rect:
         serializedVersion: 2
         x: 496
@@ -149,7 +149,7 @@ TextureImporter:
         width: 124
         height: 144
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
