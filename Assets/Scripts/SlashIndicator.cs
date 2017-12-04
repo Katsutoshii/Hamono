@@ -33,7 +33,6 @@ public class SlashIndicator : MonoBehaviour {
 		}
 		else if (!Input.GetMouseButton(0) && drawing && player.state != Player.State.talking) {
 			drawing = false;
-			player.GetAttackType();
 		}
 
 		// when drawing, scale the UI indicator based on the start position and the current mouse position

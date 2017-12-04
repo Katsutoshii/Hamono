@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
 		idle,
 		running,
 		autoPathing,
+		ready,
 		dashing,
 		slashing,
 		talking,
@@ -87,7 +88,6 @@ public class Player : MonoBehaviour {
     	anim = gameObject.GetComponent<Animator>();
 		state = State.idle;
 		attackType = AttackType.none;
-		completedAutoPathing = false;
 		completedSpeech = false;
 		allSpeech = new HashSet<GameObject>();
 	}
@@ -101,6 +101,10 @@ public class Player : MonoBehaviour {
 		switch (state) {
 			case State.autoPathing:
 				AutoPath();
+				break;
+
+			case State.ready:
+				Ready();
 				break;
 			
 			case State.dashing:
@@ -128,72 +132,38 @@ public class Player : MonoBehaviour {
 
 	// method to handle all control inputs inside main loop
 	private void Controls() {
-
-		// for move left and right manually
-		if (Input.GetKey(key:KeyCode.D) && Input.GetKey(key:KeyCode.A) && state != State.talking) {
-			CancelAutomation();
-			rb.velocity = new Vector2(0, rb.velocity.y);
-			state = State.idle;
-		}
-		else if (Input.GetKey(key:KeyCode.A) && state != State.talking) {
-			CancelAutomation();
-			rb.velocity = new Vector2(-speed, rb.velocity.y);
-			state = State.running;
-		}
-		else if(Input.GetKey(key:KeyCode.D) && state != State.talking) {
-			CancelAutomation();
-			rb.velocity = new Vector2(speed, rb.velocity.y);
-			state = State.running;
-		} else if (Input.GetKeyDown(key:KeyCode.S)) {
-			// triggers a speech bubble
-			GameObject nearestNPC = NearestNPC();
-			if (nearestNPC != null) {
-				if (completedSpeech && state == State.talking) {
-				foreach (GameObject item in allSpeech)
-					Destroy(item);
-				state = State.idle;
-				completedSpeech = false;
-			} else if (state != State.talking) {
-				state = State.talking;
-				// Need to trigger correct canvas
-				NPCText = Instantiate(SpeechText);
-				NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
-				allSpeech.Add(NPCText);
-				TextTyper NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
-				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me.");
-				completedSpeech = false;
-			}
-			}
-		}
-		else if (state == State.running) {
-			rb.velocity = new Vector2(0, rb.velocity.y);
-			state = State.idle;
-		}
-		
-
-		// for jumping
-		if (Input.GetKeyDown(key: KeyCode.W) && jumps > 0 && state != State.talking)
-		{
-			CancelAutomation();
-			anim.Play("PlayerJumpUp");
-			state = State.idle;
-		}
-		if (Input.GetKeyUp(key:KeyCode.W) && jumps > 0 && state != State.talking) {
-			Jump(jumpPower);
-		}
-
 		// for initiating action
 		if (Input.GetMouseButtonDown(0) && state != State.talking) {
-				jumps = 0;
-				state = State.autoPathing;
-				completedAutoPathing = false;
-				targetA = MouseWorldPosition2D();
 
-				// turn the sprite around
-				if (targetA.x > transform.position.x)
-					transform.localScale = new Vector3(1, 1, 1);
-				else 
-					transform.localScale = new Vector3(-1, 1, 1);
+			// get the object we clicked on
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			
+			if(Physics.Raycast (ray, out hit)) {
+				
+				Debug.Log("Clicked on " + hit.transform.name);
+				Debug.Log("Layer " + hit.transform.gameObject.layer);
+
+				// handle special cases
+				switch (hit.transform.gameObject.layer) {
+					// don't autopath onto terrain
+					case 8: // terrain
+						return;
+				}
+			}
+
+			state = State.autoPathing;
+			targetA = MouseWorldPosition2D();
+
+			// turn the sprite around
+			if (targetA.x > transform.position.x)
+				transform.localScale = new Vector3(1, 1, 1);
+			else 
+				transform.localScale = new Vector3(-1, 1, 1);
+		}
+
+		if (Input.GetMouseButtonUp(0)) {
+			GetAttackType();
 		}
 	}
 
@@ -232,24 +202,45 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	public float AUTOPATH_Y_THRESHOLD; 
+	public float AUTOPATH_Y_FACTOR;
+
 	// method to handle the autopathing
 	private void AutoPath() {
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y;
 
 		// if we are at the position to start slashing, freeze until we have an attack!
-		if(Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
-			completedAutoPathing = true;
-			rb.gravityScale = 0;
-			rb.velocity = new Vector3(0, 0);
-			Attack();	// will do nothing unless an attack is set
+		if (Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
+			state = State.ready;
+			readyStartTime = Time.time;
+			return;
+		}
+		if (Mathf.Abs(xDist) < SLASHING_X_DIST) {
+			rb.velocity = new Vector2(0, rb.velocity.y);
 		}
 
 		// otherwise, if we need to move in the x or y direction, do so
-		if (Mathf.Abs(xDist) >= SLASHING_X_DIST || Mathf.Abs(yDist) >= SLASHING_Y_DIST) {
-			completedAutoPathing = false;
-			rb.velocity = new Vector2(xDist * KP, yDist * KP);
+		if (Mathf.Abs(xDist) >= SLASHING_X_DIST) {
+			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
 		}
+
+		if (yDist >= AUTOPATH_Y_THRESHOLD && grounded) {
+			StartCoroutine(Jump(Mathf.Min(yDist * AUTOPATH_Y_FACTOR, 20f)));
+		}
+	}
+
+	public float READY_FLOAT_TIMEOUT;
+	private float readyStartTime;
+	// method for when autopathing is complete and ready to make an attack
+	private void Ready() {
+		if (Time.time - readyStartTime > READY_FLOAT_TIMEOUT || !Input.GetMouseButton(0)) {
+			state = State.idle;
+			rb.gravityScale = GRAVITY_SCALE;
+		}
+		rb.gravityScale = 0;
+		rb.velocity = new Vector3(0, 0);
+		Attack();	// will do nothing unless an attack is set
 	}
 
 	/// <summary>
@@ -279,7 +270,6 @@ public class Player : MonoBehaviour {
 			rb.velocity = new Vector3(0, 0, 0);
 			state = State.idle;
 			attackType = AttackType.none;
-			completedAutoPathing = false;
 		}
 	}
 
@@ -323,20 +313,26 @@ public class Player : MonoBehaviour {
 
 	public void CancelAutomation() {
 		if(state == State.autoPathing || state == State.dashing || state == State.slashing) {
-			completedAutoPathing = false;
 			attackType = AttackType.none;
 			rb.velocity = new Vector3(0, 0, 0);
 			rb.gravityScale = GRAVITY_SCALE;
 		}
 	}
 	
+	public float JUMP_DELAY;
+	private IEnumerator Jump(float jumpPower) {
+		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+		anim.Play("PlayerJumpUp");
+		
+		yield return new WaitForSeconds(JUMP_DELAY);
+		
+		dustcloud.MakeCloud(jumpPos);
 
-	private void Jump(float power) {
+		Debug.Log("jump! with vel = " + jumpPower);
 		rb.velocity = new Vector2(rb.velocity.x, 0); // prevents stacking velocity
-		rb.velocity += Vector2.up * power;
-		jumps--;
+		rb.velocity += Vector2.up * jumpPower;
 		anim.Play("PlayerJumping");
-		dustcloud.MakeCloud(transform.position);
+		yield return null;
 	}
 
 	// method to perform the slash
@@ -379,15 +375,19 @@ public class Player : MonoBehaviour {
 			
 			case AttackType.none:
 				break;
-
 		}
 	}
 
+	public float MIN_ATTACK_THRESH;
 	public void GetAttackType() {
 		
 		targetB = MouseWorldPosition2D();
 		state = State.autoPathing;
-		if (Vector2.Distance(targetA, targetB) > SLASHING_THRESHOLD) {
+
+		float dist = Vector2.Distance(targetA, targetB);
+
+		if (dist < MIN_ATTACK_THRESH) attackType = AttackType.none;
+		else if (dist > SLASHING_THRESHOLD) {
 			attackType = AttackType.dash;
 			// dashing is handle on a frame-by-frame basis
 		}
@@ -424,6 +424,7 @@ public class Player : MonoBehaviour {
 			Debug.Log("Slash ended!");
 			rb.WakeUp();
 			state = State.idle;
+			rb.gravityScale = GRAVITY_SCALE;
 			attackType = AttackType.none;
 		}
 		else rb.Sleep();
