@@ -60,6 +60,7 @@ public class Player : MonoBehaviour {
 	public Vector2 targetA; 	// start point of a slash
 	public Vector2 targetB;		// end point of a slash
 	public SlashIndicator slashIndicator;
+	public Dustcloud dustcloud;
 	public Rigidbody2D rb;
     public Animator anim;
 
@@ -335,13 +336,7 @@ public class Player : MonoBehaviour {
 		rb.velocity += Vector2.up * power;
 		jumps--;
 		anim.Play("PlayerJumping");
-
-		// create the jump fx
-		GameObject jumpFx = new GameObject();
-		SpriteRenderer jumpFxRenderer = jumpFx.AddComponent<SpriteRenderer>();
-		jumpFxRenderer.sprite = Resources.Load<Sprite>("Fx_Jump dustcloud_1");
-		jumpFx.transform.position = transform.position;
-
+		dustcloud.MakeCloud(transform.position);
 	}
 
 	// method to perform the slash

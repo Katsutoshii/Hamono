@@ -141,10 +141,10 @@ BoxCollider2D:
   m_Offset: {x: 0.08428562, y: -0.70659137}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.12, y: 1.28}
+    newSize: {x: 1.12, y: 1.28}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -220,16 +220,21 @@ MonoBehaviour:
   jumpPower: 10
   jumps: 2
   comboCount: 0
+  completedSpeech: 0
   state: 0
   attackType: 6
   attackResponse: 5
+  NPCText: {fileID: 0}
+  SpeechText: {fileID: 0}
   grounded: 1
   autoPathing: 0
   completedAutoPathing: 0
   targetA: {x: 0.9956711, y: 1.9547617}
   targetB: {x: 3.5064938, y: -0.66428566}
   slashIndicator: {fileID: 0}
+  dustcloud: {fileID: 0}
   rb: {fileID: 0}
+  anim: {fileID: 0}
   SLASHING_X_DIST: 1
   SLASHING_Y_DIST: 0.5
   SLASHING_THRESHOLD: 2
@@ -241,6 +246,8 @@ MonoBehaviour:
   DASH_TARGET_THRESHOLD: 0.8
   JAB_THRESHOLD: 0.4
   ATTACK_TIMEOUT: 0.5
+  numAfterimage: 0
+  afterimageColor: {r: 0.33574829, g: 0.6135232, b: 0.8455882, a: 0}
 --- !u!114 &114742312546721590
 MonoBehaviour:
   m_ObjectHideFlags: 1
