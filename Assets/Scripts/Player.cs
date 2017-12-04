@@ -93,27 +93,32 @@ public class Player : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update() {
 	
 		Controls();
 
 		// actions based on the state
 		switch (state) {
+			
 			case State.autoPathing:
 				AutoPath();
+				rb.gravityScale = GRAVITY_SCALE;
 				break;
 
 			case State.ready:
 				Ready();
+				rb.gravityScale = 0;
 				break;
 			
 			case State.dashing:
 				Dash();
 				SpawnAfterimages();
+				rb.gravityScale = 0;
 				break;
 
 			case State.slashing:
 				CheckForSlashEnd();
+				rb.gravityScale = 0;
 				break;
 
 			default:
@@ -224,7 +229,7 @@ public class Player : MonoBehaviour {
 		}
 
 		if (yDist >= AUTOPATH_Y_THRESHOLD && grounded) {
-			StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
+			if (!jumping) StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
 		}
 	}
 
@@ -233,17 +238,16 @@ public class Player : MonoBehaviour {
 	// method for when autopathing is complete and ready to make an attack
 	private void Ready() {
 		Debug.Log("Ready");
-		if (Time.time - readyStartTime > READY_FLOAT_TIMEOUT) {
-			state = State.idle;
-			attackType = AttackType.none;
-			rb.gravityScale = GRAVITY_SCALE;
-			
-			rb.velocity = new Vector3(0, 0);
-			return;
-		}
-		rb.gravityScale = 0;
+		
 		rb.velocity = new Vector3(0, 0);
 		Attack();	// will do nothing unless an attack is set
+
+		if (attackType == AttackType.none && state != State.dashing && state != State.slashing &&
+			(Time.time - readyStartTime > READY_FLOAT_TIMEOUT || !Input.GetMouseButton(0))) {
+			Debug.Log("Cancel ready!");
+			state = State.idle;
+			return;
+		}
 	}
 
 	/// <summary>
@@ -257,14 +261,15 @@ public class Player : MonoBehaviour {
 	// method to handle dashing
 	// this is only called when auto pathing is completed!
 	private void Dash() {
+		Debug.Log("dash");
 		if (Time.time > attackStartTime + ATTACK_TIMEOUT) {
 			state = State.idle;
 			attackType = AttackType.none;
 		}
 		float distanceB = Vector2.Distance(rb.position, targetB);
+
 		// if we are mid dash
 		if (distanceB > DASH_TARGET_THRESHOLD) {
-			rb.gravityScale = 0;
 			rb.velocity = (targetB - rb.position) * DASH_SPEED;
 		} 
 
@@ -319,12 +324,13 @@ public class Player : MonoBehaviour {
 			attackType = AttackType.none;
 			state = State.idle;
 			rb.velocity = new Vector3(0, 0, 0);
-			rb.gravityScale = GRAVITY_SCALE;
 		}
 	}
 	
 	public float JUMP_DELAY;
+	private bool jumping = false;
 	private IEnumerator Jump(float jumpPower) {
+		jumping = true;
 		rb.velocity = Vector3.zero;
 		Debug.Log("Jump!");
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -338,14 +344,12 @@ public class Player : MonoBehaviour {
 		rb.velocity = new Vector2(rb.velocity.x, 0); // prevents stacking velocity
 		rb.velocity += Vector2.up * jumpPower;
 		anim.Play("PlayerJumping");
+		jumping = false;
 		yield return null;
 	}
 
 	// method to perform the slash
 	private void Attack(){
-		
-		rb.gravityScale = 0;
-		rb.Sleep();
 		attackStartTime = Time.time;
 
 		switch (attackType) {
@@ -375,6 +379,7 @@ public class Player : MonoBehaviour {
 				break;
 
 			case AttackType.dash:
+			Debug.Log("Setting state to dashing");
 				state = State.dashing;
 				anim.Play("PlayerDash");
 				break;
@@ -429,11 +434,8 @@ public class Player : MonoBehaviour {
 		// check if the slash is over by seeing if the current playing animation is idle
 		if (anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle") && Time.time > attackStartTime + 0.2) {
 			Debug.Log("Slash ended!");
-			rb.WakeUp();
 			state = State.idle;
-			rb.gravityScale = GRAVITY_SCALE;
 			attackType = AttackType.none;
 		}
-		else rb.Sleep();
 	}
 }
