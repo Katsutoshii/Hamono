@@ -443,7 +443,7 @@ public class Player : MonoBehaviour {
 		Debug.Log("finding slash type");
 		// if this is a jab
 		float angle = Mathf.Atan2(targetB.y - targetA.y, 
-			targetB.x - targetA.x) * 180 / Mathf.PI;
+			Mathf.Abs(targetB.x - targetA.x)) * 180 / Mathf.PI;
 		Debug.Log("It's a jab! Angle = " + angle);
 
 		if(angle > 30) slashType = AttackType.upSlash;
