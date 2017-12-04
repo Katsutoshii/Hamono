@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: e2e292213e897e44ea4851c37cd9ab6e
-timeCreated: 1512346070
+guid: b32093ee7f46248a398835744c019825
+timeCreated: 1512349118
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Kiri_Jump_Up_2_0
-    21300002: Kiri_Jump_Up_2_1
+    21300000: kiri_jump_up_2_0
+    21300002: kiri_jump_up_2_1
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -82,29 +82,29 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Kiri_Jump_Up_2_0
+      name: kiri_jump_up_2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
-        width: 108
-        height: 124
+        y: 0
+        width: 124
+        height: 144
       alignment: 9
-      pivot: {x: 0.5, y: 0.59454346}
+      pivot: {x: 0.49752536, y: 0.600154}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Kiri_Jump_Up_2_1
+      name: kiri_jump_up_2_1
       rect:
         serializedVersion: 2
-        x: 136
+        x: 124
         y: 0
-        width: 96
-        height: 140
-      alignment: 9
-      pivot: {x: 0.48, y: 0.5}
+        width: 124
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
