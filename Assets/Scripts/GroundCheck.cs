@@ -16,6 +16,7 @@ public class GroundCheck : MonoBehaviour
     {
         player.grounded = true;
         player.jumps = 2;   // reset the number of jumps
+        player.anim.Play("PlayerLanding");
     }
 
     /// <summary>

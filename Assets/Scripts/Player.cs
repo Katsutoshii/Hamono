@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
 	public Vector2 targetB;		// end point of a slash
 	public SlashIndicator slashIndicator;
 	public Rigidbody2D rb;
-    private Animator anim;
+    public Animator anim;
 
 	// constants
 	public float SLASHING_X_DIST;
@@ -76,13 +76,14 @@ public class Player : MonoBehaviour {
 	public float JAB_THRESHOLD;
 	public float ATTACK_TIMEOUT;
 
+
 	private float attackStartTime;
 
 	// Use this for initialization
 	void Start () {
 		Debug.Log("Start");
 		rb = gameObject.GetComponent<Rigidbody2D>();
-    anim = gameObject.GetComponent<Animator>();
+    	anim = gameObject.GetComponent<Animator>();
 		state = State.idle;
 		attackType = AttackType.none;
 		completedAutoPathing = false;
@@ -173,8 +174,11 @@ public class Player : MonoBehaviour {
 		if (Input.GetKeyDown(key: KeyCode.W) && jumps > 0 && state != State.talking)
 		{
 			CancelAutomation();
-			Jump(jumpPower);
+			anim.Play("PlayerJumpUp");
 			state = State.idle;
+		}
+		if (Input.GetKeyUp(key:KeyCode.W) && jumps > 0 && state != State.talking) {
+			Jump(jumpPower);
 		}
 
 		// for initiating action
@@ -279,6 +283,9 @@ public class Player : MonoBehaviour {
 	}
 
 	private int afterimageCount = 0;
+	public int numAfterimage;
+	public Color afterimageColor;
+
 	// method to create the after images for the dash
 	private void SpawnAfterimages() {
 		
@@ -290,16 +297,15 @@ public class Player : MonoBehaviour {
 		trailPartRenderer.sortingLayerName = "EntityBackground";
         trailPartRenderer.sprite = GetComponent<SpriteRenderer>().sprite;
 
-		trailPartRenderer.color = new Color(0.2f, 0.2f, 1f);
+		trailPartRenderer.color = afterimageColor;
 		trailPart.transform.position = transform.position;
 		trailPart.transform.localScale = transform.localScale;
 		Destroy(trailPart, 0.3f); // replace 0.5f with needed lifeTime
  
         StartCoroutine("FadeTrailPart", trailPartRenderer);
     }
- 
-    IEnumerator FadeTrailPart(SpriteRenderer trailPartRenderer)
-    {
+
+    IEnumerator FadeTrailPart(SpriteRenderer trailPartRenderer) {
         Color color = trailPartRenderer.color;
         for (float f = 0.8f; f >= 0; f -= 0.08f) {
             Color c = trailPartRenderer.color;
@@ -316,11 +322,11 @@ public class Player : MonoBehaviour {
 
 	public void CancelAutomation() {
 		if(state == State.autoPathing || state == State.dashing || state == State.slashing) {
-				completedAutoPathing = false;
-				attackType = AttackType.none;
-				rb.velocity = new Vector3(0, 0, 0);
-				rb.gravityScale = GRAVITY_SCALE;
-			}
+			completedAutoPathing = false;
+			attackType = AttackType.none;
+			rb.velocity = new Vector3(0, 0, 0);
+			rb.gravityScale = GRAVITY_SCALE;
+		}
 	}
 	
 
@@ -328,6 +334,14 @@ public class Player : MonoBehaviour {
 		rb.velocity = new Vector2(rb.velocity.x, 0); // prevents stacking velocity
 		rb.velocity += Vector2.up * power;
 		jumps--;
+		anim.Play("PlayerJumping");
+
+		// create the jump fx
+		GameObject jumpFx = new GameObject();
+		SpriteRenderer jumpFxRenderer = jumpFx.AddComponent<SpriteRenderer>();
+		jumpFxRenderer.sprite = Resources.Load<Sprite>("Fx_Jump dustcloud_1");
+		jumpFx.transform.position = transform.position;
+
 	}
 
 	// method to perform the slash
