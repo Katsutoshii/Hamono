@@ -130,7 +130,7 @@ public class Player : MonoBehaviour {
 	// method to handle all control inputs inside main loop
 	private void Controls() {
 
-		if (rb.velocity.y < 0 && !grounded && (state == State.idle || state == State.falling)) {
+		if (rb.velocity.y < 0 && !grounded && (state == State.idle || state == State.falling || state == State.running)) {
 			state = State.falling;
 			anim.Play("PlayerFalling");
 		}
