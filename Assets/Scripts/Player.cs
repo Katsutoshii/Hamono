@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
 	public enum State {
 		idle,
 		running,
+		falling,
 		autoPathing,
 		ready,
 		dashing,
@@ -129,6 +130,7 @@ public class Player : MonoBehaviour {
 		anim.SetBool("dashing", state == State.dashing);
 	}
 
+	private bool falling;
 	// method to handle all control inputs inside main loop
 	private void Controls() {
 		// for initiating action
@@ -164,6 +166,50 @@ public class Player : MonoBehaviour {
 		if (Input.GetMouseButtonUp(0)) {
 			GetAttackType();
 		}
+
+		if (rb.velocity.y < 0 && !grounded && !falling) {
+			falling = true;
+			anim.Play("PlayerFalling");
+		}
+		else if (falling && grounded) {
+			falling = false;
+			anim.Play("PlayerLanding");
+		}
+
+		if (Input.GetKeyDown(key:KeyCode.S)) {
+			StartDialogue();
+		}
+	}
+
+	private void StartDialogue() {
+		// triggers a speech bubble
+			GameObject nearestNPC = NearestNPC();
+			if (nearestNPC != null) {
+				if (completedSpeech && state == State.talking)
+				foreach (GameObject item in allSpeech)
+					Destroy(item);
+				state = State.idle;
+				completedSpeech = false;
+			} 
+			else if (state != State.talking) {
+				state = State.talking;
+				// Need to trigger correct canvas
+				NPCText = Instantiate(SpeechText);
+				NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
+				allSpeech.Add(NPCText);
+				TextTyper NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
+				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me.");
+				completedSpeech = false;
+			}
+
+			state = State.autoPathing;
+			targetA = MouseWorldPosition2D();
+
+			// turn the sprite around
+			if (targetA.x > transform.position.x)
+				transform.localScale = new Vector3(1, 1, 1);
+			else 
+				transform.localScale = new Vector3(-1, 1, 1);
 	}
 
 	// Grabs the nearest NPC able to chat
@@ -187,6 +233,7 @@ public class Player : MonoBehaviour {
 			transform.localScale = new Vector3 (-1, 1, 1);
 		} else if (state == State.running) state = State.idle;
 	}
+
 	private void LimitVelocity() {
 		// limit the velocity
 		if (rb.velocity.x > maxSpeed) {
