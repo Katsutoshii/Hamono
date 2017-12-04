@@ -6,10 +6,7 @@ using RedBlueGames.Tools.TextTyper;
 
 public class Player : MonoBehaviour {
 
-	public float speed;
 	public float maxSpeed;
-	public float jumpPower;
-	public int jumps;
 
 	public int comboCount;
 
@@ -31,9 +28,7 @@ public class Player : MonoBehaviour {
 	public enum AttackType {
 		upSlash,
 		downSlash,
-		jab,
-		upJab,
-		downJab,
+		straightSlash,
 		dash,
 		none
 	}
@@ -75,7 +70,6 @@ public class Player : MonoBehaviour {
 	public float GRAVITY_SCALE;
 	public float DASH_SPEED;
 	public float DASH_TARGET_THRESHOLD;
-	public float JAB_THRESHOLD;
 	public float ATTACK_TIMEOUT;
 
 
@@ -353,27 +347,17 @@ public class Player : MonoBehaviour {
 		attackStartTime = Time.time;
 
 		switch (attackType) {
-			case AttackType.upJab:
-				state = State.slashing;
-				anim.Play("PlayerJab");
-				break;
-
-			case AttackType.jab:
-				state = State.slashing;
-				anim.Play("PlayerJab");
-				break;
-
-			case AttackType.downJab:
-				state = State.slashing;
-				anim.Play("PlayerDownJab");
-				break;
-
 			case AttackType.upSlash:
 				state = State.slashing;
 				anim.Play("PlayerUpSlash");
 				break;
 
 			case AttackType.downSlash:
+				state = State.slashing;
+				anim.Play("PlayerDownJab");
+				break;
+
+			case AttackType.straightSlash:
 				state = State.slashing;
 				anim.Play("PlayerJab");
 				break;
@@ -394,7 +378,7 @@ public class Player : MonoBehaviour {
 	public void GetAttackType() {
 		
 		targetB = MouseWorldPosition2D();
-		state = State.autoPathing;
+		//state = State.autoPathing;
 
 		float dist = Vector2.Distance(targetA, targetB);
 
@@ -411,22 +395,14 @@ public class Player : MonoBehaviour {
 		AttackType slashType;
 		Debug.Log("finding slash type");
 		// if this is a jab
-		if(Vector2.Distance(transform.position, targetA) < JAB_THRESHOLD) {
-			float angle = Mathf.Atan2(targetB.y - targetA.y, 
-				targetB.x - targetA.x) * 180 / Mathf.PI;
-			Debug.Log("It's a jab! Angle = " + angle);
+		float angle = Mathf.Atan2(targetB.y - targetA.y, 
+			targetB.x - targetA.x) * 180 / Mathf.PI;
+		Debug.Log("It's a jab! Angle = " + angle);
 
-			if(angle > 30) slashType = AttackType.upJab;
-			else if(angle < -30) slashType = AttackType.downJab;
-			else slashType = AttackType.jab;
-		}
-		// otherwise this must be a slash
-		else {
-			Debug.Log("It's a slash!");
-			if(targetA.y >= targetB.y) slashType = AttackType.downSlash;
-			else slashType = AttackType.upSlash;
-		}
-
+		if(angle > 30) slashType = AttackType.upSlash;
+		else if(angle < -30) slashType = AttackType.downSlash;
+		else slashType = AttackType.straightSlash;
+		
 		return slashType;
 	}
 

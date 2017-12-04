@@ -15,7 +15,6 @@ public class GroundCheck : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider2D)
     {
         player.grounded = true;
-        player.jumps = 2;   // reset the number of jumps
         player.anim.Play("PlayerLanding");
     }
 
@@ -27,7 +26,6 @@ public class GroundCheck : MonoBehaviour
     void OnTriggerStay2D(Collider2D other)
     {
         player.grounded = true;
-        player.jumps = 2;
 
         // Enemy - placeholder label for all enemy sprites
         // TODO: change to use layer
