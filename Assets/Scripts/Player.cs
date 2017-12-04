@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
 	public enum State {
 		idle,
 		running,
+		falling,
 		autoPathing,
 		dashing,
 		slashing,
@@ -129,8 +130,14 @@ public class Player : MonoBehaviour {
 	// method to handle all control inputs inside main loop
 	private void Controls() {
 
-		if (rb.velocity.y < 0 && !grounded)
+		if (rb.velocity.y < 0 && !grounded) {
+			state = State.falling;
 			anim.Play("PlayerFalling");
+		}
+		else if (state == State.falling && grounded) {
+			state = State.idle;
+			anim.Play("PlayerLanding");
+		}
 
 		// for move left and right manually
 		if (Input.GetKey(key:KeyCode.D) && Input.GetKey(key:KeyCode.A) && state != State.talking) {
