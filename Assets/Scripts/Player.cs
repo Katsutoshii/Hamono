@@ -16,7 +16,6 @@ public class Player : MonoBehaviour {
 	public enum State {
 		idle,
 		running,
-		falling,
 		autoPathing,
 		ready,
 		dashing,
