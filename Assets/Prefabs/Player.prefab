@@ -138,7 +138,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08428562, y: -0.70659137}
+  m_Offset: {x: 0.10755083, y: -0.70659137}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -149,7 +149,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.94362164, y: 0.1168704}
+  m_Size: {x: 0.3254323, y: 0.1168704}
   m_EdgeRadius: 0
 --- !u!61 &61671867867945532
 BoxCollider2D:
@@ -215,10 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebeb5ef8aeb3bba4b8d6b3a8d3b0865f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
-  maxSpeed: 15
-  jumpPower: 10
-  jumps: 2
+  maxSpeed: 10
   comboCount: 0
   completedSpeech: 0
   state: 0
@@ -237,17 +234,21 @@ MonoBehaviour:
   anim: {fileID: 0}
   SLASHING_X_DIST: 1
   SLASHING_Y_DIST: 0.5
-  SLASHING_THRESHOLD: 2
+  SLASHING_THRESHOLD: 4
   AUTO_JUMP_FACTOR: 2
   TURNING_THRESHOLD: 0.1
-  KP: 6.5
+  KP: 5
   GRAVITY_SCALE: 2
   DASH_SPEED: 8
   DASH_TARGET_THRESHOLD: 0.8
-  JAB_THRESHOLD: 0.4
   ATTACK_TIMEOUT: 0.5
-  numAfterimage: 0
+  AUTOPATH_Y_THRESHOLD: 1.5
+  AUTOPATH_Y_FACTOR: 6.25
+  READY_FLOAT_TIMEOUT: 0.5
+  numAfterimage: 4
   afterimageColor: {r: 0.33574829, g: 0.6135232, b: 0.8455882, a: 0}
+  JUMP_DELAY: 0.1
+  MIN_ATTACK_THRESH: 0.2
 --- !u!114 &114742312546721590
 MonoBehaviour:
   m_ObjectHideFlags: 1

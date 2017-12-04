@@ -61,7 +61,6 @@ public class AttackResponse : MonoBehaviour
         player.attackResponse = Player.AttackResponse.combo;
         player.comboCount++;
         // Resets the number of jumps
-        player.jumps = 0;
       }
     }	
 
