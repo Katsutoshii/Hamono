@@ -72,9 +72,11 @@ public class Player : MonoBehaviour {
 	public float DASH_SPEED;
 	public float DASH_TARGET_THRESHOLD;
 	public float ATTACK_TIMEOUT;
+	public float AUTOPATH_TIMEOUT;
 
 
 	private float attackStartTime;
+	private float autoPathStartTime;
 
 	// Use this for initialization
 	void Start () {
@@ -152,6 +154,7 @@ public class Player : MonoBehaviour {
 				}
 			}
 
+			autoPathStartTime = Time.time;
 			state = State.autoPathing;
 			targetA = MouseWorldPosition2D();
 
@@ -192,7 +195,6 @@ public class Player : MonoBehaviour {
 			} 
 			else if (state != State.talking) {
 				state = State.talking;
-				// Need to trigger correct canvas
 				NPCText = Instantiate(SpeechText);
 				NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
 				allSpeech.Add(NPCText);
@@ -251,6 +253,13 @@ public class Player : MonoBehaviour {
 		rb.gravityScale = GRAVITY_SCALE;
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y;
+
+		// timeout if the player cannot reach destination
+		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT) {
+			state = State.idle;
+			rb.velocity = new Vector2(0, 0);
+			return;
+		}
 
 		// if we are at the position to start slashing, freeze until we have an attack!
 		if (Mathf.Abs(xDist) < SLASHING_X_DIST && (Mathf.Abs(yDist) < SLASHING_Y_DIST

@@ -474,6 +474,11 @@ Prefab:
       propertyPath: dustcloud
       value: 
       objectReference: {fileID: 1201637302}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: AUTOPATH_TIMEOUT
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
