@@ -138,9 +138,8 @@ public class Player : MonoBehaviour {
 
 			// get the object we clicked on
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-			
-			if(Physics.Raycast (ray, out hit)) {
+			RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+			if(hit.collider != null) {
 				
 				Debug.Log("Clicked on " + hit.transform.name);
 				Debug.Log("Layer " + hit.transform.gameObject.layer);
