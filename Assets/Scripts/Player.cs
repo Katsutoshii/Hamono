@@ -129,6 +129,9 @@ public class Player : MonoBehaviour {
 	// method to handle all control inputs inside main loop
 	private void Controls() {
 
+		if (rb.velocity.y < 0 && !grounded)
+			anim.Play("PlayerFalling");
+
 		// for move left and right manually
 		if (Input.GetKey(key:KeyCode.D) && Input.GetKey(key:KeyCode.A) && state != State.talking) {
 			CancelAutomation();
