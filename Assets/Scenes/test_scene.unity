@@ -208,6 +208,7 @@ MonoBehaviour:
   player: {fileID: 1271265347}
   following: 0
   SCROLL_SPEED: 0.03
+  smoothTime: 0.3
 --- !u!1 &376223532
 GameObject:
   m_ObjectHideFlags: 0
