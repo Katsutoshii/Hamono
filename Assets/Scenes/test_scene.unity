@@ -482,12 +482,12 @@ Prefab:
     - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
         type: 2}
       propertyPath: AUTOPATH_Y_THRESHOLD
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
         type: 2}
       propertyPath: AUTOPATH_Y_FACTOR
-      value: 3.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
         type: 2}

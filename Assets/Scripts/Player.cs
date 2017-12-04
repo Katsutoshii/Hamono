@@ -184,12 +184,8 @@ public class Player : MonoBehaviour {
 		// turn the sprite around based on velocity
 		if (rb.velocity.x > TURNING_THRESHOLD) {
 			transform.localScale = new Vector3 (1, 1, 1);
-			if (state == State.idle)
-				state = State.running;
 		} else if (rb.velocity.x < -TURNING_THRESHOLD) {
 			transform.localScale = new Vector3 (-1, 1, 1);
-			if (state == State.idle)
-				state = State.running;
 		} else if (state == State.running) state = State.idle;
 	}
 	private void LimitVelocity() {
@@ -207,11 +203,13 @@ public class Player : MonoBehaviour {
 
 	// method to handle the autopathing
 	private void AutoPath() {
+		rb.gravityScale = GRAVITY_SCALE;
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y;
 
 		// if we are at the position to start slashing, freeze until we have an attack!
-		if (Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
+		if (Mathf.Abs(xDist) < SLASHING_X_DIST && (Mathf.Abs(yDist) < SLASHING_Y_DIST
+			|| (Mathf.Abs(yDist) < AUTOPATH_Y_THRESHOLD && grounded))) {
 			state = State.ready;
 			readyStartTime = Time.time;
 			return;
@@ -226,7 +224,7 @@ public class Player : MonoBehaviour {
 		}
 
 		if (yDist >= AUTOPATH_Y_THRESHOLD && grounded) {
-			StartCoroutine(Jump(Mathf.Min(yDist * AUTOPATH_Y_FACTOR, 20f)));
+			StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
 		}
 	}
 
@@ -234,9 +232,14 @@ public class Player : MonoBehaviour {
 	private float readyStartTime;
 	// method for when autopathing is complete and ready to make an attack
 	private void Ready() {
-		if (Time.time - readyStartTime > READY_FLOAT_TIMEOUT || !Input.GetMouseButton(0)) {
+		Debug.Log("Ready");
+		if (Time.time - readyStartTime > READY_FLOAT_TIMEOUT) {
 			state = State.idle;
+			attackType = AttackType.none;
 			rb.gravityScale = GRAVITY_SCALE;
+			
+			rb.velocity = new Vector3(0, 0);
+			return;
 		}
 		rb.gravityScale = 0;
 		rb.velocity = new Vector3(0, 0);
@@ -314,6 +317,7 @@ public class Player : MonoBehaviour {
 	public void CancelAutomation() {
 		if(state == State.autoPathing || state == State.dashing || state == State.slashing) {
 			attackType = AttackType.none;
+			state = State.idle;
 			rb.velocity = new Vector3(0, 0, 0);
 			rb.gravityScale = GRAVITY_SCALE;
 		}
@@ -321,6 +325,8 @@ public class Player : MonoBehaviour {
 	
 	public float JUMP_DELAY;
 	private IEnumerator Jump(float jumpPower) {
+		rb.velocity = Vector3.zero;
+		Debug.Log("Jump!");
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		anim.Play("PlayerJumpUp");
 		
@@ -337,7 +343,6 @@ public class Player : MonoBehaviour {
 
 	// method to perform the slash
 	private void Attack(){
-		Debug.Log("Attacking");
 		
 		rb.gravityScale = 0;
 		rb.Sleep();
@@ -371,11 +376,13 @@ public class Player : MonoBehaviour {
 
 			case AttackType.dash:
 				state = State.dashing;
+				anim.Play("PlayerDash");
 				break;
 			
 			case AttackType.none:
 				break;
 		}
+		attackType = AttackType.none;
 	}
 
 	public float MIN_ATTACK_THRESH;
