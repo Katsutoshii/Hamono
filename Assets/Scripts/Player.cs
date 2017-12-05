@@ -235,7 +235,10 @@ public class Player : MonoBehaviour {
 			transform.localScale = new Vector3 (1, 1, 1);
 		} else if (rb.velocity.x < -TURNING_THRESHOLD) {
 			transform.localScale = new Vector3 (-1, 1, 1);
-		} else if (state == State.running) state = State.idle;
+		} else if (state == State.running) {
+			state = State.idle;
+			attackType = AttackType.none;
+		}
 	}
 
 	private void LimitVelocity() {
@@ -253,7 +256,7 @@ public class Player : MonoBehaviour {
 
 	// method to handle the autopathing
 	private void AutoPath() {
-		stamina.increaseStamina(GENERATE_STAMINA);
+		if (grounded) stamina.increaseStamina(GENERATE_STAMINA);
 		rb.gravityScale = GRAVITY_SCALE;
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y;
@@ -261,6 +264,7 @@ public class Player : MonoBehaviour {
 		// timeout if the player cannot reach destination
 		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT) {
 			state = State.idle;
+			attackType = AttackType.none;
 			rb.velocity = new Vector2(0, 0);
 			return;
 		}
@@ -314,6 +318,12 @@ public class Player : MonoBehaviour {
 	// method to handle dashing
 	// this is only called when auto pathing is completed!
 	private void Dash() {
+		if (stamina.isExhausted()) {
+			rb.velocity = new Vector3(0, 0, 0);
+			state = State.idle;
+			attackType = AttackType.none;
+			return;
+		}
 		stamina.decreaseStamina(DASH_STAMINA_COST);
 		Debug.Log("dash");
 		if (Time.time > attackStartTime + ATTACK_TIMEOUT) {
@@ -405,7 +415,7 @@ public class Player : MonoBehaviour {
 	// method to perform the slash
 	private void Attack(){
 		attackStartTime = Time.time;
-
+		if (grounded) stamina.increaseStamina(GENERATE_STAMINA);
 		switch (attackType) {
 			case AttackType.upSlash:
 				state = State.slashing;

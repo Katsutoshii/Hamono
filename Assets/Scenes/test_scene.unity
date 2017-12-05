@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 98938694}
   - component: {fileID: 98938693}
   - component: {fileID: 98938692}
+  - component: {fileID: 98938696}
   m_Layer: 5
   m_Name: Stamina
   m_TagString: Untagged
@@ -207,6 +208,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &98938696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 98938691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3a3f5d3e6de42739d4037448db240c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillAmount: 1
 --- !u!1 &113826361
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +655,26 @@ Prefab:
       propertyPath: AUTOPATH_TIMEOUT
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: stamina
+      value: 
+      objectReference: {fileID: 98938696}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: DASH_STAMINA_COST
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: GENERATE_STAMINA
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: MIN_ATTACK_THRESH
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
@@ -1062,7 +1095,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.028, y: 0.69979286}
   m_AnchorMax: {x: 0.1713152, y: 1}
-  m_AnchoredPosition: {x: -0.019989014, y: 4.709999}
+  m_AnchoredPosition: {x: -0.019958496, y: 4.7099915}
   m_SizeDelta: {x: -0.03999996, y: 8.95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1525442102
