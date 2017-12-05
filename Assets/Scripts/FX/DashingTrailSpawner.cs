@@ -24,25 +24,5 @@ public class DashingTrailSpawner : MonoBehaviour {
 
 	void SpawnTrail()
     {
-        GameObject trailPart = new GameObject();
-        SpriteRenderer trailPartRenderer = trailPart.AddComponent<SpriteRenderer>();
-        trailPartRenderer.sprite = GetComponent<SpriteRenderer>().sprite;
-        trailPart.transform.position = transform.position;
-        trailPart.transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(player.targetB.y - player.targetA.y, 
-				player.targetB.x - player.targetA.x) * 180 / Mathf.PI);
-        Destroy(trailPart, 0.2f); // replace 0.5f with needed lifeTime
- 
-        StartCoroutine("FadeTrailPart", trailPartRenderer);
-    }
- 
-    IEnumerator FadeTrailPart(SpriteRenderer trailPartRenderer)
-    {
-        Color color = trailPartRenderer.color;
-        for (float f = 1f; f >= 0; f -= 0.1f) {
-            Color c = trailPartRenderer.color;
-            c.a = f;
-            trailPartRenderer.color = c;
-            yield return new WaitForEndOfFrame();
-        }
     }
 }

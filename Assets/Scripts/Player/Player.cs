@@ -117,7 +117,7 @@ public class Player : MonoBehaviour {
 			
 			case State.dashing:
 				Dash();
-				SpawnAfterimages();
+				SpawnAfterimage();
 				rb.gravityScale = 0;
 				break;
 
@@ -324,10 +324,11 @@ public class Player : MonoBehaviour {
 			attackType = AttackType.none;
 		}
 		float distanceB = Vector2.Distance(rb.position, targetB);
-
+		
 		// if we are mid dash
 		if (distanceB > DASH_TARGET_THRESHOLD) {
 			rb.velocity = (targetB - rb.position) * DASH_SPEED;
+			SpawnSwordAfterimage();
 		} 
 
 		// otherwise we have completed the dash
@@ -343,13 +344,22 @@ public class Player : MonoBehaviour {
 	public Color afterimageColor;
 
 	// method to create the after images for the dash
-	private void SpawnAfterimages() {
+	private void SpawnAfterimage() {
 		
 		afterimageCount++;
 		if(afterimageCount % 3 != 0) return;
 
 		PoolManager.instance.ReuseObject (afterimagePrefab, transform.position, transform.eulerAngles, transform.localScale);
     }
+
+	private void SpawnSwordAfterimage() {
+        Vector3 eulerAngles = new Vector3(0, 0, Mathf.Atan2(rb.velocity.y, 
+				rb.velocity.x) * 180 / Mathf.PI);
+			
+		Vector3 localScale = new Vector3(rb.velocity.magnitude / 20, 1, 1);
+
+		PoolManager.instance.ReuseObject (swordAfterimagePrefab, transform.position, eulerAngles, localScale);
+	}
 
 	private Vector2 MouseWorldPosition2D() {
 		Vector3 worldSpaceClickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
