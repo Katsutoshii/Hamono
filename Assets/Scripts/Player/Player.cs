@@ -98,6 +98,8 @@ public class Player : MonoBehaviour {
 
 		PoolManager.instance.CreatePool(afterimagePrefab, 10);
 		PoolManager.instance.CreatePool(swordAfterimagePrefab, 20);
+
+		NPCText = null;
 	}
 	
 	// Update is called once per frame
@@ -198,20 +200,30 @@ public class Player : MonoBehaviour {
 
 	private void StartDialogue() {
 		// triggers a speech bubble
+
 			GameObject nearestNPC = NearestNPC();
+			TextTyper NPCTextChild;
+			if (NPCText == null) {
+				NPCText = Instantiate(SpeechText);
+				NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
+			}
+			NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
 			if (completedSpeech && state == State.talking) {
+				// ending conversation
 				foreach (GameObject item in allSpeech)
 					Destroy(item);
 				state = State.idle;
 				completedSpeech = false;
+				NPCText = null;
 			} else if (state != State.talking && nearestNPC != null && !completedSpeech) {
+				// starting converstation
 				state = State.talking;
-				NPCText = Instantiate(SpeechText);
-				// NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
 				allSpeech.Add(NPCText);
-				TextTyper NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
-				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me.");
+				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me. \n I'm talking for a really long time. \n You probably find this extremely annoying.");
 				completedSpeech = false;
+			} else if (state == State.talking) {
+				// skipping content
+				NPCTextChild.Skip();
 			}
 	}
 
