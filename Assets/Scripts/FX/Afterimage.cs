@@ -8,15 +8,14 @@ public class Afterimage : PooledObject {
 
     private SpriteRenderer spriteRenderer;
     public Color startColor;
-    public float alphaIncrement;
+    public float alphaDecrement;
+    public Vector3 rotation;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.
     /// </summary>
     void Start() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.color = startColor;
     }
 
     /// <summary>
@@ -24,11 +23,12 @@ public class Afterimage : PooledObject {
     /// </summary>
     void FixedUpdate() {
         Color c = spriteRenderer.color;
-        c.a -= alphaIncrement;
+        c.a -= alphaDecrement;
         spriteRenderer.color = c;
     }
 
     public override void OnObjectReuse() {
-        transform.localScale = 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = startColor;
     }
 }

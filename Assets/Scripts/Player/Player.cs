@@ -48,6 +48,7 @@ public class Player : MonoBehaviour {
 
 	public GameObject NPCText;
 	public GameObject SpeechText;
+	public SpriteRenderer spriteRenderer;
 
 	public bool grounded;
 	public bool autoPathing;
@@ -83,6 +84,7 @@ public class Player : MonoBehaviour {
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
     	anim = gameObject.GetComponent<Animator>();
+		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
 		state = State.idle;
 		attackType = AttackType.none;
@@ -346,12 +348,10 @@ public class Player : MonoBehaviour {
 		afterimageCount++;
 		if(afterimageCount % 3 != 0) return;
 
-		trailPartRenderer.color = afterimageColor;
-		trailPart.transform.position = transform.position;
-		trailPart.transform.localScale = transform.localScale; 
+		PoolManager.instance.ReuseObject (afterimagePrefab, transform.position, transform.eulerAngles, transform.localScale);
     }
 
-	private Vector2 MouseWorldPosition2D(){
+	private Vector2 MouseWorldPosition2D() {
 		Vector3 worldSpaceClickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		return new Vector2(worldSpaceClickPosition.x, worldSpaceClickPosition.y);
 	}

@@ -479,6 +479,18 @@ Prefab:
       propertyPath: AUTOPATH_TIMEOUT
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: afterimagePrefab
+      value: 
+      objectReference: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
+        type: 2}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: swordAfterimagePrefab
+      value: 
+      objectReference: {fileID: 1497393089588702, guid: 8efcdf899027fc8499e34fd3ce0f1c74,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0

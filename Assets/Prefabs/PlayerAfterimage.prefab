@@ -52,6 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee763d2d42d78964084ff740cd1ad638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startColor: {r: 0.26913932, g: 0.7047445, b: 0.9632353, a: 0.747}
+  alphaDecrement: 0.08
+  rotation: {x: 0, y: 0, z: 0}
 --- !u!212 &212435349034511184
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -32,14 +32,26 @@ public class PoolManager : MonoBehaviour {
 	}
 
 	/// method to reuse an object form the pool
-	public void ReuseObject(GameObject prefab, Vector3 position, Quaternion rotation) {
+	public void ReuseObject(GameObject prefab, Vector3 position, Quaternion rotation, Vector3 localScale) {
 		int poolKey = prefab.GetInstanceID();
 
 		if (pools.ContainsKey(poolKey)) {
 			ObjectInstance objectToReuse = pools[poolKey].Dequeue();
 			pools[poolKey].Enqueue(objectToReuse);
 
-			objectToReuse.Reuse(position, rotation);
+			objectToReuse.Reuse(position, rotation, localScale);
+		}
+	}
+
+	/// method to reuse an object form the pool, overload for euler angles rotation
+	public void ReuseObject(GameObject prefab, Vector3 position, Vector3 rotation, Vector3 localScale) {
+		int poolKey = prefab.GetInstanceID();
+
+		if (pools.ContainsKey(poolKey)) {
+			ObjectInstance objectToReuse = pools[poolKey].Dequeue();
+			pools[poolKey].Enqueue(objectToReuse);
+
+			objectToReuse.Reuse(position, rotation, localScale);
 		}
 	}
 
@@ -60,14 +72,27 @@ public class PoolManager : MonoBehaviour {
 			}
 		}
 
-		public void Reuse(Vector3 position, Quaternion rotation) {
-			if (hasPoolObjectComponent) {
-				poolObjectScript.OnObjectReuse();
-			}
-
+		public void Reuse(Vector3 position, Quaternion rotation, Vector3 localScale) {
 			gameObject.SetActive(true);
 			gameObject.transform.position = position;
 			gameObject.transform.rotation = rotation;
+			gameObject.transform.localScale = localScale;
+
+			if (hasPoolObjectComponent) {
+				poolObjectScript.OnObjectReuse();
+			}
+		}
+
+		// overload for using euler angles rotation
+		public void Reuse(Vector3 position, Vector3 rotation, Vector3 localScale) {
+			gameObject.SetActive(true);
+			gameObject.transform.position = position;
+			gameObject.transform.eulerAngles = rotation;
+			gameObject.transform.localScale = localScale;
+
+			if (hasPoolObjectComponent) {
+				poolObjectScript.OnObjectReuse();
+			}
 		}
 	}
 }
