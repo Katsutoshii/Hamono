@@ -191,7 +191,7 @@ public class Player : MonoBehaviour {
 			anim.Play("PlayerLanding");
 		}
 
-		if (Input.GetKeyDown(key:KeyCode.S)) {
+		if (Input.GetMouseButtonDown(1)) {
 			StartDialogue();
 		}
 	}
@@ -199,14 +199,12 @@ public class Player : MonoBehaviour {
 	private void StartDialogue() {
 		// triggers a speech bubble
 			GameObject nearestNPC = NearestNPC();
-			if (nearestNPC != null) {
-				if (completedSpeech && state == State.talking)
+			if (completedSpeech && state == State.talking) {
 				foreach (GameObject item in allSpeech)
 					Destroy(item);
 				state = State.idle;
 				completedSpeech = false;
-			} 
-			else if (state != State.talking) {
+			} else if (state != State.talking && nearestNPC != null && !completedSpeech) {
 				state = State.talking;
 				NPCText = Instantiate(SpeechText);
 				// NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
@@ -215,15 +213,6 @@ public class Player : MonoBehaviour {
 				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me.");
 				completedSpeech = false;
 			}
-
-			state = State.autoPathing;
-			targetA = MouseWorldPosition2D();
-
-			// turn the sprite around
-			if (targetA.x > transform.position.x)
-				transform.localScale = new Vector3(1, 1, 1);
-			else 
-				transform.localScale = new Vector3(-1, 1, 1);
 	}
 
 	// Grabs the nearest NPC able to chat
