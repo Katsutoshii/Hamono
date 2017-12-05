@@ -583,7 +583,6 @@ MonoBehaviour:
     m_TypeName: RedBlueGames.Tools.TextTyper.TextTyper+CharacterPrintedEvent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   player: {fileID: 0}
-<<<<<<< HEAD
 --- !u!1001 &739346144
 Prefab:
   m_ObjectHideFlags: 0
@@ -646,8 +645,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
-=======
->>>>>>> c6ffa294a7841ae207db06a262620e6196ab09bf
 --- !u!1 &762027636
 GameObject:
   m_ObjectHideFlags: 0

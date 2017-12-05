@@ -61,7 +61,6 @@ public class Player : MonoBehaviour {
 	public Rigidbody2D rb;
 	public Animator anim;
 	public StaminaBar stamina;
-    public Animator anim;
 	public GameObject afterimagePrefab;
 	public GameObject swordAfterimagePrefab;
 
