@@ -48,6 +48,7 @@ public class Player : MonoBehaviour {
 
 	public GameObject NPCText;
 	public GameObject SpeechText;
+	public SpriteRenderer spriteRenderer;
 
 	public bool grounded;
 	public bool autoPathing;
@@ -60,6 +61,9 @@ public class Player : MonoBehaviour {
 	public Rigidbody2D rb;
 	public Animator anim;
 	public StaminaBar stamina;
+    public Animator anim;
+	public GameObject afterimagePrefab;
+	public GameObject swordAfterimagePrefab;
 
 	// constants
 	public float SLASHING_X_DIST;
@@ -82,13 +86,19 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Start");
 		rb = gameObject.GetComponent<Rigidbody2D>();
     	anim = gameObject.GetComponent<Animator>();
+		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
 		state = State.idle;
 		attackType = AttackType.none;
+
+
 		completedSpeech = false;
 		allSpeech = new HashSet<GameObject>();
+
+		PoolManager.instance.CreatePool(afterimagePrefab, 10);
+		PoolManager.instance.CreatePool(swordAfterimagePrefab, 20);
 	}
 	
 	// Update is called once per frame
@@ -111,7 +121,7 @@ public class Player : MonoBehaviour {
 			
 			case State.dashing:
 				Dash();
-				SpawnAfterimages();
+				SpawnAfterimage();
 				rb.gravityScale = 0;
 				break;
 
@@ -121,6 +131,7 @@ public class Player : MonoBehaviour {
 				break;
 
 			default:
+				rb.velocity = new Vector2(0, rb.velocity.y);
 				rb.gravityScale = GRAVITY_SCALE;
 				if (grounded) stamina.increaseStamina(GENERATE_STAMINA);
 				break;
@@ -259,7 +270,7 @@ public class Player : MonoBehaviour {
 		if (grounded) stamina.increaseStamina(GENERATE_STAMINA);
 		rb.gravityScale = GRAVITY_SCALE;
 		float xDist = targetA.x - transform.position.x;
-		float yDist = targetA.y - transform.position.y;
+		float yDist = targetA.y - transform.position.y + 0.5f;
 
 		// timeout if the player cannot reach destination
 		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT) {
@@ -331,10 +342,11 @@ public class Player : MonoBehaviour {
 			attackType = AttackType.none;
 		}
 		float distanceB = Vector2.Distance(rb.position, targetB);
-
+		
 		// if we are mid dash
 		if (distanceB > DASH_TARGET_THRESHOLD) {
 			rb.velocity = (targetB - rb.position) * DASH_SPEED;
+			SpawnSwordAfterimage();
 		} 
 
 		// otherwise we have completed the dash
@@ -350,35 +362,24 @@ public class Player : MonoBehaviour {
 	public Color afterimageColor;
 
 	// method to create the after images for the dash
-	private void SpawnAfterimages() {
+	private void SpawnAfterimage() {
 		
 		afterimageCount++;
 		if(afterimageCount % 3 != 0) return;
 
-		GameObject trailPart = new GameObject();
-        SpriteRenderer trailPartRenderer = trailPart.AddComponent<SpriteRenderer>();
-		trailPartRenderer.sortingLayerName = "EntityBackground";
-        trailPartRenderer.sprite = GetComponent<SpriteRenderer>().sprite;
-
-		trailPartRenderer.color = afterimageColor;
-		trailPart.transform.position = transform.position;
-		trailPart.transform.localScale = transform.localScale;
-		Destroy(trailPart, 0.3f); // replace 0.5f with needed lifeTime
- 
-        StartCoroutine("FadeTrailPart", trailPartRenderer);
+		PoolManager.instance.ReuseObject (afterimagePrefab, transform.position, transform.eulerAngles, transform.localScale);
     }
 
-    IEnumerator FadeTrailPart(SpriteRenderer trailPartRenderer) {
-        Color color = trailPartRenderer.color;
-        for (float f = 0.8f; f >= 0; f -= 0.08f) {
-            Color c = trailPartRenderer.color;
-            c.a = f;
-            trailPartRenderer.color = c;
-            yield return new WaitForEndOfFrame();
-        }
-    }
+	private void SpawnSwordAfterimage() {
+        Vector3 eulerAngles = new Vector3(0, 0, Mathf.Atan2(rb.velocity.y, 
+				rb.velocity.x) * 180 / Mathf.PI);
+			
+		Vector3 localScale = new Vector3(rb.velocity.magnitude / 20, 1, 1);
 
-	private Vector2 MouseWorldPosition2D(){
+		PoolManager.instance.ReuseObject (swordAfterimagePrefab, transform.position, eulerAngles, localScale);
+	}
+
+	private Vector2 MouseWorldPosition2D() {
 		Vector3 worldSpaceClickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		return new Vector2(worldSpaceClickPosition.x, worldSpaceClickPosition.y);
 	}
