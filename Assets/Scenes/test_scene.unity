@@ -1414,7 +1414,7 @@ Prefab:
     - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
         type: 2}
       propertyPath: DASH_STAMINA_COST
-      value: 0.005
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
         type: 2}
