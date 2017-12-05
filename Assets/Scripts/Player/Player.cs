@@ -210,7 +210,7 @@ public class Player : MonoBehaviour {
 				NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
 				allSpeech.Add(NPCText);
 				TextTyper NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
-				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me.");
+				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me. \n I'm talking for a really long time. \n You probably find this extremely annoying.");
 				completedSpeech = false;
 			}
 	}
