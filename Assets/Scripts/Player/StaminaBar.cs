@@ -10,7 +10,6 @@ public class StaminaBar : MonoBehaviour
 
     private Image bar;
     private Player player;
-    private bool exhausted;
 
     // Use this for initialization
     void Start()
@@ -21,22 +20,12 @@ public class StaminaBar : MonoBehaviour
 
     // increases the player's stamina
     public void increaseStamina(float amount) {
-      if (this.bar.fillAmount < 1)
-        this.bar.fillAmount += amount;
-      exhausted = false;
+      this.bar.fillAmount += amount;
     }
 
     // decreases the player's stamina
     public void decreaseStamina(float amount) {
-      if (this.bar.fillAmount > 0)
-        this.bar.fillAmount -= amount;
-      else
-        exhausted = true;
-    }
-
-    // checks to see if stamina is exhausted
-    public bool isExhausted() {
-      return exhausted;
+      this.bar.fillAmount -= amount;
     }
 
 }
