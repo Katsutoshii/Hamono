@@ -45,7 +45,6 @@
         private void AlertCompletion() {
             Debug.Log("The message completed");
             player = GameObject.Find("Player").GetComponent<Player>();
-            // player.state = Player.State.idle;
             player.completedSpeech = true;
         }
 
