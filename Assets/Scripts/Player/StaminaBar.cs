@@ -23,7 +23,7 @@ public class StaminaBar : MonoBehaviour
     public void increaseStamina(float amount) {
       if (this.bar.fillAmount < 1)
         this.bar.fillAmount += amount;
-      exhausted = false;
+      this.exhausted = false;
     }
 
     // decreases the player's stamina
@@ -31,12 +31,13 @@ public class StaminaBar : MonoBehaviour
       if (this.bar.fillAmount > 0)
         this.bar.fillAmount -= amount;
       else
-        exhausted = true;
+        this.exhausted = true;
+      Debug.Log("okfdsjakflads");
     }
 
-    // checks to see if stamina is exhausted
+    // checks to see if character is exhausted
     public bool isExhausted() {
-      return exhausted;
+      return this.exhausted;
     }
 
 }

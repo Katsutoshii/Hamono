@@ -216,10 +216,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 98938691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc3a3f5d3e6de42739d4037448db240c, type: 3}
+  m_Script: {fileID: 11500000, guid: 47dd8e2bc532a4505b99fb0a87984744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillAmount: 1
+  fillAmount: 0
 --- !u!1 &113826361
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,10 +347,10 @@ RectTransform:
   m_Father: {fileID: 98938695}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.057707567, y: 0.69979286}
-  m_AnchorMax: {x: 0.16770758, y: 0.98800004}
-  m_AnchoredPosition: {x: -0.19207764, y: 4.720001}
-  m_SizeDelta: {x: 2.2503, y: -20.907}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -104.6, y: 32.88}
+  m_SizeDelta: {x: 31.144, y: 2.992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &281139249
 MonoBehaviour:
@@ -596,91 +596,6 @@ MonoBehaviour:
     m_TypeName: RedBlueGames.Tools.TextTyper.TextTyper+CharacterPrintedEvent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   player: {fileID: 0}
-<<<<<<< HEAD
---- !u!1001 &739346144
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: SpeechText
-      value: 
-      objectReference: {fileID: 1531944410}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: slashIndicator
-      value: 
-      objectReference: {fileID: 1690490367}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: dustcloud
-      value: 
-      objectReference: {fileID: 1201637302}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: AUTOPATH_TIMEOUT
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: stamina
-      value: 
-      objectReference: {fileID: 98938696}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: DASH_STAMINA_COST
-      value: 0.005
-      objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: GENERATE_STAMINA
-      value: 0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: MIN_ATTACK_THRESH
-      value: 0.4
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
-  m_IsPrefabParent: 0
-=======
->>>>>>> c6ffa294a7841ae207db06a262620e6196ab09bf
 --- !u!1 &762027636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.028, y: 0.69979286}
   m_AnchorMax: {x: 0.1713152, y: 1}
-  m_AnchoredPosition: {x: -0.019958496, y: 4.7099915}
+  m_AnchoredPosition: {x: -0.019989014, y: 4.709999}
   m_SizeDelta: {x: -0.03999996, y: 8.95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1525442102
@@ -1273,7 +1188,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1690490364
 GameObject:
@@ -1418,6 +1333,21 @@ Prefab:
       propertyPath: dustcloud
       value: 
       objectReference: {fileID: 1201637302}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: stamina
+      value: 
+      objectReference: {fileID: 98938696}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: DASH_STAMINA_COST
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: GENERATE_STAMINA
+      value: 0.001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0

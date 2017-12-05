@@ -61,7 +61,6 @@ public class Player : MonoBehaviour {
 	public Rigidbody2D rb;
 	public Animator anim;
 	public StaminaBar stamina;
-    public Animator anim;
 	public GameObject afterimagePrefab;
 	public GameObject swordAfterimagePrefab;
 
@@ -246,10 +245,7 @@ public class Player : MonoBehaviour {
 			transform.localScale = new Vector3 (1, 1, 1);
 		} else if (rb.velocity.x < -TURNING_THRESHOLD) {
 			transform.localScale = new Vector3 (-1, 1, 1);
-		} else if (state == State.running) {
-			state = State.idle;
-			attackType = AttackType.none;
-		}
+		} else if (state == State.running) state = State.idle;
 	}
 
 	private void LimitVelocity() {
@@ -275,7 +271,6 @@ public class Player : MonoBehaviour {
 		// timeout if the player cannot reach destination
 		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT) {
 			state = State.idle;
-			attackType = AttackType.none;
 			rb.velocity = new Vector2(0, 0);
 			return;
 		}
@@ -416,7 +411,7 @@ public class Player : MonoBehaviour {
 	// method to perform the slash
 	private void Attack(){
 		attackStartTime = Time.time;
-		if (grounded) stamina.increaseStamina(GENERATE_STAMINA);
+
 		switch (attackType) {
 			case AttackType.upSlash:
 				state = State.slashing;
