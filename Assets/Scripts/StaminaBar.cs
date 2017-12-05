@@ -18,16 +18,14 @@ public class StaminaBar : MonoBehaviour
       player = GameObject.Find("Player").GetComponent<Player>();
     }
 
-    void Update() {
-      HandleStamina();
+    // increases the player's stamina
+    public void increaseStamina(float amount) {
+      this.bar.fillAmount += amount;
     }
 
-    private void HandleStamina() {
-      if (player.state == Player.State.autoPathing && fillAmount < 1)
-        fillAmount += 0.005f;
-      else if (player.state == Player.State.dashing && fillAmount > 0)
-        fillAmount -= 0.02f;
-      else
-        bar.fillAmount = fillAmount;
+    // decreases the player's stamina
+    public void decreaseStamina(float amount) {
+      this.bar.fillAmount -= amount;
     }
+
 }

@@ -58,7 +58,8 @@ public class Player : MonoBehaviour {
 	public SlashIndicator slashIndicator;
 	public Dustcloud dustcloud;
 	public Rigidbody2D rb;
-    public Animator anim;
+	public Animator anim;
+	public StaminaBar stamina;
 
 	// constants
 	public float SLASHING_X_DIST;
@@ -72,6 +73,8 @@ public class Player : MonoBehaviour {
 	public float DASH_TARGET_THRESHOLD;
 	public float ATTACK_TIMEOUT;
 	public float AUTOPATH_TIMEOUT;
+	public float DASH_STAMINA_COST;
+	public float GENERATE_STAMINA;
 
 
 	private float attackStartTime;
@@ -119,6 +122,7 @@ public class Player : MonoBehaviour {
 
 			default:
 				rb.gravityScale = GRAVITY_SCALE;
+				if (grounded) stamina.increaseStamina(GENERATE_STAMINA);
 				break;
 		}		
 
@@ -249,6 +253,7 @@ public class Player : MonoBehaviour {
 
 	// method to handle the autopathing
 	private void AutoPath() {
+		stamina.increaseStamina(GENERATE_STAMINA);
 		rb.gravityScale = GRAVITY_SCALE;
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y;
@@ -309,6 +314,7 @@ public class Player : MonoBehaviour {
 	// method to handle dashing
 	// this is only called when auto pathing is completed!
 	private void Dash() {
+		stamina.decreaseStamina(DASH_STAMINA_COST);
 		Debug.Log("dash");
 		if (Time.time > attackStartTime + ATTACK_TIMEOUT) {
 			state = State.idle;
