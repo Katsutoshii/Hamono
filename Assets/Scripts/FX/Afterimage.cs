@@ -25,6 +25,7 @@ public class Afterimage : PooledObject {
         Color c = spriteRenderer.color;
         c.a -= alphaDecrement;
         spriteRenderer.color = c;
+        if (c.a <= 0) gameObject.SetActive(false);
     }
 
     public override void OnObjectReuse() {
