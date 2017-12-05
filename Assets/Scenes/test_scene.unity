@@ -271,7 +271,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 281139248}
   - {fileID: 1525442101}
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -413,17 +412,17 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 281139247}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 98938695}
+  m_Father: {fileID: 1525442101}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -330.63953, y: 161.7}
-  m_SizeDelta: {x: 100.71, y: 26.56}
+  m_AnchoredPosition: {x: 11.23, y: -2.76}
+  m_SizeDelta: {x: 99.58, y: 12.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &281139249
 MonoBehaviour:
@@ -780,7 +779,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.094, y: -0.851}
+  m_AnchoredPosition: {x: -8.044, y: -0.917}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1076290090
@@ -1080,14 +1079,15 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 281139248}
   m_Father: {fileID: 98938695}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.028, y: 0.69979286}
   m_AnchorMax: {x: 0.1713152, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 28.729996}
-  m_SizeDelta: {x: -0.0000076294, y: -39.09}
+  m_AnchoredPosition: {x: -2.7399902, y: 2.9199982}
+  m_SizeDelta: {x: 5.49, y: -90.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1525442102
 MonoBehaviour:
@@ -1411,6 +1411,16 @@ Prefab:
       propertyPath: stamina
       value: 
       objectReference: {fileID: 98938696}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: GENERATE_STAMINA
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: DASH_STAMINA_COST
+      value: 0.04
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
