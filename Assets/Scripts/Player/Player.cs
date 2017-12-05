@@ -59,6 +59,8 @@ public class Player : MonoBehaviour {
 	public Dustcloud dustcloud;
 	public Rigidbody2D rb;
     public Animator anim;
+	public GameObject afterimagePrefab;
+	public GameObject swordAfterimagePrefab;
 
 	// constants
 	public float SLASHING_X_DIST;
@@ -79,13 +81,18 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Start");
 		rb = gameObject.GetComponent<Rigidbody2D>();
     	anim = gameObject.GetComponent<Animator>();
+
 		state = State.idle;
 		attackType = AttackType.none;
+
+
 		completedSpeech = false;
 		allSpeech = new HashSet<GameObject>();
+
+		PoolManager.instance.CreatePool(afterimagePrefab, 10);
+		PoolManager.instance.CreatePool(swordAfterimagePrefab, 20);
 	}
 	
 	// Update is called once per frame
@@ -339,27 +346,9 @@ public class Player : MonoBehaviour {
 		afterimageCount++;
 		if(afterimageCount % 3 != 0) return;
 
-		GameObject trailPart = new GameObject();
-        SpriteRenderer trailPartRenderer = trailPart.AddComponent<SpriteRenderer>();
-		trailPartRenderer.sortingLayerName = "EntityBackground";
-        trailPartRenderer.sprite = GetComponent<SpriteRenderer>().sprite;
-
 		trailPartRenderer.color = afterimageColor;
 		trailPart.transform.position = transform.position;
-		trailPart.transform.localScale = transform.localScale;
-		Destroy(trailPart, 0.3f); // replace 0.5f with needed lifeTime
- 
-        StartCoroutine("FadeTrailPart", trailPartRenderer);
-    }
-
-    IEnumerator FadeTrailPart(SpriteRenderer trailPartRenderer) {
-        Color color = trailPartRenderer.color;
-        for (float f = 0.8f; f >= 0; f -= 0.08f) {
-            Color c = trailPartRenderer.color;
-            c.a = f;
-            trailPartRenderer.color = c;
-            yield return new WaitForEndOfFrame();
-        }
+		trailPart.transform.localScale = transform.localScale; 
     }
 
 	private Vector2 MouseWorldPosition2D(){
