@@ -252,13 +252,13 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 113826364}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -186237661
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &98938695
@@ -1411,16 +1411,6 @@ Prefab:
       propertyPath: stamina
       value: 
       objectReference: {fileID: 98938696}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: DASH_STAMINA_COST
-      value: 0.005
-      objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: GENERATE_STAMINA
-      value: 0.001
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0

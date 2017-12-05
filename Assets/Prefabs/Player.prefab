@@ -202,11 +202,12 @@ MonoBehaviour:
   dustcloud: {fileID: 0}
   rb: {fileID: 0}
   anim: {fileID: 0}
+  stamina: {fileID: 0}
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
     type: 2}
   swordAfterimagePrefab: {fileID: 1497393089588702, guid: 8efcdf899027fc8499e34fd3ce0f1c74,
     type: 2}
-  SLASHING_X_DIST: 1
+  SLASHING_X_DIST: 0.3
   SLASHING_Y_DIST: 0.5
   SLASHING_THRESHOLD: 4
   AUTO_JUMP_FACTOR: 2
@@ -217,12 +218,15 @@ MonoBehaviour:
   DASH_TARGET_THRESHOLD: 0.8
   ATTACK_TIMEOUT: 0.5
   AUTOPATH_TIMEOUT: 1.5
+  DASH_STAMINA_COST: 0.005
+  GENERATE_STAMINA: 0.001
   AUTOPATH_Y_THRESHOLD: 1.5
   AUTOPATH_Y_FACTOR: 6.25
+  JUMP_X_THRESHOLD: 3.5
+  JUMP_DELAY: 0.1
   READY_FLOAT_TIMEOUT: 0.5
   numAfterimage: 4
   afterimageColor: {r: 0.33574829, g: 0.6135232, b: 0.8455882, a: 0}
-  JUMP_DELAY: 0.1
   MIN_ATTACK_THRESH: 0.2
 --- !u!212 &212073600475020504
 SpriteRenderer:

@@ -260,6 +260,7 @@ public class Player : MonoBehaviour {
 
 	public float AUTOPATH_Y_THRESHOLD; 
 	public float AUTOPATH_Y_FACTOR;
+	public float JUMP_X_THRESHOLD;
 
 	// method to handle the autopathing
 	private void AutoPath() {
@@ -282,18 +283,41 @@ public class Player : MonoBehaviour {
 			readyStartTime = Time.time;
 			return;
 		}
-		if (Mathf.Abs(xDist) < SLASHING_X_DIST) {
-			rb.velocity = new Vector2(0, rb.velocity.y);
+
+		if (prejumping) {
+			rb.velocity = new Vector2(0, 0);
+			return;
 		}
+
+		// fixes overshooting
+		if (Mathf.Abs(xDist) < SLASHING_X_DIST)
+			rb.velocity = new Vector2(0, rb.velocity.y);
 
 		// otherwise, if we need to move in the x or y direction, do so
-		if (Mathf.Abs(xDist) >= SLASHING_X_DIST) {
+		if (Mathf.Abs(xDist) >= SLASHING_X_DIST)
 			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
-		}
 
-		if (yDist >= AUTOPATH_Y_THRESHOLD && grounded) {
-			if (!jumping) StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
-		}
+		if (yDist >= AUTOPATH_Y_THRESHOLD && xDist <= JUMP_X_THRESHOLD && grounded)
+			StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
+	}
+
+	public float JUMP_DELAY;
+	private bool prejumping = false;
+	private IEnumerator Jump(float jumpPower) {
+		prejumping = true;
+		rb.velocity = Vector2.zero;
+		Debug.Log("Jump!");
+		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+		anim.Play("PlayerJumpUp");
+		
+		yield return new WaitForSeconds(JUMP_DELAY);
+		prejumping = false;
+		dustcloud.MakeCloud(jumpPos);
+
+		Debug.Log("jump! with vel = " + jumpPower);
+		rb.velocity = Vector2.up * jumpPower;
+		anim.Play("PlayerJumping");
+		yield return null;
 	}
 
 	public float READY_FLOAT_TIMEOUT;
@@ -385,27 +409,6 @@ public class Player : MonoBehaviour {
 			state = State.idle;
 			rb.velocity = new Vector3(0, 0, 0);
 		}
-	}
-	
-	public float JUMP_DELAY;
-	private bool jumping = false;
-	private IEnumerator Jump(float jumpPower) {
-		jumping = true;
-		rb.velocity = Vector3.zero;
-		Debug.Log("Jump!");
-		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-		anim.Play("PlayerJumpUp");
-		
-		yield return new WaitForSeconds(JUMP_DELAY);
-		
-		dustcloud.MakeCloud(jumpPos);
-
-		Debug.Log("jump! with vel = " + jumpPower);
-		rb.velocity = new Vector2(rb.velocity.x, 0); // prevents stacking velocity
-		rb.velocity += Vector2.up * jumpPower;
-		anim.Play("PlayerJumping");
-		jumping = false;
-		yield return null;
 	}
 
 	// method to perform the slash
