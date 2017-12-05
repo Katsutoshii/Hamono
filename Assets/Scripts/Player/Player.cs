@@ -200,8 +200,14 @@ public class Player : MonoBehaviour {
 
 	private void StartDialogue() {
 		// triggers a speech bubble
+
 			GameObject nearestNPC = NearestNPC();
 			TextTyper NPCTextChild;
+			if (NPCText == null) {
+				NPCText = Instantiate(SpeechText);
+				NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
+			}
+			NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
 			if (completedSpeech && state == State.talking) {
 				// ending conversation
 				foreach (GameObject item in allSpeech)
@@ -209,18 +215,14 @@ public class Player : MonoBehaviour {
 				state = State.idle;
 				completedSpeech = false;
 				NPCText = null;
-			} else if (state != State.talking && nearestNPC != null && !completedSpeech && NPCText == null) {
+			} else if (state != State.talking && nearestNPC != null && !completedSpeech) {
 				// starting converstation
 				state = State.talking;
-				NPCText = Instantiate(SpeechText);
-				NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
-				NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
 				allSpeech.Add(NPCText);
 				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me. \n I'm talking for a really long time. \n You probably find this extremely annoying.");
 				completedSpeech = false;
-			} else if (state == State.talking && nearestNPC != null && NPCText != null) {
+			} else if (state == State.talking) {
 				// skipping content
-				NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
 				NPCTextChild.Skip();
 			}
 	}
