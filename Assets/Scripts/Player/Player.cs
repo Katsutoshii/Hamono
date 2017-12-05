@@ -191,7 +191,7 @@ public class Player : MonoBehaviour {
 			anim.Play("PlayerLanding");
 		}
 
-		if (Input.GetKeyDown(key:KeyCode.S)) {
+		if (Input.GetMouseButtonDown(1)) {
 			StartDialogue();
 		}
 	}
