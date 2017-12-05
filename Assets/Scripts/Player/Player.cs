@@ -127,6 +127,7 @@ public class Player : MonoBehaviour {
 				break;
 
 			default:
+				rb.velocity = new Vector2(0, rb.velocity.y);
 				rb.gravityScale = GRAVITY_SCALE;
 				break;
 		}		
