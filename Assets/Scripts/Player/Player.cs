@@ -261,7 +261,7 @@ public class Player : MonoBehaviour {
 	private void AutoPath() {
 		rb.gravityScale = GRAVITY_SCALE;
 		float xDist = targetA.x - transform.position.x;
-		float yDist = targetA.y - transform.position.y;
+		float yDist = targetA.y - transform.position.y + 0.5f;
 
 		// timeout if the player cannot reach destination
 		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT) {
