@@ -27,10 +27,10 @@ public class Enemy : MonoBehaviour {
 
   void OnTriggerEnter2D(Collider2D other)
   {
-      if (other.name == "Obstacle") {
+      if (other.gameObject.layer == 8) {
         direction *= -1;
       }
 
   }
-  
+
 }
