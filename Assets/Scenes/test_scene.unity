@@ -435,7 +435,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4688960186873004, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.4
+      value: -14.25
       objectReference: {fileID: 0}
     - target: {fileID: 4688960186873004, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
       propertyPath: m_LocalPosition.y
@@ -509,9 +509,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576a6ea6d13124f6fb38e091f9871dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 0
-  direction: 2
+  player: {fileID: 1271265347}
   rb: {fileID: 0}
+  state: 0
+  walkingSpeed: 2
+  direction: 1
+  distanceNearPlayer: 3
+  SLASHING_X_DIST: 0.3
+  SLASHING_Y_DIST: 0.5
+  KP: 2
+  GRAVITY_SCALE: 2
+  AUTOPATH_Y_THRESHOLD: 0
+  AUTOPATH_Y_FACTOR: 0
+  JUMP_X_THRESHOLD: 0
 --- !u!61 &457465140
 BoxCollider2D:
   m_ObjectHideFlags: 0
