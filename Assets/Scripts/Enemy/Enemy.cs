@@ -49,7 +49,6 @@ public class Enemy : MonoBehaviour {
   void Update() {
     rb.velocity = new Vector2(direction, rb.velocity.y);
 
-    Debug.Log("direction: " + direction);
     if (direction < 0)
       transform.localScale = new Vector3(-1, 1, 1);
     else

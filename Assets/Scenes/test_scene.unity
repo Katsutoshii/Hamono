@@ -513,11 +513,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   state: 0
   walkingSpeed: 2
-  direction: 1
   distanceNearPlayer: 3
   SLASHING_X_DIST: 0.3
   SLASHING_Y_DIST: 0.5
-  KP: 2
+  KP: 1
   GRAVITY_SCALE: 2
   AUTOPATH_Y_THRESHOLD: 0
   AUTOPATH_Y_FACTOR: 0
