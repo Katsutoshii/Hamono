@@ -18,12 +18,12 @@ public class Enemy : MonoBehaviour {
   private System.Random random;
   private float[] directionOptions = new float[] {-1f, 1f};
 
-  private Vector2 target;
+  public float healthAmount;
+  public float receiveDamage;
 
   public enum State {
     idle,
     walking,
-    ready,
     attacking,
     damaged,
     dead,
@@ -57,12 +57,11 @@ public class Enemy : MonoBehaviour {
     bool nearPlayer = NearPlayer();
     if (nearPlayer || lockOnPlayer) {
       // follow the player
-      Debug.Log("Enemy: Following the player");
-      target = player.transform.position;
+      // Debug.Log("Enemy: Following the player");
       AutoPath();
     } else {
       // randomly walk around
-      Debug.Log("Enemy: Walking around");
+      // Debug.Log("Enemy: Walking around");
       RandomWalkCycle();
     }
   }
@@ -105,19 +104,46 @@ public class Enemy : MonoBehaviour {
     return false;
   }
 
-  public float AUTOPATH_Y_THRESHOLD; 
-	public float AUTOPATH_Y_FACTOR;
-	public float JUMP_X_THRESHOLD;
+  // attacks player
+  private void Attack() {
+    // attack the player
+    if (player.state != Player.State.dashing && player.state != Player.State.slashing) {
+      // the player is damaged
+    } else {
+      // the enemy is damaged
+      Debug.Log("Enemy: I'm damaged");
+      state = State.damaged;
+      Damage();
+    }
+  }
+
+  // enemy is damaged
+  private void Damage() {
+    // damage done by the player
+    if (healthAmount <= 0) {
+      state = State.dead;
+      Debug.Log("Enemy: I died");
+      Death();
+    }
+    healthAmount -= receiveDamage;
+  }
+
+  // enemy died
+  private void Death() {
+    // deletes the game object
+    Destroy(gameObject);
+  }
 
   // follows player
   private void AutoPath() {
 		rb.gravityScale = GRAVITY_SCALE;
-		float xDist = target.x - transform.position.x;
-		float yDist = target.y - transform.position.y + 0.5f;
+		float xDist = player.transform.position.x - transform.position.x;
+		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
     if (Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
-			state = State.ready;
 			// readyStartTime = Time.time;
+      state = State.attacking;
+      Attack();
 			return;
 		}
 

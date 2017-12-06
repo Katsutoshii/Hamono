@@ -514,13 +514,12 @@ MonoBehaviour:
   state: 0
   walkingSpeed: 2
   distanceNearPlayer: 3
-  SLASHING_X_DIST: 0.3
+  healthAmount: 1
+  receiveDamage: 0.1
+  SLASHING_X_DIST: 1.1
   SLASHING_Y_DIST: 0.5
   KP: 1
   GRAVITY_SCALE: 2
-  AUTOPATH_Y_THRESHOLD: 0
-  AUTOPATH_Y_FACTOR: 0
-  JUMP_X_THRESHOLD: 0
 --- !u!61 &457465140
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1363,6 +1362,11 @@ Prefab:
       propertyPath: stamina
       value: 
       objectReference: {fileID: 98938696}
+    - target: {fileID: 61671867867945532, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0

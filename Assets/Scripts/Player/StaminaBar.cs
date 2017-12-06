@@ -32,7 +32,6 @@ public class StaminaBar : MonoBehaviour
         this.bar.fillAmount -= amount;
       else
         this.exhausted = true;
-      Debug.Log("okfdsjakflads");
     }
 
     // checks to see if character is exhausted
