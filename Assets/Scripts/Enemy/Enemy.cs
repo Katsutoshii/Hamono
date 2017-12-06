@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour {
   public float maxSpeed;
   public float direction;
 
-  private float nearPlayer;
-  private float lockOnPlayer;
+  private bool nearPlayer;
+  private bool lockOnPlayer;
 
   public enum State {
     idle,
