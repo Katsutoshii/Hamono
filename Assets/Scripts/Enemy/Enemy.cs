@@ -25,12 +25,12 @@ public class Enemy : MonoBehaviour {
     rb.velocity = new Vector2(direction, rb.velocity.y);
   }
 
-  void OnTriggerEnter2D(Collider2D other)
-  {
-      if (other.gameObject.layer == 8) {
+  void OnCollisionEnter2D(Collision2D collision) {
+      Collider2D collider = collision.collider;
+      if (collider.gameObject.layer == 8) {
         direction *= -1;
+        transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
       }
-
+      Debug.Log("other: " + collider);
   }
-
 }
