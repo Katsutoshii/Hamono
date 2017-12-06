@@ -57,11 +57,9 @@ public class Enemy : MonoBehaviour {
     bool nearPlayer = NearPlayer();
     if (nearPlayer || lockOnPlayer) {
       // follow the player
-      // Debug.Log("Enemy: Following the player");
       AutoPath();
     } else {
       // randomly walk around
-      // Debug.Log("Enemy: Walking around");
       RandomWalkCycle();
     }
   }
@@ -141,7 +139,6 @@ public class Enemy : MonoBehaviour {
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
     if (Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
-			// readyStartTime = Time.time;
       state = State.attacking;
       Attack();
 			return;
