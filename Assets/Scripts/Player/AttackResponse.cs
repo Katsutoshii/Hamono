@@ -25,17 +25,20 @@ public class AttackResponse : MonoBehaviour
             case Player.AttackResponse.blocked:
                 break;
             case Player.AttackResponse.missed:
+                player.spriteRenderer.color = Color.red;
                 Damaged();
                 break;
             case Player.AttackResponse.combo:
                 break;
             default:
+                player.spriteRenderer.color = Color.white;
                 break;
         }
     }
 
     private void Damaged() {
         Debug.Log("Player damaged: " + player.healthAmount);
+        player.attackResponse = Player.AttackResponse.none;
         if (player.healthAmount <= 0) {
             // player died
             Death();
