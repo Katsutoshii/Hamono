@@ -334,6 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 10
   comboCount: 0
+  coinCount: 0
   completedSpeech: 0
   state: 0
   attackType: 6
