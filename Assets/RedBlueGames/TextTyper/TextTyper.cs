@@ -40,10 +40,11 @@
         private float defaultPrintDelay;
         private Coroutine typeTextCoroutine;
 
-        public Player player;
+        public NPC NPC;
 
         private void AlertCompletion() {
             Debug.Log("The message completed");
+            NPC.completedSpeech = true;
         }
 
         /// <summary>
