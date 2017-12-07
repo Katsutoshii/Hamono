@@ -68,14 +68,18 @@ public class Enemy : MonoBehaviour {
     }
   }
 
-  // handles case when enemy runs into a wall
+  // handles case when enemy runs into something
   void OnCollisionEnter2D(Collision2D collision) {
       Collider2D collider = collision.collider;
-      if (collider.gameObject.layer == 8) {
-        direction *= -1;
-        transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
-      }
+      
       Debug.Log("collider: " + collider);
+
+      switch (collider.gameObject.layer) {
+        case 8: // we hit a wall, so turn around
+          direction *= -1;
+          transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
+          break;
+      }
   }
 
   private void RandomWalkCycle() {
@@ -113,15 +117,14 @@ public class Enemy : MonoBehaviour {
       // the player is damaged
     } else {
       // the enemy is damaged
-      Debug.Log("Enemy: I'm damaged");
-      state = State.damaged;
-      if (player.state == Player.State.slashing) Damage(receiveSlashDamage);
-      else if (player.state == Player.State.dashing) Damage(receiveDashDamage);
+      //if (player.state == Player.State.slashing) Damage(receiveSlashDamage); else
+      if (player.state == Player.State.dashing) Damage(receiveDashDamage);
     }
   }
 
   // enemy is damaged
   private void Damage(float damage) {
+    state = State.damaged;
     // damage done by the player
     if (healthAmount <= 0) {
       state = State.dead;
@@ -158,5 +161,18 @@ public class Enemy : MonoBehaviour {
 			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
       direction = xDist * KP;
     }
+  }
+
+  /// <summary>
+  /// Sent when another object enters a trigger collider attached to this
+  /// object (2D physics only).
+  /// </summary>
+  /// <param name="other">The other Collider2D involved in this collision.</param>
+  void OnTriggerEnter2D(Collider2D other)
+  {
+      Debug.Log("Trigger enter!");
+      Damage(receiveSlashDamage);
+      rb.AddForce((rb.position - other.attachedRigidbody.position) * 100);
+      Debug.Log("Health = " + healthAmount);
   }
 }
