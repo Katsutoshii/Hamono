@@ -1,0 +1,78 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using RedBlueGames.Tools.TextTyper;
+
+public class NPC : MonoBehaviour {
+	
+	public GameObject NPCText;
+	public GameObject SpeechText;
+	
+	public HashSet<GameObject> allSpeech;
+	
+	public bool completedSpeech;
+
+	// Use this for initialization
+	void Start () {
+		
+		completedSpeech = false;
+		allSpeech = new HashSet<GameObject>();
+		
+		NPCText = null;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+	/// <summary>
+	/// Called every frame while the mouse is over the GUIElement or Collider.
+	/// </summary>
+	void OnMouseOver()
+	{
+		if(Input.GetMouseButton(1)) {
+			StartDialogue();
+		}
+	}
+
+	private void StartDialogue() {
+		Debug.Log("starting dialogue");
+		// triggers a speech bubble
+		TextTyper NPCTextChild;
+
+		if (NPCText == null) {
+			NPCText = Instantiate(SpeechText);
+			NPCText.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, 0);
+		}
+		NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
+
+		if (completedSpeech) {
+			// ending conversation
+			foreach (GameObject item in allSpeech)
+				Destroy(item);
+			completedSpeech = false;
+			NPCText = null;
+		} 
+		
+		else if (!completedSpeech) {
+			// starting converstation
+			allSpeech.Add(NPCText);
+			NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me. \n I'm talking for a really long time. \n You probably find this extremely annoying.");
+			completedSpeech = false;
+		}
+	}
+
+	// Grabs the nearest NPC able to chat
+	// distance defines the area space that picks up NPCs
+	private GameObject NearestNPC(float distance = 2.3f) {
+		GameObject[] NPCList = GameObject.FindGameObjectsWithTag("NPC");
+		GameObject nearestNPC = null;
+
+		foreach (GameObject NPC in NPCList) {
+			if (Vector2.Distance(transform.position, NPC.transform.position) <= distance)
+				nearestNPC = NPC;
+		}
+		return nearestNPC;
+	}
+}

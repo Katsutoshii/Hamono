@@ -46,9 +46,9 @@ public class SlashIndicator : MonoBehaviour {
 			float width = Mathf.Sqrt(
 				(clickWorldPoint.x - targetA.x) * (clickWorldPoint.x - targetA.x)
 				 + (clickWorldPoint.y - targetA.y) * (clickWorldPoint.y - targetA.y)
-			) * 100 / spriteRenderer.sprite.rect.width;
+			) * 5500 / spriteRenderer.sprite.rect.width;
 				
-			transform.localScale = new Vector3(width, 0.05f, 0.05f);
+			transform.localScale = new Vector3(width, 2f, 2f);
 
 			float angle = Mathf.Atan2(clickWorldPoint.y - targetA.y, 
 				clickWorldPoint.x - targetA.x) * 180 / Mathf.PI;
