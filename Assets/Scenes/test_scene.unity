@@ -515,7 +515,8 @@ MonoBehaviour:
   walkingSpeed: 2
   distanceNearPlayer: 3
   healthAmount: 1
-  receiveDamage: 0.1
+  receiveSlashDamage: 0.05
+  receiveDashDamage: 0.1
   SLASHING_X_DIST: 1.1
   SLASHING_Y_DIST: 0.5
   KP: 1
