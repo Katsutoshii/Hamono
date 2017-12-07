@@ -155,6 +155,7 @@ public class Enemy : MonoBehaviour {
     for (int i = 0; i < 4; i++)
       PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
 
+    Debug.Log("destroy me");
     Destroy(gameObject);
   }
 
