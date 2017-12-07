@@ -128,6 +128,7 @@ public class Player : MonoBehaviour {
 				break;
 
 			case State.slashing:
+				Debug.Log("slashing!");
 				CheckForSlashEnd();
 				rb.gravityScale = 0;
 				break;
@@ -178,6 +179,7 @@ public class Player : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonUp(0)) {
+			Debug.Log("Mouse up");
 			GetAttackType();
 		}
 
@@ -186,8 +188,8 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	private bool slashQueued;
 	private void UpdateAnimatorVariables() {
-		
 		// update animator variables
     	anim.SetBool("grounded", grounded);
     	anim.SetFloat("speedX", Mathf.Abs(rb.velocity.x));
@@ -200,7 +202,10 @@ public class Player : MonoBehaviour {
 		anim.SetBool("upSlashing", state == State.slashing && attackType == AttackType.upSlash);
 		anim.SetBool("slashing", state == State.slashing && attackType == AttackType.straightSlash);
 
+
 		anim.SetBool("prejumping", jumping && grounded);
+		anim.SetBool("ready", state == State.ready);
+		anim.SetBool("idle", state == State.idle);
 	}
 
 	private void StartDialogue() {
@@ -283,21 +288,33 @@ public class Player : MonoBehaviour {
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y + 0.5f;
 
-		// timeout if the player cannot reach destination
+		// timeout if the player
 		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT) {
+			Debug.Log("timeout for autopath");
 			state = State.idle;
 			rb.velocity = new Vector2(0, 0);
 			return;
 		}
 
-		// if we are at the position to start slashing, freeze until we have an attack!
-		if (Mathf.Abs(xDist) < SLASHING_X_DIST && (Mathf.Abs(yDist) < SLASHING_Y_DIST
-			|| (Mathf.Abs(yDist) < AUTOPATH_Y_THRESHOLD && grounded))) {
-			state = State.ready;
-			readyStartTime = Time.time;
+		bool positionReached = Mathf.Abs(xDist) < SLASHING_X_DIST && 		// we are close enough in the x direciton
+			(Mathf.Abs(yDist) < SLASHING_Y_DIST || 							// and we are close enough on the y
+			(Mathf.Abs(yDist) < AUTOPATH_Y_THRESHOLD && grounded));			// OR we are gorunded and meet the grounded thresh
+
+		if (positionReached) Debug.Log("position reached!");
+		if (positionReached) {
+			// if we are at the position to start slashing, freeze until we have an attack!
+			if (Input.GetMouseButton(0) || attackType != AttackType.none) {		// if we have an attack queued or we are still drawing
+				
+				state = State.ready;
+				readyStartTime = Time.time;
+			}
+			else {
+				state = State.idle;
+			}
 			return;
 		}
 
+		// if we are crouching for a jump
 		if (jumping && grounded) {
 			rb.velocity = new Vector2(0, rb.velocity.y);
 			return;
@@ -322,14 +339,12 @@ public class Player : MonoBehaviour {
 		rb.velocity = Vector2.zero;
 		Debug.Log("Jump!");
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-		anim.Play("PlayerJumpUp");
 		
 		yield return new WaitForSeconds(JUMP_DELAY);
 		dustcloud.MakeCloud(jumpPos);
 
 		Debug.Log("jump! with vel = " + jumpPower);
 		rb.velocity = Vector2.up * jumpPower;
-		anim.Play("PlayerJumping");
 		yield return new WaitForSeconds(JUMP_DELAY);
 		
 		jumping = false;
@@ -340,16 +355,20 @@ public class Player : MonoBehaviour {
 	private float readyStartTime;
 	// method for when autopathing is complete and ready to make an attack
 	private void Ready() {
-		Debug.Log("Ready");
+		Debug.Log("Ready: attack type = " + attackType.ToString());
 		
 		rb.velocity = new Vector3(0, 0);
 		Attack();	// will do nothing unless an attack is set
 
-		if (attackType == AttackType.none && state != State.dashing && state != State.slashing &&
-			(Time.time - readyStartTime > READY_FLOAT_TIMEOUT || !Input.GetMouseButton(0))) {
+		if ((attackType == AttackType.none && 
+			state != State.dashing && 
+			state != State.slashing &&
+			(Time.time - readyStartTime > READY_FLOAT_TIMEOUT && !grounded) // time out if floating
+			)) {
+
 			Debug.Log("Cancel ready!");
 			state = State.idle;
-			return;
+			attackType = AttackType.none;
 		}
 	}
 
@@ -419,48 +438,40 @@ public class Player : MonoBehaviour {
 		return new Vector2(worldSpaceClickPosition.x, worldSpaceClickPosition.y);
 	}
 
-	public void CancelAutomation() {
-		if(state == State.autoPathing || state == State.dashing || state == State.slashing) {
-			attackType = AttackType.none;
-			state = State.idle;
-			rb.velocity = new Vector3(0, 0, 0);
-		}
-	}
 
 	// method to perform the slash
-	private void Attack(){
+	private void Attack() {
+		Debug.Log("Checking attack!");
 		attackStartTime = Time.time;
 
 		switch (attackType) {
 			case AttackType.upSlash:
 				state = State.slashing;
-				anim.Play("PlayerUpSlash");
 				break;
 
 			case AttackType.downSlash:
 				state = State.slashing;
-				anim.Play("PlayerDownJab");
 				break;
 
 			case AttackType.straightSlash:
 				state = State.slashing;
-				anim.Play("PlayerJab");
 				break;
 
 			case AttackType.dash:
-			Debug.Log("Setting state to dashing");
 				state = State.dashing;
-				anim.Play("PlayerDash");
 				break;
 			
 			case AttackType.none:
 				break;
 		}
-		attackType = AttackType.none;
+
+		Debug.Log("new state = " + state.ToString());
+		UpdateAnimatorVariables();
 	}
 
 	public float MIN_ATTACK_THRESH;
 	public void GetAttackType() {
+		Debug.Log("Get attack type!");
 		
 		targetB = MouseWorldPosition2D();
 		//state = State.autoPathing;
@@ -472,7 +483,12 @@ public class Player : MonoBehaviour {
 			attackType = AttackType.dash;
 			// dashing is handle on a frame-by-frame basis
 		}
-		else attackType = CalcSlashType(); 	// sets slashType to the correct type of slash
+		else {
+			slashQueued = true;
+			attackType = CalcSlashType(); 	// sets slashType to the correct type of slash
+		}
+
+		Debug.Log("Queued attack = " + attackType.ToString());
 	}
 	
 	// method to get the slash type based on targetA and targetB
@@ -482,7 +498,6 @@ public class Player : MonoBehaviour {
 		// if this is a jab
 		float angle = Mathf.Atan2(targetB.y - targetA.y, 
 			Mathf.Abs(targetB.x - targetA.x)) * 180 / Mathf.PI;
-		Debug.Log("It's a jab! Angle = " + angle);
 
 		if(angle > 30) slashType = AttackType.upSlash;
 		else if(angle < -30) slashType = AttackType.downSlash;
@@ -492,9 +507,10 @@ public class Player : MonoBehaviour {
 	}
 
 	private void CheckForSlashEnd() {
+
 		// check if the slash is over by seeing if the current playing animation is idle
-		if (anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle") && Time.time > attackStartTime + 0.2) {
-			Debug.Log("Slash ended!");
+		if (!(anim.GetBool("slashing") || anim.GetBool("upSlashing") || anim.GetBool("downSlashing"))) {
+			Debug.Log("Slash over!");
 			state = State.idle;
 			attackType = AttackType.none;
 		}
