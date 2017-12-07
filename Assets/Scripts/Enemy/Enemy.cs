@@ -128,9 +128,10 @@ public class Enemy : MonoBehaviour {
     // attack the player
     if (player.state != Player.State.dashing && player.state != Player.State.slashing) {
       // the player is damaged
+      player.attackResponse = Player.AttackResponse.missed;
     } else {
       // the enemy is damaged
-      //if (player.state == Player.State.slashing) Damage(receiveSlashDamage); else
+      player.attackResponse = Player.AttackResponse.normal;
       if (player.state == Player.State.dashing) Damage(receiveDashDamage);
     }
   }
@@ -154,6 +155,7 @@ public class Enemy : MonoBehaviour {
     for (int i = 0; i < 4; i++)
       PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
 
+    Debug.Log("destroy me");
     Destroy(gameObject);
   }
 

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
 
 	public float maxSpeed;
 	public int comboCount;
+	public float healthAmount;
 	public int coinCount;
 	public Text cointCountText;
 
@@ -101,7 +102,6 @@ public class Player : MonoBehaviour {
 	void Update() {
 	
 		Controls();
-		
 		if (grounded) stamina.IncreaseStamina(GENERATE_STAMINA);
 
 		// actions based on the state

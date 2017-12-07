@@ -4,6 +4,8 @@ using UnityEngine;
 using RedBlueGames.Tools.TextTyper;
 
 public class NPC : MonoBehaviour {
+
+	private Player player;
 	
 	public GameObject NPCText;
 	public GameObject SpeechText;
@@ -15,6 +17,8 @@ public class NPC : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
+		player = GameObject.Find("Player").GetComponent<Player>();
+
 		completedSpeech = false;
 		allSpeech = new HashSet<GameObject>();
 		
@@ -31,7 +35,7 @@ public class NPC : MonoBehaviour {
 	/// </summary>
 	void OnMouseOver()
 	{
-		if(Input.GetMouseButton(1)) {
+		if(Input.GetMouseButtonDown(1)) {
 			StartDialogue();
 		}
 	}
@@ -53,13 +57,15 @@ public class NPC : MonoBehaviour {
 				Destroy(item);
 			completedSpeech = false;
 			NPCText = null;
-		} 
-		
-		else if (!completedSpeech) {
+			player.state = Player.State.idle;
+		} else if (!completedSpeech && player.state != Player.State.talking) {
 			// starting converstation
+			player.state = Player.State.talking;
 			allSpeech.Add(NPCText);
 			NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me. \n I'm talking for a really long time. \n You probably find this extremely annoying.");
 			completedSpeech = false;
+		} else if (!completedSpeech && player.state == Player.State.talking) {
+			NPCTextChild.Skip();
 		}
 	}
 
