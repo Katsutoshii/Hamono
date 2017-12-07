@@ -18,8 +18,8 @@ TagManager:
   - Terrain
   - Enemies
   - NPCs
-  - 
-  - 
+  - Player
+  - PlayerHurtBox
   - 
   - 
   - 

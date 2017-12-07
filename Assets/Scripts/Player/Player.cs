@@ -127,7 +127,6 @@ public class Player : MonoBehaviour {
 				break;
 
 			case State.slashing:
-				Debug.Log("slashing!");
 				CheckForSlashEnd();
 				rb.gravityScale = 0;
 				break;
@@ -186,7 +185,6 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	private bool slashQueued;
 	private void UpdateAnimatorVariables() {
 		// update animator variables
     	anim.SetBool("grounded", grounded);
@@ -479,12 +477,8 @@ public class Player : MonoBehaviour {
 			attackType = AttackType.dash;
 			// dashing is handle on a frame-by-frame basis
 		}
-		else {
-			slashQueued = true;
+		else
 			attackType = CalcSlashType(); 	// sets slashType to the correct type of slash
-		}
-
-		Debug.Log("Queued attack = " + attackType.ToString());
 	}
 	
 	// method to get the slash type based on targetA and targetB
