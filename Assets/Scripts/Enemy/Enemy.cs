@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour {
 
   public Player player;
   public Rigidbody2D rb;
+  private SpriteRenderer spriteRenderer;
   public State state;
 
   public float walkingSpeed;
@@ -40,6 +41,7 @@ public class Enemy : MonoBehaviour {
 
   void Start() {
     rb = gameObject.GetComponent<Rigidbody2D>();
+    spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     lockOnPlayer = false;
     lastTime = Time.time;
     random = new System.Random();
@@ -54,12 +56,22 @@ public class Enemy : MonoBehaviour {
       transform.localScale = new Vector3(-1, 1, 1);
     else
       transform.localScale = new Vector3(1, 1, 1);
+    
+    switch (state) {
+      case State.attacking:
+        Attack();
+        break;
 
-    bool nearPlayer = NearPlayer();
-    if (state == State.attacking) {
-      // starts attacking the player
-      Attack();
-    } else if (nearPlayer || lockOnPlayer) {
+      case State.damaged:
+        spriteRenderer.color = Color.red;
+        break;
+
+      default:
+        spriteRenderer.color = Color.white;
+        break;
+    }
+
+    if (NearPlayer() || lockOnPlayer) {
       // follow the player
       AutoPath();
      } else {
@@ -125,13 +137,14 @@ public class Enemy : MonoBehaviour {
   // enemy is damaged
   private void Damage(float damage) {
     state = State.damaged;
+    
+    healthAmount -= damage;
     // damage done by the player
     if (healthAmount <= 0) {
       state = State.dead;
       Debug.Log("Enemy: I died");
       Death();
     }
-    healthAmount -= damage;
   }
 
   // enemy died
@@ -170,9 +183,13 @@ public class Enemy : MonoBehaviour {
   /// <param name="other">The other Collider2D involved in this collision.</param>
   void OnTriggerEnter2D(Collider2D other)
   {
-      Debug.Log("Trigger enter!");
-      Damage(receiveSlashDamage);
-      rb.AddForce((rb.position - other.attachedRigidbody.position) * 100);
-      Debug.Log("Health = " + healthAmount);
+      Debug.Log("Trigger " + other.name + " enter!");
+
+      switch (other.name) {
+        case "SlashHurtBox":
+          Damage(receiveSlashDamage);
+          Debug.Log("Health = " + healthAmount);
+          break;
+      }
   }
 }

@@ -17,7 +17,7 @@ public class SlashHurtBox : MonoBehaviour {
 		if (player.state == Player.State.slashing) {
 			hurtBox.enabled = true;
 			
-			hurtBox.offset = new Vector2(player.transform.localScale.x * 0.3f, 0);
+			hurtBox.offset = new Vector2(0.3f, 0);
 		}
 		else {
 			hurtBox.offset = new Vector2(0, 0);
