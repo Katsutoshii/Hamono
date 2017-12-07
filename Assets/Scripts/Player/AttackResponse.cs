@@ -17,7 +17,7 @@ public class AttackResponse : MonoBehaviour
         // Enemy - placeholder label for all enemy sprites
         // TODO: change to use layer
         if (collider2D.name == "Enemy") {
-            if (player.state != Player.State.running && player.state != Player.State.idle) {
+            if (player.state != Player.State.idle) {
                 // We are in attack mode
                 // TODO: Calculate what type of enemy it is and distribute attack response
                 if (player.attackResponse == Player.AttackResponse.combo) {
@@ -52,7 +52,7 @@ public class AttackResponse : MonoBehaviour
     /// <param name="other">The other Collider2D involved in this collision.</param>
     void OnTriggerStay2D(Collider2D other)
     {
-      if (player.state == Player.State.idle || player.state == Player.State.running) {
+      if (player.state == Player.State.idle) {
         // The player got hit
         player.attackResponse = Player.AttackResponse.none;
         player.comboCount = 0;

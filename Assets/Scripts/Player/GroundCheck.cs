@@ -30,7 +30,7 @@ public class GroundCheck : MonoBehaviour
         // Enemy - placeholder label for all enemy sprites
         // TODO: change to use layer
         if (other.name == "Enemy") {
-            if (player.state != Player.State.running && player.state != Player.State.idle) {
+            if (player.state != Player.State.idle) {
                 // We are in attack mode
                 // TODO: move following calculations to different scripts
                 // Calculate what type of enemy it is and distribute attack response
