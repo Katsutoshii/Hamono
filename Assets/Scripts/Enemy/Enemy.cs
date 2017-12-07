@@ -19,7 +19,8 @@ public class Enemy : MonoBehaviour {
   private float[] directionOptions = new float[] {-1f, 1f};
 
   public float healthAmount;
-  public float receiveDamage;
+  public float receiveSlashDamage;
+  public float receiveDashDamage;
 
   public enum State {
     idle,
@@ -55,10 +56,13 @@ public class Enemy : MonoBehaviour {
       transform.localScale = new Vector3(1, 1, 1);
 
     bool nearPlayer = NearPlayer();
-    if (nearPlayer || lockOnPlayer) {
+    if (state == State.attacking) {
+      // starts attacking the player
+      Attack();
+    } else if (nearPlayer || lockOnPlayer) {
       // follow the player
       AutoPath();
-    } else {
+     } else {
       // randomly walk around
       RandomWalkCycle();
     }
@@ -111,19 +115,20 @@ public class Enemy : MonoBehaviour {
       // the enemy is damaged
       Debug.Log("Enemy: I'm damaged");
       state = State.damaged;
-      Damage();
+      if (player.state == Player.State.slashing) Damage(receiveSlashDamage);
+      else if (player.state == Player.State.dashing) Damage(receiveDashDamage);
     }
   }
 
   // enemy is damaged
-  private void Damage() {
+  private void Damage(float damage) {
     // damage done by the player
     if (healthAmount <= 0) {
       state = State.dead;
       Debug.Log("Enemy: I died");
       Death();
     }
-    healthAmount -= receiveDamage;
+    healthAmount -= damage;
   }
 
   // enemy died
@@ -140,7 +145,7 @@ public class Enemy : MonoBehaviour {
 
     if (Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
       state = State.attacking;
-      Attack();
+      direction = 0;
 			return;
 		}
 
