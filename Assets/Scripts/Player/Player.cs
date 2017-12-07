@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using RedBlueGames.Tools.TextTyper;
 
 public class Player : MonoBehaviour {
 
@@ -11,8 +10,6 @@ public class Player : MonoBehaviour {
 	public int coinCount;
 	public Text cointCountText;
 
-	public HashSet<GameObject> allSpeech;
-	public bool completedSpeech;
 
 	public enum State {
 		idle,
@@ -46,8 +43,6 @@ public class Player : MonoBehaviour {
 	public AttackType attackType = AttackType.none;
 	public AttackResponse attackResponse = AttackResponse.none;
 
-	public GameObject NPCText;
-	public GameObject SpeechText;
 	public SpriteRenderer spriteRenderer;
 
 	public bool grounded;
@@ -96,13 +91,10 @@ public class Player : MonoBehaviour {
 		state = State.idle;
 		attackType = AttackType.none;
 
-		completedSpeech = false;
-		allSpeech = new HashSet<GameObject>();
 
 		PoolManager.instance.CreatePool(afterimagePrefab, 10);
 		PoolManager.instance.CreatePool(swordAfterimagePrefab, 20);
 
-		NPCText = null;
 	}
 	
 	// Update is called once per frame
@@ -165,10 +157,6 @@ public class Player : MonoBehaviour {
 		if (Input.GetMouseButtonUp(0)) {
 			GetAttackType();
 		}
-
-		if (Input.GetMouseButtonDown(1)) {
-			StartDialogue();
-		}
 	}
 
 	private void UpdateAnimatorVariables() {
@@ -190,54 +178,7 @@ public class Player : MonoBehaviour {
 		animator.SetBool("idle", state == State.idle);
 	}
 
-	private void StartDialogue() {
-		// triggers a speech bubble
-
-		GameObject nearestNPC = NearestNPC();
-		TextTyper NPCTextChild;
-
-		if (NPCText == null) {
-			NPCText = Instantiate(SpeechText);
-			NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
-		}
-		NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
-
-		if (completedSpeech && state == State.talking) {
-			// ending conversation
-			foreach (GameObject item in allSpeech)
-				Destroy(item);
-			state = State.idle;
-			completedSpeech = false;
-			NPCText = null;
-		} 
-		
-		else if (state != State.talking && nearestNPC != null && !completedSpeech) {
-			// starting converstation
-			state = State.talking;
-			allSpeech.Add(NPCText);
-			NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me. \n I'm talking for a really long time. \n You probably find this extremely annoying.");
-			completedSpeech = false;
-		} 
-		
-		else if (state == State.talking) {
-			// skipping content
-			NPCTextChild.Skip();
-		}
-	}
-
-	// Grabs the nearest NPC able to chat
-	// distance defines the area space that picks up NPCs
-	private GameObject NearestNPC(float distance = 2.3f) {
-		GameObject[] NPCList = GameObject.FindGameObjectsWithTag("NPC");
-		GameObject nearestNPC = null;
-
-		foreach (GameObject NPC in NPCList) {
-			if (Vector2.Distance(transform.position, NPC.transform.position) <= distance)
-				nearestNPC = NPC;
-		}
-		return nearestNPC;
-	}
-
+	
 	private void RotateSpriteForVelocity() {
 		// turn the sprite around based on velocity
 		if (rb.velocity.x > TURNING_THRESHOLD) {
