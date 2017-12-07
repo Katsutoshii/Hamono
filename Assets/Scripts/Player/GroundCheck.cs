@@ -15,7 +15,7 @@ public class GroundCheck : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider2D)
     {
         player.grounded = true;
-        player.anim.Play("PlayerLanding");
+        player.animator.Play("PlayerLanding");
     }
 
     /// <summary>

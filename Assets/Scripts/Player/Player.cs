@@ -50,20 +50,20 @@ public class Player : MonoBehaviour {
 
 	public bool grounded;
 	public bool autoPathing;
-	public bool completedAutoPathing; // triggeers dash/slash after completed autopathing
 
 	public Vector2 targetA; 	// start point of a slash
 	public Vector2 targetB;		// end point of a slash
 	public SlashIndicator slashIndicator;
 	public Dustcloud dustcloud;
 	public Rigidbody2D rb;
-	public Animator anim;
+	public Animator animator;
 	public StaminaBar stamina;
 	public GameObject afterimagePrefab;
 	public GameObject swordAfterimagePrefab;
 	public Texture2D cursorTexture;
 	public CursorMode cursorMode;
 	public Vector2 hotSpot;
+	private AudioSource audioSource;
 
 	// constants
 	public float SLASHING_X_DIST;
@@ -87,12 +87,12 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
-    	anim = gameObject.GetComponent<Animator>();
+    	animator = gameObject.GetComponent<Animator>();
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+		audioSource = gameObject.GetComponent<AudioSource>();
 
 		state = State.idle;
 		attackType = AttackType.none;
-
 
 		completedSpeech = false;
 		allSpeech = new HashSet<GameObject>();
@@ -149,22 +149,6 @@ public class Player : MonoBehaviour {
 		// for initiating action
 		if (Input.GetMouseButtonDown(0) && state != State.talking) {
 
-			// get the object we clicked on
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-			if(hit.collider != null) {
-				
-				Debug.Log("Clicked on " + hit.transform.name);
-				Debug.Log("Layer " + hit.transform.gameObject.layer);
-
-				// handle special cases
-				switch (hit.transform.gameObject.layer) {
-					// don't autopath onto terrain
-					case 8: // terrain
-						return;
-				}
-			}
-
 			autoPathStartTime = Time.time;
 			state = State.autoPathing;
 			targetA = MouseWorldPosition2D();
@@ -187,21 +171,21 @@ public class Player : MonoBehaviour {
 
 	private void UpdateAnimatorVariables() {
 		// update animator variables
-    	anim.SetBool("grounded", grounded);
-    	anim.SetFloat("speedX", Mathf.Abs(rb.velocity.x));
-		anim.SetFloat("velocityY", rb.velocity.y);
+    	animator.SetBool("grounded", grounded);
+    	animator.SetFloat("speedX", Mathf.Abs(rb.velocity.x));
+		animator.SetFloat("velocityY", rb.velocity.y);
 
-		anim.SetBool("dashing", state == State.dashing);
+		animator.SetBool("dashing", state == State.dashing);
 
-		anim.SetBool("upSlashing", state == State.slashing && attackType == AttackType.upSlash);
-		anim.SetBool("downSlashing", state == State.slashing && attackType == AttackType.downSlash);
-		anim.SetBool("upSlashing", state == State.slashing && attackType == AttackType.upSlash);
-		anim.SetBool("slashing", state == State.slashing && attackType == AttackType.straightSlash);
+		animator.SetBool("upSlashing", state == State.slashing && attackType == AttackType.upSlash);
+		animator.SetBool("downSlashing", state == State.slashing && attackType == AttackType.downSlash);
+		animator.SetBool("upSlashing", state == State.slashing && attackType == AttackType.upSlash);
+		animator.SetBool("slashing", state == State.slashing && attackType == AttackType.straightSlash);
 
 
-		anim.SetBool("prejumping", jumping && grounded);
-		anim.SetBool("ready", state == State.ready);
-		anim.SetBool("idle", state == State.idle);
+		animator.SetBool("prejumping", jumping && grounded);
+		animator.SetBool("ready", state == State.ready);
+		animator.SetBool("idle", state == State.idle);
 	}
 
 	private void StartDialogue() {
@@ -498,7 +482,7 @@ public class Player : MonoBehaviour {
 	private void CheckForSlashEnd() {
 
 		// check if the slash is over by seeing if the current playing animation is idle
-		if (!(anim.GetBool("slashing") || anim.GetBool("upSlashing") || anim.GetBool("downSlashing"))) {
+		if (!(animator.GetBool("slashing") || animator.GetBool("upSlashing") || animator.GetBool("downSlashing"))) {
 			Debug.Log("Slash over!");
 			state = State.idle;
 			attackType = AttackType.none;
@@ -507,5 +491,9 @@ public class Player : MonoBehaviour {
 
 	private void OnMouseEnter() {
 		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+	}
+
+	public void PlayOneShot(AudioClip sound) {
+		audioSource.PlayOneShot(sound);
 	}
 }

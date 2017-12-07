@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 50404783047066720}
   - component: {fileID: 95266908316134988}
   - component: {fileID: 114638767232979100}
+  - component: {fileID: 82650513785808734}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -201,6 +202,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8084313, y: 1.3923676}
   m_EdgeRadius: 0
+--- !u!82 &82650513785808734
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1486475674207076}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95266908316134988
 Animator:
   serializedVersion: 3
@@ -262,13 +343,12 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   grounded: 1
   autoPathing: 0
-  completedAutoPathing: 0
   targetA: {x: 0.9956711, y: 1.9547617}
   targetB: {x: 3.5064938, y: -0.66428566}
   slashIndicator: {fileID: 0}
   dustcloud: {fileID: 0}
   rb: {fileID: 0}
-  anim: {fileID: 0}
+  animator: {fileID: 0}
   stamina: {fileID: 0}
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
     type: 2}

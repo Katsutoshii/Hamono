@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable CS0414  
+
 public class PoolManager : MonoBehaviour {
 
 	Dictionary<int, Queue<ObjectInstance>> pools = new Dictionary<int, Queue<ObjectInstance>>();

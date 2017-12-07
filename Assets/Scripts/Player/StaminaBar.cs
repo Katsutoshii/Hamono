@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+#pragma warning disable CS0414  
+
 public class StaminaBar : MonoBehaviour
 {
     [SerializeField]
