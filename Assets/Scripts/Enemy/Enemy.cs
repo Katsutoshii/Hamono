@@ -55,10 +55,13 @@ public class Enemy : MonoBehaviour {
       transform.localScale = new Vector3(1, 1, 1);
 
     bool nearPlayer = NearPlayer();
-    if (nearPlayer || lockOnPlayer) {
+    if (nearPlayer || lockOnPlayer || state == State.attacking) {
       // follow the player
       AutoPath();
-    } else {
+    } else if (state == State.attacking) {
+      // starts attacking the player
+      Attack();
+     } else {
       // randomly walk around
       RandomWalkCycle();
     }
@@ -70,6 +73,9 @@ public class Enemy : MonoBehaviour {
       if (collider.gameObject.layer == 8) {
         direction *= -1;
         transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
+      } else if (collider.gameObject.name == "Player") {
+        // colliding with player
+        state = State.attacking;
       }
       Debug.Log("collider: " + collider);
   }
@@ -140,7 +146,6 @@ public class Enemy : MonoBehaviour {
 
     if (Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
       state = State.attacking;
-      Attack();
 			return;
 		}
 
