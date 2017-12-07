@@ -16,7 +16,10 @@ public class HealthBar : MonoBehaviour
   private Image secondHeart;
   private Image thirdHeart;
 
+  public Sprite noHeart;
+
   private float maxHearts = 3f;
+  private float heartSections = 4f;
 
   // Use this for initialization
   void Start() {
@@ -36,13 +39,19 @@ public class HealthBar : MonoBehaviour
     if (healthAmount >= 3) {
       // handle all heart to be full
     } else if (healthAmount >= 2) {
-      this.thirdHeart.fillAmount = healthAmount - 2;
+      float roundingFigure = heartSections * (healthAmount - 2);
+      this.thirdHeart.fillAmount = Mathf.Round(roundingFigure) / heartSections;
     } else if (healthAmount >= 1) {
       // change third heart to be empty - black dot
-      this.secondHeart.fillAmount = healthAmount - 1;
+      float roundingFigure = heartSections * (healthAmount - 1);
+      this.thirdHeart.sprite = noHeart;
+      this.secondHeart.fillAmount = Mathf.Round(roundingFigure) / heartSections;
     } else if (healthAmount > 0) {
       // change the third and second hearts to be empty - black dot
-      this.firstHeart.fillAmount = healthAmount;
+      float roundingFigure = heartSections * healthAmount;
+      this.secondHeart.sprite = noHeart;
+      this.thirdHeart.sprite = noHeart;
+      this.firstHeart.fillAmount = Mathf.Round(roundingFigure) / heartSections;
     } else {
       // player is dead
       this.exhausted = true;
