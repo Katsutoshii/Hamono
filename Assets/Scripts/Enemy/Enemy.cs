@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour {
   public Player player;
   public Rigidbody2D rb;
   private SpriteRenderer spriteRenderer;
+  public GameObject coinPrefab;
   public State state;
 
   public float walkingSpeed;
@@ -150,7 +151,21 @@ public class Enemy : MonoBehaviour {
   // enemy died
   private void Death() {
     // deletes the game object
+    for (int i = 0; i < 4; i++)
+      PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
+
     Destroy(gameObject);
+  }
+
+  private Vector3 RandomOffset(Vector3 position) {
+    return new Vector3(position.x + GetRandomNumber(0f, 0.5f),
+      position.y + GetRandomNumber(0f, 0.5f),
+      position.z);
+  }
+
+  public float GetRandomNumber(float minimum, float maximum)
+  { 
+      return ((float) random.NextDouble()) * (maximum - minimum) + minimum;
   }
 
   // follows player

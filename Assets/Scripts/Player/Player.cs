@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 
 	public float maxSpeed;
 	public int comboCount;
+	public int coinCount;
 
 	public HashSet<GameObject> allSpeech;
 	public bool completedSpeech;
@@ -493,7 +494,22 @@ public class Player : MonoBehaviour {
 		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
 	}
 
+	// method to play sounds from animator
 	public void PlayOneShot(AudioClip sound) {
 		audioSource.PlayOneShot(sound);
+	}
+
+	/// <summary>
+	/// Sent when an incoming collider makes contact with this object's
+	/// collider (2D physics only).
+	/// </summary>
+	/// <param name="other">The Collision2D data associated with this collision.</param>
+	void OnCollisionEnter2D(Collision2D other)
+	{
+		switch (other.collider.name.Substring(0, 4)) {
+			case "Coin":
+				coinCount++;
+				break;
+		}
 	}
 }
