@@ -146,7 +146,6 @@ public class Enemy : MonoBehaviour {
     if (Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
       state = State.attacking;
       direction = 0;
-      // Attack();
 			return;
 		}
 
