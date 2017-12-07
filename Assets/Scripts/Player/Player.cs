@@ -286,7 +286,7 @@ public class Player : MonoBehaviour {
 		}
 
 		if (jumping && grounded) {
-			rb.velocity = new Vector2(0, 0);
+			rb.velocity = new Vector2(0, rb.velocity.y);
 			return;
 		}
 
