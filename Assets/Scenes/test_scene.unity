@@ -1351,6 +1351,15 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 61203960177793454, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0.099128395
+      objectReference: {fileID: 0}
+    - target: {fileID: 61203960177793454, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.7634261
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
