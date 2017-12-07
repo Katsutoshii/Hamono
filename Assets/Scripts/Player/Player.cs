@@ -285,7 +285,7 @@ public class Player : MonoBehaviour {
 			return;
 		}
 
-		if (prejumping) {
+		if (jumping && grounded) {
 			rb.velocity = new Vector2(0, 0);
 			return;
 		}
@@ -303,21 +303,23 @@ public class Player : MonoBehaviour {
 	}
 
 	public float JUMP_DELAY;
-	private bool prejumping = false;
+	private bool jumping = false;
 	private IEnumerator Jump(float jumpPower) {
-		prejumping = true;
+		jumping = true;
 		rb.velocity = Vector2.zero;
 		Debug.Log("Jump!");
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		anim.Play("PlayerJumpUp");
 		
 		yield return new WaitForSeconds(JUMP_DELAY);
-		prejumping = false;
 		dustcloud.MakeCloud(jumpPos);
 
 		Debug.Log("jump! with vel = " + jumpPower);
 		rb.velocity = Vector2.up * jumpPower;
 		anim.Play("PlayerJumping");
+		yield return new WaitForSeconds(JUMP_DELAY);
+		
+		jumping = false;
 		yield return null;
 	}
 
