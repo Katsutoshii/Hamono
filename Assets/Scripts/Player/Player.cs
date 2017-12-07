@@ -15,7 +15,6 @@ public class Player : MonoBehaviour {
 
 	public enum State {
 		idle,
-		running,
 		autoPathing,
 		ready,
 		dashing,
@@ -106,6 +105,8 @@ public class Player : MonoBehaviour {
 	void Update() {
 	
 		Controls();
+		
+		if (grounded) stamina.increaseStamina(GENERATE_STAMINA);
 
 		// actions based on the state
 		switch (state) {
@@ -141,13 +142,9 @@ public class Player : MonoBehaviour {
 		RotateSpriteForVelocity();
 		if(state != State.dashing) LimitVelocity();
 
-		// update animator variables
-    	anim.SetBool("grounded", grounded);
-    	anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
-		anim.SetBool("dashing", state == State.dashing);
+		UpdateAnimatorVariables();
 	}
 
-	private bool falling;
 	// method to handle all control inputs inside main loop
 	private void Controls() {
 		// for initiating action
@@ -184,47 +181,61 @@ public class Player : MonoBehaviour {
 			GetAttackType();
 		}
 
-		if (rb.velocity.y < 0 && !grounded && !falling) {
-			falling = true;
-			anim.Play("PlayerFalling");
-		}
-		else if (falling && grounded) {
-			falling = false;
-			anim.Play("PlayerLanding");
-		}
-
 		if (Input.GetMouseButtonDown(1)) {
 			StartDialogue();
 		}
 	}
 
+	private void UpdateAnimatorVariables() {
+		
+		// update animator variables
+    	anim.SetBool("grounded", grounded);
+    	anim.SetFloat("speedX", Mathf.Abs(rb.velocity.x));
+		anim.SetFloat("velocityY", rb.velocity.y);
+
+		anim.SetBool("dashing", state == State.dashing);
+
+		anim.SetBool("upSlashing", state == State.slashing && attackType == AttackType.upSlash);
+		anim.SetBool("downSlashing", state == State.slashing && attackType == AttackType.downSlash);
+		anim.SetBool("upSlashing", state == State.slashing && attackType == AttackType.upSlash);
+		anim.SetBool("slashing", state == State.slashing && attackType == AttackType.straightSlash);
+
+		anim.SetBool("prejumping", jumping && grounded);
+	}
+
 	private void StartDialogue() {
 		// triggers a speech bubble
 
-			GameObject nearestNPC = NearestNPC();
-			TextTyper NPCTextChild;
-			if (NPCText == null) {
-				NPCText = Instantiate(SpeechText);
-				NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
-			}
-			NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
-			if (completedSpeech && state == State.talking) {
-				// ending conversation
-				foreach (GameObject item in allSpeech)
-					Destroy(item);
-				state = State.idle;
-				completedSpeech = false;
-				NPCText = null;
-			} else if (state != State.talking && nearestNPC != null && !completedSpeech) {
-				// starting converstation
-				state = State.talking;
-				allSpeech.Add(NPCText);
-				NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me. \n I'm talking for a really long time. \n You probably find this extremely annoying.");
-				completedSpeech = false;
-			} else if (state == State.talking) {
-				// skipping content
-				NPCTextChild.Skip();
-			}
+		GameObject nearestNPC = NearestNPC();
+		TextTyper NPCTextChild;
+
+		if (NPCText == null) {
+			NPCText = Instantiate(SpeechText);
+			NPCText.transform.position = new Vector2(nearestNPC.transform.position.x, nearestNPC.transform.position.y + 1.2f);
+		}
+		NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
+
+		if (completedSpeech && state == State.talking) {
+			// ending conversation
+			foreach (GameObject item in allSpeech)
+				Destroy(item);
+			state = State.idle;
+			completedSpeech = false;
+			NPCText = null;
+		} 
+		
+		else if (state != State.talking && nearestNPC != null && !completedSpeech) {
+			// starting converstation
+			state = State.talking;
+			allSpeech.Add(NPCText);
+			NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me. \n I'm talking for a really long time. \n You probably find this extremely annoying.");
+			completedSpeech = false;
+		} 
+		
+		else if (state == State.talking) {
+			// skipping content
+			NPCTextChild.Skip();
+		}
 	}
 
 	// Grabs the nearest NPC able to chat
@@ -232,6 +243,7 @@ public class Player : MonoBehaviour {
 	private GameObject NearestNPC(float distance = 2.3f) {
 		GameObject[] NPCList = GameObject.FindGameObjectsWithTag("NPC");
 		GameObject nearestNPC = null;
+
 		foreach (GameObject NPC in NPCList) {
 			Debug.Log(NPC.transform.position);
 			if (Vector2.Distance(transform.position, NPC.transform.position) <= distance)
@@ -244,9 +256,10 @@ public class Player : MonoBehaviour {
 		// turn the sprite around based on velocity
 		if (rb.velocity.x > TURNING_THRESHOLD) {
 			transform.localScale = new Vector3 (1, 1, 1);
-		} else if (rb.velocity.x < -TURNING_THRESHOLD) {
+		} 
+		else if (rb.velocity.x < -TURNING_THRESHOLD) {
 			transform.localScale = new Vector3 (-1, 1, 1);
-		} else if (state == State.running) state = State.idle;
+		}
 	}
 
 	private void LimitVelocity() {
@@ -265,7 +278,7 @@ public class Player : MonoBehaviour {
 
 	// method to handle the autopathing
 	private void AutoPath() {
-		if (grounded) stamina.increaseStamina(GENERATE_STAMINA);
+
 		rb.gravityScale = GRAVITY_SCALE;
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y + 0.5f;
