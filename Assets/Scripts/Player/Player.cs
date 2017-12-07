@@ -102,7 +102,6 @@ public class Player : MonoBehaviour {
 	void Update() {
 	
 		Controls();
-		
 		if (grounded) stamina.IncreaseStamina(GENERATE_STAMINA);
 
 		// actions based on the state
