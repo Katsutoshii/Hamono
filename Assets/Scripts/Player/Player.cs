@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
 	public float maxSpeed;
 	public int comboCount;
 	public int coinCount;
+	public Text cointCountText;
 
 	public HashSet<GameObject> allSpeech;
 	public bool completedSpeech;
@@ -109,7 +110,7 @@ public class Player : MonoBehaviour {
 	
 		Controls();
 		
-		if (grounded) stamina.increaseStamina(GENERATE_STAMINA);
+		if (grounded) stamina.IncreaseStamina(GENERATE_STAMINA);
 
 		// actions based on the state
 		switch (state) {
@@ -135,7 +136,7 @@ public class Player : MonoBehaviour {
 			default:
 				rb.velocity = new Vector2(0, rb.velocity.y);
 				rb.gravityScale = GRAVITY_SCALE;
-				if (grounded) stamina.increaseStamina(GENERATE_STAMINA);
+				if (grounded) stamina.IncreaseStamina(GENERATE_STAMINA);
 				break;
 		}		
 
@@ -316,7 +317,6 @@ public class Player : MonoBehaviour {
 	private IEnumerator Jump(float jumpPower) {
 		jumping = true;
 		rb.velocity = Vector2.zero;
-		Debug.Log("Jump!");
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		
 		yield return new WaitForSeconds(JUMP_DELAY);
@@ -351,14 +351,6 @@ public class Player : MonoBehaviour {
 		rb.gravityScale = 0;
 	}
 
-	/// <summary>
-	/// OnGUI is called for rendering and handling GUI events.
-	/// This function can be called multiple times per frame (one call per event).
-	/// </summary>
-	void OnGUI() {
-		GUI.Label(new Rect(20, 20, 100, 100), "Velocity = " + rb.velocity.ToString());
-	}
-
 	// method to handle dashing
 	// this is only called when auto pathing is completed!
 	private void Dash() {
@@ -368,8 +360,7 @@ public class Player : MonoBehaviour {
 			attackType = AttackType.none;
 			return;
 		}
-		stamina.decreaseStamina(DASH_STAMINA_COST);
-		Debug.Log("dash");
+		stamina.DecreaseStamina(DASH_STAMINA_COST);
 		if (Time.time > attackStartTime + ATTACK_TIMEOUT) {
 			state = State.idle;
 			attackType = AttackType.none;
@@ -509,6 +500,7 @@ public class Player : MonoBehaviour {
 		switch (other.collider.name.Substring(0, 4)) {
 			case "Coin":
 				coinCount++;
+				cointCountText.text = "" + coinCount;
 				break;
 		}
 	}

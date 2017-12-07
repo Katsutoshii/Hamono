@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   rb: {fileID: 0}
+  coinPrefab: {fileID: 1923347793606866, guid: 8b363b572e089004b96a5158a0897986, type: 2}
   state: 0
   walkingSpeed: 2
   distanceNearPlayer: 3

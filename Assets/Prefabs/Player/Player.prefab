@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4702268169266706}
   - component: {fileID: 61508419877422528}
   - component: {fileID: 114494229243757060}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SlashHurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4413722616883630}
   - component: {fileID: 61203960177793454}
   - component: {fileID: 114168312230010564}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 95266908316134988}
   - component: {fileID: 114638767232979100}
   - component: {fileID: 82650513785808734}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -335,6 +335,7 @@ MonoBehaviour:
   maxSpeed: 10
   comboCount: 0
   coinCount: 0
+  cointCountText: {fileID: 0}
   completedSpeech: 0
   state: 0
   attackType: 6
