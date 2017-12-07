@@ -115,18 +115,15 @@ public class Player : MonoBehaviour {
 			
 			case State.autoPathing:
 				AutoPath();
-				rb.gravityScale = GRAVITY_SCALE;
 				break;
 
 			case State.ready:
 				Ready();
-				rb.gravityScale = 0;
 				break;
 			
 			case State.dashing:
 				Dash();
 				SpawnAfterimage();
-				rb.gravityScale = 0;
 				break;
 
 			case State.slashing:
@@ -181,7 +178,6 @@ public class Player : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonUp(0)) {
-			Debug.Log("Mouse up");
 			GetAttackType();
 		}
 
@@ -252,7 +248,6 @@ public class Player : MonoBehaviour {
 		GameObject nearestNPC = null;
 
 		foreach (GameObject NPC in NPCList) {
-			Debug.Log(NPC.transform.position);
 			if (Vector2.Distance(transform.position, NPC.transform.position) <= distance)
 				nearestNPC = NPC;
 		}
@@ -302,7 +297,6 @@ public class Player : MonoBehaviour {
 			(Mathf.Abs(yDist) < SLASHING_Y_DIST || 							// and we are close enough on the y
 			(Mathf.Abs(yDist) < AUTOPATH_Y_THRESHOLD && grounded));			// OR we are gorunded and meet the grounded thresh
 
-		if (positionReached) Debug.Log("position reached!");
 		if (positionReached) {
 			// if we are at the position to start slashing, freeze until we have an attack!
 			if (Input.GetMouseButton(0) || attackType != AttackType.none) {		// if we have an attack queued or we are still drawing
@@ -344,8 +338,6 @@ public class Player : MonoBehaviour {
 		
 		yield return new WaitForSeconds(JUMP_DELAY);
 		dustcloud.MakeCloud(jumpPos);
-
-		Debug.Log("jump! with vel = " + jumpPower);
 		rb.velocity = Vector2.up * jumpPower;
 		yield return new WaitForSeconds(JUMP_DELAY);
 		
@@ -372,6 +364,8 @@ public class Player : MonoBehaviour {
 			state = State.idle;
 			attackType = AttackType.none;
 		}
+		
+		rb.gravityScale = 0;
 	}
 
 	/// <summary>
@@ -411,6 +405,8 @@ public class Player : MonoBehaviour {
 			state = State.idle;
 			attackType = AttackType.none;
 		}
+		
+		rb.gravityScale = 0;
 	}
 
 	private int afterimageCount = 0;
@@ -467,13 +463,11 @@ public class Player : MonoBehaviour {
 				break;
 		}
 
-		Debug.Log("new state = " + state.ToString());
 		UpdateAnimatorVariables();
 	}
 
 	public float MIN_ATTACK_THRESH;
 	public void GetAttackType() {
-		Debug.Log("Get attack type!");
 		
 		targetB = MouseWorldPosition2D();
 		//state = State.autoPathing;
@@ -496,7 +490,6 @@ public class Player : MonoBehaviour {
 	// method to get the slash type based on targetA and targetB
 	private AttackType CalcSlashType(){
 		AttackType slashType;
-		Debug.Log("finding slash type");
 		// if this is a jab
 		float angle = Mathf.Atan2(targetB.y - targetA.y, 
 			Mathf.Abs(targetB.x - targetA.x)) * 180 / Mathf.PI;
