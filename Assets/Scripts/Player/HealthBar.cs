@@ -34,6 +34,7 @@ public class HealthBar : MonoBehaviour
   }
 
   private void HandleHealth() {
+    HashSet<Image> refillImages = new HashSet<Image>();
     float healthAmount = player.healthAmount / maxHearts;
     this.exhausted = false;
     
@@ -46,25 +47,33 @@ public class HealthBar : MonoBehaviour
       // change third heart to be empty - black dot
       float roundingFigure = heartSections * (healthAmount - 1);
       this.thirdHeart.sprite = noHeart;
-      this.thirdHeart.fillAmount = 1f;
+      refillImages.Add(this.thirdHeart);
       this.secondHeart.fillAmount = Mathf.Round(roundingFigure) / heartSections;
     } else if (healthAmount > 0) {
       // change the third and second hearts to be empty - black dot
       float roundingFigure = heartSections * healthAmount;
       this.secondHeart.sprite = noHeart;
-      this.secondHeart.fillAmount = 1f;
       this.thirdHeart.sprite = noHeart;
-      this.thirdHeart.fillAmount = 1f;
+      refillImages.Add(this.secondHeart);
+      refillImages.Add(this.thirdHeart);
       this.firstHeart.fillAmount = Mathf.Round(roundingFigure) / heartSections;
     } else {
       // player is dead
       this.firstHeart.sprite = noHeart;
-      this.firstHeart.fillAmount = 1f;
       this.secondHeart.sprite = noHeart;
-      this.secondHeart.fillAmount = 1f;
       this.thirdHeart.sprite = noHeart;
-      this.thirdHeart.fillAmount = 1f;
+      refillImages.Add(this.firstHeart);
+      refillImages.Add(this.secondHeart);
+      refillImages.Add(this.thirdHeart);
       this.exhausted = true;
+    }
+    refillImage(refillImages);
+  }
+
+  // refills all images in the given set
+  private void refillImage(HashSet<Image> images) {
+    foreach (Image image in images) {
+      image.fillAmount = 1f;
     }
   }
 }
