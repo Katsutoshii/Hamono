@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 
 	public float maxSpeed;
 	public int comboCount;
+	public float healthAmount;
 
 	public HashSet<GameObject> allSpeech;
 	public bool completedSpeech;
