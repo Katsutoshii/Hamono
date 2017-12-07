@@ -7,7 +7,6 @@ using RedBlueGames.Tools.TextTyper;
 public class Player : MonoBehaviour {
 
 	public float maxSpeed;
-
 	public int comboCount;
 
 	public HashSet<GameObject> allSpeech;
@@ -63,6 +62,9 @@ public class Player : MonoBehaviour {
 	public StaminaBar stamina;
 	public GameObject afterimagePrefab;
 	public GameObject swordAfterimagePrefab;
+	public Texture2D cursorTexture;
+	public CursorMode cursorMode;
+	public Vector2 hotSpot;
 
 	// constants
 	public float SLASHING_X_DIST;
@@ -485,5 +487,9 @@ public class Player : MonoBehaviour {
 			state = State.idle;
 			attackType = AttackType.none;
 		}
+	}
+
+	private void OnMouseEnter() {
+		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
 	}
 }
