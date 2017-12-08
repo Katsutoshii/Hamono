@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class CollectibleManager : MonoBehaviour {
 	public GameObject coinPrefab;
 
 	// Use this for initialization

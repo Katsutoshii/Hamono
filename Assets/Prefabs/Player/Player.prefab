@@ -426,7 +426,7 @@ MonoBehaviour:
   cursorTexture: {fileID: 2800000, guid: 044a019ae00db4f15bca4730f0ad6cea, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
-  SLASHING_X_DIST: 0.3
+  SLASHING_X_DIST: 0.5
   SLASHING_Y_DIST: 0.5
   SLASHING_THRESHOLD: 4
   AUTO_JUMP_FACTOR: 2

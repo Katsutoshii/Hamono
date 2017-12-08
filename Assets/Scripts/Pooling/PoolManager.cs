@@ -65,7 +65,6 @@ public class PoolManager : MonoBehaviour {
 
 		public ObjectInstance(GameObject objectInstance) {
 			gameObject = objectInstance;
-			gameObject.transform.parent = transform;
 			transform = gameObject.transform;
 			gameObject.SetActive(false);
 
