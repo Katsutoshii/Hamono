@@ -463,7 +463,7 @@ public class Player : MonoBehaviour {
 		Debug.Log("Player: Trigger enter " + other.name);
 		switch (other.name) {
 			case "EnemyHurtBox":
-				Damage(0.5f, other);
+				if (state != State.dashing && state != State.slashing) Damage(0.5f, other);
 				break;
 		}
 	}
