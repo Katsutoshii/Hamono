@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 61508419877422528}
   - component: {fileID: 114494229243757060}
   m_Layer: 11
-  m_Name: SlashHurtBox
+  m_Name: PlayerSlashHurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 61434013151631290}
   - component: {fileID: 114246282131561358}
   m_Layer: 11
-  m_Name: DashHurtBox
+  m_Name: PlayerDashHurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -424,11 +424,8 @@ MonoBehaviour:
   cursorTexture: {fileID: 2800000, guid: 044a019ae00db4f15bca4730f0ad6cea, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
-  JUMP_DELAY: 0.1
-  READY_FLOAT_TIMEOUT: 0.5
   numAfterimage: 4
   afterimageColor: {r: 0.33574829, g: 0.6135232, b: 0.8455882, a: 0}
-  MIN_ATTACK_THRESH: 0.2
 --- !u!114 &114869825246196744
 MonoBehaviour:
   m_ObjectHideFlags: 1

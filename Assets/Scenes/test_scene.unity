@@ -171,14 +171,6 @@ Prefab:
       propertyPath: health
       value: 
       objectReference: {fileID: 162929030}
-    - target: {fileID: 1280207887532674, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
-      propertyPath: m_Name
-      value: PlayerSlashHurtBox
-      objectReference: {fileID: 0}
-    - target: {fileID: 1704654179640802, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
-      propertyPath: m_Name
-      value: PlayerDashHurtBox
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
@@ -750,16 +742,6 @@ Prefab:
     - target: {fileID: 4583521384042448, guid: 0aa0d1d5e8f83c9448822babe119923d, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114067437066943898, guid: 0aa0d1d5e8f83c9448822babe119923d,
-        type: 2}
-      propertyPath: potPiecePrefab
-      value: 
-      objectReference: {fileID: 1799168926636986, guid: 0fbca03f4e8bbfc4d9e280157bcc8a53,
-        type: 2}
-    - target: {fileID: 1614836595776924, guid: 0aa0d1d5e8f83c9448822babe119923d, type: 2}
-      propertyPath: m_Name
-      value: ItemManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0aa0d1d5e8f83c9448822babe119923d, type: 2}

@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 4793397336257148}
   - component: {fileID: 114067437066943898}
   m_Layer: 0
-  m_Name: CollectibleManager
+  m_Name: ItemManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,6 +252,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 1923347793606866, guid: 8b363b572e089004b96a5158a0897986, type: 2}
+  potPiecePrefab: {fileID: 1799168926636986, guid: 0fbca03f4e8bbfc4d9e280157bcc8a53,
+    type: 2}
 --- !u!114 &114156157777855168
 MonoBehaviour:
   m_ObjectHideFlags: 1
