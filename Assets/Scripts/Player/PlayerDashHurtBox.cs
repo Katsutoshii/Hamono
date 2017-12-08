@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashHurtBox : MonoBehaviour {
+public class PlayerDashHurtBox : MonoBehaviour {
 
 	private Player player;
 	private BoxCollider2D hurtBox;

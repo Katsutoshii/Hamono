@@ -265,7 +265,7 @@ public class Player : MonoBehaviour {
 			StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
 	}
 
-	public float JUMP_DELAY;
+	private const float JUMP_DELAY = 0.1f;
 	private bool jumping = false;
 	private IEnumerator Jump(float jumpPower) {
 		jumping = true;
@@ -281,7 +281,7 @@ public class Player : MonoBehaviour {
 		yield return null;
 	}
 
-	public float READY_FLOAT_TIMEOUT;
+	private const float READY_FLOAT_TIMEOUT = 0.5f;
 	private float readyStartTime;
 	// method for when autopathing is complete and ready to make an attack
 	private void Ready() {
@@ -392,7 +392,7 @@ public class Player : MonoBehaviour {
 		UpdateAnimatorVariables();
 	}
 
-	public float MIN_ATTACK_THRESH;
+	private const float MIN_ATTACK_THRESH = 0.2f;
 	public void GetAttackType() {
 		
 		targetB = MouseWorldPosition2D();

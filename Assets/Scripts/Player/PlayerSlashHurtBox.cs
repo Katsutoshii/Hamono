@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlashHurtBox : MonoBehaviour {
+public class PlayerSlashHurtBox : MonoBehaviour {
 	private Player player;
 	private BoxCollider2D hurtBox;
 
