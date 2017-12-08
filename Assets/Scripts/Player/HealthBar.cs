@@ -18,8 +18,6 @@ public class HealthBar : MonoBehaviour
   public Sprite noHeart;
 
   public int numHearts;
-  private float maxHearts = 3f;
-  private float heartSections = 4f;
 
   // Use this for initialization
   void Start() {
@@ -37,7 +35,7 @@ public class HealthBar : MonoBehaviour
       Debug.Log("i = " + i);
       hearts[i].fillAmount = 1f;
     }
-    if ((int)healthAmount == maxHearts) {
+    if ((int)healthAmount == numHearts) {
       Debug.Log("Full health!");
       return;
     }
@@ -47,7 +45,7 @@ public class HealthBar : MonoBehaviour
     hearts[(int) healthAmount].fillAmount = healthAmount % 1f;
 
     // set the rest of the iamges to no heart
-    for (int i = (int) healthAmount + 1; i < maxHearts; i++) {
+    for (int i = (int) healthAmount + 1; i < numHearts; i++) {
       hearts[i].sprite = noHeart;
     }
   }

@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour {
   private SpriteRenderer spriteRenderer;
   public GameObject coinPrefab;
   public State state;
+  private Animator animator;
+  public AudioSource audioSource;
 
   public float walkingSpeed;
   public float distanceNearPlayer;
@@ -44,6 +46,8 @@ public class Enemy : MonoBehaviour {
     rb = gameObject.GetComponent<Rigidbody2D>();
     rb.isKinematic = false;
 
+    audioSource = GetComponent<AudioSource>();
+    animator = GetComponent<Animator>();
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     lockOnPlayer = false;
     lastTime = Time.time;
@@ -66,7 +70,7 @@ public class Enemy : MonoBehaviour {
         break;
 
       case State.damaged:
-        spriteRenderer.color = Color.red;
+        Damaged();
         break;
 
       default:
@@ -81,6 +85,22 @@ public class Enemy : MonoBehaviour {
       // randomly walk around
       RandomWalkCycle();
     }
+    UpdateAnimatorVariables();
+  }
+
+  private float damagedStartTime;
+	private void Damaged() {
+		spriteRenderer.color = Color.red;
+		
+		if (Time.time - damagedStartTime > 0.5f) {
+			spriteRenderer.color = Color.white;
+			state = State.idle;
+		}
+	}
+
+  private void UpdateAnimatorVariables() {
+    animator.SetFloat("speed", rb.velocity.magnitude);
+    animator.SetBool("damaged", state == State.damaged);
   }
 
   // handles case when enemy runs into something
@@ -98,6 +118,7 @@ public class Enemy : MonoBehaviour {
   }
 
   private void RandomWalkCycle() {
+    if (state == State.damaged) return; 
     float currentTime = Time.time;
     if (currentTime - lastTime >= 3f) {
       lastTime = currentTime;
@@ -134,25 +155,26 @@ public class Enemy : MonoBehaviour {
     } else {
       // the enemy is damaged
       player.attackResponse = Player.AttackResponse.normal;
-      if (player.state == Player.State.dashing) Damage(receiveDashDamage);
     }
   }
 
   // enemy is damaged
   private void Damage(float damage) {
-    state = State.damaged;
-    
-    healthAmount -= damage;
-    // damage done by the player
-    if (healthAmount <= 0) {
-      state = State.dead;
-      Debug.Log("Enemy: I died");
-      Death();
+    if (state != State.damaged) {
+      state = State.damaged;
+      damagedStartTime = Time.time;
+      
+      healthAmount -= damage;
+      // damage done by the player
+      if (healthAmount <= 0) {
+        Death();
+      }
     }
   }
 
   // enemy died
   private void Death() {
+    Debug.Log("enemy death!");
     // deletes the game object
     for (int i = 0; i < 4; i++)
       PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
@@ -174,6 +196,7 @@ public class Enemy : MonoBehaviour {
 
   // follows player
   private void AutoPath() {
+    if (state == State.damaged) return; 
 		rb.gravityScale = GRAVITY_SCALE;
 		float xDist = player.transform.position.x - transform.position.x;
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
@@ -202,12 +225,16 @@ public class Enemy : MonoBehaviour {
   /// <param name="other">The other Collider2D involved in this collision.</param>
   void OnTriggerEnter2D(Collider2D other)
   {
+      if (state == State.damaged || state == State.dead) return;
       Debug.Log("Trigger " + other.name + " enter!");
 
       switch (other.name) {
         case "SlashHurtBox":
           Damage(receiveSlashDamage);
-          Debug.Log("Health = " + healthAmount);
+          break;
+
+        case "DashHurtBox":
+          Damage(receiveDashDamage);
           break;
       }
   }

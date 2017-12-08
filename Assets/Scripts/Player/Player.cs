@@ -133,6 +133,7 @@ public class Player : MonoBehaviour {
 				break;
 
 			default:
+				gameObject.layer = 11;
 				rb.velocity = new Vector2(0, rb.velocity.y);
 				rb.gravityScale = GRAVITY_SCALE;
 				if (grounded) stamina.IncreaseStamina(GENERATE_STAMINA);
@@ -183,6 +184,7 @@ public class Player : MonoBehaviour {
 		animator.SetBool("prejumping", jumping && grounded);
 		animator.SetBool("ready", state == State.ready);
 		animator.SetBool("idle", state == State.idle);
+		animator.SetBool("damaged", state == State.damaged);
 	}
 
 	
@@ -302,6 +304,7 @@ public class Player : MonoBehaviour {
 	// method to handle dashing
 	// this is only called when auto pathing is completed!
 	private void Dash() {
+		gameObject.layer = 14;
 		if (stamina.isExhausted()) {
 			rb.velocity = new Vector3(0, 0, 0);
 			state = State.idle;
@@ -324,6 +327,7 @@ public class Player : MonoBehaviour {
 		// otherwise we have completed the dash
 		else {
 			rb.velocity = new Vector3(0, 0, 0);
+			gameObject.layer = 11;
 			state = State.idle;
 			attackType = AttackType.none;
 		}

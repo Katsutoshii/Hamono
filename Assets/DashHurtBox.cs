@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlashHurtBox : MonoBehaviour {
+public class DashHurtBox : MonoBehaviour {
+
 	private Player player;
 	private BoxCollider2D hurtBox;
 
@@ -15,15 +16,11 @@ public class SlashHurtBox : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (player.state == Player.State.slashing) {
+		if (player.state == Player.State.dashing) {
 			hurtBox.enabled = true;
-			
-			hurtBox.offset = new Vector2(0.3f, 0);
 		}
 		else {
-			hurtBox.offset = new Vector2(0, 0);
 			hurtBox.enabled = false;
-			
 		}
 	}
 }
