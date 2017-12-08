@@ -408,17 +408,15 @@ MonoBehaviour:
   state: 0
   attackType: 6
   attackResponse: 5
-  spriteRenderer: {fileID: 0}
   grounded: 1
   autoPathing: 0
-  targetA: {x: 0.9956711, y: 1.9547617}
-  targetB: {x: 3.5064938, y: -0.66428566}
   slashIndicator: {fileID: 0}
-  dustcloud: {fileID: 0}
   rb: {fileID: 0}
   animator: {fileID: 0}
   stamina: {fileID: 0}
   health: {fileID: 0}
+  dustCloudPrefab: {fileID: 1250923004883462, guid: 3aa9da3f77e263043a0d3c39ab39d9f1,
+    type: 2}
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
     type: 2}
   swordAfterimagePrefab: {fileID: 1497393089588702, guid: 8efcdf899027fc8499e34fd3ce0f1c74,
@@ -426,22 +424,6 @@ MonoBehaviour:
   cursorTexture: {fileID: 2800000, guid: 044a019ae00db4f15bca4730f0ad6cea, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
-  SLASHING_X_DIST: 0.5
-  SLASHING_Y_DIST: 0.5
-  SLASHING_THRESHOLD: 4
-  AUTO_JUMP_FACTOR: 2
-  TURNING_THRESHOLD: 0.1
-  KP: 5
-  GRAVITY_SCALE: 2
-  DASH_SPEED: 8
-  DASH_TARGET_THRESHOLD: 0.8
-  ATTACK_TIMEOUT: 0.5
-  AUTOPATH_TIMEOUT: 1.5
-  DASH_STAMINA_COST: 0.04
-  GENERATE_STAMINA: 0.02
-  AUTOPATH_Y_THRESHOLD: 1.5
-  AUTOPATH_Y_FACTOR: 6.25
-  JUMP_X_THRESHOLD: 3.5
   JUMP_DELAY: 0.1
   READY_FLOAT_TIMEOUT: 0.5
   numAfterimage: 4

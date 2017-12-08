@@ -38,7 +38,6 @@ public class AttackResponse : MonoBehaviour
                 break;
 
             default:
-                player.spriteRenderer.color = Color.white;
                 break;
         }
     }

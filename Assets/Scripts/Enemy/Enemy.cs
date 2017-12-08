@@ -56,15 +56,12 @@ public class Enemy : MonoBehaviour {
     direction = walkingSpeed;
   }
 
-  void Update() {
-    rb.velocity = new Vector2(direction, rb.velocity.y);
-
-    if (direction < 0)
-      transform.localScale = new Vector3(-1, 1, 1);
-    else
-      transform.localScale = new Vector3(1, 1, 1);
-    
+  void Update() {    
     switch (state) {
+      case State.walking:
+        Walk();
+        break;
+
       case State.attacking:
         Attack();
         break;
@@ -78,23 +75,35 @@ public class Enemy : MonoBehaviour {
         break;
     }
 
-    if (NearPlayer() || lockOnPlayer) {
-      // follow the player
-      AutoPath();
-     } else {
-      // randomly walk around
-      RandomWalkCycle();
-    }
     UpdateAnimatorVariables();
   }
 
+  private void Walk() {
+    rb.velocity = new Vector2(direction, rb.velocity.y);
+    spriteRenderer.color = Color.white;
+
+    if (direction < 0)
+      transform.localScale = new Vector3(-1, 1, 1);
+    else
+      transform.localScale = new Vector3(1, 1, 1);
+    if (NearPlayer() || lockOnPlayer) {
+      // follow the player
+      AutoPath();
+    } 
+    else {
+      // randomly walk around
+      RandomWalkCycle();
+    }
+  }
+  
   private float damagedStartTime;
 	private void Damaged() {
 		spriteRenderer.color = Color.red;
 		
 		if (Time.time - damagedStartTime > 0.5f) {
 			spriteRenderer.color = Color.white;
-			state = State.idle;
+
+			state = State.walking;
 		}
 	}
 
@@ -148,6 +157,13 @@ public class Enemy : MonoBehaviour {
 
   // attacks player
   private void Attack() {
+    rb.velocity = new Vector2(direction, rb.velocity.y);
+    spriteRenderer.color = Color.white;
+    if (direction < 0)
+      transform.localScale = new Vector3(-1, 1, 1);
+    else
+      transform.localScale = new Vector3(1, 1, 1);
+
     // attack the player
     if (player.state != Player.State.dashing && player.state != Player.State.slashing) {
       // the player is damaged
@@ -159,18 +175,19 @@ public class Enemy : MonoBehaviour {
   }
 
   // enemy is damaged
-  private void Damage(float damage) {
-    if (state != State.damaged) {
-      state = State.damaged;
-      damagedStartTime = Time.time;
-      
-      healthAmount -= damage;
-      // damage done by the player
-      if (healthAmount <= 0) {
-        Death();
-      }
-    }
-  }
+  private void Damage(float damageAmount, Collider2D source) {
+		if (state != State.damaged) {
+			damagedStartTime = Time.time;
+			state = State.damaged;
+			rb.AddForce( 100 * (new Vector2(transform.position.x - source.transform.position.x, 
+				transform.position.y - source.transform.position.y + 4000f)));
+
+			healthAmount -= damageAmount;
+			if ( healthAmount < 0) healthAmount = 0;
+
+			if (healthAmount == 0) Death();
+		}
+	}
 
   // enemy died
   private void Death() {
@@ -230,11 +247,11 @@ public class Enemy : MonoBehaviour {
 
       switch (other.name) {
         case "SlashHurtBox":
-          Damage(receiveSlashDamage);
+          Damage(receiveSlashDamage, other);
           break;
 
         case "DashHurtBox":
-          Damage(receiveDashDamage);
+          Damage(receiveDashDamage, other);
           break;
       }
   }

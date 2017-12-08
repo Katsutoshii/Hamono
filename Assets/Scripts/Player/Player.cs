@@ -44,40 +44,42 @@ public class Player : MonoBehaviour {
 	public AttackType attackType = AttackType.none;
 	public AttackResponse attackResponse = AttackResponse.none;
 
-	public SpriteRenderer spriteRenderer;
+	private SpriteRenderer spriteRenderer;
 
 	public bool grounded;
 	public bool autoPathing;
 
-	public Vector2 targetA; 	// start point of a slash
-	public Vector2 targetB;		// end point of a slash
+	private Vector2 targetA; 	// start point of a slash
+	private Vector2 targetB;		// end point of a slash
 	public SlashIndicator slashIndicator;
-	public Dustcloud dustcloud;
 	public Rigidbody2D rb;
 	public Animator animator;
+
 	public StaminaBar stamina;
 	public HealthBar health;
+
+	public GameObject dustCloudPrefab;
 	public GameObject afterimagePrefab;
 	public GameObject swordAfterimagePrefab;
+
 	public Texture2D cursorTexture;
 	public CursorMode cursorMode;
 	public Vector2 hotSpot;
 	private AudioSource audioSource;
 
 	// constants
-	public float SLASHING_X_DIST;
-	public float SLASHING_Y_DIST;
-	public float SLASHING_THRESHOLD;
-	public float AUTO_JUMP_FACTOR;
-	public float TURNING_THRESHOLD;
-	public float KP;
-	public float GRAVITY_SCALE;
-	public float DASH_SPEED;
-	public float DASH_TARGET_THRESHOLD;
-	public float ATTACK_TIMEOUT;
-	public float AUTOPATH_TIMEOUT;
-	public float DASH_STAMINA_COST;
-	public float GENERATE_STAMINA;
+	private const float SLASHING_X_DIST = 1.5f;
+	private const float SLASHING_Y_DIST = 0.5f;
+	public const float SLASHING_THRESHOLD = 3.5f;
+	private const float TURNING_THRESHOLD = 0.1f;
+	public const float KP = 4f;
+	private const float GRAVITY_SCALE = 2f;
+	private const float DASH_SPEED = 8f;
+	private const float DASH_TARGET_THRESHOLD = 0.8f;
+	private const float ATTACK_TIMEOUT = 0.5f;
+	private const float AUTOPATH_TIMEOUT = 1.5f;
+	private const float DASH_STAMINA_COST = 0.04f;
+	private const float GENERATE_STAMINA = 0.02f;
 
 
 	private float attackStartTime;
@@ -95,7 +97,7 @@ public class Player : MonoBehaviour {
 		state = State.idle;
 		attackType = AttackType.none;
 
-
+		PoolManager.instance.CreatePool(dustCloudPrefab, 1);
 		PoolManager.instance.CreatePool(afterimagePrefab, 10);
 		PoolManager.instance.CreatePool(swordAfterimagePrefab, 20);
 
@@ -185,6 +187,7 @@ public class Player : MonoBehaviour {
 		animator.SetBool("ready", state == State.ready);
 		animator.SetBool("idle", state == State.idle);
 		animator.SetBool("damaged", state == State.damaged);
+		animator.SetBool("dead", state == State.dead);
 	}
 
 	
@@ -208,9 +211,9 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	public float AUTOPATH_Y_THRESHOLD; 
-	public float AUTOPATH_Y_FACTOR;
-	public float JUMP_X_THRESHOLD;
+	private const float AUTOPATH_Y_THRESHOLD = 1.5f; 
+	private const float AUTOPATH_Y_FACTOR = 6.25f;
+	private const float JUMP_X_THRESHOLD = 3.5f;
 
 	// method to handle the autopathing
 	private void AutoPath() {
@@ -221,13 +224,15 @@ public class Player : MonoBehaviour {
 
 		// timeout if the player
 		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT) {
-			Debug.Log("timeout for autopath");
 			state = State.idle;
 			rb.velocity = new Vector2(0, 0);
 			return;
 		}
 
-		bool positionReached = Mathf.Abs(xDist) < SLASHING_X_DIST && 		// we are close enough in the x direciton
+		float tempSlashingXDist = SLASHING_X_DIST;
+		if (!Input.GetMouseButton(0) && attackType == AttackType.none) tempSlashingXDist /= 3;
+
+		bool positionReached = Mathf.Abs(xDist) < tempSlashingXDist && 		// we are close enough in the x direciton
 			(Mathf.Abs(yDist) < SLASHING_Y_DIST || 							// and we are close enough on the y
 			(Mathf.Abs(yDist) < AUTOPATH_Y_THRESHOLD && grounded));			// OR we are gorunded and meet the grounded thresh
 
@@ -250,13 +255,11 @@ public class Player : MonoBehaviour {
 			return;
 		}
 
-		// fixes overshooting
-		if (Mathf.Abs(xDist) < SLASHING_X_DIST)
-			rb.velocity = new Vector2(0, rb.velocity.y);
-
-		// otherwise, if we need to move in the x or y direction, do so
-		if (Mathf.Abs(xDist) >= SLASHING_X_DIST)
+		if (Mathf.Abs(xDist) >= tempSlashingXDist) 
 			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
+		else if (Mathf.Abs(xDist) <= 0.05) {
+			rb.velocity = new Vector2(0, rb.velocity.y);
+		}
 
 		if (yDist >= AUTOPATH_Y_THRESHOLD && xDist <= JUMP_X_THRESHOLD && grounded)
 			StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
@@ -270,7 +273,7 @@ public class Player : MonoBehaviour {
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		
 		yield return new WaitForSeconds(JUMP_DELAY);
-		dustcloud.MakeCloud(jumpPos);
+		PoolManager.instance.ReuseObject(dustCloudPrefab, jumpPos, transform.rotation, transform.localScale);
 		rb.velocity = Vector2.up * jumpPower;
 		yield return new WaitForSeconds(JUMP_DELAY);
 		
@@ -282,7 +285,6 @@ public class Player : MonoBehaviour {
 	private float readyStartTime;
 	// method for when autopathing is complete and ready to make an attack
 	private void Ready() {
-		Debug.Log("Ready: attack type = " + attackType.ToString());
 		
 		rb.velocity = new Vector3(0, 0);
 		Attack();	// will do nothing unless an attack is set
@@ -293,7 +295,6 @@ public class Player : MonoBehaviour {
 			(Time.time - readyStartTime > READY_FLOAT_TIMEOUT && !grounded) // time out if floating
 			)) {
 
-			Debug.Log("Cancel ready!");
 			state = State.idle;
 			attackType = AttackType.none;
 		}
@@ -365,7 +366,6 @@ public class Player : MonoBehaviour {
 
 	// method to perform the slash
 	private void Attack() {
-		Debug.Log("Checking attack!");
 		attackStartTime = Time.time;
 
 		switch (attackType) {
@@ -427,7 +427,6 @@ public class Player : MonoBehaviour {
 
 		// check if the slash is over by seeing if the current playing animation is idle
 		if (!(animator.GetBool("slashing") || animator.GetBool("upSlashing") || animator.GetBool("downSlashing"))) {
-			Debug.Log("Slash over!");
 			state = State.idle;
 			attackType = AttackType.none;
 		}
@@ -449,7 +448,6 @@ public class Player : MonoBehaviour {
 	/// <param name="other">The Collision2D data associated with this collision.</param>
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		Debug.Log("Player: Collision enter " + other.collider.name);
 		switch (other.collider.name.Substring(0, 4)) {
 			case "Coin":
 				coinCount++;
@@ -464,7 +462,6 @@ public class Player : MonoBehaviour {
 	/// <param name="other">The other Collider involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log("Player: Trigger enter " + other.name);
 		switch (other.name) {
 			case "EnemyHurtBox":
 				if (state != State.dashing && state != State.slashing) Damage(0.5f, other);
@@ -476,7 +473,8 @@ public class Player : MonoBehaviour {
 		if (state != State.damaged) {
 			damagedStartTime = Time.time;
 			state = State.damaged;
-			rb.AddForce(Vector2.up * 20);
+			rb.AddForce( 200 * (new Vector2(transform.position.x - source.transform.position.x, 
+				transform.position.y - source.transform.position.y + 1.5f)));
 
 			healthAmount -= damageAmount;
 			if ( healthAmount < 0) healthAmount = 0;
@@ -498,5 +496,6 @@ public class Player : MonoBehaviour {
 
 	private void Death() {
 		Debug.Log("Player died!");
+		state = State.dead;
 	}
 }

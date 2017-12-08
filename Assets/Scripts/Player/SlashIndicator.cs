@@ -40,7 +40,7 @@ public class SlashIndicator : MonoBehaviour {
 			Vector3 clickWorldPoint = ScreenToWorldPoint(Input.mousePosition);
 			Vector3 targetAScreenPoint = Camera.main.WorldToScreenPoint(targetA);
 
-			if (Vector2.Distance(targetA, clickWorldPoint) > player.SLASHING_THRESHOLD)
+			if (Vector2.Distance(targetA, clickWorldPoint) > Player.SLASHING_THRESHOLD)
 				spriteRenderer.color = Color.blue;
 			else spriteRenderer.color = Color.red;
 
