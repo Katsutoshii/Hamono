@@ -37,16 +37,17 @@ public class SlashIndicator : MonoBehaviour {
 
 		// when drawing, scale the UI indicator based on the start position and the current mouse position
 		if (drawing) {
-			Vector3 clickWorldPoint =ScreenToWorldPoint(Input.mousePosition);
+			Vector3 clickWorldPoint = ScreenToWorldPoint(Input.mousePosition);
+			Vector3 targetAScreenPoint = Camera.main.WorldToScreenPoint(targetA);
 
 			if (Vector2.Distance(targetA, clickWorldPoint) > player.SLASHING_THRESHOLD)
 				spriteRenderer.color = Color.blue;
 			else spriteRenderer.color = Color.red;
 
 			float width = Mathf.Sqrt(
-				(clickWorldPoint.x - targetA.x) * (clickWorldPoint.x - targetA.x)
-				 + (clickWorldPoint.y - targetA.y) * (clickWorldPoint.y - targetA.y)
-			) * 5500 / spriteRenderer.sprite.rect.width;
+				(Input.mousePosition.x - targetAScreenPoint.x) * (Input.mousePosition.x - targetAScreenPoint.x)
+				 + (Input.mousePosition.y - targetAScreenPoint.y) * (Input.mousePosition.y - targetAScreenPoint.y)
+			) * 100 / spriteRenderer.sprite.rect.width;
 				
 			transform.localScale = new Vector3(width, 2f, 2f);
 
