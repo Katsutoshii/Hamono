@@ -56,6 +56,7 @@ public class Player : MonoBehaviour {
 	public Rigidbody2D rb;
 	public Animator animator;
 	public StaminaBar stamina;
+	public HealthBar health;
 	public GameObject afterimagePrefab;
 	public GameObject swordAfterimagePrefab;
 	public Texture2D cursorTexture;
@@ -85,6 +86,8 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = gameObject.GetComponent<Rigidbody2D>();
+		rb.isKinematic = false;
+
     	animator = gameObject.GetComponent<Animator>();
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		audioSource = gameObject.GetComponent<AudioSource>();
@@ -101,7 +104,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 	
-		Controls();
+		if (state != State.damaged) Controls();
 		if (grounded) stamina.IncreaseStamina(GENERATE_STAMINA);
 
 		// actions based on the state
@@ -118,6 +121,10 @@ public class Player : MonoBehaviour {
 			case State.dashing:
 				Dash();
 				SpawnAfterimage();
+				break;
+
+			case State.damaged:
+				Damaged();
 				break;
 
 			case State.slashing:
@@ -438,11 +445,54 @@ public class Player : MonoBehaviour {
 	/// <param name="other">The Collision2D data associated with this collision.</param>
 	void OnCollisionEnter2D(Collision2D other)
 	{
+		Debug.Log("Player: Collision enter " + other.collider.name);
 		switch (other.collider.name.Substring(0, 4)) {
 			case "Coin":
 				coinCount++;
 				cointCountText.text = "" + coinCount;
 				break;
 		}
+	}
+
+	/// <summary>
+	/// OnTriggerEnter is called when the Collider other enters the trigger.
+	/// </summary>
+	/// <param name="other">The other Collider involved in this collision.</param>
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		Debug.Log("Player: Trigger enter " + other.name);
+		switch (other.name) {
+			case "EnemyHurtBox":
+				Damage(0.5f, other);
+				break;
+		}
+	}
+
+	private void Damage(float damageAmount, Collider2D source) {
+		if (state != State.damaged) {
+			damagedStartTime = Time.time;
+			state = State.damaged;
+			rb.AddForce(Vector2.up * 20);
+
+			healthAmount -= damageAmount;
+			if ( healthAmount < 0) healthAmount = 0;
+
+			if (healthAmount == 0) Death();
+			health.HandleHealth(healthAmount);
+		}
+	}
+
+	private float damagedStartTime;
+	private void Damaged() {
+		spriteRenderer.color = Color.red;
+		
+		if (Time.time - damagedStartTime > 0.5f) {
+			spriteRenderer.color = Color.white;
+			state = State.idle;
+		}
+	}
+
+	private void Death() {
+		Debug.Log("Player died!");
 	}
 }

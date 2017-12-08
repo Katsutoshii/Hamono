@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 95266908316134988}
   - component: {fileID: 114638767232979100}
   - component: {fileID: 82650513785808734}
+  - component: {fileID: 114869825246196744}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -185,7 +186,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1486475674207076}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: db9865676f10108478255e3a2948c22c, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -334,14 +335,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 10
   comboCount: 0
+  healthAmount: 3
   coinCount: 0
   cointCountText: {fileID: 0}
-  completedSpeech: 0
   state: 0
   attackType: 6
   attackResponse: 5
-  NPCText: {fileID: 0}
-  SpeechText: {fileID: 0}
   spriteRenderer: {fileID: 0}
   grounded: 1
   autoPathing: 0
@@ -352,11 +351,12 @@ MonoBehaviour:
   rb: {fileID: 0}
   animator: {fileID: 0}
   stamina: {fileID: 0}
+  health: {fileID: 0}
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
     type: 2}
   swordAfterimagePrefab: {fileID: 1497393089588702, guid: 8efcdf899027fc8499e34fd3ce0f1c74,
     type: 2}
-  cursorTexture: {fileID: 0}
+  cursorTexture: {fileID: 2800000, guid: 044a019ae00db4f15bca4730f0ad6cea, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
   SLASHING_X_DIST: 0.3
@@ -380,6 +380,17 @@ MonoBehaviour:
   numAfterimage: 4
   afterimageColor: {r: 0.33574829, g: 0.6135232, b: 0.8455882, a: 0}
   MIN_ATTACK_THRESH: 0.2
+--- !u!114 &114869825246196744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1486475674207076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4bf8e4b6ad504cc6bdc87dd042248f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212073600475020504
 SpriteRenderer:
   m_ObjectHideFlags: 1

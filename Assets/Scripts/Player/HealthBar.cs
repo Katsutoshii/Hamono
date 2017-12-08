@@ -8,63 +8,47 @@ public class HealthBar : MonoBehaviour
 
   [SerializeField]
   public float fillAmount;
-
-  private Player player;
   private bool exhausted;
 
+  private Image[] hearts;
   private Image firstHeart;
   private Image secondHeart;
   private Image thirdHeart;
 
   public Sprite noHeart;
 
+  public int numHearts;
   private float maxHearts = 3f;
   private float heartSections = 4f;
 
   // Use this for initialization
   void Start() {
-    player = GameObject.Find("Player").GetComponent<Player>();
-    firstHeart = GameObject.Find("First Heart").GetComponent<Image>();
-    secondHeart = GameObject.Find("Second Heart").GetComponent<Image>();
-    thirdHeart = GameObject.Find("Third Heart").GetComponent<Image>();
+    hearts = GetComponentsInChildren<Image>();
+    numHearts = hearts.Length;
+
+    for (int i = 0; i < hearts.Length; i++)
+      Debug.Log("heart " + i + " = " + hearts[i]);;
   }
 
-  void Update() {
-    HandleHealth();
-  }
+  public void HandleHealth(float healthAmount) {
+    exhausted = false;
+    Debug.Log("mod check: " + (healthAmount - healthAmount % 1f));
+    for (int i = 0; i < (int) (healthAmount - healthAmount % 1f); i++) {
+      Debug.Log("i = " + i);
+      hearts[i].fillAmount = 1f;
+    }
+    if ((int)healthAmount == maxHearts) {
+      Debug.Log("Full health!");
+      return;
+    }
 
-  private void HandleHealth() {
-    float healthAmount = player.healthAmount / maxHearts;
-    this.exhausted = false;
-    
-    if (healthAmount >= 3) {
-      // handle all heart to be full
-    } else if (healthAmount >= 2) {
-      float roundingFigure = heartSections * (healthAmount - 2);
-      this.thirdHeart.fillAmount = Mathf.Round(roundingFigure) / heartSections;
-    } else if (healthAmount >= 1) {
-      // change third heart to be empty - black dot
-      float roundingFigure = heartSections * (healthAmount - 1);
-      this.thirdHeart.sprite = noHeart;
-      this.thirdHeart.fillAmount = 1f;
-      this.secondHeart.fillAmount = Mathf.Round(roundingFigure) / heartSections;
-    } else if (healthAmount > 0) {
-      // change the third and second hearts to be empty - black dot
-      float roundingFigure = heartSections * healthAmount;
-      this.secondHeart.sprite = noHeart;
-      this.secondHeart.fillAmount = 1f;
-      this.thirdHeart.sprite = noHeart;
-      this.thirdHeart.fillAmount = 1f;
-      this.firstHeart.fillAmount = Mathf.Round(roundingFigure) / heartSections;
-    } else {
-      // player is dead
-      this.firstHeart.sprite = noHeart;
-      this.firstHeart.fillAmount = 1f;
-      this.secondHeart.sprite = noHeart;
-      this.secondHeart.fillAmount = 1f;
-      this.thirdHeart.sprite = noHeart;
-      this.thirdHeart.fillAmount = 1f;
-      this.exhausted = true;
+    // if we have a fractional amount of health left, set the fill amount
+    Debug.Log("Setting heart #" + (int) healthAmount + " to fill amount " + healthAmount %1f);
+    hearts[(int) healthAmount].fillAmount = healthAmount % 1f;
+
+    // set the rest of the iamges to no heart
+    for (int i = (int) healthAmount + 1; i < maxHearts; i++) {
+      hearts[i].sprite = noHeart;
     }
   }
 }

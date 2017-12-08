@@ -20,22 +20,30 @@ public class AttackResponse : MonoBehaviour
         switch (player.attackResponse) {
             case Player.AttackResponse.normal:
                 break;
+
             case Player.AttackResponse.strong:
                 break;
+
             case Player.AttackResponse.blocked:
                 break;
+
             case Player.AttackResponse.missed:
+                /*
                 player.spriteRenderer.color = Color.red;
                 Damaged();
+                */
                 break;
+
             case Player.AttackResponse.combo:
                 break;
+
             default:
                 player.spriteRenderer.color = Color.white;
                 break;
         }
     }
 
+    /*
     private void Damaged() {
         Debug.Log("Player damaged: " + player.healthAmount);
         player.attackResponse = Player.AttackResponse.none;
@@ -46,6 +54,7 @@ public class AttackResponse : MonoBehaviour
         }
         player.healthAmount -= .2f;
     }
+    */
 
     private void Death() {
         // notify the user that the player died

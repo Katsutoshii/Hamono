@@ -42,6 +42,8 @@ public class Enemy : MonoBehaviour {
 
   void Start() {
     rb = gameObject.GetComponent<Rigidbody2D>();
+    rb.isKinematic = false;
+
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     lockOnPlayer = false;
     lastTime = Time.time;
@@ -85,7 +87,7 @@ public class Enemy : MonoBehaviour {
   void OnCollisionEnter2D(Collision2D collision) {
       Collider2D collider = collision.collider;
       
-      Debug.Log("collider: " + collider);
+      Debug.Log("Enemy: collider: " + collider);
 
       switch (collider.gameObject.layer) {
         case 8: // we hit a wall, so turn around
