@@ -95,7 +95,7 @@ public class Enemy : MonoBehaviour {
       RandomWalkCycle();
     }
   }
-  
+
   private float damagedStartTime;
 	private void Damaged() {
 		spriteRenderer.color = Color.red;
@@ -246,11 +246,11 @@ public class Enemy : MonoBehaviour {
       Debug.Log("Trigger " + other.name + " enter!");
 
       switch (other.name) {
-        case "SlashHurtBox":
+        case "PlayerSlashHurtBox":
           Damage(receiveSlashDamage, other);
           break;
 
-        case "DashHurtBox":
+        case "PlayerDashHurtBox":
           Damage(receiveDashDamage, other);
           break;
       }

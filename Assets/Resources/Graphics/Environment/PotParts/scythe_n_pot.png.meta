@@ -1,14 +1,23 @@
 fileFormatVersion: 2
-guid: c12f94add8dc84aba841325b009ccc2c
-timeCreated: 1512349052
+guid: 222e81ff0d8a2ee4680796ec5bda395d
+timeCreated: 1512757410
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: kiri_jump_down_2_0
-    21300002: kiri_jump_down_2_1
-    21300004: kiri_jump_down_2_2
-    21300006: kiri_jump_down_2_3
-    21300008: kiri_jump_down_2_4
+    21300000: scythe_n_pot_0
+    21300002: scythe_n_pot_1
+    21300004: scythe_n_pot_2
+    21300006: scythe_n_pot_3
+    21300008: scythe_n_pot_4
+    21300010: scythe_n_pot_5
+    21300012: scythe_n_pot_6
+    21300014: scythe_n_pot_7
+    21300016: scythe_n_pot_8
+    21300018: scythe_n_pot_9
+    21300020: scythe_n_pot_10
+    21300022: scythe_n_pot_11
+    21300024: scythe_n_pot_12
+    21300026: scythe_n_pot_13
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -36,7 +45,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -1
     wrapU: 1
@@ -85,71 +94,141 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kiri_jump_down_2_0
+      name: scythe_n_pot_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 124
-        height: 144
+        x: 29
+        y: 42
+        width: 16
+        height: 21
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: kiri_jump_down_2_1
+      name: scythe_n_pot_2
       rect:
         serializedVersion: 2
-        x: 124
-        y: 0
-        width: 124
-        height: 144
+        x: 47
+        y: 42
+        width: 14
+        height: 21
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: kiri_jump_down_2_2
+      name: scythe_n_pot_3
       rect:
         serializedVersion: 2
-        x: 248
-        y: 0
-        width: 124
-        height: 144
+        x: 62
+        y: 56
+        width: 8
+        height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: kiri_jump_down_2_3
+      name: scythe_n_pot_4
       rect:
         serializedVersion: 2
-        x: 372
-        y: 0
-        width: 124
-        height: 144
+        x: 75
+        y: 51
+        width: 8
+        height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: kiri_jump_down_2_4
+      name: scythe_n_pot_5
       rect:
         serializedVersion: 2
-        x: 496
-        y: 0
-        width: 124
-        height: 144
+        x: 84
+        y: 55
+        width: 5
+        height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: scythe_n_pot_7
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 49
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: scythe_n_pot_9
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 46
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: scythe_n_pot_10
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 45
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: scythe_n_pot_11
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 42
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: scythe_n_pot_12
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 44
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
