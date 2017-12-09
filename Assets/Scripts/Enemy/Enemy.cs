@@ -58,10 +58,6 @@ public class Enemy : MonoBehaviour {
 
   void Update() {    
     switch (state) {
-      case State.walking:
-        Walk();
-        break;
-
       case State.attacking:
         Attack();
         break;
@@ -72,6 +68,7 @@ public class Enemy : MonoBehaviour {
 
       default:
         spriteRenderer.color = Color.white;
+        Walk();
         break;
     }
 
