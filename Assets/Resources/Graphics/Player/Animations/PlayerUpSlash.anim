@@ -81,7 +81,7 @@ AnimationClip:
   - time: 0.16666667
     functionName: PlayOneShot
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: cb2c10e29f357439786f025c69ab51e3,
+    objectReferenceParameter: {fileID: 8300000, guid: 4a377139e936b264d95314c48735be92,
       type: 3}
     floatParameter: 0
     intParameter: 0
