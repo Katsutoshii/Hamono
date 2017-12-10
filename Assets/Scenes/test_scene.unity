@@ -121,11 +121,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 10.83
       objectReference: {fileID: 0}
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_LocalPosition.z
@@ -295,6 +295,14 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1799412041967056, guid: abd2a89ff8084e446aecd12da3051b49, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648057588988020, guid: abd2a89ff8084e446aecd12da3051b49, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abd2a89ff8084e446aecd12da3051b49, type: 2}
   m_IsPrefabParent: 0
@@ -307,11 +315,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4688960186873004, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -14.25
+      value: -1.31
       objectReference: {fileID: 0}
     - target: {fileID: 4688960186873004, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.53
+      value: -0.38
       objectReference: {fileID: 0}
     - target: {fileID: 4688960186873004, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -441,6 +449,10 @@ Prefab:
     - target: {fileID: 1840072878634930, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
       propertyPath: m_Name
       value: CeramicPot (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840072878634930, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
@@ -636,6 +648,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 82072894372962322, guid: 0aa0d1d5e8f83c9448822babe119923d,
+        type: 2}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0aa0d1d5e8f83c9448822babe119923d, type: 2}
   m_IsPrefabParent: 0
@@ -687,6 +704,10 @@ Prefab:
     - target: {fileID: 1840072878634930, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
       propertyPath: m_Name
       value: CeramicPot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840072878634930, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
@@ -873,6 +894,10 @@ Prefab:
     - target: {fileID: 1840072878634930, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
       propertyPath: m_Name
       value: CeramicPot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840072878634930, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
