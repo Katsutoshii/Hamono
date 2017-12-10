@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0002d7e95ef1c1e4f818e32e3d9806a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enterSound: {fileID: 8300000, guid: e2dc6c6c81e8c1640a6eb7d22b58f426, type: 3}
+  enterSound: {fileID: 8300000, guid: c0156cfb7fcee47ea9f8973d67da4b95, type: 3}
 --- !u!1101 &1101083912212912998
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
