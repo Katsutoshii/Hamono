@@ -49,7 +49,7 @@ public class NPC : MonoBehaviour {
 			NPCText = Instantiate(SpeechText);
 			NPCText.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, 0);
 		}
-		NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
+		NPCTextChild = NPCText.transform.GetChild(1).gameObject.GetComponent<TextTyper>();
 		NPCTextChild.NPC = gameObject.GetComponent<NPC>();
 		Debug.Log("completed speech?: " + completedSpeech);
 		if (completedSpeech) {
