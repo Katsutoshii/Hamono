@@ -661,6 +661,11 @@ Prefab:
       propertyPath: m_Name
       value: CeramicPot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 82205144438085874, guid: 139b318ece4cec2449221b6aa168e81f,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: cff88094060014a8a883b664fe88d725, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
   m_IsPrefabParent: 0
@@ -1171,6 +1176,11 @@ Prefab:
       propertyPath: m_Name
       value: CeramicPot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 82205144438085874, guid: 139b318ece4cec2449221b6aa168e81f,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: cff88094060014a8a883b664fe88d725, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
   m_IsPrefabParent: 0
@@ -1442,6 +1452,11 @@ Prefab:
       propertyPath: m_Name
       value: CeramicPot
       objectReference: {fileID: 0}
+    - target: {fileID: 82205144438085874, guid: 139b318ece4cec2449221b6aa168e81f,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: cff88094060014a8a883b664fe88d725, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
   m_IsPrefabParent: 0
