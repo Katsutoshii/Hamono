@@ -79,10 +79,10 @@ public class Enemy : MonoBehaviour {
     rb.velocity = new Vector2(direction, rb.velocity.y);
     spriteRenderer.color = Color.white;
 
-    if (direction < 0)
-      transform.localScale = new Vector3(-1, 1, 1);
-    else
-      transform.localScale = new Vector3(1, 1, 1);
+    // if (direction < 0)
+    //   transform.localScale = new Vector3(-1, 1, 1);
+    // else
+    //   transform.localScale = new Vector3(1, 1, 1);
     if (NearPlayer() || lockOnPlayer) {
       // follow the player
       AutoPath();
@@ -137,8 +137,10 @@ public class Enemy : MonoBehaviour {
         state = State.idle;
       } else {
         float directionScale = directionOptions[random.Next(directionOptions.Length)];
+        Debug.Log("the direction scale: " + directionScale);
         direction = walkingSpeed * directionScale;
         state = State.walking;
+        transform.localScale = new Vector3(directionScale, 1, 1);
       }
     }
   }
