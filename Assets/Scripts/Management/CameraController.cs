@@ -24,6 +24,7 @@ public class CameraController : MonoBehaviour {
         
         following = !player.slashIndicator.drawing;
         // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
-        if (following) transform.position = Vector3.SmoothDamp(transform.position, player.transform.position + offset, ref velocity, smoothTime);
+        if (following) transform.position = Vector3.SmoothDamp(transform.position, 
+            player.transform.position + -10f * new Vector3(0, 0, 1), ref velocity, smoothTime);
     }
 }
