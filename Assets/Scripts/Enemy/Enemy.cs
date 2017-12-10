@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour {
   public float healthAmount;
   public float receiveSlashDamage;
   public float receiveDashDamage;
+  public float receiveSlashKnockback;
+  public float receiveDashKnockback;
 
   public enum State {
     idle,
@@ -103,9 +105,11 @@ public class Enemy : MonoBehaviour {
   private float damagedStartTime;
 	private void Damaged() {
 		spriteRenderer.color = Color.red;
+    gameObject.layer = LayerMask.NameToLayer("Default");
 		
 		if (Time.time - damagedStartTime > 0.5f) {
 			spriteRenderer.color = Color.white;
+      gameObject.layer = LayerMask.NameToLayer("Enemies");
 
 			state = State.walking;
 		}
@@ -202,8 +206,7 @@ public class Enemy : MonoBehaviour {
     }
   }
 
-  private float receiveSlashKnockback = 2f;
-  private float receiveDashKnockback = 1f;
+  
   /// <summary>
   /// Sent when another object enters a trigger collider attached to this
   /// object (2D physics only).
