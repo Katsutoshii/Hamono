@@ -7,7 +7,7 @@ public class NPC : MonoBehaviour {
 
 	private Player player;
 	
-	public GameObject NPCText;
+	private GameObject NPCText;
 	public GameObject SpeechText;
 	
 	public HashSet<GameObject> allSpeech;
@@ -63,7 +63,7 @@ public class NPC : MonoBehaviour {
 			// starting converstation
 			player.state = Player.State.talking;
 			allSpeech.Add(NPCText);
-			NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me. \n I'm talking for a really long time. \n You probably find this extremely annoying.");
+			NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me.\n I'm talking for a really long time.\n You probably find this extremely annoying.");
 			completedSpeech = false;
 		} else if (!completedSpeech && player.state == Player.State.talking) {
 			NPCTextChild.Skip();
