@@ -85,7 +85,7 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: 0.083333336
-    functionName: Jump
+    functionName: PlayOneShot
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: cad21e75024cdf94f98ab816a699ff32,
       type: 3}

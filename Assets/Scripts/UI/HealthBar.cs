@@ -8,7 +8,6 @@ public class HealthBar : MonoBehaviour
 
   [SerializeField]
   public float fillAmount;
-  private bool exhausted;
 
   private Image[] hearts;
   private Image firstHeart;
@@ -29,7 +28,6 @@ public class HealthBar : MonoBehaviour
   }
 
   public void HandleHealth(float healthAmount) {
-    exhausted = false;
     Debug.Log("mod check: " + (healthAmount - healthAmount % 1f));
     for (int i = 0; i < (int) (healthAmount - healthAmount % 1f); i++) {
       Debug.Log("i = " + i);
