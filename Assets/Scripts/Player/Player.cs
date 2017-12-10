@@ -68,8 +68,6 @@ public class Player : MonoBehaviour {
 	private AudioSource audioSource;
 
 	// constants
-	private const float SLASHING_X_DIST = 1.5f;
-	private const float SLASHING_Y_DIST = 0.5f;
 	public const float SLASHING_THRESHOLD = 3.5f;
 	private const float TURNING_THRESHOLD = 0.1f;
 	public const float KP = 4f;
@@ -141,8 +139,8 @@ public class Player : MonoBehaviour {
 				if (grounded) stamina.IncreaseStamina(GENERATE_STAMINA);
 				break;
 		}		
-
-		RotateSpriteForVelocity();
+		
+		if (state != State.damaged) RotateSpriteForVelocity();
 		if(state != State.dashing) LimitVelocity();
 
 		UpdateAnimatorVariables();
@@ -211,6 +209,9 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+
+	private const float SLASHING_X_DIST = 1f;
+	private const float SLASHING_Y_DIST = 0.5f;
 	private const float AUTOPATH_Y_THRESHOLD = 1.5f; 
 	private const float AUTOPATH_Y_FACTOR = 6.25f;
 	private const float JUMP_X_THRESHOLD = 3.5f;
@@ -262,8 +263,6 @@ public class Player : MonoBehaviour {
 		}
 
 		if (yDist >= AUTOPATH_Y_THRESHOLD && xDist <= JUMP_X_THRESHOLD && grounded) {
-			Debug.Log("yDist = " + yDist);
-			Debug.Log("AUTOPATH_Y_THRESHOLD = " + AUTOPATH_Y_THRESHOLD);
 			StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
 		}
 	}
@@ -271,7 +270,6 @@ public class Player : MonoBehaviour {
 	private const float JUMP_DELAY = 0.1f;
 	private bool jumping = false;
 	private IEnumerator Jump(float jumpPower) {
-		Debug.Log("Jump");
 		jumping = true;
 		rb.velocity = Vector2.zero;
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -469,24 +467,23 @@ public class Player : MonoBehaviour {
 	{
 		switch (other.name) {
 			case "EnemyHurtBox":
-				if (state != State.dashing && state != State.slashing) Damage(0.5f, 2f, other);
+				if (state != State.dashing && state != State.slashing && state != State.damaged) Damage(0.5f, 2f, other);
 				break;
 		}
 	}
 
 	private void Damage(float damageAmount, float knockback, Collider2D source) {
-		if (state != State.damaged) {
-			damagedStartTime = Time.time;
-			state = State.damaged;
-			rb.velocity = 5 * new Vector2(transform.position.x - source.transform.position.x, 
-				transform.position.y - source.transform.position.y + 1f);
+		Debug.Log("Damaged");
+		damagedStartTime = Time.time;
+		state = State.damaged;
+		rb.velocity = 5 * new Vector2(transform.position.x - source.transform.position.x, 
+			transform.position.y - source.transform.position.y + 1f);
 
-			healthAmount -= damageAmount;
-			if ( healthAmount < 0) healthAmount = 0;
+		healthAmount -= damageAmount;
+		if ( healthAmount < 0) healthAmount = 0;
 
-			if (healthAmount == 0) Death();
-			health.HandleHealth(healthAmount);
-		}
+		if (healthAmount == 0) Death();
+		health.HandleHealth(healthAmount);
 	}
 
 	private float damagedStartTime;

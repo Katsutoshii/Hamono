@@ -25,7 +25,6 @@ public class Pot : MonoBehaviour {
 	/// </summary>
 	/// <param name="other">The other Collider2D involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log("On trigger enter");
 		switch (other.name) {
 			case "PlayerSlashHurtBox":
 				Break();
@@ -39,7 +38,6 @@ public class Pot : MonoBehaviour {
 
 	private void Break() {
 		audioSource.Play();
-		Debug.Log("on break");
 		for (int i = 0; i < numCoins; i++) 
 			PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), RandomOffset(transform.localEulerAngles), coinPrefab.transform.localScale);
 

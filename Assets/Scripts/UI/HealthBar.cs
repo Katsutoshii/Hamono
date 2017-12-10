@@ -22,9 +22,6 @@ public class HealthBar : MonoBehaviour
   void Start() {
     hearts = GetComponentsInChildren<Image>();
     numHearts = hearts.Length;
-
-    for (int i = 0; i < hearts.Length; i++)
-      Debug.Log("heart " + i + " = " + hearts[i]);;
   }
 
   public void HandleHealth(float healthAmount) {

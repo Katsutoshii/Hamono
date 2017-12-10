@@ -57,8 +57,7 @@ public class Enemy : MonoBehaviour {
 
   }
 
-  void Update() {    
-    RotateBasedOnDirection();
+  void Update() {
     CheckForPlayerProximity();
 
     switch (state) {
@@ -71,7 +70,6 @@ public class Enemy : MonoBehaviour {
         break;
 
       case State.walking:
-        spriteRenderer.color = Color.white;
         Walk();
         break;
     }
@@ -83,13 +81,13 @@ public class Enemy : MonoBehaviour {
   public float randomChangetime;
   private IEnumerator ChangeRandomWalkCycle() {
     while( true) {
-      Debug.Log("Changing direction");
       randomWalkToRight = Random.Range(0, 1f) >= 0.5f;
       yield return new WaitForSeconds(randomChangetime);
     }
   }
 
   private void Walk() {
+    RotateBasedOnDirection();
     spriteRenderer.color = Color.white;
 
     if (lockOnPlayer) {
@@ -105,7 +103,7 @@ public class Enemy : MonoBehaviour {
   private float damagedStartTime;
 	private void Damaged() {
 		spriteRenderer.color = Color.red;
-    gameObject.layer = LayerMask.NameToLayer("Default");
+    gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
 		
 		if (Time.time - damagedStartTime > 0.5f) {
 			spriteRenderer.color = Color.white;
@@ -123,8 +121,6 @@ public class Enemy : MonoBehaviour {
   // handles case when enemy runs into something
   void OnCollisionEnter2D(Collision2D collision) {
       Collider2D collider = collision.collider;
-      
-      Debug.Log("Enemy: collider: " + collider);
 
       switch (collider.gameObject.layer) {
         case 8: // we hit a wall, so turn around
@@ -145,7 +141,7 @@ public class Enemy : MonoBehaviour {
   }
 
   private void RotateBasedOnDirection() {
-    if (direction < 0)
+    if (rb.velocity.x < 0)
       transform.localScale = new Vector3(-1, 1, 1);
     else
       transform.localScale = new Vector3(1, 1, 1);
@@ -184,14 +180,12 @@ public class Enemy : MonoBehaviour {
 
   // follows player
   private void AutoPath() {
-    if (state == State.damaged) return; 
 		rb.gravityScale = GRAVITY_SCALE;
 		float xDist = player.transform.position.x - transform.position.x;
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
     if (Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
-      state = State.attacking;
-      direction = 0;
+      // state = State.attacking;
 			return;
 		}
 
@@ -202,7 +196,6 @@ public class Enemy : MonoBehaviour {
 		// otherwise, if we need to move in the x or y direction, do so
 		if (Mathf.Abs(xDist) >= SLASHING_X_DIST) {
 			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
-      direction = xDist * KP;
     }
   }
 
@@ -215,7 +208,6 @@ public class Enemy : MonoBehaviour {
   void OnTriggerEnter2D(Collider2D other)
   {
       if (state == State.damaged || state == State.dead) return;
-      Debug.Log("Trigger " + other.name + " enter!");
 
       switch (other.name) {
         case "PlayerSlashHurtBox":
@@ -246,12 +238,10 @@ public class Enemy : MonoBehaviour {
 
   // enemy died
   private void Death() {
-    Debug.Log("enemy death!");
     // deletes the game object
     for (int i = 0; i < 4; i++)
       PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
 
-    Debug.Log("destroy me");
     Destroy(gameObject);
   }
 }

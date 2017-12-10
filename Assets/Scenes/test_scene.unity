@@ -334,6 +334,37 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1271265347}
+    - target: {fileID: 114977486539889522, guid: e8f8d6ece32a741cb9cb683305e90a9c,
+        type: 2}
+      propertyPath: receiveSlashKnockback
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114977486539889522, guid: e8f8d6ece32a741cb9cb683305e90a9c,
+        type: 2}
+      propertyPath: receiveDashKnockback
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4884861050180686, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.0107422
+      objectReference: {fileID: 0}
+    - target: {fileID: 4884861050180686, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4884861050180686, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.57812476
+      objectReference: {fileID: 0}
+    - target: {fileID: 4884861050180686, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 114977486539889522, guid: e8f8d6ece32a741cb9cb683305e90a9c,
+        type: 2}
+      propertyPath: distanceNearPlayer
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
   m_IsPrefabParent: 0
