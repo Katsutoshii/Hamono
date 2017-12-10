@@ -176,8 +176,8 @@ public class Enemy : MonoBehaviour {
 		if (state != State.damaged) {
 			damagedStartTime = Time.time;
 			state = State.damaged;
-			rb.AddForce( 100 * (new Vector2(transform.position.x - source.transform.position.x, 
-				transform.position.y - source.transform.position.y + 4000f)));
+			rb.velocity = new Vector2(transform.position.x - source.transform.position.x, 
+				transform.position.y - source.transform.position.y + 4000f);
 
 			healthAmount -= damageAmount;
 			if ( healthAmount < 0) healthAmount = 0;

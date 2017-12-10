@@ -19,7 +19,7 @@ public class PotPiece : PooledObject {
 		spriteRenderer.color = Color.white;
 
 		rb = GetComponent<Rigidbody2D>();
-		rb.AddForce(new Vector3(Random.Range(-10f, 10f), Random.Range(0f, 100f), 0));
+		rb.velocity = new Vector3(Random.Range(-10f, 10f), Random.Range(0f, 10f), 0);
 		
 		spriteRenderer.sprite = sprites[Random.Range(2, sprites.Length)];
 	}

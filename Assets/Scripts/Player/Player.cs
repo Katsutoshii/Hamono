@@ -261,13 +261,17 @@ public class Player : MonoBehaviour {
 			rb.velocity = new Vector2(0, rb.velocity.y);
 		}
 
-		if (yDist >= AUTOPATH_Y_THRESHOLD && xDist <= JUMP_X_THRESHOLD && grounded)
+		if (yDist >= AUTOPATH_Y_THRESHOLD && xDist <= JUMP_X_THRESHOLD && grounded) {
+			Debug.Log("yDist = " + yDist);
+			Debug.Log("AUTOPATH_Y_THRESHOLD = " + AUTOPATH_Y_THRESHOLD);
 			StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
+		}
 	}
 
 	private const float JUMP_DELAY = 0.1f;
 	private bool jumping = false;
 	private IEnumerator Jump(float jumpPower) {
+		Debug.Log("Jump");
 		jumping = true;
 		rb.velocity = Vector2.zero;
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -474,8 +478,8 @@ public class Player : MonoBehaviour {
 		if (state != State.damaged) {
 			damagedStartTime = Time.time;
 			state = State.damaged;
-			rb.AddForce( 200 * (new Vector2(transform.position.x - source.transform.position.x, 
-				transform.position.y - source.transform.position.y + 1.5f)));
+			rb.velocity = new Vector2(transform.position.x - source.transform.position.x, 
+				transform.position.y - source.transform.position.y + 1.5f);
 
 			healthAmount -= damageAmount;
 			if ( healthAmount < 0) healthAmount = 0;
