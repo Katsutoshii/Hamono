@@ -459,7 +459,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4707717252596822, guid: 78a58a037ea4777489af06b4ecc0cc65, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -2.36
       objectReference: {fileID: 0}
     - target: {fileID: 4707717252596822, guid: 78a58a037ea4777489af06b4ecc0cc65, type: 2}
       propertyPath: m_LocalPosition.z
@@ -495,7 +495,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4707717252596822, guid: 78a58a037ea4777489af06b4ecc0cc65, type: 2}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 6.8001547
       objectReference: {fileID: 0}
     - target: {fileID: 61731503018117034, guid: 78a58a037ea4777489af06b4ecc0cc65,
         type: 2}
@@ -573,7 +573,7 @@ Transform:
   m_GameObject: {fileID: 521871972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.043, y: 1.49, z: 4.613351}
-  m_LocalScale: {x: 225.64125, y: 37.45289, z: 1}
+  m_LocalScale: {x: 225.64125, y: 64.606186, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
@@ -1095,6 +1095,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4130824684890484, guid: 38774e62c76abce41b83d7a8365e84c5, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.81515616
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38774e62c76abce41b83d7a8365e84c5, type: 2}
   m_IsPrefabParent: 0
@@ -1145,6 +1149,26 @@ Prefab:
     - target: {fileID: 1522440620401066, guid: 6f3a96970d9140b4aa5fd9d7e25b51af, type: 2}
       propertyPath: m_Name
       value: MainCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
+        type: 2}
+      propertyPath: maxX
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
+        type: 2}
+      propertyPath: minX
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
+        type: 2}
+      propertyPath: maxY
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
+        type: 2}
+      propertyPath: minY
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f3a96970d9140b4aa5fd9d7e25b51af, type: 2}

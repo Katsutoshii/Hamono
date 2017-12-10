@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61526887242600890}
   - component: {fileID: 50251683207357238}
   - component: {fileID: 114911433450638118}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: PotPiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}

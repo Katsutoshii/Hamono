@@ -4,6 +4,11 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
     public Player player;
+    public float maxX;
+    public float minX;
+    public float maxY;
+    public float minY;
+
 	public bool following = false;
     public float SCROLL_SPEED;
     public float smoothTime;
@@ -27,7 +32,20 @@ public class CameraController : MonoBehaviour {
         
         following = !player.slashIndicator.drawing;
         // Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
-        if (following) transform.position = Vector3.SmoothDamp(transform.position, 
-            player.transform.position + offset, ref velocity, smoothTime);
+        if (following) {
+            transform.position = Vector3.SmoothDamp(transform.position, 
+                player.transform.position + offset, ref velocity, smoothTime);
+            
+            // bound the position
+            transform.position = new Vector3(
+                Bound(transform.position.x, minX, maxX),
+                Bound(transform.position.y, minY, maxY), 
+                transform.position.z);
+        }
+
+    }
+
+    private float Bound(float val, float min, float max) {
+        return Mathf.Max(Mathf.Min(val, max), min);
     }
 }
