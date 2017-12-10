@@ -7,8 +7,10 @@ public class NPC : MonoBehaviour {
 
 	private Player player;
 	
-	public GameObject NPCText;
-	public GameObject SpeechText;
+	public GameObject npcText;
+	public GameObject speechText;
+	 [TextArea(3,10)]
+ 	public string text;
 	
 	public HashSet<GameObject> allSpeech;
 	
@@ -22,7 +24,7 @@ public class NPC : MonoBehaviour {
 		completedSpeech = false;
 		allSpeech = new HashSet<GameObject>();
 		
-		NPCText = null;
+		npcText = null;
 	}
 	
 	// Update is called once per frame
@@ -45,11 +47,11 @@ public class NPC : MonoBehaviour {
 		// triggers a speech bubble
 		TextTyper NPCTextChild;
 
-		if (NPCText == null) {
-			NPCText = Instantiate(SpeechText);
-			NPCText.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, 0);
+		if (npcText == null) {
+			npcText = Instantiate(speechText);
+			npcText.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, 0);
 		}
-		NPCTextChild = NPCText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
+		NPCTextChild = npcText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
 		NPCTextChild.NPC = gameObject.GetComponent<NPC>();
 		Debug.Log("completed speech?: " + completedSpeech);
 		if (completedSpeech) {
@@ -57,13 +59,15 @@ public class NPC : MonoBehaviour {
 			foreach (GameObject item in allSpeech)
 				Destroy(item);
 			completedSpeech = false;
-			NPCText = null;
+			npcText = null;
 			player.state = Player.State.idle;
 		} else if (!completedSpeech && player.state != Player.State.talking) {
 			// starting converstation
 			player.state = Player.State.talking;
-			allSpeech.Add(NPCText);
-			NPCTextChild.TypeText("Hey! I'm an NPC. Talk to me. \n I'm talking for a really long time. \n You probably find this extremely annoying.");
+			allSpeech.Add(npcText);
+
+			NPCTextChild.TypeText(text);
+			
 			completedSpeech = false;
 		} else if (!completedSpeech && player.state == Player.State.talking) {
 			NPCTextChild.Skip();

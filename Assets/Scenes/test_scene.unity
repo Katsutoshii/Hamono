@@ -191,6 +191,21 @@ Prefab:
       propertyPath: m_SortingLayer
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: grounded
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82650513785808734, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: BypassEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: dashStaminaCost
+      value: 0.04
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
@@ -649,6 +664,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 139b318ece4cec2449221b6aa168e81f, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &733309282 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1454267894875148, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
+    type: 2}
+  m_PrefabInternal: {fileID: 810246195}
 --- !u!1001 &752684386
 Prefab:
   m_ObjectHideFlags: 0
@@ -752,6 +772,64 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f7fcc755bf347fd43807c5e5b67109c9, type: 2}
+    - target: {fileID: 114157020721625334, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
+        type: 2}
+      propertyPath: completedSpeech
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114157020721625334, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
+        type: 2}
+      propertyPath: text
+      value: 'Hi im Wendy
+
+        How''s going
+
+        You should eat some square hamburgers
+
+        Square hamburgers are...
+
+        ...easier to draw in pixel art games'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114157020721625334, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
+        type: 2}
+      propertyPath: npcText
+      value: 
+      objectReference: {fileID: 733309282}
+    - target: {fileID: 114157020721625334, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
+        type: 2}
+      propertyPath: speechText
+      value: 
+      objectReference: {fileID: 733309282}
+    - target: {fileID: 114499957758202984, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114499957758202984, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114499957758202984, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114499957758202984, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 114499957758202984, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114499957758202984, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
+        type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008, type: 2}
   m_IsPrefabParent: 0

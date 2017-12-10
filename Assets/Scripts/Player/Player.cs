@@ -76,8 +76,9 @@ public class Player : MonoBehaviour {
 	private const float DASH_TARGET_THRESHOLD = 0.8f;
 	private const float ATTACK_TIMEOUT = 0.5f;
 	private const float AUTOPATH_TIMEOUT = 1.5f;
-	private const float DASH_STAMINA_COST = 0.04f;
-	private const float GENERATE_STAMINA = 0.02f;
+	public float dashStaminaCost;
+	public float slashStaminaCost;
+	public float generateStamina;
 
 
 	private float attackStartTime;
@@ -105,7 +106,7 @@ public class Player : MonoBehaviour {
 	void Update() {
 	
 		if (state != State.damaged) Controls();
-		if (grounded) stamina.IncreaseStamina(GENERATE_STAMINA);
+		if (grounded) stamina.IncreaseStamina(generateStamina);
 
 		// actions based on the state
 		switch (state) {
@@ -136,7 +137,7 @@ public class Player : MonoBehaviour {
 				gameObject.layer = 11;
 				rb.velocity = new Vector2(0, rb.velocity.y);
 				rb.gravityScale = GRAVITY_SCALE;
-				if (grounded) stamina.IncreaseStamina(GENERATE_STAMINA);
+				if (grounded) stamina.IncreaseStamina(generateStamina);
 				break;
 		}		
 		
@@ -314,7 +315,7 @@ public class Player : MonoBehaviour {
 			attackType = AttackType.none;
 			return;
 		}
-		stamina.DecreaseStamina(DASH_STAMINA_COST);
+		stamina.DecreaseStamina(dashStaminaCost);
 		if (Time.time > attackStartTime + ATTACK_TIMEOUT) {
 			state = State.idle;
 			attackType = AttackType.none;
@@ -368,6 +369,7 @@ public class Player : MonoBehaviour {
 
 	// method to perform the slash
 	private void Attack() {
+		if (attackType != AttackType.none) stamina.DecreaseStamina(slashStaminaCost);
 		attackStartTime = Time.time;
 
 		switch (attackType) {
