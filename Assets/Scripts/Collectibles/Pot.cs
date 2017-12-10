@@ -53,14 +53,8 @@ public class Pot : MonoBehaviour {
 	}
 
 	private Vector3 RandomOffset(Vector3 position) {
-    return new Vector3(position.x + GetRandomNumber(0f, 0.5f),
-      position.y + GetRandomNumber(0f, 0.5f),
+    return new Vector3(position.x + Random.Range(0f, 0.5f),
+      position.y + Random.Range(0f, 0.5f),
       position.z);
-  	}
-	
-	public float GetRandomNumber(float minimum, float maximum)
-  	{ 
-		System.Random random = new System.Random();
-      	return ((float) random.NextDouble()) * (maximum - minimum) + minimum;
   	}
 }

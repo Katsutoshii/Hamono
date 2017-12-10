@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
@@ -19,7 +18,6 @@ public class Enemy : MonoBehaviour {
   private float direction;
   private bool lockOnPlayer;
   private float lastTime;
-  private System.Random random;
   private float[] directionOptions = new float[] {-1f, 1f};
 
   public float healthAmount;
@@ -51,12 +49,16 @@ public class Enemy : MonoBehaviour {
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     lockOnPlayer = false;
     lastTime = Time.time;
-    random = new System.Random();
     state = State.walking;
     direction = walkingSpeed;
+    StartCoroutine(ChangeRandomWalkCycle());
+
   }
 
   void Update() {    
+    RotateBasedOnDirection();
+    CheckForPlayerProximity();
+
     switch (state) {
       case State.attacking:
         Attack();
@@ -66,7 +68,7 @@ public class Enemy : MonoBehaviour {
         Damaged();
         break;
 
-      default:
+      case State.walking:
         spriteRenderer.color = Color.white;
         Walk();
         break;
@@ -75,15 +77,20 @@ public class Enemy : MonoBehaviour {
     UpdateAnimatorVariables();
   }
 
+  bool randomWalkToRight;
+  public float randomChangetime;
+  private IEnumerator ChangeRandomWalkCycle() {
+    while( true) {
+      Debug.Log("Changing direction");
+      randomWalkToRight = Random.Range(0, 1f) >= 0.5f;
+      yield return new WaitForSeconds(randomChangetime);
+    }
+  }
+
   private void Walk() {
-    rb.velocity = new Vector2(direction, rb.velocity.y);
     spriteRenderer.color = Color.white;
 
-    // if (direction < 0)
-    //   transform.localScale = new Vector3(-1, 1, 1);
-    // else
-    //   transform.localScale = new Vector3(1, 1, 1);
-    if (NearPlayer() || lockOnPlayer) {
+    if (lockOnPlayer) {
       // follow the player
       AutoPath();
     } 
@@ -128,44 +135,32 @@ public class Enemy : MonoBehaviour {
   }
 
   private void RandomWalkCycle() {
-    if (state == State.damaged) return; 
-    float currentTime = Time.time;
-    if (currentTime - lastTime >= 3f) {
-      lastTime = currentTime;
-      if (rb.velocity.x != 0) {
-        direction = 0;
-        state = State.idle;
-      } else {
-        float directionScale = directionOptions[random.Next(directionOptions.Length)];
-        Debug.Log("the direction scale: " + directionScale);
-        direction = walkingSpeed * directionScale;
-        state = State.walking;
-        transform.localScale = new Vector3(directionScale, 1, 1);
-      }
-    }
+    if (randomWalkToRight) rb.velocity = walkingSpeed * Vector2.right + Vector2.up * rb.velocity.y;
+    else rb.velocity = walkingSpeed * Vector2.left + Vector2.up * rb.velocity.y;
+
   }
 
-  // checks to see if it's close enough to player
-  private bool NearPlayer() {
-    float distance = Vector2.Distance(transform.position, player.transform.position);
-    if (distance <= distanceNearPlayer) {
-      lockOnPlayer = true;
-      return true;
-    }
-    // the player got out of range for the enemy to follow her
-    if (distance >= 10f)
-      lockOnPlayer = false;
-    return false;
-  }
-
-  // attacks player
-  private void Attack() {
-    rb.velocity = new Vector2(direction, rb.velocity.y);
-    spriteRenderer.color = Color.white;
+  private void RotateBasedOnDirection() {
     if (direction < 0)
       transform.localScale = new Vector3(-1, 1, 1);
     else
       transform.localScale = new Vector3(1, 1, 1);
+  }
+
+  // checks to see if it's close enough to player
+  private void CheckForPlayerProximity() {
+    float distance = Vector2.Distance(transform.position, player.transform.position);
+    if (distance <= distanceNearPlayer) {
+      lockOnPlayer = true;
+    }
+    // the player got out of range for the enemy to follow her
+    if (distance >= 10f)
+      lockOnPlayer = false;
+  }
+
+  // attacks player
+  private void Attack() {
+    spriteRenderer.color = Color.white;
 
     // attack the player
     if (player.state != Player.State.dashing && player.state != Player.State.slashing) {
@@ -177,41 +172,10 @@ public class Enemy : MonoBehaviour {
     }
   }
 
-  // enemy is damaged
-  private void Damage(float damageAmount, Collider2D source) {
-		if (state != State.damaged) {
-			damagedStartTime = Time.time;
-			state = State.damaged;
-			rb.velocity = new Vector2(transform.position.x - source.transform.position.x, 
-				transform.position.y - source.transform.position.y + 4000f);
-
-			healthAmount -= damageAmount;
-			if ( healthAmount < 0) healthAmount = 0;
-
-			if (healthAmount == 0) Death();
-		}
-	}
-
-  // enemy died
-  private void Death() {
-    Debug.Log("enemy death!");
-    // deletes the game object
-    for (int i = 0; i < 4; i++)
-      PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
-
-    Debug.Log("destroy me");
-    Destroy(gameObject);
-  }
-
   private Vector3 RandomOffset(Vector3 position) {
-    return new Vector3(position.x + GetRandomNumber(0f, 0.5f),
-      position.y + GetRandomNumber(0f, 0.5f),
+    return new Vector3(position.x + Random.Range(0f, 0.5f),
+      position.y + Random.Range(0f, 0.5f),
       position.z);
-  }
-
-  public float GetRandomNumber(float minimum, float maximum)
-  { 
-      return ((float) random.NextDouble()) * (maximum - minimum) + minimum;
   }
 
   // follows player
@@ -238,6 +202,8 @@ public class Enemy : MonoBehaviour {
     }
   }
 
+  private float receiveSlashKnockback = 2f;
+  private float receiveDashKnockback = 1f;
   /// <summary>
   /// Sent when another object enters a trigger collider attached to this
   /// object (2D physics only).
@@ -250,12 +216,39 @@ public class Enemy : MonoBehaviour {
 
       switch (other.name) {
         case "PlayerSlashHurtBox":
-          Damage(receiveSlashDamage, other);
+          Damage(receiveSlashDamage, receiveSlashKnockback, other);
           break;
 
         case "PlayerDashHurtBox":
-          Damage(receiveDashDamage, other);
+          Damage(receiveDashDamage, receiveDashKnockback, other);
           break;
       }
+  }
+
+  
+  // when enemy is first damaged
+  private void Damage(float damageAmount, float knockback, Collider2D source) {
+		if (state != State.damaged) {
+			damagedStartTime = Time.time;
+			state = State.damaged;
+			rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
+				transform.position.y - source.transform.position.y + 1.5f);
+
+			healthAmount -= damageAmount;
+			if ( healthAmount < 0) healthAmount = 0;
+
+			if (healthAmount == 0) Death();
+		}
+	}
+
+  // enemy died
+  private void Death() {
+    Debug.Log("enemy death!");
+    // deletes the game object
+    for (int i = 0; i < 4; i++)
+      PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
+
+    Debug.Log("destroy me");
+    Destroy(gameObject);
   }
 }

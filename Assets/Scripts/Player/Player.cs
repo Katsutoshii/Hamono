@@ -469,17 +469,17 @@ public class Player : MonoBehaviour {
 	{
 		switch (other.name) {
 			case "EnemyHurtBox":
-				if (state != State.dashing && state != State.slashing) Damage(0.5f, other);
+				if (state != State.dashing && state != State.slashing) Damage(0.5f, 2f, other);
 				break;
 		}
 	}
 
-	private void Damage(float damageAmount, Collider2D source) {
+	private void Damage(float damageAmount, float knockback, Collider2D source) {
 		if (state != State.damaged) {
 			damagedStartTime = Time.time;
 			state = State.damaged;
-			rb.velocity = new Vector2(transform.position.x - source.transform.position.x, 
-				transform.position.y - source.transform.position.y + 1.5f);
+			rb.velocity = 5 * new Vector2(transform.position.x - source.transform.position.x, 
+				transform.position.y - source.transform.position.y + 1f);
 
 			healthAmount -= damageAmount;
 			if ( healthAmount < 0) healthAmount = 0;
