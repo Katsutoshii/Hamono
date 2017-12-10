@@ -87,7 +87,7 @@ AnimationClip:
   - time: 0.083333336
     functionName: PlayOneShot
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: cad21e75024cdf94f98ab816a699ff32,
+    objectReferenceParameter: {fileID: 8300000, guid: 5a5111d39adf14e829142d1172df712f,
       type: 3}
     floatParameter: 0
     intParameter: 0
@@ -95,7 +95,7 @@ AnimationClip:
   - time: 0.33333334
     functionName: PlayOneShot
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: cad21e75024cdf94f98ab816a699ff32,
+    objectReferenceParameter: {fileID: 8300000, guid: 5a5111d39adf14e829142d1172df712f,
       type: 3}
     floatParameter: 0
     intParameter: 0
