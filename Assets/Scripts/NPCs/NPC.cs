@@ -7,7 +7,7 @@ public class NPC : MonoBehaviour {
 
 	private Player player;
 	
-	public GameObject npcText;
+	private GameObject npcText;
 	public GameObject speechText;
 	 [TextArea(3,10)]
  	public string text;
@@ -51,7 +51,7 @@ public class NPC : MonoBehaviour {
 			npcText = Instantiate(speechText);
 			npcText.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, 0);
 		}
-		NPCTextChild = npcText.transform.GetChild(0).gameObject.GetComponent<TextTyper>();
+		NPCTextChild = npcText.transform.GetChild(1).gameObject.GetComponent<TextTyper>();
 		NPCTextChild.NPC = gameObject.GetComponent<NPC>();
 		Debug.Log("completed speech?: " + completedSpeech);
 		if (completedSpeech) {
@@ -65,9 +65,7 @@ public class NPC : MonoBehaviour {
 			// starting converstation
 			player.state = Player.State.talking;
 			allSpeech.Add(npcText);
-
 			NPCTextChild.TypeText(text);
-			
 			completedSpeech = false;
 		} else if (!completedSpeech && player.state == Player.State.talking) {
 			NPCTextChild.Skip();
