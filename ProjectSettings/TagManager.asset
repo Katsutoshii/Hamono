@@ -22,9 +22,9 @@ TagManager:
   - PlayerHurtBox
   - Collectibles
   - Dashing
-  - 
-  - 
-  - 
+  - EnemyBoundaries
+  - EnemiesDamaged
+  - Debris
   - 
   - 
   - 

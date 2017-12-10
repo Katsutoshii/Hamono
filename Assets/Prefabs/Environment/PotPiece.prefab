@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61526887242600890}
   - component: {fileID: 50251683207357238}
   - component: {fileID: 114911433450638118}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: PotPiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1799168926636986}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7787f415f41d2384785bb541c7e44091, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

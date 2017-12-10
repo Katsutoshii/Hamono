@@ -68,8 +68,6 @@ public class Player : MonoBehaviour {
 	private AudioSource audioSource;
 
 	// constants
-	private const float SLASHING_X_DIST = 1.5f;
-	private const float SLASHING_Y_DIST = 0.5f;
 	public const float SLASHING_THRESHOLD = 3.5f;
 	private const float TURNING_THRESHOLD = 0.1f;
 	public const float KP = 4f;
@@ -78,8 +76,9 @@ public class Player : MonoBehaviour {
 	private const float DASH_TARGET_THRESHOLD = 0.8f;
 	private const float ATTACK_TIMEOUT = 0.5f;
 	private const float AUTOPATH_TIMEOUT = 1.5f;
-	private const float DASH_STAMINA_COST = 0.04f;
-	private const float GENERATE_STAMINA = 0.02f;
+	public float dashStaminaCost;
+	public float slashStaminaCost;
+	public float generateStamina;
 
 
 	private float attackStartTime;
@@ -107,7 +106,7 @@ public class Player : MonoBehaviour {
 	void Update() {
 	
 		if (state != State.damaged) Controls();
-		if (grounded) stamina.IncreaseStamina(GENERATE_STAMINA);
+		if (grounded) stamina.IncreaseStamina(generateStamina);
 
 		// actions based on the state
 		switch (state) {
@@ -138,11 +137,11 @@ public class Player : MonoBehaviour {
 				gameObject.layer = 11;
 				rb.velocity = new Vector2(0, rb.velocity.y);
 				rb.gravityScale = GRAVITY_SCALE;
-				if (grounded) stamina.IncreaseStamina(GENERATE_STAMINA);
+				if (grounded) stamina.IncreaseStamina(generateStamina);
 				break;
 		}		
-
-		RotateSpriteForVelocity();
+		
+		if (state != State.damaged) RotateSpriteForVelocity();
 		if(state != State.dashing) LimitVelocity();
 
 		UpdateAnimatorVariables();
@@ -211,6 +210,9 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+
+	private const float SLASHING_X_DIST = 1f;
+	private const float SLASHING_Y_DIST = 0.5f;
 	private const float AUTOPATH_Y_THRESHOLD = 1.5f; 
 	private const float AUTOPATH_Y_FACTOR = 6.25f;
 	private const float JUMP_X_THRESHOLD = 3.5f;
@@ -262,8 +264,6 @@ public class Player : MonoBehaviour {
 		}
 
 		if (yDist >= AUTOPATH_Y_THRESHOLD && xDist <= JUMP_X_THRESHOLD && grounded) {
-			Debug.Log("yDist = " + yDist);
-			Debug.Log("AUTOPATH_Y_THRESHOLD = " + AUTOPATH_Y_THRESHOLD);
 			StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
 		}
 	}
@@ -271,7 +271,6 @@ public class Player : MonoBehaviour {
 	private const float JUMP_DELAY = 0.1f;
 	private bool jumping = false;
 	private IEnumerator Jump(float jumpPower) {
-		Debug.Log("Jump");
 		jumping = true;
 		rb.velocity = Vector2.zero;
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -316,7 +315,7 @@ public class Player : MonoBehaviour {
 			attackType = AttackType.none;
 			return;
 		}
-		stamina.DecreaseStamina(DASH_STAMINA_COST);
+		stamina.DecreaseStamina(dashStaminaCost);
 		if (Time.time > attackStartTime + ATTACK_TIMEOUT) {
 			state = State.idle;
 			attackType = AttackType.none;
@@ -370,6 +369,7 @@ public class Player : MonoBehaviour {
 
 	// method to perform the slash
 	private void Attack() {
+		if (attackType != AttackType.none) stamina.DecreaseStamina(slashStaminaCost);
 		attackStartTime = Time.time;
 
 		switch (attackType) {
@@ -469,24 +469,23 @@ public class Player : MonoBehaviour {
 	{
 		switch (other.name) {
 			case "EnemyHurtBox":
-				if (state != State.dashing && state != State.slashing) Damage(0.5f, other);
+				if (state != State.dashing && state != State.slashing && state != State.damaged) Damage(0.5f, 2f, other);
 				break;
 		}
 	}
 
-	private void Damage(float damageAmount, Collider2D source) {
-		if (state != State.damaged) {
-			damagedStartTime = Time.time;
-			state = State.damaged;
-			rb.velocity = new Vector2(transform.position.x - source.transform.position.x, 
-				transform.position.y - source.transform.position.y + 1.5f);
+	private void Damage(float damageAmount, float knockback, Collider2D source) {
+		Debug.Log("Damaged");
+		damagedStartTime = Time.time;
+		state = State.damaged;
+		rb.velocity = 5 * new Vector2(transform.position.x - source.transform.position.x, 
+			transform.position.y - source.transform.position.y + 1f);
 
-			healthAmount -= damageAmount;
-			if ( healthAmount < 0) healthAmount = 0;
+		healthAmount -= damageAmount;
+		if ( healthAmount < 0) healthAmount = 0;
 
-			if (healthAmount == 0) Death();
-			health.HandleHealth(healthAmount);
-		}
+		if (healthAmount == 0) Death();
+		health.HandleHealth(healthAmount);
 	}
 
 	private float damagedStartTime;

@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1483470518808174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.25, y: -0.53, z: 0}
+  m_LocalPosition: {x: -1.31, y: -0.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4884861050180686}
@@ -94,7 +94,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 4
 --- !u!61 &61069694831140012
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -260,13 +260,16 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   walkingSpeed: 2
   distanceNearPlayer: 3
-  healthAmount: 1
+  healthAmount: 3
   receiveSlashDamage: 0.5
   receiveDashDamage: 0.5
+  receiveSlashKnockback: 5
+  receiveDashKnockback: 2
   SLASHING_X_DIST: 1.1
   SLASHING_Y_DIST: 0.5
   KP: 1
   GRAVITY_SCALE: 2
+  randomChangetime: 2
 --- !u!212 &212478704518247742
 SpriteRenderer:
   m_ObjectHideFlags: 1

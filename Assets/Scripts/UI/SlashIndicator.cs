@@ -12,7 +12,6 @@ public class SlashIndicator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("On Start for slash");
 		gameObject.transform.localScale = new Vector3(0, 0, 0);
 		drawing = false;
 
