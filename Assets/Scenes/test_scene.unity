@@ -176,46 +176,6 @@ Prefab:
       propertyPath: health
       value: 
       objectReference: {fileID: 162929030}
-    - target: {fileID: 212073600475020504, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f7fcc755bf347fd43807c5e5b67109c9, type: 2}
-    - target: {fileID: 212073600475020504, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: m_SortingLayerID
-      value: 848748911
-      objectReference: {fileID: 0}
-    - target: {fileID: 212073600475020504, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: grounded
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 82650513785808734, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: BypassEffects
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: dashStaminaCost
-      value: 0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: slashStaminaCost
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: generateStamina
-      value: 0.01
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
