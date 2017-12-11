@@ -60,6 +60,7 @@ public class Enemy : MonoBehaviour {
 
   void Update() {
     CheckForPlayerProximity();
+    UpdateAnimatorVariables();
 
     switch (state) {
       case State.attacking:
@@ -74,8 +75,6 @@ public class Enemy : MonoBehaviour {
         Walk();
         break;
     }
-
-    UpdateAnimatorVariables();
   }
 
   bool randomWalkToRight;
