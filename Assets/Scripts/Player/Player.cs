@@ -453,11 +453,17 @@ public class Player : MonoBehaviour {
 	/// <param name="other">The Collision2D data associated with this collision.</param>
 	void OnCollisionEnter2D(Collision2D other)
 	{
+		Debug.Log("Player had collision with " + other.collider.name);
 		if (other.collider.name.Length < 4) Debug.Log("Object names must be greater than 4");
 		switch (other.collider.name.Substring(0, 4)) {
 			case "Coin":
 				coinCount++;
 				cointCountText.text = "" + coinCount;
+				break;
+
+			case "Spik":
+				Damage(0.5f, 0f, other.collider);
+				rb.velocity += 9 * Vector2.up;
 				break;
 		}
 	}
@@ -470,7 +476,7 @@ public class Player : MonoBehaviour {
 	{
 		switch (other.name) {
 			case "EnemyHurtBox":
-				if (state != State.dashing && state != State.slashing && state != State.damaged) Damage(0.5f, 2f, other);
+				if (state != State.dashing && state != State.slashing && state != State.damaged) Damage(0.5f, 4f, other);
 				break;
 		}
 	}
@@ -479,8 +485,9 @@ public class Player : MonoBehaviour {
 		Debug.Log("Damaged");
 		damagedStartTime = Time.time;
 		state = State.damaged;
-		rb.velocity = 5 * new Vector2(transform.position.x - source.transform.position.x, 
-			transform.position.y - source.transform.position.y + 1f);
+		if (knockback != 0)
+			rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
+				transform.position.y - source.transform.position.y + 1f);
 
 		healthAmount -= damageAmount;
 		if ( healthAmount < 0) healthAmount = 0;
@@ -494,7 +501,7 @@ public class Player : MonoBehaviour {
 		
 		if (healthAmount == 0) StartCoroutine(Death());
 		
-		if (Time.time - damagedStartTime > 0.5f) {
+		if (Time.time - damagedStartTime > 0.3f) {
 			spriteRenderer.color = Color.white;
 			state = State.idle;
 		}
