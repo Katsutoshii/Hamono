@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour {
   private Animator animator;
   public AudioSource audioSource;
 
+  public bool grounded;
   private bool prevNotice;
 
   public float walkingSpeed;
@@ -155,16 +156,33 @@ public class Enemy : MonoBehaviour {
 
       switch (collider.gameObject.layer) {
         case 8: // we hit a wall, so turn around
+          grounded = true;
           direction *= -1;
           transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
           break;
       }
   }
 
-  private void RandomWalkCycle() {
-    if (randomWalkToRight) rb.velocity = walkingSpeed * Vector2.right + Vector2.up * rb.velocity.y;
-    else rb.velocity = walkingSpeed * Vector2.left + Vector2.up * rb.velocity.y;
+  void OnCollisionExit2D(Collision2D collision) {
+    Collider2D collider = collision.collider;
 
+    switch (collider.gameObject.layer) {
+      case 8:
+        grounded = false;
+        break;
+    }
+  }
+
+  private void RandomWalkCycle() {
+    if (grounded) {
+      if (randomWalkToRight) {
+        rb.velocity = walkingSpeed * Vector2.right;
+        rb.AddForce(Vector2.up * 140f);
+      } else {
+        rb.velocity = walkingSpeed * Vector2.left;
+        rb.AddForce(Vector2.up * 140f);
+      }
+    }
   }
 
   private void RotateBasedOnDirection() {
