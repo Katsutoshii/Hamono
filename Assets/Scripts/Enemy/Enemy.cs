@@ -82,6 +82,10 @@ public class Enemy : MonoBehaviour {
       case State.noticed:
         Noticed();
         break;
+      
+      case State.dead:
+        Death();
+        break;
     }
   }
 
@@ -114,10 +118,12 @@ public class Enemy : MonoBehaviour {
     }
   }
 
+  // enemy notices player
   private void Noticed() {
     rb.velocity = new Vector2(0, rb.velocity.y);
     animator.SetBool("noticed", state == State.noticed);
     if (Time.time - noticedStartTime > .7f)
+      // give time for the animation to run
       state = State.walking;
   }
 
@@ -246,6 +252,7 @@ public class Enemy : MonoBehaviour {
 
   
   // when enemy is first damaged
+  private float deathStartTime;
   private void Damage(float damageAmount, float knockback, Collider2D source) {
 		if (state != State.damaged) {
 			damagedStartTime = Time.time;
@@ -257,9 +264,9 @@ public class Enemy : MonoBehaviour {
 			if ( healthAmount < 0) healthAmount = 0;
 
 			if (healthAmount == 0) {
+        if (state != State.dead)
+          deathStartTime = Time.time;
         state = State.dead;
-        animator.SetBool("dead", state == State.dead);
-        Death();
       }
 		}
 	}
@@ -267,8 +274,10 @@ public class Enemy : MonoBehaviour {
   // enemy died
   private void Death() {
     // deletes the game object
-    for (int i = 0; i < 4; i++)
-      PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
-    Destroy(gameObject);
+    if (Time.time - deathStartTime > 1f) {
+      for (int i = 0; i < 4; i++)
+        PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
+      Destroy(gameObject);
+    }
   }
 }
