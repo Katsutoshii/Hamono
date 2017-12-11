@@ -280,6 +280,11 @@ Prefab:
       propertyPath: m_Size.x
       value: 1.0310272
       objectReference: {fileID: 0}
+    - target: {fileID: 114977486539889522, guid: e8f8d6ece32a741cb9cb683305e90a9c,
+        type: 2}
+      propertyPath: healthAmount
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
   m_IsPrefabParent: 0

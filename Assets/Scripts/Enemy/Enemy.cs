@@ -12,9 +12,11 @@ public class Enemy : MonoBehaviour {
   private Animator animator;
   public AudioSource audioSource;
 
+  private bool prevNotice;
+
   public float walkingSpeed;
   public float distanceNearPlayer;
-  
+
   private float direction;
   private bool lockOnPlayer;
   private float lastTime;
@@ -29,6 +31,7 @@ public class Enemy : MonoBehaviour {
   public enum State {
     idle,
     walking,
+    noticed,
     attacking,
     damaged,
     dead,
@@ -54,6 +57,7 @@ public class Enemy : MonoBehaviour {
     lastTime = Time.time;
     state = State.walking;
     direction = walkingSpeed;
+    prevNotice = false;
     StartCoroutine(ChangeRandomWalkCycle());
 
   }
@@ -74,6 +78,10 @@ public class Enemy : MonoBehaviour {
       case State.walking:
         Walk();
         break;
+      
+      case State.noticed:
+        Noticed();
+        break;
     }
   }
 
@@ -86,18 +94,31 @@ public class Enemy : MonoBehaviour {
     }
   }
 
+  private float noticedStartTime;
   private void Walk() {
     RotateBasedOnDirection();
     spriteRenderer.color = Color.white;
 
     if (lockOnPlayer) {
       // follow the player
+      if (!prevNotice) {
+        state = State.noticed;
+        prevNotice = true;
+        noticedStartTime = Time.time;
+      }
       AutoPath();
     } 
     else {
       // randomly walk around
       RandomWalkCycle();
     }
+  }
+
+  private void Noticed() {
+    rb.velocity = new Vector2(0, rb.velocity.y);
+    animator.SetBool("noticed", state == State.noticed);
+    if (Time.time - noticedStartTime > .7f)
+      state = State.walking;
   }
 
   private float damagedStartTime;
@@ -119,6 +140,7 @@ public class Enemy : MonoBehaviour {
     animator.SetBool("idle", state == State.idle);
     animator.SetBool("walking", state == State.walking);
     animator.SetBool("dead", state == State.dead);
+    animator.SetBool("noticed", state == State.noticed);
   }
 
   // handles case when enemy runs into something
@@ -153,8 +175,10 @@ public class Enemy : MonoBehaviour {
       lockOnPlayer = true;
     }
     // the player got out of range for the enemy to follow her
-    if (distance >= 10f)
+    if (distance >= 10f) {
       lockOnPlayer = false;
+      prevNotice = false;
+    }
   }
 
   // attacks player
@@ -232,7 +256,11 @@ public class Enemy : MonoBehaviour {
 			healthAmount -= damageAmount;
 			if ( healthAmount < 0) healthAmount = 0;
 
-			if (healthAmount == 0) Death();
+			if (healthAmount == 0) {
+        state = State.dead;
+        animator.SetBool("dead", state == State.dead);
+        Death();
+      }
 		}
 	}
 
@@ -241,7 +269,6 @@ public class Enemy : MonoBehaviour {
     // deletes the game object
     for (int i = 0; i < 4; i++)
       PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
-
     Destroy(gameObject);
   }
 }
