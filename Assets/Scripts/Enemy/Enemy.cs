@@ -189,10 +189,10 @@ public class Enemy : MonoBehaviour {
     if (grounded) {
       if (randomWalkToRight) {
         rb.velocity = walkingSpeed * Vector2.right;
-        rb.AddForce(Vector2.up * 140f);
+        rb.AddForce(Vector2.up * 150f);
       } else {
         rb.velocity = walkingSpeed * Vector2.left;
-        rb.AddForce(Vector2.up * 140f);
+        rb.AddForce(Vector2.up * 150f);
       }
     }
   }
