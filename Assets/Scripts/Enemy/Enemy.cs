@@ -215,7 +215,6 @@ public class Enemy : MonoBehaviour {
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
     if (Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
-      // state = State.attacking;
 			return;
 		}
 
@@ -264,8 +263,11 @@ public class Enemy : MonoBehaviour {
 			if ( healthAmount < 0) healthAmount = 0;
 
 			if (healthAmount == 0) {
-        if (state != State.dead)
+        if (state != State.dead) {
           deathStartTime = Time.time;
+          // destroys the hurtbox
+          Destroy(gameObject.transform.GetChild(0).GetComponent<Collider2D>());
+        }   
         state = State.dead;
       }
 		}
@@ -274,7 +276,7 @@ public class Enemy : MonoBehaviour {
   // enemy died
   private void Death() {
     // deletes the game object
-    if (Time.time - deathStartTime > 1f) {
+    if (Time.time - deathStartTime > .8f) {
       for (int i = 0; i < 4; i++)
         PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
       Destroy(gameObject);
