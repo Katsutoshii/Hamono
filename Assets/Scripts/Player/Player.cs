@@ -87,6 +87,8 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+		
 		rb = gameObject.GetComponent<Rigidbody2D>();
 		rb.isKinematic = false;
 
@@ -438,7 +440,7 @@ public class Player : MonoBehaviour {
 	}
 
 	private void OnMouseEnter() {
-		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+		
 	}
 
 	// method to play sounds from animator

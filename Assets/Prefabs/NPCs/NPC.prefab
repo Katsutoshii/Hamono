@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1391959981285746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.58, y: -0.83, z: -0.11098785}
+  m_LocalPosition: {x: 15.91, y: -1.07, z: -0.11098785}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -124,6 +124,10 @@ MonoBehaviour:
 
     It''s pretty sweet.'
   completedSpeech: 0
+  cursorTexture: {fileID: 2800000, guid: 044a019ae00db4f15bca4730f0ad6cea, type: 3}
+  speechBubble: {fileID: 2800000, guid: 673a9117f240eec49a5aaa5e14d1ac41, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!212 &212258997714179170
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -155,8 +159,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 848748911
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a24d988628d7bf64c89ebda73d9b9955, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
