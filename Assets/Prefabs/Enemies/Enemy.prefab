@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1483470518808174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.31, y: -0.38, z: 0}
+  m_LocalPosition: {x: -9.74, y: -0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4884861050180686}
@@ -69,8 +69,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1722446572477376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.03, y: -0.17, z: 0}
+  m_LocalScale: {x: 1.0107422, y: 0.57812476, z: 1}
   m_Children: []
   m_Father: {fileID: 4688960186873004}
   m_RootOrder: 0
@@ -259,12 +259,12 @@ MonoBehaviour:
   state: 0
   audioSource: {fileID: 0}
   walkingSpeed: 2
-  distanceNearPlayer: 3
+  distanceNearPlayer: 5
   healthAmount: 3
   receiveSlashDamage: 0.5
   receiveDashDamage: 0.5
-  receiveSlashKnockback: 5
-  receiveDashKnockback: 2
+  receiveSlashKnockback: 2.5
+  receiveDashKnockback: 2.5
   SLASHING_X_DIST: 1.1
   SLASHING_Y_DIST: 0.5
   KP: 1
@@ -284,7 +284,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f7fcc755bf347fd43807c5e5b67109c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -301,8 +301,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 848748911
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5bda435891eba37409a461a52108f00a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

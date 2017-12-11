@@ -128,10 +128,6 @@ public class Enemy : MonoBehaviour {
           direction *= -1;
           transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
           break;
-        case 13: // we hit a collectible, so we ignore it
-          Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), collider);
-          break;
-
       }
   }
 

@@ -98,6 +98,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  maxX: 10
+  minX: -10
+  maxY: 10
+  minY: 2
   following: 0
   SCROLL_SPEED: 0.01
   smoothTime: 0.4
