@@ -117,6 +117,9 @@ public class Enemy : MonoBehaviour {
   private void UpdateAnimatorVariables() {
     animator.SetFloat("speed", rb.velocity.magnitude);
     animator.SetBool("damaged", state == State.damaged);
+    animator.SetBool("idle", state == State.idle);
+    animator.SetBool("walking", state == State.walking);
+    animator.SetBool("dead", state == State.dead);
   }
 
   // handles case when enemy runs into something
@@ -139,9 +142,9 @@ public class Enemy : MonoBehaviour {
 
   private void RotateBasedOnDirection() {
     if (rb.velocity.x < 0)
-      transform.localScale = new Vector3(-1, 1, 1);
-    else
       transform.localScale = new Vector3(1, 1, 1);
+    else
+      transform.localScale = new Vector3(-1, 1, 1);
   }
 
   // checks to see if it's close enough to player
@@ -166,6 +169,7 @@ public class Enemy : MonoBehaviour {
     } else {
       // the enemy is damaged
       player.attackResponse = Player.AttackResponse.normal;
+      state = State.damaged;
     }
   }
 
