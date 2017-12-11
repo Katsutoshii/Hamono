@@ -14,10 +14,8 @@ public class GroundCheck : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (collider2D.gameObject.layer == LayerMask.NameToLayer("Terrain")) {
-            Debug.Log("hit terrain!");
+        if (collider2D.gameObject.layer == LayerMask.NameToLayer("Terrain"))
             player.grounded = true;
-        }
     }
 
     /// <summary>
