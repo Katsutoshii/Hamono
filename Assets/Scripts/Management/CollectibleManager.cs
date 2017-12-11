@@ -5,6 +5,7 @@ using UnityEngine;
 public class CollectibleManager : MonoBehaviour {
 	public GameObject coinPrefab;
 	public GameObject potPiecePrefab;
+	public float timeScale;
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +15,6 @@ public class CollectibleManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		Time.timeScale = timeScale;
 	}
 }
