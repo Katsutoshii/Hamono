@@ -39,7 +39,7 @@ public class Pot : MonoBehaviour {
 	private void Break() {
 		audioSource.Play();
 		for (int i = 0; i < numCoins; i++) 
-			PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), RandomOffset(transform.localEulerAngles), coinPrefab.transform.localScale);
+			PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), coinPrefab.transform.rotation, coinPrefab.transform.localScale);
 
 		for (int i = 0; i < numPieces; i++)
 			PoolManager.instance.ReuseObject(potPiecePrefab, RandomOffset(transform.position), RandomOffset(transform.localEulerAngles), potPiecePrefab.transform.localScale);

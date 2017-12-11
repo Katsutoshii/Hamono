@@ -453,7 +453,6 @@ public class Player : MonoBehaviour {
 	/// <param name="other">The Collision2D data associated with this collision.</param>
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		Debug.Log("Player had collision with " + other.collider.name);
 		if (other.collider.name.Length < 4) Debug.Log("Object names must be greater than 4");
 		switch (other.collider.name.Substring(0, 4)) {
 			case "Coin":

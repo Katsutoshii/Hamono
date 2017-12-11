@@ -125,10 +125,20 @@ public class Enemy : MonoBehaviour {
 
       switch (collider.gameObject.layer) {
         case 8: // we hit a wall, so turn around
-          direction *= -1;
-          transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
+          break;
+
+        case 15: // we hit a boundary, so turn around
+          rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
           break;
       }
+
+      switch (collision.collider.name) {
+        case "Spikes":
+          Damage(1f, 0, collision.collider);
+          rb.velocity += 3 * Vector2.up;
+          break;
+      }
+
   }
 
   private void RandomWalkCycle() {
@@ -138,10 +148,13 @@ public class Enemy : MonoBehaviour {
   }
 
   private void RotateBasedOnDirection() {
-    if (rb.velocity.x < 0)
-      transform.localScale = new Vector3(-1, 1, 1);
-    else
-      transform.localScale = new Vector3(1, 1, 1);
+    Debug.Log(rb.velocity.x);
+    if (Mathf.Abs(rb.velocity.x) > 0.05f) {
+      if (rb.velocity.x < 0)
+        transform.localScale = new Vector3(-1, 1, 1);
+      else
+        transform.localScale = new Vector3(1, 1, 1);
+    }
   }
 
   // checks to see if it's close enough to player
@@ -204,8 +217,6 @@ public class Enemy : MonoBehaviour {
   /// <param name="other">The other Collider2D involved in this collision.</param>
   void OnTriggerEnter2D(Collider2D other)
   {
-      if (state == State.damaged || state == State.dead) return;
-
       switch (other.name) {
         case "PlayerSlashHurtBox":
           Damage(receiveSlashDamage, receiveSlashKnockback, other);
@@ -223,8 +234,9 @@ public class Enemy : MonoBehaviour {
 		if (state != State.damaged) {
 			damagedStartTime = Time.time;
 			state = State.damaged;
-			rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
-				transform.position.y - source.transform.position.y + 1.5f);
+      if (knockback != 0)
+			  rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
+				  transform.position.y - source.transform.position.y + 1.5f);
 
 			healthAmount -= damageAmount;
 			if ( healthAmount < 0) healthAmount = 0;
