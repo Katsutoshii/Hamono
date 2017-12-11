@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour {
     audioSource = GetComponent<AudioSource>();
     animator = GetComponent<Animator>();
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    spriteRenderer.color = Color.white;
     lockOnPlayer = false;
     lastTime = Time.time;
     state = State.walking;

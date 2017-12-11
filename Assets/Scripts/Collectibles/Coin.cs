@@ -12,8 +12,6 @@ public class Coin : PooledObject {
 
 	// Use this for initialization
 	void Start () {
-		Init();
-
 	}
 	
 	// Update is called once per frame
@@ -22,10 +20,7 @@ public class Coin : PooledObject {
 	}
 
 	public override void OnObjectReuse() {
-		Init();
-    }
-
-	private void Init() {
+		
 		trigger = GetComponent<BoxCollider2D>();
 		rb = GetComponent<Rigidbody2D>();
 		rb.isKinematic = false;
@@ -36,7 +31,7 @@ public class Coin : PooledObject {
 		spriteRenderer.color = Color.white;
 
 		trigger.enabled = true;
-	}
+    }
 
 	/// <summary>
 	/// Sent when an incoming collider makes contact with this object's
