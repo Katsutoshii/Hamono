@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
@@ -484,7 +485,6 @@ public class Player : MonoBehaviour {
 		healthAmount -= damageAmount;
 		if ( healthAmount < 0) healthAmount = 0;
 
-		if (healthAmount == 0) Death();
 		health.HandleHealth(healthAmount);
 	}
 
@@ -492,14 +492,19 @@ public class Player : MonoBehaviour {
 	private void Damaged() {
 		spriteRenderer.color = Color.red;
 		
+		if (healthAmount == 0) StartCoroutine(Death());
+		
 		if (Time.time - damagedStartTime > 0.5f) {
 			spriteRenderer.color = Color.white;
 			state = State.idle;
 		}
 	}
 
-	private void Death() {
+	private IEnumerator Death() {
 		Debug.Log("Player died!");
-		state = State.dead;
+		Time.timeScale = 0;
+		yield return new WaitForSecondsRealtime(1);
+		Time.timeScale = 1;
+		SceneManager.LoadScene(0);
 	}
 }
