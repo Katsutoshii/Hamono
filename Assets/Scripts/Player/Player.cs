@@ -512,7 +512,7 @@ public class Player : MonoBehaviour {
 		}
 		invincible = true;
 		if (Time.time - damagedStartTime > damagedTime) {
-			spriteRenderer.color += new Color (255, 255, 255, 255);
+			spriteRenderer.color = new Color (255, 255, 255, 255);
 			state = State.idle;
 		}
 	}
@@ -521,7 +521,7 @@ public class Player : MonoBehaviour {
 		if (Time.time - invincibleStartTime > invincibleTime) {
 			invincible = false;
 			state = State.idle;
-			spriteRenderer.color += new Color (255, 255, 255, 255);
+			spriteRenderer.color = new Color (255, 255, 255, 255);
 		}
 		if (Time.time - alphaToggleTime > .1f) {
 			alphaToggleTime = Time.time;
