@@ -512,12 +512,13 @@ public class Player : MonoBehaviour {
 		}
 		invincible = true;
 		if (Time.time - damagedStartTime > damagedTime) {
-			spriteRenderer.color = Color.white;
-			// state = State.idle;
+			spriteRenderer.color += new Color (255, 255, 255, 255);
+			state = State.idle;
 		}
 	}
 
 	private void Invincible() {
+		Debug.Log("i do not drop it");
 		if (Time.time - invincibleStartTime > invincibleTime) {
 			invincible = false;
 			state = State.idle;
@@ -532,7 +533,7 @@ public class Player : MonoBehaviour {
 	private void ToggleAlpha() {
 		Color color = spriteRenderer.color;
 		Debug.Log("what's the deal?: " + color.a);
-		if (color.a == 1f) color.a = .6f;
+		if (color.a == 1f || color.a == 255) color.a = .6f;
 		else color.a = 1f;
 		spriteRenderer.color = new Color(255, 0, 0, color.a);
 	}
