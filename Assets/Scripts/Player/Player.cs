@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
 		dashing,
 		slashing,
 		talking,
+		finishedTalking,
 		damaged,
 		dead,
 	};
@@ -153,7 +154,7 @@ public class Player : MonoBehaviour {
 	// method to handle all control inputs inside main loop
 	private void Controls() {
 		// for initiating action
-		if (Input.GetMouseButtonDown(0) && state != State.talking) {
+		if (Input.GetMouseButtonDown(0) && state != State.talking && state != State.finishedTalking) {
 
 			autoPathStartTime = Time.time;
 			state = State.autoPathing;
@@ -164,7 +165,7 @@ public class Player : MonoBehaviour {
 				transform.localScale = new Vector3(1, 1, 1);
 			else 
 				transform.localScale = new Vector3(-1, 1, 1);
-		}
+		} else if (state == State.finishedTalking) state = State.idle;
 
 		if (Input.GetMouseButtonUp(0)) {
 			GetAttackType();
