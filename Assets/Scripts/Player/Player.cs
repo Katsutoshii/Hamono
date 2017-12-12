@@ -113,8 +113,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
-	
-		if (state != State.damaged) Controls();
+		Controls();
 		if (grounded) stamina.IncreaseStamina(generateStamina);
 
 		if (invincible) Invincible();
