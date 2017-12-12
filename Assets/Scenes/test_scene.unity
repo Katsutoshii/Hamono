@@ -574,6 +574,11 @@ Prefab:
       propertyPath: m_Size.y
       value: 1.309115
       objectReference: {fileID: 0}
+    - target: {fileID: 114977486539889522, guid: e8f8d6ece32a741cb9cb683305e90a9c,
+        type: 2}
+      propertyPath: jumpingPower
+      value: 150
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
   m_IsPrefabParent: 0
@@ -9129,6 +9134,14 @@ CompositeCollider2D:
         Y: 0
       - X: -150000000
         Y: 0
+    - - X: 140000000
+        Y: 10000000
+      - X: 100000000
+        Y: 10000000
+      - X: 100000000
+        Y: 0
+      - X: 140000000
+        Y: 0
     - - X: 90000000
         Y: -20000000
       - X: -30000000
@@ -9145,14 +9158,6 @@ CompositeCollider2D:
         Y: -30000000
       - X: 90000000
         Y: -30000000
-    - - X: 140000000
-        Y: 10000000
-      - X: 100000000
-        Y: 10000000
-      - X: 100000000
-        Y: 0
-      - X: 140000000
-        Y: 0
     - - X: 210000000
         Y: -20000000
       - X: 150000000
@@ -9197,6 +9202,10 @@ CompositeCollider2D:
       - {x: -19, y: 2}
       - {x: -19, y: 0}
       - {x: -15, y: 0}
+    - - {x: 14, y: 1}
+      - {x: 10, y: 1}
+      - {x: 10, y: 0}
+      - {x: 14, y: 0}
     - - {x: 9, y: -2}
       - {x: -3, y: -2}
       - {x: -3, y: 1}
@@ -9205,10 +9214,6 @@ CompositeCollider2D:
       - {x: -14, y: -2}
       - {x: -14, y: -3}
       - {x: 9, y: -3}
-    - - {x: 14, y: 1}
-      - {x: 10, y: 1}
-      - {x: 10, y: 0}
-      - {x: 14, y: 0}
     - - {x: 21, y: -2}
       - {x: 15, y: -2}
       - {x: 15, y: -3}

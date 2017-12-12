@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour {
   private bool prevNotice;
 
   public float walkingSpeed;
+  public float jumpingPower;
   public float distanceNearPlayer;
 
   private float direction;
@@ -189,10 +190,10 @@ public class Enemy : MonoBehaviour {
     if (grounded) {
       if (randomWalkToRight) {
         rb.velocity = walkingSpeed * Vector2.right;
-        rb.AddForce(Vector2.up * 150f);
+        if (rb.velocity.x > 0) rb.AddForce(Vector2.up * jumpingPower);
       } else {
         rb.velocity = walkingSpeed * Vector2.left;
-        rb.AddForce(Vector2.up * 150f);
+        if (rb.velocity.x < 0) rb.AddForce(Vector2.up * jumpingPower);
       }
     }
   }
