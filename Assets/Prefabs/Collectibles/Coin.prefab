@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collected: {fileID: 8300000, guid: 5550ddd2e08414daf9a68af14490064f, type: 3}
+  gravitationalPullDistance: 4
 --- !u!212 &212838587531425152
 SpriteRenderer:
   m_ObjectHideFlags: 1
