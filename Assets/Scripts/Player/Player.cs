@@ -62,6 +62,7 @@ public class Player : MonoBehaviour {
 	public HealthBar health;
 	public float damagedTime;
 	public float invincibleTime;
+	private float alphaToggleTime;
 
 	public GameObject dustCloudPrefab;
 	public GameObject afterimagePrefab;
@@ -116,7 +117,7 @@ public class Player : MonoBehaviour {
 		Controls();
 		if (grounded) stamina.IncreaseStamina(generateStamina);
 
-		if (invincible) Invincible();
+		if (invincible)	Invincible();
 
 		// actions based on the state
 		switch (state) {
@@ -505,8 +506,10 @@ public class Player : MonoBehaviour {
 		spriteRenderer.color = Color.red;
 		
 		if (healthAmount == 0) StartCoroutine(Death());
-		if (!invincible)
-				invincibleStartTime = Time.time;
+		if (!invincible) {
+			invincibleStartTime = Time.time;
+			alphaToggleTime = Time.time;
+		}
 		invincible = true;
 		if (Time.time - damagedStartTime > damagedTime) {
 			spriteRenderer.color = Color.white;
@@ -515,12 +518,23 @@ public class Player : MonoBehaviour {
 	}
 
 	private void Invincible() {
-		Color color = spriteRenderer.color;
 		if (Time.time - invincibleStartTime > invincibleTime) {
 			invincible = false;
 			state = State.idle;
 			spriteRenderer.color += new Color (255, 255, 255, 255);
 		}
+		if (Time.time - alphaToggleTime > .1f) {
+			alphaToggleTime = Time.time;
+			ToggleAlpha();
+		}
+	}
+
+	private void ToggleAlpha() {
+		Color color = spriteRenderer.color;
+		Debug.Log("what's the deal?: " + color.a);
+		if (color.a == 1f) color.a = .6f;
+		else color.a = 1f;
+		spriteRenderer.color = new Color(255, 0, 0, color.a);
 	}
 
 	private IEnumerator Death() {
