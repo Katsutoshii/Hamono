@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 	public int coinCount;
 	public Text cointCountText;
 
+	public bool invincible;
 
 	public enum State {
 		idle,
@@ -59,6 +60,8 @@ public class Player : MonoBehaviour {
 
 	public StaminaBar stamina;
 	public HealthBar health;
+	public float damagedTime;
+	public float invincibleTime;
 
 	public GameObject dustCloudPrefab;
 	public GameObject afterimagePrefab;
@@ -97,6 +100,8 @@ public class Player : MonoBehaviour {
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		audioSource = gameObject.GetComponent<AudioSource>();
 
+		invincible = false;
+
 		state = State.idle;
 		attackType = AttackType.none;
 
@@ -111,6 +116,8 @@ public class Player : MonoBehaviour {
 	
 		if (state != State.damaged) Controls();
 		if (grounded) stamina.IncreaseStamina(generateStamina);
+
+		if (invincible) Invincible();
 
 		// actions based on the state
 		switch (state) {
@@ -440,10 +447,6 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	private void OnMouseEnter() {
-		
-	}
-
 	// method to play sounds from animator
 	public void PlayOneShot(AudioClip sound) {
 		audioSource.PlayOneShot(sound);
@@ -464,7 +467,7 @@ public class Player : MonoBehaviour {
 				break;
 
 			case "Spik":
-				Damage(0.5f, 0f, other.collider);
+				if (!invincible) Damage(0.5f, 0f, other.collider);
 				rb.velocity += 9 * Vector2.up;
 				break;
 		}
@@ -478,7 +481,7 @@ public class Player : MonoBehaviour {
 	{
 		switch (other.name) {
 			case "EnemyHurtBox":
-				if (state != State.dashing && state != State.slashing && state != State.damaged) Damage(0.5f, 4f, other);
+				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) Damage(0.5f, 4f, other);
 				break;
 		}
 	}
@@ -497,15 +500,27 @@ public class Player : MonoBehaviour {
 		health.HandleHealth(healthAmount);
 	}
 
+	private float invincibleStartTime;
 	private float damagedStartTime;
 	private void Damaged() {
 		spriteRenderer.color = Color.red;
 		
 		if (healthAmount == 0) StartCoroutine(Death());
-		
-		if (Time.time - damagedStartTime > 0.3f) {
+		if (!invincible)
+				invincibleStartTime = Time.time;
+		invincible = true;
+		if (Time.time - damagedStartTime > damagedTime) {
 			spriteRenderer.color = Color.white;
+			// state = State.idle;
+		}
+	}
+
+	private void Invincible() {
+		Color color = spriteRenderer.color;
+		if (Time.time - invincibleStartTime > invincibleTime) {
+			invincible = false;
 			state = State.idle;
+			spriteRenderer.color += new Color (255, 255, 255, 255);
 		}
 	}
 

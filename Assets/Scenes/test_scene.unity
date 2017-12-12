@@ -176,6 +176,16 @@ Prefab:
       propertyPath: health
       value: 
       objectReference: {fileID: 162929030}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: invincibleTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: damagedTime
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
