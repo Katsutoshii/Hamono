@@ -62,6 +62,7 @@ public class Player : MonoBehaviour {
 	public HealthBar health;
 	public float damagedTime;
 	public float invincibleTime;
+	public float hurtAlpha;
 	private float alphaToggleTime;
 
 	public GameObject dustCloudPrefab;
@@ -531,7 +532,7 @@ public class Player : MonoBehaviour {
 
 	private void ToggleAlpha() {
 		Color color = spriteRenderer.color;
-		if (color.a == 1f || color.a == 255) color.a = .6f;
+		if (color.a == 1f || color.a == 255) color.a = hurtAlpha;
 		else color.a = 1f;
 		spriteRenderer.color = new Color(255, 0, 0, color.a);
 	}
