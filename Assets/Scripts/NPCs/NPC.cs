@@ -44,7 +44,7 @@ public class NPC : MonoBehaviour {
 	void OnMouseOver()
 	{
 		Cursor.SetCursor(speechBubble, hotSpot, cursorMode);
-		if(Input.GetMouseButtonDown(0)) {
+		if(Input.GetMouseButtonDown(1)) {
 			StartDialogue();
 		}
 	}
@@ -77,7 +77,7 @@ public class NPC : MonoBehaviour {
 			dialogStarted = false;
 			completedSpeech = false;
 			npcText = null;
-			player.state = Player.State.idle;
+			player.state = Player.State.finishedTalking;
 		} else if (!completedSpeech && player.state != Player.State.talking) {
 			// starting converstation
 			player.state = Player.State.talking;
