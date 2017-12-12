@@ -504,7 +504,6 @@ public class Player : MonoBehaviour {
 	private float invincibleStartTime;
 	private float damagedStartTime;
 	private void Damaged() {
-		spriteRenderer.color = Color.red;
 		
 		if (healthAmount == 0) StartCoroutine(Death());
 		if (!invincible) {
