@@ -417,9 +417,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   stamina: {fileID: 0}
   health: {fileID: 0}
-  damagedTime: 0.2
-  invincibleTime: 2
-  hurtAlpha: 0.6
+  damagedTime: 0.3
+  hurtAlpha: 0.4
   dustCloudPrefab: {fileID: 1250923004883462, guid: 3aa9da3f77e263043a0d3c39ab39d9f1,
     type: 2}
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
@@ -434,6 +433,7 @@ MonoBehaviour:
   generateStamina: 0.01
   numAfterimage: 4
   afterimageColor: {r: 0.33574829, g: 0.6135232, b: 0.8455882, a: 0}
+  invincibleFlashes: 8
 --- !u!114 &114869825246196744
 MonoBehaviour:
   m_ObjectHideFlags: 1

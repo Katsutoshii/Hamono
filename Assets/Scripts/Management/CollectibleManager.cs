@@ -12,9 +12,4 @@ public class CollectibleManager : MonoBehaviour {
 		PoolManager.instance.CreatePool(coinPrefab, 20);
 		PoolManager.instance.CreatePool(potPiecePrefab, 20);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		Time.timeScale = timeScale;
-	}
 }

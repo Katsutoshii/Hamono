@@ -62,7 +62,6 @@ public class Player : MonoBehaviour {
 	public StaminaBar stamina;
 	public HealthBar health;
 	public float damagedTime;
-	public float invincibleTime;
 	public float hurtAlpha;
 	private float alphaToggleTime;
 
@@ -119,8 +118,6 @@ public class Player : MonoBehaviour {
 		Controls();
 		if (grounded) stamina.IncreaseStamina(generateStamina);
 
-		if (invincible)	Invincible();
-
 		// actions based on the state
 		switch (state) {
 			
@@ -141,15 +138,19 @@ public class Player : MonoBehaviour {
 				Damaged();
 				break;
 
+			case State.dead:
+				break;
+
 			case State.slashing:
 				CheckForSlashEnd();
 				rb.gravityScale = 0;
 				break;
 
-			default:
+			case State.idle:
 				gameObject.layer = 11;
 				rb.velocity = new Vector2(0, rb.velocity.y);
 				rb.gravityScale = GRAVITY_SCALE;
+				spriteRenderer.color = new Color(1f, 1f, 1f, spriteRenderer.color.a);
 				if (grounded) stamina.IncreaseStamina(generateStamina);
 				break;
 		}		
@@ -499,7 +500,10 @@ public class Player : MonoBehaviour {
 	}
 
 	private void Damage(float damageAmount, float knockback, Collider2D source) {
+		if(invincible) return;
+
 		Debug.Log("Damaged");
+		invincible = true;
 		damagedStartTime = Time.time;
 		state = State.damaged;
 		if (knockback != 0)
@@ -512,49 +516,41 @@ public class Player : MonoBehaviour {
 		health.HandleHealth(healthAmount);
 	}
 
-	private float invincibleStartTime;
 	private float damagedStartTime;
 	private void Damaged() {
 		spriteRenderer.color = Color.red;
-		if (healthAmount == 0) StartCoroutine(Death());
-		if (!invincible) {
-			invincibleStartTime = Time.time;
-			alphaToggleTime = Time.time;
-		}
-		invincible = true;
+		if (healthAmount == 0f) StartCoroutine(Death());		
+
+		// check if done being damaged
 		if (Time.time - damagedStartTime > damagedTime) {
 			spriteRenderer.color = Color.white;
 			state = State.idle;
+			StartCoroutine(ToggleAlpha());
 		}
 	}
 
-	private void Invincible() {
-		// check if we are done being invincible
-		if (Time.time - invincibleStartTime > invincibleTime) {
-			invincible = false;
-			state = State.idle;
-			spriteRenderer.color = Color.white;
+	public int invincibleFlashes = 4;
+	private IEnumerator ToggleAlpha() {
+		for (int i = 0; i < invincibleFlashes; i++) {
+			Color color = Color.white;
+			if (i % 2 == 0) color.a = hurtAlpha;
+			spriteRenderer.color = color;
+			yield return new WaitForSeconds(0.1f);
 		}
-
-		//otherwise toggle the alpha
-		if (Time.time - alphaToggleTime > .1f) {
-			alphaToggleTime = Time.time;
-			ToggleAlpha();
-		}
-	}
-
-	private void ToggleAlpha() {
-
-		Color color = spriteRenderer.color;
-		if (color.a == 1f || color.a == 255) color.a = hurtAlpha;
-		else color.a = 1f;
-		spriteRenderer.color = color;
+		invincible = false;
+		yield return null;
 	}
 
 	private IEnumerator Death() {
+		
 		Debug.Log("Player died!");
+		state = State.damaged;
+		yield return new WaitForSeconds(0.1f);
+
+		state = State.dead;
 		Time.timeScale = 0;
 		yield return new WaitForSecondsRealtime(1);
+		
 		Time.timeScale = 1;
 		SceneManager.LoadScene(0);
 	}
