@@ -25,7 +25,6 @@ public class HealthBar : MonoBehaviour
   }
 
   public void HandleHealth(float healthAmount) {
-    Debug.Log("mod check: " + (healthAmount - healthAmount % 1f));
     for (int i = 0; i < (int) (healthAmount - healthAmount % 1f); i++) {
       hearts[i].fillAmount = 1f;
     }

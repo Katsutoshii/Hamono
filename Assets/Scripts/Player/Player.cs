@@ -115,7 +115,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
-		Controls();
+		if (!(state == State.damaged || state == State.dead))Controls();
 		if (grounded) stamina.IncreaseStamina(generateStamina);
 
 		// actions based on the state
@@ -500,8 +500,6 @@ public class Player : MonoBehaviour {
 	}
 
 	private void Damage(float damageAmount, float knockback, Collider2D source) {
-		if(invincible) return;
-
 		Debug.Log("Damaged");
 		invincible = true;
 		damagedStartTime = Time.time;
@@ -537,6 +535,7 @@ public class Player : MonoBehaviour {
 			spriteRenderer.color = color;
 			yield return new WaitForSeconds(0.1f);
 		}
+		Debug.Log("invincible = false");
 		invincible = false;
 		yield return null;
 	}
@@ -550,7 +549,7 @@ public class Player : MonoBehaviour {
 		state = State.dead;
 		Time.timeScale = 0;
 		yield return new WaitForSecondsRealtime(1);
-		
+
 		Time.timeScale = 1;
 		SceneManager.LoadScene(0);
 	}
