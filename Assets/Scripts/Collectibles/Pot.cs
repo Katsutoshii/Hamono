@@ -40,10 +40,10 @@ public class Pot : MonoBehaviour {
 
 	private void Break() {
 		audioSource.Play();
-		for (int i = 0; i < Random.Range(0, numCoins); i++) 
+		for (int i = 0; i < Random.Range(0, numCoins + 1); i++) 
 			PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), coinPrefab.transform.rotation, coinPrefab.transform.localScale);
 
-		for (int i = 0; i < Random.Range(0, numHearts); i++) 
+		for (int i = 0; i < Random.Range(0, numHearts + 1); i++) 
 			PoolManager.instance.ReuseObject(heartPrefab, RandomOffset(transform.position), heartPrefab.transform.rotation, heartPrefab.transform.localScale);
 
 		for (int i = 0; i < numPieces; i++)
