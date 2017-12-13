@@ -1374,7 +1374,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD
     - target: {fileID: 82072894372962322, guid: 0aa0d1d5e8f83c9448822babe119923d,
         type: 2}
       propertyPath: Mute
@@ -1390,8 +1389,6 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 0ea640cc991ea594db5e59f4df1b1dfc, type: 3}
-=======
->>>>>>> 2b5e2b337979f2f39bd872e0f35ae41a77bdcf88
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0aa0d1d5e8f83c9448822babe119923d, type: 2}
   m_IsPrefabParent: 0
