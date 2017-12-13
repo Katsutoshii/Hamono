@@ -480,7 +480,7 @@ public class Player : MonoBehaviour {
 
 			case "Spik":
 				if (!invincible) Damage(0.5f, 0f, other.collider);
-				rb.velocity += 9 * Vector2.up;
+				rb.velocity = new Vector2(rb.velocity.x, 9f);
 				break;
 		}
 	}
