@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Coin : PooledObject {
-	private Player player;
 	private SpriteRenderer spriteRenderer;
 	private BoxCollider2D trigger;
 	private Collider2D collector;
@@ -11,30 +10,14 @@ public class Coin : PooledObject {
 	private Rigidbody2D rb;
 	private Animator animator;
 
-	public float gravitationalPullDistance;
-
 	// Use this for initialization
 	void Start () {
-		player = GameObject.Find("Player").GetComponent<Player>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float coinPlayerDistance = Vector2.Distance(player.transform.position, transform.position);
-		if (coinPlayerDistance <= gravitationalPullDistance)
-			AutoPath();
+		
 	}
-
-	// follows user if close enough
-	private void AutoPath() {
-		rb.gravityScale = 2f;
-		float xDist = player.transform.position.x - transform.position.x;
-		float yDist = player.transform.position.y - transform.position.y;
-
-		if (yDist >= .2f && xDist <= .2f) {
-			rb.velocity = new Vector2(xDist * 5f, yDist * 5f);
-		}
-  }
 
 	public override void OnObjectReuse() {
 		

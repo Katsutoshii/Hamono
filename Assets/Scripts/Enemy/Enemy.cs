@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour {
 
   public bool grounded;
   private bool prevNotice;
-  private bool died;
 
   public float walkingSpeed;
   public float jumpingPower;
@@ -61,7 +60,6 @@ public class Enemy : MonoBehaviour {
     state = State.walking;
     direction = walkingSpeed;
     prevNotice = false;
-    died = false;
     StartCoroutine(ChangeRandomWalkCycle());
 
   }
@@ -297,9 +295,8 @@ public class Enemy : MonoBehaviour {
 			if ( healthAmount < 0) healthAmount = 0;
 
 			if (healthAmount == 0) {
-        if (state != State.dead && !died) {
+        if (state != State.dead) {
           deathStartTime = Time.time;
-          died = true;
           // destroys the hurtbox
           Destroy(gameObject.transform.GetChild(0).GetComponent<Collider2D>());
         }   

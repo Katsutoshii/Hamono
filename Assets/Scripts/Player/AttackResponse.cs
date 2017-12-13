@@ -28,6 +28,10 @@ public class AttackResponse : MonoBehaviour
                 break;
 
             case Player.AttackResponse.missed:
+                /*
+                player.spriteRenderer.color = Color.red;
+                Damaged();
+                */
                 break;
 
             case Player.AttackResponse.combo:

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RedBlueGames.Tools.TextTyper;
-using UnityEngine.UI;
 
 public class NPC : MonoBehaviour {
 
@@ -69,7 +68,6 @@ public class NPC : MonoBehaviour {
 			npcText.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, 0);
 		}
 		NPCTextChild = npcText.transform.GetChild(1).gameObject.GetComponent<TextTyper>();
-		npcText.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 		NPCTextChild.NPC = gameObject.GetComponent<NPC>();
 		Debug.Log("completed speech?: " + completedSpeech);
 		if (completedSpeech) {
