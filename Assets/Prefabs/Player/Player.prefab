@@ -429,7 +429,7 @@ MonoBehaviour:
   cursorTexture: {fileID: 2800000, guid: 044a019ae00db4f15bca4730f0ad6cea, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
-  dashStaminaCost: 0.04
+  dashStaminaCost: 0.03
   slashStaminaCost: 0.2
   generateStamina: 0.01
   numAfterimage: 4
