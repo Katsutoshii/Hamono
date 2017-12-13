@@ -160,7 +160,6 @@ public class Enemy : MonoBehaviour {
 
       switch (collider.gameObject.layer) {
         case 8: // we hit a wall, so turn around
-          grounded = true;
           direction *= -1;
           transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
           break;
@@ -172,22 +171,13 @@ public class Enemy : MonoBehaviour {
 
       switch (collision.collider.name) {
         case "Spikes":
+          if( state == State.damaged) break;
           Damage(1f, 0, collision.collider);
           rb.velocity += 3 * Vector2.up;
           break;
       }
-
   }
 
-  void OnCollisionExit2D(Collision2D collision) {
-    Collider2D collider = collision.collider;
-
-    switch (collider.gameObject.layer) {
-      case 8:
-        grounded = false;
-        break;
-    }
-  }
 
   private void RandomWalkCycle() {
     if (grounded) {
@@ -293,26 +283,26 @@ public class Enemy : MonoBehaviour {
   // when enemy is first damaged
   private float deathStartTime;
   private void Damage(float damageAmount, float knockback, Collider2D source) {
-		if (state != State.damaged) {
-			damagedStartTime = Time.time;
-			state = State.damaged;
-      if (knockback != 0)
-			  rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
-				  transform.position.y - source.transform.position.y + 1.5f);
+		if (state == State.damaged || state == State.dead) return;
+    damagedStartTime = Time.time;
+    state = State.damaged;
 
-			healthAmount -= damageAmount;
-			if ( healthAmount < 0) healthAmount = 0;
+    if (knockback != 0)
+      rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
+        transform.position.y - source.transform.position.y + 1.5f);
 
-			if (healthAmount == 0) {
-        if (state != State.dead) {
-          deathStartTime = Time.time;
-          // destroys the hurtbox
-          state = State.dead;
-          spriteRenderer.color = Color.red;
-          Destroy(gameObject.transform.GetChild(0).GetComponent<Collider2D>());
-        }   
-      }
-		}
+    healthAmount -= damageAmount;
+    if ( healthAmount < 0) healthAmount = 0;
+
+    if (healthAmount == 0) {
+      if (state != State.dead) {
+        deathStartTime = Time.time;
+        // destroys the hurtbox
+        state = State.dead;
+        spriteRenderer.color = Color.red;
+        Destroy(gameObject.transform.GetChild(0).GetComponent<Collider2D>());
+      }   
+    }
 	}
 
 	private const float JUMP_DELAY = 0.1f;

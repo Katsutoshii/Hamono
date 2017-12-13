@@ -86,7 +86,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collected: {fileID: 8300000, guid: 99e67147f58ec4501bca764687e3d2ae, type: 3}
-  gravitationalPullDistance: 1
+  gravitationalPullDistance: 2
 --- !u!212 &212838587531425152
 SpriteRenderer:
   m_ObjectHideFlags: 1
