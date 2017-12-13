@@ -402,9 +402,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 10
   comboCount: 0
+  maxHealth: 3
   healthAmount: 3
   coinCount: 0
   cointCountText: {fileID: 0}
+  invincible: 0
   state: 0
   attackType: 6
   attackResponse: 5
@@ -415,6 +417,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   stamina: {fileID: 0}
   health: {fileID: 0}
+  damagedTime: 0.2
+  invincibleTime: 2
+  hurtAlpha: 0.6
   dustCloudPrefab: {fileID: 1250923004883462, guid: 3aa9da3f77e263043a0d3c39ab39d9f1,
     type: 2}
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,

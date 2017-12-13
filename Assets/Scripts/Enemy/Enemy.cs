@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour {
 
   public bool grounded;
   private bool prevNotice;
+  private bool died;
 
   public float walkingSpeed;
   public float jumpingPower;
@@ -60,6 +61,7 @@ public class Enemy : MonoBehaviour {
     state = State.walking;
     direction = walkingSpeed;
     prevNotice = false;
+    died = false;
     StartCoroutine(ChangeRandomWalkCycle());
 
   }
@@ -149,6 +151,7 @@ public class Enemy : MonoBehaviour {
     animator.SetBool("walking", state == State.walking);
     animator.SetBool("dead", state == State.dead);
     animator.SetBool("noticed", state == State.noticed);
+    animator.SetBool("grounded", grounded);
   }
 
   // handles case when enemy runs into something
@@ -190,15 +193,16 @@ public class Enemy : MonoBehaviour {
     if (grounded) {
       if (randomWalkToRight) {
         rb.velocity = walkingSpeed * Vector2.right;
-        if (rb.velocity.x > 0) rb.AddForce(Vector2.up * jumpingPower);
+        if (rb.velocity.x > 0) StartCoroutine(Jump(jumpingPower));
       } else {
         rb.velocity = walkingSpeed * Vector2.left;
-        if (rb.velocity.x < 0) rb.AddForce(Vector2.up * jumpingPower);
+        if (rb.velocity.x < 0) StartCoroutine(Jump(jumpingPower));
       }
     }
   }
 
   private void RotateBasedOnDirection() {
+    if (state != State.walking) return;
     if (Mathf.Abs(rb.velocity.x) > 0.05f) {
       if (rb.velocity.x < 0)
         transform.localScale = new Vector3(1, 1, 1);
@@ -247,17 +251,22 @@ public class Enemy : MonoBehaviour {
 		float xDist = player.transform.position.x - transform.position.x;
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
-    if (Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
+    if (Mathf.Abs(xDist) < 0.1 && Mathf.Abs(yDist) < 0.1) {
 			return;
 		}
 
-		// fixes overshooting
-		if (Mathf.Abs(xDist) < SLASHING_X_DIST)
-			rb.velocity = new Vector2(0, rb.velocity.y);
-
 		// otherwise, if we need to move in the x or y direction, do so
-		if (Mathf.Abs(xDist) >= SLASHING_X_DIST) {
+		if (Mathf.Abs(xDist) >= 0.1) {
 			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
+    }
+
+    // adds jumping
+    if (grounded) {
+      if (randomWalkToRight) {
+          if (rb.velocity.x > 0) StartCoroutine(Jump(jumpingPower));
+        } else {
+          if (rb.velocity.x < 0) StartCoroutine(Jump(jumpingPower));
+        }
     }
   }
 
@@ -298,15 +307,32 @@ public class Enemy : MonoBehaviour {
         if (state != State.dead) {
           deathStartTime = Time.time;
           // destroys the hurtbox
+          state = State.dead;
+          spriteRenderer.color = Color.red;
           Destroy(gameObject.transform.GetChild(0).GetComponent<Collider2D>());
         }   
-        state = State.dead;
       }
 		}
 	}
 
+	private const float JUMP_DELAY = 0.1f;
+	private bool jumping = false;
+	private IEnumerator Jump(float jumpPower) {
+		jumping = true;
+		rb.velocity = Vector2.zero;
+		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+		
+		yield return new WaitForSeconds(JUMP_DELAY);
+		rb.velocity = Vector2.up * jumpPower;
+		yield return new WaitForSeconds(JUMP_DELAY);
+		
+		jumping = false;
+		yield return null;
+	}
   // enemy died
   private void Death() {
+    rb.velocity = new Vector2(0, rb.velocity.y);
+    if (Time.time - deathStartTime > .3f) spriteRenderer.color = Color.white;
     // deletes the game object
     if (Time.time - deathStartTime > .8f) {
       for (int i = 0; i < 4; i++)
