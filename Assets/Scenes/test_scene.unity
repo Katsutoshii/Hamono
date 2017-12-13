@@ -184,22 +184,6 @@ Camera:
   m_PrefabParentObject: {fileID: 20672528059436694, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
     type: 2}
   m_PrefabInternal: {fileID: 1473868039}
---- !u!1 &156786411 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1765969217973460, guid: e8f8d6ece32a741cb9cb683305e90a9c,
-    type: 2}
-  m_PrefabInternal: {fileID: 430480202}
---- !u!114 &156786413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 156786411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11929f8b3dbb2c241b11061878fafe45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &162929030 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114160780534258230, guid: 3c53a60cc04983040adac58efe4be6c8,
@@ -555,28 +539,7 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1271265347}
-    - target: {fileID: 61743906592735028, guid: e8f8d6ece32a741cb9cb683305e90a9c,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: 0.050656617
-      objectReference: {fileID: 0}
-    - target: {fileID: 61743906592735028, guid: e8f8d6ece32a741cb9cb683305e90a9c,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 1.1536025
-      objectReference: {fileID: 0}
-    - target: {fileID: 61743906592735028, guid: e8f8d6ece32a741cb9cb683305e90a9c,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: 0.22461668
-      objectReference: {fileID: 0}
-    - target: {fileID: 61743906592735028, guid: e8f8d6ece32a741cb9cb683305e90a9c,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 2.0176916
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114092831440508774, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &462502919
