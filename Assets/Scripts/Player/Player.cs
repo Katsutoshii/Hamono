@@ -204,7 +204,7 @@ public class Player : MonoBehaviour {
 
 	
 	private void RotateSpriteForVelocity() {
-		if (state != State.idle) return;
+		if (!(state == State.idle || state == State.dashing)) return;
 		// turn the sprite around based on velocity
 		if (rb.velocity.x > TURNING_THRESHOLD) {
 			transform.localScale = new Vector3 (1, 1, 1);
