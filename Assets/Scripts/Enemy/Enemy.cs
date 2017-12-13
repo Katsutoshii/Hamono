@@ -12,9 +12,14 @@ public class Enemy : MonoBehaviour {
   private Animator animator;
   public AudioSource audioSource;
 
+  public bool grounded;
+  private bool prevNotice;
+  private bool died;
+
   public float walkingSpeed;
+  public float jumpingPower;
   public float distanceNearPlayer;
-  
+
   private float direction;
   private bool lockOnPlayer;
   private float lastTime;
@@ -29,6 +34,7 @@ public class Enemy : MonoBehaviour {
   public enum State {
     idle,
     walking,
+    noticed,
     attacking,
     damaged,
     dead,
@@ -49,16 +55,20 @@ public class Enemy : MonoBehaviour {
     audioSource = GetComponent<AudioSource>();
     animator = GetComponent<Animator>();
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    spriteRenderer.color = Color.white;
     lockOnPlayer = false;
     lastTime = Time.time;
     state = State.walking;
     direction = walkingSpeed;
+    prevNotice = false;
+    died = false;
     StartCoroutine(ChangeRandomWalkCycle());
 
   }
 
   void Update() {
     CheckForPlayerProximity();
+    UpdateAnimatorVariables();
 
     switch (state) {
       case State.attacking:
@@ -72,9 +82,15 @@ public class Enemy : MonoBehaviour {
       case State.walking:
         Walk();
         break;
+      
+      case State.noticed:
+        Noticed();
+        break;
+      
+      case State.dead:
+        Death();
+        break;
     }
-
-    UpdateAnimatorVariables();
   }
 
   bool randomWalkToRight;
@@ -86,18 +102,33 @@ public class Enemy : MonoBehaviour {
     }
   }
 
+  private float noticedStartTime;
   private void Walk() {
     RotateBasedOnDirection();
     spriteRenderer.color = Color.white;
 
     if (lockOnPlayer) {
       // follow the player
+      if (!prevNotice) {
+        state = State.noticed;
+        prevNotice = true;
+        noticedStartTime = Time.time;
+      }
       AutoPath();
     } 
     else {
       // randomly walk around
       RandomWalkCycle();
     }
+  }
+
+  // enemy notices player
+  private void Noticed() {
+    rb.velocity = new Vector2(0, rb.velocity.y);
+    animator.SetBool("noticed", state == State.noticed);
+    if (Time.time - noticedStartTime > .7f)
+      // give time for the animation to run
+      state = State.walking;
   }
 
   private float damagedStartTime;
@@ -116,6 +147,11 @@ public class Enemy : MonoBehaviour {
   private void UpdateAnimatorVariables() {
     animator.SetFloat("speed", rb.velocity.magnitude);
     animator.SetBool("damaged", state == State.damaged);
+    animator.SetBool("idle", state == State.idle);
+    animator.SetBool("walking", state == State.walking);
+    animator.SetBool("dead", state == State.dead);
+    animator.SetBool("noticed", state == State.noticed);
+    animator.SetBool("grounded", grounded);
   }
 
   // handles case when enemy runs into something
@@ -127,24 +163,42 @@ public class Enemy : MonoBehaviour {
           direction *= -1;
           transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
           break;
-        case 13: // we hit a collectible, so we ignore it
-          Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), collider);
-          break;
 
+        case 15: // we hit a boundary, so turn around
+          rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
+          break;
+      }
+
+      switch (collision.collider.name) {
+        case "Spikes":
+          if( state == State.damaged) break;
+          Damage(1f, 0, collision.collider);
+          rb.velocity += 3 * Vector2.up;
+          break;
       }
   }
 
-  private void RandomWalkCycle() {
-    if (randomWalkToRight) rb.velocity = walkingSpeed * Vector2.right + Vector2.up * rb.velocity.y;
-    else rb.velocity = walkingSpeed * Vector2.left + Vector2.up * rb.velocity.y;
 
+  private void RandomWalkCycle() {
+    if (grounded) {
+      if (randomWalkToRight) {
+        rb.velocity = walkingSpeed * Vector2.right;
+        if (rb.velocity.x > 0) StartCoroutine(Jump(jumpingPower));
+      } else {
+        rb.velocity = walkingSpeed * Vector2.left;
+        if (rb.velocity.x < 0) StartCoroutine(Jump(jumpingPower));
+      }
+    }
   }
 
   private void RotateBasedOnDirection() {
-    if (rb.velocity.x < 0)
-      transform.localScale = new Vector3(-1, 1, 1);
-    else
-      transform.localScale = new Vector3(1, 1, 1);
+    if (state != State.walking) return;
+    if (Mathf.Abs(rb.velocity.x) > 0.05f) {
+      if (rb.velocity.x < 0)
+        transform.localScale = new Vector3(1, 1, 1);
+      else
+        transform.localScale = new Vector3(-1, 1, 1);
+    }
   }
 
   // checks to see if it's close enough to player
@@ -154,8 +208,10 @@ public class Enemy : MonoBehaviour {
       lockOnPlayer = true;
     }
     // the player got out of range for the enemy to follow her
-    if (distance >= 10f)
+    if (distance >= 10f) {
       lockOnPlayer = false;
+      prevNotice = false;
+    }
   }
 
   // attacks player
@@ -169,6 +225,7 @@ public class Enemy : MonoBehaviour {
     } else {
       // the enemy is damaged
       player.attackResponse = Player.AttackResponse.normal;
+      state = State.damaged;
     }
   }
 
@@ -184,18 +241,22 @@ public class Enemy : MonoBehaviour {
 		float xDist = player.transform.position.x - transform.position.x;
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
-    if (Mathf.Abs(xDist) < SLASHING_X_DIST && Mathf.Abs(yDist) < SLASHING_Y_DIST) {
-      // state = State.attacking;
+    if (Mathf.Abs(xDist) < 0.1 && Mathf.Abs(yDist) < 0.1) {
 			return;
 		}
 
-		// fixes overshooting
-		if (Mathf.Abs(xDist) < SLASHING_X_DIST)
-			rb.velocity = new Vector2(0, rb.velocity.y);
-
 		// otherwise, if we need to move in the x or y direction, do so
-		if (Mathf.Abs(xDist) >= SLASHING_X_DIST) {
+		if (Mathf.Abs(xDist) >= 0.1) {
 			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
+    }
+
+    // adds jumping
+    if (grounded) {
+      if (randomWalkToRight) {
+          if (rb.velocity.x > 0) StartCoroutine(Jump(jumpingPower));
+        } else {
+          if (rb.velocity.x < 0) StartCoroutine(Jump(jumpingPower));
+        }
     }
   }
 
@@ -207,8 +268,6 @@ public class Enemy : MonoBehaviour {
   /// <param name="other">The other Collider2D involved in this collision.</param>
   void OnTriggerEnter2D(Collider2D other)
   {
-      if (state == State.damaged || state == State.dead) return;
-
       switch (other.name) {
         case "PlayerSlashHurtBox":
           Damage(receiveSlashDamage, receiveSlashKnockback, other);
@@ -222,26 +281,53 @@ public class Enemy : MonoBehaviour {
 
   
   // when enemy is first damaged
+  private float deathStartTime;
   private void Damage(float damageAmount, float knockback, Collider2D source) {
-		if (state != State.damaged) {
-			damagedStartTime = Time.time;
-			state = State.damaged;
-			rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
-				transform.position.y - source.transform.position.y + 1.5f);
+		if (state == State.damaged || state == State.dead) return;
+    damagedStartTime = Time.time;
+    state = State.damaged;
 
-			healthAmount -= damageAmount;
-			if ( healthAmount < 0) healthAmount = 0;
+    if (knockback != 0)
+      rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
+        transform.position.y - source.transform.position.y + 1.5f);
 
-			if (healthAmount == 0) Death();
-		}
+    healthAmount -= damageAmount;
+    if ( healthAmount < 0) healthAmount = 0;
+
+    if (healthAmount == 0) {
+      if (state != State.dead) {
+        deathStartTime = Time.time;
+        // destroys the hurtbox
+        state = State.dead;
+        spriteRenderer.color = Color.red;
+        Destroy(gameObject.transform.GetChild(0).GetComponent<Collider2D>());
+      }   
+    }
 	}
 
+	private const float JUMP_DELAY = 0.1f;
+	private bool jumping = false;
+	private IEnumerator Jump(float jumpPower) {
+		jumping = true;
+		rb.velocity = Vector2.zero;
+		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+		
+		yield return new WaitForSeconds(JUMP_DELAY);
+		rb.velocity = Vector2.up * jumpPower;
+		yield return new WaitForSeconds(JUMP_DELAY);
+		
+		jumping = false;
+		yield return null;
+	}
   // enemy died
   private void Death() {
+    rb.velocity = new Vector2(0, rb.velocity.y);
+    if (Time.time - deathStartTime > .3f) spriteRenderer.color = Color.white;
     // deletes the game object
-    for (int i = 0; i < 4; i++)
-      PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
-
-    Destroy(gameObject);
+    if (Time.time - deathStartTime > .8f) {
+      for (int i = 0; i < 4; i++)
+        PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
+      Destroy(gameObject);
+    }
   }
 }

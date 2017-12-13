@@ -278,7 +278,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.1214877
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -402,9 +402,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 10
   comboCount: 0
+  maxHealth: 3
   healthAmount: 3
   coinCount: 0
   cointCountText: {fileID: 0}
+  invincible: 0
   state: 0
   attackType: 6
   attackResponse: 5
@@ -415,6 +417,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   stamina: {fileID: 0}
   health: {fileID: 0}
+  damagedTime: 0.3
+  hurtAlpha: 0.4
   dustCloudPrefab: {fileID: 1250923004883462, guid: 3aa9da3f77e263043a0d3c39ab39d9f1,
     type: 2}
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
@@ -424,11 +428,12 @@ MonoBehaviour:
   cursorTexture: {fileID: 2800000, guid: 044a019ae00db4f15bca4730f0ad6cea, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
-  dashStaminaCost: 0.04
+  dashStaminaCost: 0.03
   slashStaminaCost: 0.2
   generateStamina: 0.01
   numAfterimage: 4
   afterimageColor: {r: 0.33574829, g: 0.6135232, b: 0.8455882, a: 0}
+  invincibleFlashes: 8
 --- !u!114 &114869825246196744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -472,7 +477,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 848748911
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

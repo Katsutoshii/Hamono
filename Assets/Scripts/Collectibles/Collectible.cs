@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : PooledObject {
+public class Collectible : PooledObject {
+	private Player player;
 	private SpriteRenderer spriteRenderer;
 	private BoxCollider2D trigger;
 	private Collider2D collector;
@@ -10,22 +11,11 @@ public class Coin : PooledObject {
 	private Rigidbody2D rb;
 	private Animator animator;
 
+	public float gravitationalPullDistance;
+
 	// Use this for initialization
 	void Start () {
-		Init();
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	public override void OnObjectReuse() {
-		Init();
-    }
-
-	private void Init() {
+		player = GameObject.Find("Player").GetComponent<Player>();
 		trigger = GetComponent<BoxCollider2D>();
 		rb = GetComponent<Rigidbody2D>();
 		rb.isKinematic = false;
@@ -37,6 +27,38 @@ public class Coin : PooledObject {
 
 		trigger.enabled = true;
 	}
+	
+	// Update is called once per frame
+	void Update () {
+		float distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
+		if (distanceToPlayer <= gravitationalPullDistance)
+			AutoPath();
+	}
+
+	// follows user if close enough
+	private void AutoPath() {
+		rb.gravityScale = 2f;
+		float xDist = player.transform.position.x - transform.position.x;
+		float yDist = player.transform.position.y - transform.position.y;
+
+		if (yDist >= .2f && xDist <= .2f) {
+			rb.velocity = new Vector2(xDist * 5f, yDist * 5f);
+		}
+  }
+
+	public override void OnObjectReuse() {
+		
+		trigger = GetComponent<BoxCollider2D>();
+		rb = GetComponent<Rigidbody2D>();
+		rb.isKinematic = false;
+		spriteRenderer = GetComponent<SpriteRenderer>();
+
+		animator = GetComponent<Animator>();
+		animator.SetBool("collected", false);
+		spriteRenderer.color = Color.white;
+
+		trigger.enabled = true;
+    }
 
 	/// <summary>
 	/// Sent when an incoming collider makes contact with this object's

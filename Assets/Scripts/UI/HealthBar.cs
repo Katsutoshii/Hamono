@@ -25,18 +25,14 @@ public class HealthBar : MonoBehaviour
   }
 
   public void HandleHealth(float healthAmount) {
-    Debug.Log("mod check: " + (healthAmount - healthAmount % 1f));
     for (int i = 0; i < (int) (healthAmount - healthAmount % 1f); i++) {
-      Debug.Log("i = " + i);
       hearts[i].fillAmount = 1f;
     }
     if ((int)healthAmount == numHearts) {
-      Debug.Log("Full health!");
       return;
     }
 
     // if we have a fractional amount of health left, set the fill amount
-    Debug.Log("Setting heart #" + (int) healthAmount + " to fill amount " + healthAmount %1f);
     hearts[(int) healthAmount].fillAmount = healthAmount % 1f;
 
     // set the rest of the iamges to no heart

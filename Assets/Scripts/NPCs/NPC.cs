@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RedBlueGames.Tools.TextTyper;
+using UnityEngine.UI;
 
 public class NPC : MonoBehaviour {
 
@@ -15,6 +16,12 @@ public class NPC : MonoBehaviour {
 	public HashSet<GameObject> allSpeech;
 	
 	public bool completedSpeech;
+	private bool dialogStarted;
+
+	public Texture2D cursorTexture;
+	public Texture2D speechBubble;
+	public CursorMode cursorMode;
+	public Vector2 hotSpot;
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +36,7 @@ public class NPC : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (dialogStarted && Input.GetMouseButtonDown(0)) StartDialogue(); // continue dialog if we click anwhere
 	}
 
 	/// <summary>
@@ -37,12 +44,22 @@ public class NPC : MonoBehaviour {
 	/// </summary>
 	void OnMouseOver()
 	{
+		Cursor.SetCursor(speechBubble, hotSpot, cursorMode);
 		if(Input.GetMouseButtonDown(1)) {
 			StartDialogue();
 		}
 	}
 
+	/// <summary>
+	/// Called when the mouse is not any longer over the GUIElement or Collider.
+	/// </summary>
+	void OnMouseExit()
+	{
+		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+	}
+
 	private void StartDialogue() {
+		dialogStarted = true;
 		Debug.Log("starting dialogue");
 		// triggers a speech bubble
 		TextTyper NPCTextChild;
@@ -52,15 +69,17 @@ public class NPC : MonoBehaviour {
 			npcText.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, 0);
 		}
 		NPCTextChild = npcText.transform.GetChild(1).gameObject.GetComponent<TextTyper>();
+		npcText.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 		NPCTextChild.NPC = gameObject.GetComponent<NPC>();
 		Debug.Log("completed speech?: " + completedSpeech);
 		if (completedSpeech) {
 			// ending conversation
 			foreach (GameObject item in allSpeech)
 				Destroy(item);
+			dialogStarted = false;
 			completedSpeech = false;
 			npcText = null;
-			player.state = Player.State.idle;
+			player.state = Player.State.finishedTalking;
 		} else if (!completedSpeech && player.state != Player.State.talking) {
 			// starting converstation
 			player.state = Player.State.talking;

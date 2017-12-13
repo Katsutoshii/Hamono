@@ -11,9 +11,6 @@ public class PotPiece : PooledObject {
 	
 	public override void OnObjectReuse() {
 		sprites = Resources.LoadAll<Sprite>("Graphics/Environment/PotParts");
-		foreach (Sprite sprite in sprites) {
-			Debug.Log(sprite.name);
-		}
 
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		spriteRenderer.color = Color.white;

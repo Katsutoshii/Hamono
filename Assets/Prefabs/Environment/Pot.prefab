@@ -37,7 +37,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840072878634930}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1, y: -1.29, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
@@ -98,7 +98,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 752abbac8c4131c4a929649f692bdc96, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cff88094060014a8a883b664fe88d725, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.343
   m_Pitch: 1
@@ -181,9 +181,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 1923347793606866, guid: 8b363b572e089004b96a5158a0897986, type: 2}
+  heartPrefab: {fileID: 1449144718078270, guid: 7de5c466173a44740a0a6f3cabb8774a,
+    type: 2}
   potPiecePrefab: {fileID: 1799168926636986, guid: 0fbca03f4e8bbfc4d9e280157bcc8a53,
     type: 2}
   numCoins: 4
+  numHearts: 1
   numPieces: 5
 --- !u!212 &212858416294701752
 SpriteRenderer:
@@ -216,8 +219,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -129811065
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: 222e81ff0d8a2ee4680796ec5bda395d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

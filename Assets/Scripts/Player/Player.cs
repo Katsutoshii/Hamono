@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
 	public float maxSpeed;
 	public int comboCount;
+	public float maxHealth;
 	public float healthAmount;
 	public int coinCount;
 	public Text cointCountText;
 
+	public bool invincible;
 
 	public enum State {
 		idle,
@@ -19,6 +22,7 @@ public class Player : MonoBehaviour {
 		dashing,
 		slashing,
 		talking,
+		finishedTalking,
 		damaged,
 		dead,
 	};
@@ -57,6 +61,9 @@ public class Player : MonoBehaviour {
 
 	public StaminaBar stamina;
 	public HealthBar health;
+	public float damagedTime;
+	public float hurtAlpha;
+	private float alphaToggleTime;
 
 	public GameObject dustCloudPrefab;
 	public GameObject afterimagePrefab;
@@ -86,12 +93,16 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+		
 		rb = gameObject.GetComponent<Rigidbody2D>();
 		rb.isKinematic = false;
 
     	animator = gameObject.GetComponent<Animator>();
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		audioSource = gameObject.GetComponent<AudioSource>();
+
+		invincible = false;
 
 		state = State.idle;
 		attackType = AttackType.none;
@@ -104,8 +115,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
-	
-		if (state != State.damaged) Controls();
+		if (!(state == State.damaged || state == State.dead))Controls();
 		if (grounded) stamina.IncreaseStamina(generateStamina);
 
 		// actions based on the state
@@ -128,15 +138,19 @@ public class Player : MonoBehaviour {
 				Damaged();
 				break;
 
+			case State.dead:
+				break;
+
 			case State.slashing:
 				CheckForSlashEnd();
 				rb.gravityScale = 0;
 				break;
 
-			default:
+			case State.idle:
 				gameObject.layer = 11;
 				rb.velocity = new Vector2(0, rb.velocity.y);
 				rb.gravityScale = GRAVITY_SCALE;
+				spriteRenderer.color = new Color(1f, 1f, 1f, spriteRenderer.color.a);
 				if (grounded) stamina.IncreaseStamina(generateStamina);
 				break;
 		}		
@@ -150,7 +164,7 @@ public class Player : MonoBehaviour {
 	// method to handle all control inputs inside main loop
 	private void Controls() {
 		// for initiating action
-		if (Input.GetMouseButtonDown(0) && state != State.talking) {
+		if (Input.GetMouseButtonDown(0) && state != State.talking && state != State.finishedTalking) {
 
 			autoPathStartTime = Time.time;
 			state = State.autoPathing;
@@ -161,7 +175,7 @@ public class Player : MonoBehaviour {
 				transform.localScale = new Vector3(1, 1, 1);
 			else 
 				transform.localScale = new Vector3(-1, 1, 1);
-		}
+		} else if (state == State.finishedTalking) state = State.idle;
 
 		if (Input.GetMouseButtonUp(0)) {
 			GetAttackType();
@@ -191,6 +205,7 @@ public class Player : MonoBehaviour {
 
 	
 	private void RotateSpriteForVelocity() {
+		if (!(state == State.idle || state == State.dashing)) return;
 		// turn the sprite around based on velocity
 		if (rb.velocity.x > TURNING_THRESHOLD) {
 			transform.localScale = new Vector3 (1, 1, 1);
@@ -315,12 +330,14 @@ public class Player : MonoBehaviour {
 			attackType = AttackType.none;
 			return;
 		}
-		stamina.DecreaseStamina(dashStaminaCost);
+		
+		float distanceB = Vector2.Distance(rb.position, targetB);
+		stamina.DecreaseStamina(dashStaminaCost * distanceB / 2);
+
 		if (Time.time > attackStartTime + ATTACK_TIMEOUT) {
 			state = State.idle;
 			attackType = AttackType.none;
 		}
-		float distanceB = Vector2.Distance(rb.position, targetB);
 		
 		// if we are mid dash
 		if (distanceB > DASH_TARGET_THRESHOLD) {
@@ -436,10 +453,6 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	private void OnMouseEnter() {
-		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-	}
-
 	// method to play sounds from animator
 	public void PlayOneShot(AudioClip sound) {
 		audioSource.PlayOneShot(sound);
@@ -458,6 +471,18 @@ public class Player : MonoBehaviour {
 				coinCount++;
 				cointCountText.text = "" + coinCount;
 				break;
+
+			case "Hear":
+				healthAmount += 1;
+				healthAmount = Mathf.Min(healthAmount, maxHealth);
+				health.HandleHealth(healthAmount);
+				break;
+
+
+			case "Spik":
+				if (!invincible) Damage(0.5f, 0f, other.collider);
+				rb.velocity = new Vector2(rb.velocity.x, 9f);
+				break;
 		}
 	}
 
@@ -469,37 +494,63 @@ public class Player : MonoBehaviour {
 	{
 		switch (other.name) {
 			case "EnemyHurtBox":
-				if (state != State.dashing && state != State.slashing && state != State.damaged) Damage(0.5f, 2f, other);
+				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) Damage(0.5f, 4f, other);
 				break;
 		}
 	}
 
 	private void Damage(float damageAmount, float knockback, Collider2D source) {
 		Debug.Log("Damaged");
+		invincible = true;
 		damagedStartTime = Time.time;
 		state = State.damaged;
-		rb.velocity = 5 * new Vector2(transform.position.x - source.transform.position.x, 
-			transform.position.y - source.transform.position.y + 1f);
+		if (knockback != 0)
+			rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
+				transform.position.y - source.transform.position.y + 1f);
 
 		healthAmount -= damageAmount;
 		if ( healthAmount < 0) healthAmount = 0;
 
-		if (healthAmount == 0) Death();
 		health.HandleHealth(healthAmount);
 	}
 
 	private float damagedStartTime;
 	private void Damaged() {
 		spriteRenderer.color = Color.red;
-		
-		if (Time.time - damagedStartTime > 0.5f) {
+		if (healthAmount == 0f) StartCoroutine(Death());		
+
+		// check if done being damaged
+		if (Time.time - damagedStartTime > damagedTime) {
 			spriteRenderer.color = Color.white;
 			state = State.idle;
+			StartCoroutine(ToggleAlpha());
 		}
 	}
 
-	private void Death() {
+	public int invincibleFlashes = 4;
+	private IEnumerator ToggleAlpha() {
+		for (int i = 0; i < invincibleFlashes; i++) {
+			Color color = Color.white;
+			if (i % 2 == 0) color.a = hurtAlpha;
+			spriteRenderer.color = color;
+			yield return new WaitForSeconds(0.1f);
+		}
+		Debug.Log("invincible = false");
+		invincible = false;
+		yield return null;
+	}
+
+	private IEnumerator Death() {
+		
 		Debug.Log("Player died!");
+		state = State.damaged;
+		yield return new WaitForSeconds(0.1f);
+
 		state = State.dead;
+		Time.timeScale = 0;
+		yield return new WaitForSecondsRealtime(1);
+
+		Time.timeScale = 1;
+		SceneManager.LoadScene(0);
 	}
 }

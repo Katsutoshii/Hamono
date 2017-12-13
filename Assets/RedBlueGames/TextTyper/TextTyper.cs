@@ -40,11 +40,16 @@
         private float defaultPrintDelay;
         private Coroutine typeTextCoroutine;
 
+        public AudioSource completedCharacterAudio;
         public NPC NPC;
 
         private void AlertCompletion() {
             Debug.Log("The message completed");
             NPC.completedSpeech = true;
+        }
+
+        private void CharacterDone(string character) {
+            completedCharacterAudio.Play();
         }
 
         /// <summary>
@@ -68,6 +73,7 @@
         {
             get
             {
+                characterPrinted.AddListener(CharacterDone);
                 return this.characterPrinted;
             }
         }

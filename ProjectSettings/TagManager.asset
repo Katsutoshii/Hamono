@@ -25,7 +25,7 @@ TagManager:
   - EnemyBoundaries
   - EnemiesDamaged
   - Debris
-  - 
+  - Supports
   - 
   - 
   - 
@@ -48,6 +48,9 @@ TagManager:
     locked: 0
   - name: Terrain
     uniqueID: 1346692145
+    locked: 0
+  - name: Nonentities
+    uniqueID: 4165156231
     locked: 0
   - name: EntityBackground
     uniqueID: 3844649733

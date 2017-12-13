@@ -174,7 +174,7 @@ AudioSource:
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -254,6 +254,9 @@ MonoBehaviour:
   coinPrefab: {fileID: 1923347793606866, guid: 8b363b572e089004b96a5158a0897986, type: 2}
   potPiecePrefab: {fileID: 1799168926636986, guid: 0fbca03f4e8bbfc4d9e280157bcc8a53,
     type: 2}
+  heartPrefab: {fileID: 1449144718078270, guid: 7de5c466173a44740a0a6f3cabb8774a,
+    type: 2}
+  timeScale: 1
 --- !u!114 &114156157777855168
 MonoBehaviour:
   m_ObjectHideFlags: 1
