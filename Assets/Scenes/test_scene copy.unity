@@ -1838,6 +1838,16 @@ Prefab:
       propertyPath: maxX
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
+        type: 2}
+      propertyPath: minY
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
+        type: 2}
+      propertyPath: maxY
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f3a96970d9140b4aa5fd9d7e25b51af, type: 2}
   m_IsPrefabParent: 0
