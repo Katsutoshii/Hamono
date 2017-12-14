@@ -40,8 +40,6 @@ public class CameraController : MonoBehaviour {
                 Bound(transform.position.x, minX, maxX),
                 Bound(transform.position.y, minY, maxY), 
                 transform.position.z);
-        } else {
-            Debug.Log("camera not following: " + player.attackResponse);
         }
 
     }

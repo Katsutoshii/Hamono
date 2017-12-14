@@ -19,6 +19,7 @@ public class AttackResponse : MonoBehaviour
         HandleAttacks();
     }
 
+    // handles everything after a response is given for an attack
     private void HandleAttacks() {
         switch (player.attackResponse) {
             case Player.AttackResponse.normal:
@@ -48,7 +49,6 @@ public class AttackResponse : MonoBehaviour
 
     private void Normal() {
         Debug.Log("this is a normal response to attacking");
-        // player.attackResponse = Player.AttackResponse.none;
     }
 
     private void Strong() {
@@ -61,7 +61,6 @@ public class AttackResponse : MonoBehaviour
 
     private void Missed() {
         Debug.Log("the player missed");
-        // player.attackResponse = Player.AttackResponse.none;
     }
 
     private void Combo() {
