@@ -117,6 +117,7 @@ public class Player : MonoBehaviour {
 	void Update() {
 		if (!(state == State.damaged || state == State.dead))Controls();
 		if (grounded) stamina.IncreaseStamina(generateStamina);
+		if (attackType == AttackType.none) attackResponse = AttackResponse.none;
 
 		// actions based on the state
 		switch (state) {
@@ -407,6 +408,7 @@ public class Player : MonoBehaviour {
 				break;
 			
 			case AttackType.none:
+				attackResponse = AttackResponse.none;
 				break;
 		}
 
@@ -495,6 +497,7 @@ public class Player : MonoBehaviour {
 		switch (other.name) {
 			case "EnemyHurtBox":
 				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) Damage(0.5f, 4f, other);
+				else attackResponse = AttackResponse.normal;
 				break;
 		}
 	}
@@ -503,6 +506,7 @@ public class Player : MonoBehaviour {
 		Debug.Log("Damaged");
 		invincible = true;
 		damagedStartTime = Time.time;
+		attackResponse = AttackResponse.missed;
 		state = State.damaged;
 		if (knockback != 0)
 			rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
