@@ -70,27 +70,7 @@ public class Enemy : MonoBehaviour {
     CheckForPlayerProximity();
     UpdateAnimatorVariables();
 
-    switch (state) {
-      case State.attacking:
-        Attack();
-        break;
-
-      case State.damaged:
-        Damaged();
-        break;
-
-      case State.walking:
-        Walk();
-        break;
-      
-      case State.noticed:
-        Noticed();
-        break;
-      
-      case State.dead:
-        Death();
-        break;
-    }
+    HandleState();
   }
 
   bool randomWalkToRight;
@@ -328,6 +308,30 @@ public class Enemy : MonoBehaviour {
       for (int i = 0; i < 4; i++)
         PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
       Destroy(gameObject);
+    }
+  }
+
+  private void HandleState() {
+    switch (state) {
+      case State.attacking:
+        Attack();
+        break;
+
+      case State.damaged:
+        Damaged();
+        break;
+
+      case State.walking:
+        Walk();
+        break;
+      
+      case State.noticed:
+        Noticed();
+        break;
+      
+      case State.dead:
+        Death();
+        break;
     }
   }
 }
