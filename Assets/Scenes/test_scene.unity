@@ -1627,6 +1627,12 @@ Prefab:
       propertyPath: decreaseFactor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
+        type: 2}
+      propertyPath: screenFlash
+      value: 
+      objectReference: {fileID: 1768297942633858, guid: 320be759e8bf24a1997f117d26b1292a,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f3a96970d9140b4aa5fd9d7e25b51af, type: 2}
   m_IsPrefabParent: 0
