@@ -13,6 +13,11 @@ public class CameraController : MonoBehaviour {
     public float SCROLL_SPEED;
     public float smoothTime;
 
+	public float shakeDuration;
+	public float shakeAmount;
+	public float decreaseFactor;
+    private Vector3 originalPosition;
+
     private Vector3 offset;         // offset between the player and the camera
     private Vector3 velocity = Vector3.zero;
 
@@ -24,6 +29,9 @@ public class CameraController : MonoBehaviour {
 
         // Calculate and store the offset value by getting the distance between the player's position and camera's position.
         offset = transform.position - player.transform.position;
+
+        // original position of the camera
+        originalPosition = transform.position;
     }
     
     // LateUpdate is called after Update each frame
@@ -41,7 +49,21 @@ public class CameraController : MonoBehaviour {
                 Bound(transform.position.y, minY, maxY), 
                 transform.position.z);
         }
+        
+        if (player.state == Player.State.damaged) shakeDuration = .5f;
+        else shakeDuration = 0f;
+        ShakeCamera();
 
+    }
+
+    private void ShakeCamera() {
+        if (shakeDuration > 0) {
+            transform.position = originalPosition + Random.insideUnitSphere * shakeAmount;
+            shakeDuration -= Time.deltaTime * decreaseFactor;
+        } else {
+            shakeDuration = 0f;
+            originalPosition = transform.position;
+        }
     }
 
     private float Bound(float val, float min, float max) {
