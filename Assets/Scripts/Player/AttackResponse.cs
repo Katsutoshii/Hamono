@@ -49,10 +49,11 @@ public class AttackResponse : MonoBehaviour
 
     private void Normal() {
         Debug.Log("this is a normal response to attacking");
+        player.stamina.IncreaseStamina(player.generateStamina * 10f);
     }
 
     private void Strong() {
-
+        player.stamina.IncreaseStamina(player.generateStamina * 20f);
     }
 
     private void Blocked() {
@@ -61,9 +62,10 @@ public class AttackResponse : MonoBehaviour
 
     private void Missed() {
         Debug.Log("the player missed");
+        player.stamina.DecreaseStamina(player.dashStaminaCost * 6f);
     }
 
     private void Combo() {
-
+        if (player.comboCount > 0) player.stamina.IncreaseStamina(player.generateStamina * 20f * player.comboCount);
     }
 }
