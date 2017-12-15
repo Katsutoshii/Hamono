@@ -69,7 +69,6 @@ public partial class Player : MonoBehaviour {
 			(Mathf.Abs(yDist) < AUTOPATH_Y_THRESHOLD && grounded));			// OR we are gorunded and meet the grounded thresh
 
 		if (positionReached) {
-            Debug.Log("Reached target!");
             rb.velocity = new Vector2(0, rb.velocity.y);
 			// if we are at the position to start slashing, freeze until we have an attack!
 			if (Input.GetMouseButton(0) || attackType != AttackType.none) {		// if we have an attack queued or we are still drawing

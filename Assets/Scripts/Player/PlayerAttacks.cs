@@ -23,7 +23,6 @@ public partial class Player : MonoBehaviour {
 
 	// method for when autopathing is complete and ready to make an attack
 	public void Ready() {
-		Debug.Log("ready!");
 		rb.gravityScale = 0; // float
 		
 		rb.velocity = Vector2.zero;
@@ -43,7 +42,6 @@ public partial class Player : MonoBehaviour {
 	// method to handle dashing
 	// this is only called when auto pathing is completed!
 	public void Dash() {
-		Debug.Log("dash!");
 		rb.gravityScale = 0;
 		gameObject.layer = LayerMask.NameToLayer("Dashing");
 
@@ -95,7 +93,6 @@ public partial class Player : MonoBehaviour {
 
 	// method to perform the slash
 	public void Attack() {
-		Debug.Log("attack!");
 		if (attackType != AttackType.none) stamina.DecreaseStamina(slashStaminaCost);
 		attackStartTime = Time.time;
 

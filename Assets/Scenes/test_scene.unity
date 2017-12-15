@@ -1381,16 +1381,6 @@ Prefab:
       propertyPath: coinCountText
       value: 
       objectReference: {fileID: 1985458875}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: generateStamina
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: dashStaminaCost
-      value: 0.002
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0

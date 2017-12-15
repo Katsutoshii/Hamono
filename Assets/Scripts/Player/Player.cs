@@ -204,7 +204,6 @@ public partial class Player : MonoBehaviour {
 	/// <param name="other">The other Collider involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log("Player Collided with" + other.name);
 		switch (other.name) {
 			case "EnemyHurtBox":
 				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) Damage(0.5f, 4f, other);
@@ -214,7 +213,6 @@ public partial class Player : MonoBehaviour {
 	}
 
 	private void Damage(float damageAmount, float knockback, Collider2D source) {
-		Debug.Log("Damaged");
 		invincible = true;
 		damagedStartTime = Time.time;
 		attackResponse = AttackResponse.missed;
@@ -250,14 +248,11 @@ public partial class Player : MonoBehaviour {
 			spriteRenderer.color = color;
 			yield return new WaitForSeconds(0.1f);
 		}
-		Debug.Log("invincible = false");
 		invincible = false;
 		yield return null;
 	}
 
 	private IEnumerator Death() {
-		
-		Debug.Log("Player died!");
 		state = State.damaged;
 		yield return new WaitForSeconds(0.1f);
 
@@ -307,7 +302,6 @@ public partial class Player : MonoBehaviour {
 	}
 	
 	public void ResetToIdle() {
-		Debug.Log("Resetting player");
 		state = Player.State.idle;
 		attackType = Player.AttackType.none;
 		rb.gravityScale = Player.GRAVITY_SCALE;
