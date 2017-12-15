@@ -46,6 +46,9 @@ public class AttackResponse : MonoBehaviour
             default:
                 break;
         }
+
+        // clear the attack after processing it
+        player.attackResponse = Player.AttackResponse.none;
     }
 
     private void Normal() {
