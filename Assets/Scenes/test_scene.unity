@@ -156,11 +156,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+    - target: {fileID: 114869825246196744, guid: 912ce30ba4d82244d8548995963ae710,
         type: 2}
-      propertyPath: cointCountText
+      propertyPath: camera
       value: 
-      objectReference: {fileID: 1985458875}
+      objectReference: {fileID: 979757669}
     - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
         type: 2}
       propertyPath: slashIndicator
@@ -176,21 +176,11 @@ Prefab:
       propertyPath: health
       value: 
       objectReference: {fileID: 162929030}
-    - target: {fileID: 114869825246196744, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: camera
-      value: 
-      objectReference: {fileID: 979757669}
     - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
         type: 2}
-      propertyPath: rb
+      propertyPath: coinCountText
       value: 
-      objectReference: {fileID: 1724886957}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1724886956}
+      objectReference: {fileID: 1985458875}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
@@ -1734,16 +1724,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 881509474}
   m_Script: {fileID: 11500000, guid: 47dd8e2bc532a4505b99fb0a87984744, type: 3}
---- !u!95 &1724886956 stripped
-Animator:
-  m_PrefabParentObject: {fileID: 95266908316134988, guid: 912ce30ba4d82244d8548995963ae710,
-    type: 2}
-  m_PrefabInternal: {fileID: 12333372}
---- !u!50 &1724886957 stripped
-Rigidbody2D:
-  m_PrefabParentObject: {fileID: 50404783047066720, guid: 912ce30ba4d82244d8548995963ae710,
-    type: 2}
-  m_PrefabInternal: {fileID: 12333372}
 --- !u!1001 &1742864631
 Prefab:
   m_ObjectHideFlags: 0
