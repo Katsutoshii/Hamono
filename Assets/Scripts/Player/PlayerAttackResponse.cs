@@ -2,44 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackResponse : MonoBehaviour
+public partial class Player : MonoBehaviour
 {
-    private Player player;
     private float startComboTime;
     private float lastComboTime;
     public CameraController cameraContorller;
     public float timeFreezeDuration;
 
-    // Use this for initialization
-    void Start()
-    {
-        player = gameObject.GetComponent<Player>();
-    }
-
-    void Update() {
-        HandleAttacks();
-    }
 
     // handles everything after a response is given for an attack
-    private void HandleAttacks() {
-        switch (player.attackResponse) {
-            case Player.AttackResponse.normal:
+    private void HandleAttackResponses() {
+        switch (attackResponse) {
+            case AttackResponse.normal:
                 Normal();
                 break;
 
-            case Player.AttackResponse.strong:
+            case AttackResponse.strong:
                 Strong();
                 break;
 
-            case Player.AttackResponse.blocked:
+            case AttackResponse.blocked:
                 Blocked();
                 break;
 
-            case Player.AttackResponse.missed:
+            case AttackResponse.missed:
                 Missed();
                 break;
 
-            case Player.AttackResponse.combo:
+            case AttackResponse.combo:
                 Combo();
                 break;
 
@@ -48,17 +38,17 @@ public class PlayerAttackResponse : MonoBehaviour
         }
 
         // clear the attack after processing it
-        player.attackResponse = Player.AttackResponse.none;
+        attackResponse = AttackResponse.none;
     }
 
     private void Normal() {
         Debug.Log("this is a normal response to attacking");
         StartCoroutine(FreezeTime());
-        player.stamina.IncreaseStamina(player.generateStamina * 10f);
+        stamina.IncreaseStamina(generateStamina * 10f);
     }
 
     private void Strong() {
-        player.stamina.IncreaseStamina(player.generateStamina * 20f);
+        stamina.IncreaseStamina(generateStamina * 20f);
     }
 
     private void Blocked() {
@@ -68,11 +58,11 @@ public class PlayerAttackResponse : MonoBehaviour
     public float missStaminaPenalty;
     private void Missed() {
         Debug.Log("the player missed");
-        player.stamina.DecreaseStamina(missStaminaPenalty);
+        stamina.DecreaseStamina(missStaminaPenalty);
     }
 
     private void Combo() {
-        if (player.comboCount > 0) player.stamina.IncreaseStamina(player.generateStamina * 20f * player.comboCount);
+        if (comboCount > 0) stamina.IncreaseStamina(generateStamina * 20f * comboCount);
     }
 
     private bool timeFrozen;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour {
+public partial class Player : MonoBehaviour {
 
 	// current status of player
 	public enum State {
@@ -86,9 +86,6 @@ public class Player : MonoBehaviour {
 	public float readyStartTime;
 	private float alphaToggleTime;
 
-	private PlayerMotion motionHandler;
-	private PlayerAttacks attackHandler;
-
 	// Use this for initialization
 	void Start () {
 		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
@@ -97,12 +94,15 @@ public class Player : MonoBehaviour {
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		audioSource = gameObject.GetComponent<AudioSource>();
 
-		motionHandler = gameObject.GetComponent<PlayerMotion>();
-		attackHandler = gameObject.GetComponent<PlayerAttacks>();
-
 		// start states
 		state = State.idle;
 		attackType = AttackType.none;
+
+		
+		// create pools for attack effects
+		PoolManager.instance.CreatePool(dustCloudPrefab, 1);
+		PoolManager.instance.CreatePool(afterimagePrefab, 10);
+		PoolManager.instance.CreatePool(swordAfterimagePrefab, 20);
 	}
 	
 	// Update is called once per frame
@@ -110,10 +110,13 @@ public class Player : MonoBehaviour {
 		if (!(state == State.damaged || state == State.dead)) Controls();
 
 		// handles the current state
-		HandleState();	
+		HandleState();
+
+		// handles the attack responses
+		HandleAttackResponses();	
 		
-		if (state != State.damaged) motionHandler.RotateSpriteForVelocity();
-		if(state != State.dashing) motionHandler.LimitVelocity();
+		if (state != State.damaged) RotateSpriteForVelocity();
+		if(state != State.dashing) LimitVelocity();
 
 		UpdateAnimatorVariables();
 	}
@@ -137,7 +140,7 @@ public class Player : MonoBehaviour {
 		} else if (state == State.finishedTalking) state = State.idle;
 
 		if (Input.GetMouseButtonUp(0)) {
-			attackHandler.GetAttackType();
+			GetAttackType();
 		}
 	}
 
@@ -271,16 +274,16 @@ public class Player : MonoBehaviour {
 			
 			case State.autoPathing:
 				Controls();
-				motionHandler.AutoPath();
+				AutoPath();
 				break;
 
 			case State.ready:
 				Controls();
-				attackHandler.Ready();
+				Ready();
 				break;
 			
 			case State.dashing:
-				attackHandler.Dash();
+				Dash();
 				break;
 
 			case State.damaged:
@@ -291,7 +294,7 @@ public class Player : MonoBehaviour {
 				break;
 
 			case State.slashing:
-				attackHandler.CheckForSlashEnd();
+				CheckForSlashEnd();
 				break;
 
 			case State.idle:

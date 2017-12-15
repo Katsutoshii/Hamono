@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerAttacks : MonoBehaviour {
+public partial class Player : MonoBehaviour {
 
-	private Player player;
-	private Rigidbody2D rb;
 	public float dashStaminaCost;
 	// public constants
 	public float slashStaminaCost;
@@ -15,20 +13,6 @@ public class PlayerAttacks : MonoBehaviour {
 	// effect prefabs
 	public GameObject afterimagePrefab;
 	public GameObject swordAfterimagePrefab;
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
-    void Start()
-    {
-		player = gameObject.GetComponent<Player>();
-		rb = player.rb;
-
-		// create pools for attack effects
-		PoolManager.instance.CreatePool(afterimagePrefab, 10);
-		PoolManager.instance.CreatePool(swordAfterimagePrefab, 20);
-    }
 	
 	// private constants
 	private const float ATTACK_TIMEOUT = 0.5f;
@@ -43,16 +27,16 @@ public class PlayerAttacks : MonoBehaviour {
 		rb.gravityScale = 0; // float
 		
 		rb.velocity = Vector2.zero;
-		if (player.attackType != Player.AttackType.none) Attack();	// attack if we have an attack queued
-		else player.attackResponse = Player.AttackResponse.none;
+		if (attackType != AttackType.none) Attack();	// attack if we have an attack queued
+		else attackResponse = AttackResponse.none;
 
-		if ((player.attackType == Player.AttackType.none && 
-			player.state != Player.State.dashing && 
-			player.state != Player.State.slashing &&
-			(Time.time - player.readyStartTime > READY_FLOAT_TIMEOUT && !player.grounded) // time out if floating
+		if ((attackType == AttackType.none && 
+			state != State.dashing && 
+			state != State.slashing &&
+			(Time.time - readyStartTime > READY_FLOAT_TIMEOUT && !grounded) // time out if floating
 			)) {
 			
-			player.ResetToIdle();
+			ResetToIdle();
 		}
 	}
 
@@ -63,24 +47,24 @@ public class PlayerAttacks : MonoBehaviour {
 		rb.gravityScale = 0;
 		gameObject.layer = 14; // dashing layer
 
-		if (player.stamina.isExhausted() || Time.time > player.attackStartTime + ATTACK_TIMEOUT) {
-			player.ResetToIdle();
+		if (stamina.isExhausted() || Time.time > attackStartTime + ATTACK_TIMEOUT) {
+			ResetToIdle();
 			return;
 		}
 		
-		float distanceB = Vector2.Distance(rb.position, player.targetB);
-		player.stamina.DecreaseStamina(dashStaminaCost * distanceB / 2);
+		float distanceB = Vector2.Distance(rb.position, targetB);
+		stamina.DecreaseStamina(dashStaminaCost * distanceB / 2);
 		
 		// if we are mid dash
 		if (distanceB > DASH_TARGET_THRESHOLD) {
-			rb.velocity = (player.targetB - rb.position) * DASH_SPEED;
+			rb.velocity = (targetB - rb.position) * DASH_SPEED;
 			SpawnSwordAfterimage();
 			SpawnAfterimage();
 		} 
 
 		// otherwise we have completed the dash
 		else {
-			player.ResetToIdle();
+			ResetToIdle();
 		}
 	}
 
@@ -109,41 +93,41 @@ public class PlayerAttacks : MonoBehaviour {
 	// method to perform the slash
 	public void Attack() {
 		Debug.Log("attack!");
-		if (player.attackType != Player.AttackType.none) player.stamina.DecreaseStamina(slashStaminaCost);
-		player.attackStartTime = Time.time;
+		if (attackType != AttackType.none) stamina.DecreaseStamina(slashStaminaCost);
+		attackStartTime = Time.time;
 
 		// handles current attack type
 		HandleAttack();
 
-		player.UpdateAnimatorVariables();
+		UpdateAnimatorVariables();
 	}
 
 	private const float MIN_ATTACK_THRESH = 0.2f;
 	public void GetAttackType() {
 		
-		player.targetB = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		targetB = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-		float dist = Vector2.Distance(player.targetA, player.targetB);
+		float dist = Vector2.Distance(targetA, targetB);
 
-		if (dist < MIN_ATTACK_THRESH) player.attackType = Player.AttackType.none;
-		else if (dist > Player.SLASHING_THRESHOLD) {
-			player.attackType = Player.AttackType.dash;
+		if (dist < MIN_ATTACK_THRESH) attackType = AttackType.none;
+		else if (dist > SLASHING_THRESHOLD) {
+			attackType = AttackType.dash;
 			// dashing is handle on a frame-by-frame basis
 		}
 		else
-			player.attackType = CalcSlashType(); 	// sets slashType to the correct type of slash
+			attackType = CalcSlashType(); 	// sets slashType to the correct type of slash
 	}
 	
 	// method to get the slash type based on targetA and targetB
-	private Player.AttackType CalcSlashType(){
-		Player.AttackType slashType;
+	private AttackType CalcSlashType(){
+		AttackType slashType;
 		// if this is a jab
-		float angle = Mathf.Atan2(player.targetB.y - player.targetA.y, 
-			Mathf.Abs(player.targetB.x - player.targetA.x)) * 180 / Mathf.PI;
+		float angle = Mathf.Atan2(targetB.y - targetA.y, 
+			Mathf.Abs(targetB.x - targetA.x)) * 180 / Mathf.PI;
 
-		if(angle > 30) slashType = Player.AttackType.upSlash;
-		else if(angle < -30) slashType = Player.AttackType.downSlash;
-		else slashType = Player.AttackType.straightSlash;
+		if(angle > 30) slashType = AttackType.upSlash;
+		else if(angle < -30) slashType = AttackType.downSlash;
+		else slashType = AttackType.straightSlash;
 		
 		return slashType;
 	}
@@ -151,30 +135,30 @@ public class PlayerAttacks : MonoBehaviour {
 	public void CheckForSlashEnd() {
 
 		// check if the slash is over by seeing if the current playing animation is idle
-		if (!(player.animator.GetBool("slashing") || 
-				player.animator.GetBool("upSlashing") || 
-				player.animator.GetBool("downSlashing"))) {
-			player.ResetToIdle();
+		if (!(animator.GetBool("slashing") || 
+				animator.GetBool("upSlashing") || 
+				animator.GetBool("downSlashing"))) {
+			ResetToIdle();
 		}
 	}
 
 
 	private void HandleAttack() {
-		switch (player.attackType) {
-			case Player.AttackType.upSlash:
-				player.state = Player.State.slashing;
+		switch (attackType) {
+			case AttackType.upSlash:
+				state = State.slashing;
 				break;
 
-			case Player.AttackType.downSlash:
-				player.state = Player.State.slashing;
+			case AttackType.downSlash:
+				state = State.slashing;
 				break;
 
-			case Player.AttackType.straightSlash:
-				player.state = Player.State.slashing;
+			case AttackType.straightSlash:
+				state = State.slashing;
 				break;
 
-			case Player.AttackType.dash:
-				player.state = Player.State.dashing;
+			case AttackType.dash:
+				state = State.dashing;
 				break;
 		}
 	}
