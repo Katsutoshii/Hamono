@@ -69,9 +69,6 @@ public class Player : MonoBehaviour {
 	public Text coinCountText;
 	public bool jumping = false;
 	
-
-	
-
 	// ui/ux elements
 	public Texture2D cursorTexture;
 	public CursorMode cursorMode;
@@ -82,8 +79,6 @@ public class Player : MonoBehaviour {
     public const float SLASHING_THRESHOLD = 3.5f;
 	
 	public const float GRAVITY_SCALE = 2f;
-
-
 
 	// private start times
 	public float attackStartTime;
@@ -113,8 +108,6 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		if (!(state == State.damaged || state == State.dead)) Controls();
-		if (grounded) stamina.IncreaseStamina(generateStamina);
-		if (attackType == AttackType.none) attackResponse = AttackResponse.none;
 
 		// handles the current state
 		HandleState();	
@@ -208,6 +201,7 @@ public class Player : MonoBehaviour {
 	/// <param name="other">The other Collider involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other)
 	{
+		Debug.Log("Player Collided with" + other.name);
 		switch (other.name) {
 			case "EnemyHurtBox":
 				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) Damage(0.5f, 4f, other);
@@ -240,7 +234,7 @@ public class Player : MonoBehaviour {
 		// check if done being damaged
 		if (Time.time - damagedStartTime > damagedTime) {
 			spriteRenderer.color = Color.white;
-			state = State.idle;
+			ResetToIdle();
 			StartCoroutine(ToggleAlpha());
 		}
 	}
@@ -276,10 +270,12 @@ public class Player : MonoBehaviour {
 		switch (state) {
 			
 			case State.autoPathing:
+				Controls();
 				motionHandler.AutoPath();
 				break;
 
 			case State.ready:
+				Controls();
 				attackHandler.Ready();
 				break;
 			
@@ -296,16 +292,29 @@ public class Player : MonoBehaviour {
 
 			case State.slashing:
 				attackHandler.CheckForSlashEnd();
-				rb.gravityScale = 0;
 				break;
 
 			case State.idle:
-				gameObject.layer = 11;
-				rb.velocity = new Vector2(0, rb.velocity.y);
-				rb.gravityScale = GRAVITY_SCALE;
-				spriteRenderer.color = new Color(1f, 1f, 1f, spriteRenderer.color.a);
+				Controls();
 				if (grounded) stamina.IncreaseStamina(generateStamina);
+				rb.gravityScale = GRAVITY_SCALE;
+				rb.velocity = new Vector2(0, rb.velocity.y);
 				break;
 		}	
+	}
+	
+	public void ResetToIdle() {
+		Debug.Log("Resetting player");
+		state = Player.State.idle;
+		attackType = Player.AttackType.none;
+		rb.gravityScale = Player.GRAVITY_SCALE;
+		rb.velocity = new Vector2(0, rb.velocity.y);
+	}
+
+	private void Idle() {
+		rb.velocity = new Vector2(0, rb.velocity.y);
+		rb.gravityScale = GRAVITY_SCALE;
+		spriteRenderer.color = new Color(1f, 1f, 1f, spriteRenderer.color.a);
+		if (grounded) stamina.IncreaseStamina(generateStamina);
 	}
 }

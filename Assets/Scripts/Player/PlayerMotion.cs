@@ -11,7 +11,7 @@ public class PlayerMotion : MonoBehaviour {
 	private const float TURNING_THRESHOLD = 0.1f;
 
 	public const float KP = 4f;
-	public float maxSpeed;
+	public Vector2 maxSpeed;
 
     // effect prefabs
     // special effects game objects
@@ -44,13 +44,12 @@ public class PlayerMotion : MonoBehaviour {
 
 	public void LimitVelocity() {
 		// limit the velocity
-		if (player.rb.velocity.x > maxSpeed) {
-			rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
-		}
-		else if (rb.velocity.x < -maxSpeed) {
-			rb.velocity = new Vector2(-maxSpeed, rb.velocity.y);
-		}
+		rb.velocity = new Vector2(Bound(rb.velocity.x, -maxSpeed.x, maxSpeed.x), Bound(rb.velocity.y, -maxSpeed.y, maxSpeed.y));
 	}
+
+    private float Bound(float val, float min, float max) {
+        return Mathf.Max(Mathf.Min(val, max), min);
+    }
 
 
 	private const float SLASHING_X_DIST = 1f;
@@ -65,15 +64,15 @@ public class PlayerMotion : MonoBehaviour {
 
 	// method to handle the autopathing
 	public void AutoPath() {
+        rb.gravityScale = Player.GRAVITY_SCALE;
 
-		rb.gravityScale = Player.GRAVITY_SCALE;
 		float xDist = player.targetA.x - transform.position.x;
-		float yDist = player.targetA.y - transform.position.y + 0.5f;
+		float yDist = player.targetA.y - transform.position.y;
+        if (transform.position.y < player.targetA.y) yDist += 0.5f;
 
 		// timeout if the player
 		if (Time.time > player.autoPathStartTime + AUTOPATH_TIMEOUT) {
-			player.state = Player.State.idle;
-			rb.velocity = new Vector2(0, 0);
+			player.ResetToIdle();
 			return;
 		}
 
@@ -85,6 +84,8 @@ public class PlayerMotion : MonoBehaviour {
 			(Mathf.Abs(yDist) < AUTOPATH_Y_THRESHOLD && player.grounded));			// OR we are gorunded and meet the grounded thresh
 
 		if (positionReached) {
+            Debug.Log("Reached target!");
+            rb.velocity = Vector2.zero;
 			// if we are at the position to start slashing, freeze until we have an attack!
 			if (Input.GetMouseButton(0) || player.attackType != Player.AttackType.none) {		// if we have an attack queued or we are still drawing
 				

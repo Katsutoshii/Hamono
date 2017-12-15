@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4413722616883630}
   - component: {fileID: 61203960177793454}
   - component: {fileID: 114168312230010564}
-  m_Layer: 11
+  m_Layer: 14
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf559d8d002712e4f8e1a69c2eef846f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: {x: 10, y: 15}
   dustCloudPrefab: {fileID: 1250923004883462, guid: 3aa9da3f77e263043a0d3c39ab39d9f1,
     type: 2}
 --- !u!114 &114494229243757060

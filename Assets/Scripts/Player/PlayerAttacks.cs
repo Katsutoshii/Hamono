@@ -39,41 +39,37 @@ public class PlayerAttacks : MonoBehaviour {
 
 	// method for when autopathing is complete and ready to make an attack
 	public void Ready() {
+		Debug.Log("ready!");
+		rb.gravityScale = 0; // float
 		
-		rb.velocity = new Vector3(0, 0);
-		Attack();	// will do nothing unless an attack is set
+		rb.velocity = Vector2.zero;
+		if (player.attackType != Player.AttackType.none) Attack();	// attack if we have an attack queued
+		else player.attackResponse = Player.AttackResponse.none;
 
 		if ((player.attackType == Player.AttackType.none && 
 			player.state != Player.State.dashing && 
 			player.state != Player.State.slashing &&
 			(Time.time - player.readyStartTime > READY_FLOAT_TIMEOUT && !player.grounded) // time out if floating
 			)) {
-
-			player.state = Player.State.idle;
-			player.attackType = Player.AttackType.none;
+			
+			player.ResetToIdle();
 		}
-		
-		rb.gravityScale = 0;
 	}
 
 	// method to handle dashing
 	// this is only called when auto pathing is completed!
 	public void Dash() {
-		gameObject.layer = 14;
-		if (player.stamina.isExhausted()) {
-			rb.velocity = new Vector3(0, 0, 0);
-			player.state = Player.State.idle;
-			player.attackType = Player.AttackType.none;
+		Debug.Log("dash!");
+		rb.gravityScale = 0;
+		gameObject.layer = 14; // dashing layer
+
+		if (player.stamina.isExhausted() || Time.time > player.attackStartTime + ATTACK_TIMEOUT) {
+			player.ResetToIdle();
 			return;
 		}
 		
 		float distanceB = Vector2.Distance(rb.position, player.targetB);
 		player.stamina.DecreaseStamina(dashStaminaCost * distanceB / 2);
-
-		if (Time.time > player.attackStartTime + ATTACK_TIMEOUT) {
-			player.state = Player.State.idle;
-			player.attackType = Player.AttackType.none;
-		}
 		
 		// if we are mid dash
 		if (distanceB > DASH_TARGET_THRESHOLD) {
@@ -84,13 +80,8 @@ public class PlayerAttacks : MonoBehaviour {
 
 		// otherwise we have completed the dash
 		else {
-			rb.velocity = new Vector3(0, 0, 0);
-			gameObject.layer = 11;
-			player.state = Player.State.idle;
-			player.attackType = Player.AttackType.none;
+			player.ResetToIdle();
 		}
-		
-		rb.gravityScale = 0;
 	}
 
 	private int afterimageCount = 0;
@@ -117,6 +108,7 @@ public class PlayerAttacks : MonoBehaviour {
 
 	// method to perform the slash
 	public void Attack() {
+		Debug.Log("attack!");
 		if (player.attackType != Player.AttackType.none) player.stamina.DecreaseStamina(slashStaminaCost);
 		player.attackStartTime = Time.time;
 
@@ -162,10 +154,10 @@ public class PlayerAttacks : MonoBehaviour {
 		if (!(player.animator.GetBool("slashing") || 
 				player.animator.GetBool("upSlashing") || 
 				player.animator.GetBool("downSlashing"))) {
-			player.state = Player.State.idle;
-			player.attackType = Player.AttackType.none;
+			player.ResetToIdle();
 		}
 	}
+
 
 	private void HandleAttack() {
 		switch (player.attackType) {
@@ -183,10 +175,6 @@ public class PlayerAttacks : MonoBehaviour {
 
 			case Player.AttackType.dash:
 				player.state = Player.State.dashing;
-				break;
-			
-			case Player.AttackType.none:
-				player.attackResponse = Player.AttackResponse.none;
 				break;
 		}
 	}
