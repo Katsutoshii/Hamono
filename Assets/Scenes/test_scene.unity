@@ -1815,10 +1815,10 @@ Prefab:
       propertyPath: coinCountText
       value: 
       objectReference: {fileID: 1985458875}
-    - target: {fileID: 50404783047066720, guid: 912ce30ba4d82244d8548995963ae710,
+    - target: {fileID: 114484034026400498, guid: 912ce30ba4d82244d8548995963ae710,
         type: 2}
-      propertyPath: m_Mass
-      value: 1
+      propertyPath: maxSpeed.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
