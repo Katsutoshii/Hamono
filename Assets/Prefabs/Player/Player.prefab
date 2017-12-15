@@ -440,7 +440,7 @@ MonoBehaviour:
     type: 2}
   numAfterimage: 4
   afterimageColor: {r: 0.5268166, g: 0.8124567, b: 0.85294116, a: 0}
-  maxSpeed: {x: 0, y: 0}
+  maxSpeed: {x: 10, y: 20}
   dustCloudPrefab: {fileID: 1250923004883462, guid: 3aa9da3f77e263043a0d3c39ab39d9f1,
     type: 2}
 --- !u!212 &212073600475020504
