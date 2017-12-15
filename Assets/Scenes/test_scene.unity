@@ -1330,12 +1330,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0aa0d1d5e8f83c9448822babe119923d, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &979757669 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
-    type: 2}
-  m_PrefabInternal: {fileID: 1473868039}
-  m_Script: {fileID: 11500000, guid: 3f686e9100c73bc41a8d58a389a5a3f2, type: 3}
 --- !u!114 &1271265347 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
@@ -1790,11 +1784,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114869825246196744, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: cameraContorller
-      value: 
-      objectReference: {fileID: 979757669}
     - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
         type: 2}
       propertyPath: slashIndicator
@@ -1815,11 +1804,6 @@ Prefab:
       propertyPath: coinCountText
       value: 
       objectReference: {fileID: 1985458875}
-    - target: {fileID: 114484034026400498, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: maxSpeed.y
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
