@@ -49,6 +49,7 @@ public partial class Player : MonoBehaviour {
 	// method to handle the autopathing
 	public void AutoPath() {
         rb.gravityScale = GRAVITY_SCALE;
+        if (grounded) stamina.IncreaseStamina(generateStamina);
 
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y;
@@ -69,7 +70,7 @@ public partial class Player : MonoBehaviour {
 
 		if (positionReached) {
             Debug.Log("Reached target!");
-            rb.velocity = Vector2.zero;
+            rb.velocity = new Vector2(0, rb.velocity.y);
 			// if we are at the position to start slashing, freeze until we have an attack!
 			if (Input.GetMouseButton(0) || attackType != AttackType.none) {		// if we have an attack queued or we are still drawing
 				

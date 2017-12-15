@@ -45,7 +45,7 @@ public partial class Player : MonoBehaviour {
 	public void Dash() {
 		Debug.Log("dash!");
 		rb.gravityScale = 0;
-		gameObject.layer = 14; // dashing layer
+		gameObject.layer = LayerMask.NameToLayer("Dashing");
 
 		if (stamina.isExhausted() || Time.time > attackStartTime + ATTACK_TIMEOUT) {
 			ResetToIdle();
@@ -53,7 +53,7 @@ public partial class Player : MonoBehaviour {
 		}
 		
 		float distanceB = Vector2.Distance(rb.position, targetB);
-		stamina.DecreaseStamina(dashStaminaCost * distanceB / 2);
+		stamina.DecreaseStamina(dashStaminaCost * distanceB);
 		
 		// if we are mid dash
 		if (distanceB > DASH_TARGET_THRESHOLD) {
