@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackResponse : MonoBehaviour
+public class PlayerAttackResponse : MonoBehaviour
 {
     private Player player;
     private float startComboTime;
     private float lastComboTime;
-    public CameraController camera;
+    public CameraController cameraContorller;
     public float timeFreezeDuration;
 
     // Use this for initialization
     void Start()
     {
-        player = gameObject.GetComponentInParent<Player>();
+        player = gameObject.GetComponent<Player>();
     }
 
     void Update() {
@@ -65,9 +65,10 @@ public class AttackResponse : MonoBehaviour
 
     }
 
+    public float missStaminaPenalty;
     private void Missed() {
         Debug.Log("the player missed");
-        player.stamina.DecreaseStamina(player.dashStaminaCost * 6f);
+        player.stamina.DecreaseStamina(missStaminaPenalty);
     }
 
     private void Combo() {

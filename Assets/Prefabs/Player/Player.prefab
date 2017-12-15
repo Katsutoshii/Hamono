@@ -59,6 +59,8 @@ GameObject:
   - component: {fileID: 95266908316134988}
   - component: {fileID: 114638767232979100}
   - component: {fileID: 82650513785808734}
+  - component: {fileID: 114484034026400498}
+  - component: {fileID: 114831378683315312}
   - component: {fileID: 114869825246196744}
   m_Layer: 11
   m_Name: Player
@@ -364,7 +366,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1485126207038496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f73e00bc37d2bc448239abde11b42b5, type: 3}
+  m_Script: {fileID: 11500000, guid: c4a010b1ed7def24cbcf1ab1f8f37399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114246282131561358
@@ -378,6 +380,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e59f74347c33e54595ed2d080a521ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114484034026400498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1486475674207076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf559d8d002712e4f8e1a69c2eef846f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 10
+  dustCloudPrefab: {fileID: 1250923004883462, guid: 3aa9da3f77e263043a0d3c39ab39d9f1,
+    type: 2}
 --- !u!114 &114494229243757060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -408,6 +424,8 @@ MonoBehaviour:
   autoPathing: 0
   grounded: 1
   invincible: 0
+  targetA: {x: 0, y: 0}
+  targetB: {x: 0, y: 0}
   slashIndicator: {fileID: 0}
   stamina: {fileID: 0}
   health: {fileID: 0}
@@ -418,22 +436,35 @@ MonoBehaviour:
   comboCount: 0
   coinCount: 0
   coinCountText: {fileID: 0}
-  dustCloudPrefab: {fileID: 1250923004883462, guid: 3aa9da3f77e263043a0d3c39ab39d9f1,
-    type: 2}
+  jumping: 0
+  cursorTexture: {fileID: 2800000, guid: 044a019ae00db4f15bca4730f0ad6cea, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
+  generateStamina: 0.01
+  attackStartTime: 0
+  readyStartTime: 0
+  autoPathStartTime: 0
+  damagedStartTime: 0
+  invincibleFlashes: 8
+--- !u!114 &114831378683315312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1486475674207076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e6dbd84fd0de443b9e377d0fbe1d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashStaminaCost: 0.04
+  slashStaminaCost: 0.2
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
     type: 2}
   swordAfterimagePrefab: {fileID: 1497393089588702, guid: 8efcdf899027fc8499e34fd3ce0f1c74,
     type: 2}
-  cursorTexture: {fileID: 2800000, guid: 044a019ae00db4f15bca4730f0ad6cea, type: 3}
-  cursorMode: 0
-  hotSpot: {x: 0, y: 0}
-  maxSpeed: 10
-  generateStamina: 0.01
-  dashStaminaCost: 0.03
-  slashStaminaCost: 0.2
   numAfterimage: 4
-  afterimageColor: {r: 0.33574829, g: 0.6135232, b: 0.8455882, a: 0}
-  invincibleFlashes: 8
+  afterimageColor: {r: 0.5103806, g: 0.7937298, b: 0.86764705, a: 0}
 --- !u!114 &114869825246196744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -442,11 +473,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1486475674207076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4bf8e4b6ad504cc6bdc87dd042248f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b3057eb13d917b409c76b2568d4cb73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
+  cameraContorller: {fileID: 0}
   timeFreezeDuration: 0.1
+  missStaminaPenalty: 0.2
 --- !u!212 &212073600475020504
 SpriteRenderer:
   m_ObjectHideFlags: 1
