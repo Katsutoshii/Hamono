@@ -446,6 +446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
+  timeFreezeDuration: 0.1
 --- !u!212 &212073600475020504
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -8,6 +8,7 @@ public class AttackResponse : MonoBehaviour
     private float startComboTime;
     private float lastComboTime;
     public CameraController camera;
+    public float timeFreezeDuration;
 
     // Use this for initialization
     void Start()
@@ -49,6 +50,7 @@ public class AttackResponse : MonoBehaviour
 
     private void Normal() {
         Debug.Log("this is a normal response to attacking");
+        StartCoroutine(FreezeTime());
         player.stamina.IncreaseStamina(player.generateStamina * 10f);
     }
 
@@ -67,5 +69,14 @@ public class AttackResponse : MonoBehaviour
 
     private void Combo() {
         if (player.comboCount > 0) player.stamina.IncreaseStamina(player.generateStamina * 20f * player.comboCount);
+    }
+
+    private bool timeFrozen;
+    IEnumerator FreezeTime(){
+        timeFrozen = true;
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(timeFreezeDuration);
+        timeFrozen = false;
+        Time.timeScale = 1;
     }
 }
