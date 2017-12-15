@@ -76,7 +76,7 @@ public partial class Player : MonoBehaviour {
 	private AudioSource audioSource;
 	public float generateStamina;
 	
-    public const float SLASHING_THRESHOLD = 3.5f;
+    public const float SLASHING_THRESHOLD = 3.25f;
 	
 	public const float GRAVITY_SCALE = 2f;
 

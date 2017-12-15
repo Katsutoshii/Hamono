@@ -49,11 +49,13 @@ public partial class Player : MonoBehaviour {
 
 		if (stamina.isExhausted() || Time.time > attackStartTime + ATTACK_TIMEOUT) {
 			ResetToIdle();
+			
+			rb.velocity = Vector2.zero;
 			return;
 		}
 		
 		float distanceB = Vector2.Distance(rb.position, targetB);
-		stamina.DecreaseStamina(dashStaminaCost * distanceB);
+		stamina.DecreaseStamina(dashStaminaCost * distanceB * distanceB);
 		
 		// if we are mid dash
 		if (distanceB > DASH_TARGET_THRESHOLD) {
@@ -65,6 +67,7 @@ public partial class Player : MonoBehaviour {
 		// otherwise we have completed the dash
 		else {
 			ResetToIdle();
+			rb.velocity = Vector2.zero;
 		}
 	}
 
