@@ -5,6 +5,9 @@ using UnityEngine;
 public class AttackResponse : MonoBehaviour
 {
     private Player player;
+    private float startComboTime;
+    private float lastComboTime;
+    public CameraController camera;
 
     // Use this for initialization
     void Start()
@@ -16,21 +19,27 @@ public class AttackResponse : MonoBehaviour
         HandleAttacks();
     }
 
+    // handles everything after a response is given for an attack
     private void HandleAttacks() {
         switch (player.attackResponse) {
             case Player.AttackResponse.normal:
+                Normal();
                 break;
 
             case Player.AttackResponse.strong:
+                Strong();
                 break;
 
             case Player.AttackResponse.blocked:
+                Blocked();
                 break;
 
             case Player.AttackResponse.missed:
+                Missed();
                 break;
 
             case Player.AttackResponse.combo:
+                Combo();
                 break;
 
             default:
@@ -38,47 +47,25 @@ public class AttackResponse : MonoBehaviour
         }
     }
 
-    /*
-    private void Damaged() {
-        Debug.Log("Player damaged: " + player.healthAmount);
-        player.attackResponse = Player.AttackResponse.none;
-        if (player.healthAmount <= 0) {
-            // player died
-            Death();
-            return;
-        }
-        player.healthAmount -= .2f;
-    }
-    */
-
-    private void Death() {
-        // notify the user that the player died
-        // trigger death animation/sequence
-        Debug.Log("Player died");
-        // Destroy(player.gameObject);
+    private void Normal() {
+        Debug.Log("this is a normal response to attacking");
+        player.stamina.IncreaseStamina(player.generateStamina * 10f);
     }
 
-    /// <summary>
-    /// Sent each frame where another object is within a trigger collider
-    /// attached to this object (2D physics only).
-    /// </summary>
-    /// <param name="other">The other Collider2D involved in this collision.</param>
-    void OnTriggerStay2D(Collider2D other)
-    {
-      if (player.state == Player.State.idle) {
-        // The player got hit
-        player.attackResponse = Player.AttackResponse.none;
-        player.comboCount = 0;
-      } else {
-        // The player is working with combos
-        player.attackResponse = Player.AttackResponse.combo;
-        player.comboCount++;
-        // Resets the number of jumps
-      }
-    }	
+    private void Strong() {
+        player.stamina.IncreaseStamina(player.generateStamina * 20f);
+    }
 
-    void OnTriggerExit2D(Collider2D collider2D)
-    {
-        player.grounded = false;
+    private void Blocked() {
+
+    }
+
+    private void Missed() {
+        Debug.Log("the player missed");
+        player.stamina.DecreaseStamina(player.dashStaminaCost * 6f);
+    }
+
+    private void Combo() {
+        if (player.comboCount > 0) player.stamina.IncreaseStamina(player.generateStamina * 20f * player.comboCount);
     }
 }

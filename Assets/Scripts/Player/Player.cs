@@ -6,15 +6,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
-	public float maxSpeed;
-	public int comboCount;
-	public float maxHealth;
-	public float healthAmount;
-	public int coinCount;
-	public Text cointCountText;
-
-	public bool invincible;
-
+	// current status of player
 	public enum State {
 		idle,
 		autoPathing,
@@ -48,62 +40,77 @@ public class Player : MonoBehaviour {
 	public AttackType attackType = AttackType.none;
 	public AttackResponse attackResponse = AttackResponse.none;
 
+	// player representation
 	private SpriteRenderer spriteRenderer;
-
-	public bool grounded;
-	public bool autoPathing;
-
-	private Vector2 targetA; 	// start point of a slash
-	private Vector2 targetB;		// end point of a slash
-	public SlashIndicator slashIndicator;
 	public Rigidbody2D rb;
 	public Animator animator;
 
+	// temporary state checkers
+	public bool autoPathing;
+	public bool grounded;
+	public bool invincible;
+
+	// directional targets
+	private Vector2 targetA; 	// start point of a slash
+	private Vector2 targetB;		// end point of a slash
+
+	// visible player information
+	public SlashIndicator slashIndicator;
 	public StaminaBar stamina;
 	public HealthBar health;
+	public float maxHealth;
+	public float healthAmount;
 	public float damagedTime;
 	public float hurtAlpha;
-	private float alphaToggleTime;
 
+	// counters
+	public int comboCount;
+	public int coinCount;
+	public Text coinCountText;
+	
+
+	// special effects game objects
 	public GameObject dustCloudPrefab;
 	public GameObject afterimagePrefab;
 	public GameObject swordAfterimagePrefab;
 
+	// ui/ux elements
 	public Texture2D cursorTexture;
 	public CursorMode cursorMode;
 	public Vector2 hotSpot;
 	private AudioSource audioSource;
 
-	// constants
+	// public constants
 	public const float SLASHING_THRESHOLD = 3.5f;
-	private const float TURNING_THRESHOLD = 0.1f;
 	public const float KP = 4f;
-	private const float GRAVITY_SCALE = 2f;
-	private const float DASH_SPEED = 8f;
-	private const float DASH_TARGET_THRESHOLD = 0.8f;
-	private const float ATTACK_TIMEOUT = 0.5f;
-	private const float AUTOPATH_TIMEOUT = 1.5f;
+	public float maxSpeed;
+	public float generateStamina;
 	public float dashStaminaCost;
 	public float slashStaminaCost;
-	public float generateStamina;
+
+	// private constants
+	private const float ATTACK_TIMEOUT = 0.5f;
+	private const float AUTOPATH_TIMEOUT = 1.5f;
+	private const float DASH_SPEED = 8f;
+	private const float DASH_TARGET_THRESHOLD = 0.8f;
+	private const float GRAVITY_SCALE = 2f;
+	private const float TURNING_THRESHOLD = 0.1f;
 
 
+	// private start times
 	private float attackStartTime;
 	private float autoPathStartTime;
+	private float alphaToggleTime;
 
 	// Use this for initialization
 	void Start () {
 		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-		
-		rb = gameObject.GetComponent<Rigidbody2D>();
 		rb.isKinematic = false;
 
-    	animator = gameObject.GetComponent<Animator>();
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		audioSource = gameObject.GetComponent<AudioSource>();
 
-		invincible = false;
-
+		// start states
 		state = State.idle;
 		attackType = AttackType.none;
 
@@ -117,43 +124,10 @@ public class Player : MonoBehaviour {
 	void Update() {
 		if (!(state == State.damaged || state == State.dead))Controls();
 		if (grounded) stamina.IncreaseStamina(generateStamina);
+		if (attackType == AttackType.none) attackResponse = AttackResponse.none;
 
-		// actions based on the state
-		switch (state) {
-			
-			case State.autoPathing:
-				AutoPath();
-				break;
-
-			case State.ready:
-				Ready();
-				break;
-			
-			case State.dashing:
-				Dash();
-				SpawnAfterimage();
-				break;
-
-			case State.damaged:
-				Damaged();
-				break;
-
-			case State.dead:
-				break;
-
-			case State.slashing:
-				CheckForSlashEnd();
-				rb.gravityScale = 0;
-				break;
-
-			case State.idle:
-				gameObject.layer = 11;
-				rb.velocity = new Vector2(0, rb.velocity.y);
-				rb.gravityScale = GRAVITY_SCALE;
-				spriteRenderer.color = new Color(1f, 1f, 1f, spriteRenderer.color.a);
-				if (grounded) stamina.IncreaseStamina(generateStamina);
-				break;
-		}		
+		// handles the current state
+		HandleState();	
 		
 		if (state != State.damaged) RotateSpriteForVelocity();
 		if(state != State.dashing) LimitVelocity();
@@ -184,8 +158,8 @@ public class Player : MonoBehaviour {
 
 	private void UpdateAnimatorVariables() {
 		// update animator variables
-    	animator.SetBool("grounded", grounded);
-    	animator.SetFloat("speedX", Mathf.Abs(rb.velocity.x));
+    animator.SetBool("grounded", grounded);
+    animator.SetFloat("speedX", Mathf.Abs(rb.velocity.x));
 		animator.SetFloat("velocityY", rb.velocity.y);
 
 		animator.SetBool("dashing", state == State.dashing);
@@ -389,26 +363,8 @@ public class Player : MonoBehaviour {
 		if (attackType != AttackType.none) stamina.DecreaseStamina(slashStaminaCost);
 		attackStartTime = Time.time;
 
-		switch (attackType) {
-			case AttackType.upSlash:
-				state = State.slashing;
-				break;
-
-			case AttackType.downSlash:
-				state = State.slashing;
-				break;
-
-			case AttackType.straightSlash:
-				state = State.slashing;
-				break;
-
-			case AttackType.dash:
-				state = State.dashing;
-				break;
-			
-			case AttackType.none:
-				break;
-		}
+		// handles current attack type
+		HandleAttack();
 
 		UpdateAnimatorVariables();
 	}
@@ -469,7 +425,7 @@ public class Player : MonoBehaviour {
 		switch (other.collider.name.Substring(0, 4)) {
 			case "Coin":
 				coinCount++;
-				cointCountText.text = "" + coinCount;
+				coinCountText.text = "" + coinCount;
 				break;
 
 			case "Hear":
@@ -495,6 +451,7 @@ public class Player : MonoBehaviour {
 		switch (other.name) {
 			case "EnemyHurtBox":
 				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) Damage(0.5f, 4f, other);
+				else attackResponse = AttackResponse.normal;
 				break;
 		}
 	}
@@ -503,6 +460,7 @@ public class Player : MonoBehaviour {
 		Debug.Log("Damaged");
 		invincible = true;
 		damagedStartTime = Time.time;
+		attackResponse = AttackResponse.missed;
 		state = State.damaged;
 		if (knockback != 0)
 			rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
@@ -552,5 +510,67 @@ public class Player : MonoBehaviour {
 
 		Time.timeScale = 1;
 		SceneManager.LoadScene(0);
+	}
+
+	private void HandleState() {
+		switch (state) {
+			
+			case State.autoPathing:
+				AutoPath();
+				break;
+
+			case State.ready:
+				Ready();
+				break;
+			
+			case State.dashing:
+				Dash();
+				SpawnAfterimage();
+				break;
+
+			case State.damaged:
+				Damaged();
+				break;
+
+			case State.dead:
+				break;
+
+			case State.slashing:
+				CheckForSlashEnd();
+				rb.gravityScale = 0;
+				break;
+
+			case State.idle:
+				gameObject.layer = 11;
+				rb.velocity = new Vector2(0, rb.velocity.y);
+				rb.gravityScale = GRAVITY_SCALE;
+				spriteRenderer.color = new Color(1f, 1f, 1f, spriteRenderer.color.a);
+				if (grounded) stamina.IncreaseStamina(generateStamina);
+				break;
+		}	
+	}
+
+	private void HandleAttack() {
+		switch (attackType) {
+			case AttackType.upSlash:
+				state = State.slashing;
+				break;
+
+			case AttackType.downSlash:
+				state = State.slashing;
+				break;
+
+			case AttackType.straightSlash:
+				state = State.slashing;
+				break;
+
+			case AttackType.dash:
+				state = State.dashing;
+				break;
+			
+			case AttackType.none:
+				attackResponse = AttackResponse.none;
+				break;
+		}
 	}
 }
