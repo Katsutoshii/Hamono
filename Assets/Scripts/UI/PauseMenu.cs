@@ -22,21 +22,22 @@ public class PauseMenu : MonoBehaviour {
 
   }
 
-  void Update() {
+  void Update() {}
 
-  }
-
+  // event handler for the resume button
   public void Resume() {
     Destroy(gameObject);
     player.paused = false;
     Time.timeScale = 1.0f;
   }
 
+  // event handler for the quit button
   public void Quit() {
     Destroy(gameObject);
-    // SceneManager.LoadScene(0);
     player.paused = false;
     Time.timeScale = 1.0f;
+    // goes back to the title screen
+    SceneManager.LoadScene(0);
   }
 
 }
