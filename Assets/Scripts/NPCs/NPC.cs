@@ -72,6 +72,7 @@ public class NPC : MonoBehaviour {
 		npcText.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 		NPCTextChild.NPC = gameObject.GetComponent<NPC>();
 		Debug.Log("completed speech?: " + completedSpeech);
+
 		if (completedSpeech) {
 			// ending conversation
 			foreach (GameObject item in allSpeech)
@@ -82,6 +83,7 @@ public class NPC : MonoBehaviour {
 			player.state = Player.State.finishedTalking;
 		} else if (!completedSpeech && player.state != Player.State.talking) {
 			// starting converstation
+			player.ResetToIdle();
 			player.state = Player.State.talking;
 			allSpeech.Add(npcText);
 			NPCTextChild.TypeText(text);

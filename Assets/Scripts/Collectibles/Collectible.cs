@@ -30,7 +30,7 @@ public class Collectible : PooledObject {
 	
 	// Update is called once per frame
 	void Update () {
-		float distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
+		float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 		if (distanceToPlayer <= gravitationalPullDistance)
 			AutoPath();
 	}
@@ -51,6 +51,8 @@ public class Collectible : PooledObject {
 		trigger = GetComponent<BoxCollider2D>();
 		rb = GetComponent<Rigidbody2D>();
 		rb.isKinematic = false;
+		
+		rb.simulated = true;
 		spriteRenderer = GetComponent<SpriteRenderer>();
 
 		animator = GetComponent<Animator>();
@@ -78,6 +80,7 @@ public class Collectible : PooledObject {
 	private void Collect() {
 		animator.SetBool("collected", true);
 		trigger.enabled = false;
+		rb.simulated = false;
 		StartCoroutine(Fade());
 	}
 

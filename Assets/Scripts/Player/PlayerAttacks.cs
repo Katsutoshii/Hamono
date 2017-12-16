@@ -60,6 +60,7 @@ public partial class Player : MonoBehaviour {
 		// if we are mid dash
 		if (distanceB > DASH_TARGET_THRESHOLD) {
 			rb.velocity = (targetB - rb.position) * DASH_SPEED;
+			RotateSpriteForVelocity();
 			SpawnSwordAfterimage();
 			SpawnAfterimage();
 		} 

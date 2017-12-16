@@ -51,7 +51,7 @@ public partial class Player : MonoBehaviour
     }
 
     private void Blocked() {
-
+        staminaBar.DecreaseStamina(missStaminaPenalty * 2);
     }
 
     public float missStaminaPenalty;

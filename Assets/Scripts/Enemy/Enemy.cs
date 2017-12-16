@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour {
   protected GameObject coinPrefab;
   protected GameObject heartPrefab;
   protected GameObject healthBarPrefab;
+  protected GameObject sparkPrefab;
   public State state;
   protected Animator animator;
   public AudioSource audioSource;
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour {
     noticed,
     attacking,
     damaged,
+    blocking,
     dead,
   }
 
@@ -63,6 +65,7 @@ public class Enemy : MonoBehaviour {
 
     coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
     heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
+    sparkPrefab = Resources.Load<GameObject>("Prefabs/FX/Spark");
     healthBarPrefab = transform.GetChild(2).gameObject;
     healthBarPrefab.GetComponent<Canvas>().enabled = false;
 
@@ -121,6 +124,7 @@ public class Enemy : MonoBehaviour {
     animator.SetBool("dead", state == State.dead);
     animator.SetBool("noticed", state == State.noticed);
     animator.SetBool("grounded", grounded);
+    animator.SetBool("blocking", state == State.blocking);
   }
 
   // handles case when enemy runs into something
@@ -164,7 +168,6 @@ public class Enemy : MonoBehaviour {
   protected void CheckForPlayerProximity() {
     float distance = Vector2.Distance(transform.position, player.transform.position);
     if (distance <= distanceNearPlayer) {
-      Debug.Log("Enemy Near player!");
       lockOnPlayer = true;
     }
     // the player got out of range for the enemy to follow her
@@ -207,6 +210,8 @@ public class Enemy : MonoBehaviour {
     // if we need to move in the x or y direction, do so
 		if (Mathf.Abs(xDist) >= 0.1) 
 			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
+
+    RotateBasedOnDirection();
   }
 
   
@@ -215,7 +220,7 @@ public class Enemy : MonoBehaviour {
   /// object (2D physics only).
   /// </summary>
   /// <param name="other">The other Collider2D involved in this collision.</param>
-  void OnTriggerEnter2D(Collider2D other)
+  public virtual void OnTriggerEnter2D(Collider2D other)
   {
       switch (other.name) {
         case "PlayerSlashHurtBox":
@@ -232,9 +237,21 @@ public class Enemy : MonoBehaviour {
   // when enemy is first damaged
   protected float deathStartTime;
   protected virtual void Damage(float damageAmount, float knockback, Collider2D source) {
+
 		if (state == State.damaged || state == State.dead) return;
+
     damagedStartTime = Time.time;
-    state = State.damaged;
+    
+    
+		if (damageAmount > 0) {
+      spriteRenderer.color = Color.red;
+      state = State.damaged;
+    }
+    else state = State.blocking;
+
+    // spawn sparks
+    for (int i = 0; i < 4; i++)
+        PoolManager.instance.ReuseObject(sparkPrefab, RandomOffset(transform.position), transform.rotation, sparkPrefab.transform.localScale);
 
     if (knockback != 0)
       rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
@@ -282,6 +299,10 @@ public class Enemy : MonoBehaviour {
         break;
 
       case State.damaged:
+        Damaged();
+        break;
+
+      case State.blocking:
         Damaged();
         break;
 

@@ -6,6 +6,7 @@ public class Pot : MonoBehaviour {
 	private GameObject coinPrefab;
 	private GameObject heartPrefab;
 	private GameObject potPiecePrefab;
+	private GameObject sparkPrefab;
 	private AudioSource audioSource;
 	private SpriteRenderer spriteRenderer;
 	private BoxCollider2D boxCollider2D;
@@ -22,6 +23,7 @@ public class Pot : MonoBehaviour {
     	coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
     	heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
 		potPiecePrefab = Resources.Load<GameObject>("Prefabs/Environment/PotPiece");
+		sparkPrefab = Resources.Load<GameObject>("Prefabs/FX/Spark");
 	}
 
 	/// <summary>
@@ -54,6 +56,9 @@ public class Pot : MonoBehaviour {
 		for (int i = 0; i < numPieces; i++)
 			PoolManager.instance.ReuseObject(potPiecePrefab, 
 				HamonoLib.RandomOffset(transform.position), HamonoLib.RandomOffset(transform.localEulerAngles), potPiecePrefab.transform.localScale);
+
+			PoolManager.instance.ReuseObject(sparkPrefab, 
+				HamonoLib.RandomOffset(transform.position), HamonoLib.RandomOffset(transform.localEulerAngles), sparkPrefab.transform.localScale);
 
 		spriteRenderer.color = new Color (0, 0, 0, 0);
 		boxCollider2D.enabled = false;

@@ -379,7 +379,7 @@ MonoBehaviour:
   walkingSpeed: 3
   jumpingPower: 8
   distanceNearPlayer: 8
-  healthAmount: 6
+  healthAmount: 3
   receiveSlashDamage: 1
   receiveDashDamage: 1
   receiveSlashKnockback: 1
