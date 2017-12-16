@@ -57,7 +57,7 @@ public class JumpingEnemy : Enemy {
 		
 		yield return new WaitForSeconds(JUMP_DELAY);
 		rb.velocity = Vector2.up * jumpingPower + Vector2.right * xVelocity;
-        //RotateBasedOnDirection();
+        RotateBasedOnDirection();
 		yield return new WaitForSeconds(JUMP_DELAY);
 		
 		jumping = false;

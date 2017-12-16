@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: EnemyAnimator
+  m_Name: JumperAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: speed
@@ -87,6 +87,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enterSound: {fileID: 8300000, guid: c0156cfb7fcee47ea9f8973d67da4b95, type: 3}
+--- !u!114 &114390746008115500
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0002d7e95ef1c1e4f818e32e3d9806a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterSound: {fileID: 8300000, guid: abf6fb4a7b6ec41f6a95b3431a3ad1d1, type: 3}
 --- !u!114 &114609611175507278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -540,7 +552,8 @@ AnimatorState:
   - {fileID: 1101770840059637116}
   - {fileID: 1101205523724628398}
   - {fileID: 1101446026109001320}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114390746008115500}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
