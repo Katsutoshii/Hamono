@@ -117,6 +117,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4610095002403480, guid: 139b318ece4cec2449221b6aa168e81f,
     type: 2}
   m_PrefabInternal: {fileID: 700304798}
+--- !u!4 &62425706 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4688960186873004, guid: e8f8d6ece32a741cb9cb683305e90a9c,
+    type: 2}
+  m_PrefabInternal: {fileID: 430480202}
 --- !u!20 &113826364 stripped
 Camera:
   m_PrefabParentObject: {fileID: 20672528059436694, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
@@ -1099,7 +1104,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 62425706}
     m_Modifications:
     - target: {fileID: 224118016750776082, guid: ad84b7f0de0784d82ba8e406539834b2,
         type: 2}
@@ -1119,17 +1124,17 @@ Prefab:
     - target: {fileID: 224118016750776082, guid: ad84b7f0de0784d82ba8e406539834b2,
         type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224118016750776082, guid: ad84b7f0de0784d82ba8e406539834b2,
         type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224118016750776082, guid: ad84b7f0de0784d82ba8e406539834b2,
         type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224118016750776082, guid: ad84b7f0de0784d82ba8e406539834b2,
         type: 2}
@@ -1139,17 +1144,17 @@ Prefab:
     - target: {fileID: 224118016750776082, guid: ad84b7f0de0784d82ba8e406539834b2,
         type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224118016750776082, guid: ad84b7f0de0784d82ba8e406539834b2,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -9.69
+      value: 0.050001144
       objectReference: {fileID: 0}
     - target: {fileID: 224118016750776082, guid: ad84b7f0de0784d82ba8e406539834b2,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.36
+      value: 0.91
       objectReference: {fileID: 0}
     - target: {fileID: 224118016750776082, guid: ad84b7f0de0784d82ba8e406539834b2,
         type: 2}
