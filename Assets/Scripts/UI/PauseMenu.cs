@@ -18,21 +18,25 @@ public class PauseMenu : MonoBehaviour {
     quitButton.onClick.AddListener(Quit);
 
     player = GameObject.Find("Player").GetComponent<Player>();
+    Time.timeScale = 0.0f;
+
   }
 
   void Update() {
-    
+
   }
 
   public void Resume() {
     Destroy(gameObject);
     player.paused = false;
+    Time.timeScale = 1.0f;
   }
 
   public void Quit() {
     Destroy(gameObject);
     // SceneManager.LoadScene(0);
     player.paused = false;
+    Time.timeScale = 1.0f;
   }
 
 }
