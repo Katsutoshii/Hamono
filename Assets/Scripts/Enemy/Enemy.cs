@@ -68,6 +68,9 @@ public class Enemy : MonoBehaviour {
   }
 
   void Update() {
+
+    StaticHealthBar();
+
     CheckForPlayerProximity();
 
     HandleState();
@@ -143,6 +146,10 @@ public class Enemy : MonoBehaviour {
       else
         transform.localScale = new Vector3(-1, 1, 1);
     }
+  }
+
+  protected void StaticHealthBar() {
+    transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
   }
 
   // checks to see if it's close enough to player
