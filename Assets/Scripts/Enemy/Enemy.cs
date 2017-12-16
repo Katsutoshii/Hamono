@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour {
   protected SpriteRenderer spriteRenderer;
   protected GameObject coinPrefab;
   protected GameObject heartPrefab;
+  protected GameObject sparkPrefab;
   public State state;
   protected Animator animator;
   public AudioSource audioSource;
@@ -58,6 +59,7 @@ public class Enemy : MonoBehaviour {
 
     coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
     heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
+    sparkPrefab = Resources.Load<GameObject>("Prefabs/FX/Spark");
 
     player = FindObjectOfType<Player>();
 
@@ -217,11 +219,17 @@ public class Enemy : MonoBehaviour {
   // when enemy is first damaged
   protected float deathStartTime;
   protected virtual void Damage(float damageAmount, float knockback, Collider2D source) {
+
 		if (state == State.damaged || state == State.dead) return;
+
     damagedStartTime = Time.time;
     state = State.damaged;
     
 		if (damageAmount > 0) spriteRenderer.color = Color.red;
+
+    // spawn sparks
+    for (int i = 0; i < 4; i++)
+        PoolManager.instance.ReuseObject(sparkPrefab, RandomOffset(transform.position), transform.rotation, sparkPrefab.transform.localScale);
 
     if (knockback != 0)
       rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
