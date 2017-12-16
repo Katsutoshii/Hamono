@@ -78,11 +78,6 @@ public class Enemy : MonoBehaviour {
     UpdateAnimatorVariables();
   }
 
-  protected float noticedStartTime;
-  protected virtual void Walk() {
-    
-  }
-
   // enemy notices player
   protected void Noticed() {
     rb.velocity = new Vector2(0, rb.velocity.y);
