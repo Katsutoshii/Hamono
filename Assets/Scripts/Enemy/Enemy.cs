@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour {
   protected SpriteRenderer spriteRenderer;
   protected GameObject coinPrefab;
   protected GameObject heartPrefab;
+  protected GameObject healthBarPrefab;
   public State state;
   protected Animator animator;
   public AudioSource audioSource;
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour {
 
   protected bool lockOnPlayer;
 
+  private float maxHealthAmount;
   public float healthAmount;
   public float receiveSlashDamage;
   public float receiveDashDamage;
@@ -57,8 +59,12 @@ public class Enemy : MonoBehaviour {
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     spriteRenderer.color = Color.white;
 
+    maxHealthAmount = healthAmount;
+
     coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
     heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
+    healthBarPrefab = transform.GetChild(2).gameObject;
+    healthBarPrefab.GetComponent<Canvas>().enabled = false;
 
     player = FindObjectOfType<Player>();
 
@@ -96,6 +102,7 @@ public class Enemy : MonoBehaviour {
   private float damagedStartTime;
 	protected void Damaged() {
 		spriteRenderer.color = Color.red;
+    if (!healthBarPrefab.GetComponent<Canvas>().enabled) healthBarPrefab.GetComponent<Canvas>().enabled = true;
     gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
 		
 		if (Time.time - damagedStartTime > 0.5f) {
@@ -249,7 +256,7 @@ public class Enemy : MonoBehaviour {
 
   protected void UpdateHealthBar() {
     Image bar = transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
-    bar.fillAmount = healthAmount / 5;
+    bar.fillAmount = healthAmount / maxHealthAmount;
   }
 
   // enemy died

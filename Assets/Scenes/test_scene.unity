@@ -1215,6 +1215,11 @@ Prefab:
       propertyPath: m_FillMethod
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 223570423602025912, guid: ad84b7f0de0784d82ba8e406539834b2,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad84b7f0de0784d82ba8e406539834b2, type: 2}
   m_IsPrefabParent: 0
