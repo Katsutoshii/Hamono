@@ -91,7 +91,6 @@ public class Enemy : MonoBehaviour {
 
   private float damagedStartTime;
 	protected void Damaged() {
-		spriteRenderer.color = Color.red;
     gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
 		
 		if (Time.time - damagedStartTime > 0.5f) {
@@ -221,6 +220,8 @@ public class Enemy : MonoBehaviour {
 		if (state == State.damaged || state == State.dead) return;
     damagedStartTime = Time.time;
     state = State.damaged;
+    
+		if (damageAmount > 0) spriteRenderer.color = Color.red;
 
     if (knockback != 0)
       rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 

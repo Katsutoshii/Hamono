@@ -327,7 +327,6 @@ public partial class Player : MonoBehaviour {
 		attackType = Player.AttackType.none;
 		rb.gravityScale = Player.GRAVITY_SCALE;
 		rb.velocity = new Vector2(0, rb.velocity.y);
-		invincible = false;
 	}
 
 	private void Idle() {

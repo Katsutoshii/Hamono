@@ -30,7 +30,7 @@ public class Collectible : PooledObject {
 	
 	// Update is called once per frame
 	void Update () {
-		float distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
+		float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 		if (distanceToPlayer <= gravitationalPullDistance)
 			AutoPath();
 	}

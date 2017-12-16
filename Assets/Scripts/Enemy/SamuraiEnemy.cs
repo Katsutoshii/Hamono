@@ -34,15 +34,17 @@ public class SamuraiEnemy : Enemy {
                 if (player.attackType == Player.AttackType.straightSlash)
                     Damage(receiveSlashDamage, receiveSlashKnockback, other);
                 else {
-                    player.state = Player.State.idle; // cancel player slash if wrong type
                     player.attackResponse = Player.AttackResponse.blocked;
+                    Damage(0, receiveSlashKnockback/2, other);
                     audioSource.PlayOneShot(blockSound);
                 }
                 
                 break;
 
             case "PlayerDashHurtBox":
-                player.ResetToIdle(); // cancel player dash
+                player.attackResponse = Player.AttackResponse.blocked;
+                Damage(0, receiveDashKnockback/2, other);
+                audioSource.PlayOneShot(blockSound);
                 break;
         }   
     }
