@@ -261,7 +261,7 @@ public partial class Player : MonoBehaviour {
 	private IEnumerator InvincibleBuffer() {
 		Debug.Log("are we in here?");
 		invincible = true;
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(1f);
 		invincible = false;
 		yield return null;
 	}
