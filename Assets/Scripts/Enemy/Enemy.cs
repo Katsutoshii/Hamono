@@ -91,7 +91,6 @@ public class Enemy : MonoBehaviour {
 
   private float damagedStartTime;
 	protected void Damaged() {
-		spriteRenderer.color = Color.red;
     gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
 		
 		if (Time.time - damagedStartTime > 0.5f) {
@@ -149,7 +148,6 @@ public class Enemy : MonoBehaviour {
   protected void CheckForPlayerProximity() {
     float distance = Vector2.Distance(transform.position, player.transform.position);
     if (distance <= distanceNearPlayer) {
-      Debug.Log("Enemy Near player!");
       lockOnPlayer = true;
     }
     // the player got out of range for the enemy to follow her
@@ -192,6 +190,8 @@ public class Enemy : MonoBehaviour {
     // if we need to move in the x or y direction, do so
 		if (Mathf.Abs(xDist) >= 0.1) 
 			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
+
+    RotateBasedOnDirection();
   }
 
   
@@ -200,7 +200,7 @@ public class Enemy : MonoBehaviour {
   /// object (2D physics only).
   /// </summary>
   /// <param name="other">The other Collider2D involved in this collision.</param>
-  void OnTriggerEnter2D(Collider2D other)
+  public virtual void OnTriggerEnter2D(Collider2D other)
   {
       switch (other.name) {
         case "PlayerSlashHurtBox":
@@ -220,6 +220,8 @@ public class Enemy : MonoBehaviour {
 		if (state == State.damaged || state == State.dead) return;
     damagedStartTime = Time.time;
     state = State.damaged;
+    
+		if (damageAmount > 0) spriteRenderer.color = Color.red;
 
     if (knockback != 0)
       rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 

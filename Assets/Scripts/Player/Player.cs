@@ -119,8 +119,7 @@ public partial class Player : MonoBehaviour {
 
 		// handles the attack responses
 		HandleAttackResponses();	
-		
-		if (state != State.damaged) RotateSpriteForVelocity();
+
 		if(state != State.dashing) LimitVelocity();
 
 		UpdateAnimatorVariables();
@@ -212,12 +211,13 @@ public partial class Player : MonoBehaviour {
 		switch (other.name) {
 			case "EnemyHurtBox":
 				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) Damage(0.5f, 4f, other);
-				else { attackResponse = AttackResponse.normal; StartCoroutine(InvincibleBuffer()); }
+				else { attackResponse = AttackResponse.normal; }//StartCoroutine(InvincibleBuffer()); }
 				break;
 		}
 	}
 
 	private void Damage(float damageAmount, float knockback, Collider2D source) {
+		Debug.Log("Damaged! invincible = " + invincible);
 		invincible = true;
 		damagedStartTime = Time.time;
 		attackResponse = AttackResponse.missed;
@@ -323,6 +323,7 @@ public partial class Player : MonoBehaviour {
 	
 	public void ResetToIdle() {
 		state = Player.State.idle;
+		gameObject.layer = LayerMask.NameToLayer("Player");
 		attackType = Player.AttackType.none;
 		rb.gravityScale = Player.GRAVITY_SCALE;
 		rb.velocity = new Vector2(0, rb.velocity.y);
