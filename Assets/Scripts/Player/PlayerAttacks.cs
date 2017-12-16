@@ -20,6 +20,8 @@ public partial class Player : MonoBehaviour {
 	private const float DASH_SPEED = 8f;
 	private const float DASH_TARGET_THRESHOLD = 0.8f;
 	private const float READY_FLOAT_TIMEOUT = 0.5f;
+	
+	private float readyStartTime;
 
 	// method for when autopathing is complete and ready to make an attack
 	public void Ready() {
@@ -45,7 +47,7 @@ public partial class Player : MonoBehaviour {
 		rb.gravityScale = 0;
 		gameObject.layer = LayerMask.NameToLayer("Dashing");
 
-		if (stamina.isExhausted() || Time.time > attackStartTime + ATTACK_TIMEOUT) {
+		if (staminaBar.isExhausted() || Time.time > attackStartTime + ATTACK_TIMEOUT) {
 			ResetToIdle();
 			
 			rb.velocity = Vector2.zero;
@@ -53,7 +55,7 @@ public partial class Player : MonoBehaviour {
 		}
 		
 		float distanceB = Vector2.Distance(rb.position, targetB);
-		stamina.DecreaseStamina(dashStaminaCost * distanceB * distanceB);
+		staminaBar.DecreaseStamina(dashStaminaCost * distanceB * distanceB);
 		
 		// if we are mid dash
 		if (distanceB > DASH_TARGET_THRESHOLD) {
@@ -91,9 +93,13 @@ public partial class Player : MonoBehaviour {
 		PoolManager.instance.ReuseObject (swordAfterimagePrefab, transform.position, eulerAngles, localScale);
 	}
 
+	// private start times
+	private float attackStartTime;
+	
+	private float alphaToggleTime;
 	// method to perform the slash
 	public void Attack() {
-		if (attackType != AttackType.none) stamina.DecreaseStamina(slashStaminaCost);
+		if (attackType != AttackType.none) staminaBar.DecreaseStamina(slashStaminaCost);
 		attackStartTime = Time.time;
 
 		// handles current attack type

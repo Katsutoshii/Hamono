@@ -3,7 +3,8 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
-    public Player player;
+    Player player;
+    private SlashIndicator slashIndicator;
     public float maxX;
     public float minX;
     public float maxY;
@@ -24,6 +25,10 @@ public class CameraController : MonoBehaviour {
     // Use this for initialization
     void Start () 
     {   
+        // get UI objects
+        player = FindObjectOfType<Player>();
+        slashIndicator = FindObjectOfType<SlashIndicator>();
+
         // calc the player's x y, keep the z offset
         transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
 
@@ -38,7 +43,7 @@ public class CameraController : MonoBehaviour {
     void LateUpdate () 
     {
         
-        following = !player.slashIndicator.drawing && player.attackResponse != Player.AttackResponse.normal;
+        following = !slashIndicator.drawing && player.attackResponse != Player.AttackResponse.normal;
         if (following) {
             transform.position = Vector3.SmoothDamp(transform.position, 
                 player.transform.position + offset, ref velocity, smoothTime);
@@ -53,7 +58,6 @@ public class CameraController : MonoBehaviour {
         if (player.state == Player.State.damaged) shakeDuration = .5f;
         else shakeDuration = 0f;
         ShakeCamera();
-
     }
 
     private void ShakeCamera() {

@@ -2,28 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// Base class for enemies
 public class Enemy : MonoBehaviour {
 
-  public Player player;
-  public Rigidbody2D rb;
-  private SpriteRenderer spriteRenderer;
-  public GameObject coinPrefab;
+  protected Player player;
+  protected Rigidbody2D rb;
+  protected SpriteRenderer spriteRenderer;
+  protected GameObject coinPrefab;
+  protected GameObject heartPrefab;
   public State state;
-  private Animator animator;
+  protected Animator animator;
   public AudioSource audioSource;
 
   public bool grounded;
-  private bool prevNotice;
-  private bool died;
+  protected bool prevNotice;
+  protected bool died;
 
   public float walkingSpeed;
   public float jumpingPower;
   public float distanceNearPlayer;
 
-  private float direction;
-  private bool lockOnPlayer;
-  private float lastTime;
-  private float[] directionOptions = new float[] {-1f, 1f};
+  protected bool lockOnPlayer;
 
   public float healthAmount;
   public float receiveSlashDamage;
@@ -41,14 +40,15 @@ public class Enemy : MonoBehaviour {
   }
 
   // constants
-	public float SLASHING_X_DIST;
-	public float SLASHING_Y_DIST;
-  public float KP;
-  public float GRAVITY_SCALE;
+	protected float SLASHING_X_DIST;
+	protected float SLASHING_Y_DIST;
+  protected float KP;
+  protected float GRAVITY_SCALE;
 
   private float autoPathStartTime;
 
-  void Start() {
+  public virtual void Start() {
+    Debug.Log("Enemy start!");
     rb = gameObject.GetComponent<Rigidbody2D>();
     rb.isKinematic = false;
 
@@ -56,54 +56,33 @@ public class Enemy : MonoBehaviour {
     animator = GetComponent<Animator>();
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     spriteRenderer.color = Color.white;
+
+    coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
+    heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
+
+    player = FindObjectOfType<Player>();
+
     lockOnPlayer = false;
-    lastTime = Time.time;
     state = State.walking;
-    direction = walkingSpeed;
     prevNotice = false;
     died = false;
-    StartCoroutine(ChangeRandomWalkCycle());
-
   }
 
   void Update() {
     CheckForPlayerProximity();
-    UpdateAnimatorVariables();
 
     HandleState();
+
+    UpdateAnimatorVariables();
   }
 
-  bool randomWalkToRight;
-  public float randomChangetime;
-  private IEnumerator ChangeRandomWalkCycle() {
-    while( true) {
-      randomWalkToRight = Random.Range(0, 1f) >= 0.5f;
-      yield return new WaitForSeconds(randomChangetime);
-    }
-  }
-
-  private float noticedStartTime;
-  private void Walk() {
-    RotateBasedOnDirection();
-    spriteRenderer.color = Color.white;
-
-    if (lockOnPlayer) {
-      // follow the player
-      if (!prevNotice) {
-        state = State.noticed;
-        prevNotice = true;
-        noticedStartTime = Time.time;
-      }
-      AutoPath();
-    } 
-    else {
-      // randomly walk around
-      RandomWalkCycle();
-    }
+  protected float noticedStartTime;
+  protected virtual void Walk() {
+    
   }
 
   // enemy notices player
-  private void Noticed() {
+  protected void Noticed() {
     rb.velocity = new Vector2(0, rb.velocity.y);
     animator.SetBool("noticed", state == State.noticed);
     if (Time.time - noticedStartTime > .7f)
@@ -112,7 +91,7 @@ public class Enemy : MonoBehaviour {
   }
 
   private float damagedStartTime;
-	private void Damaged() {
+	protected void Damaged() {
 		spriteRenderer.color = Color.red;
     gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
 		
@@ -124,7 +103,7 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-  private void UpdateAnimatorVariables() {
+  protected virtual void UpdateAnimatorVariables() {
     animator.SetFloat("speed", rb.velocity.magnitude);
     animator.SetBool("damaged", state == State.damaged);
     animator.SetBool("idle", state == State.idle);
@@ -140,7 +119,6 @@ public class Enemy : MonoBehaviour {
 
       switch (collider.gameObject.layer) {
         case 8: // we hit a wall, so turn around
-          direction *= -1;
           transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
           break;
 
@@ -158,20 +136,7 @@ public class Enemy : MonoBehaviour {
       }
   }
 
-
-  private void RandomWalkCycle() {
-    if (grounded) {
-      if (randomWalkToRight) {
-        rb.velocity = walkingSpeed * Vector2.right;
-        if (rb.velocity.x > 0) StartCoroutine(Jump(jumpingPower));
-      } else {
-        rb.velocity = walkingSpeed * Vector2.left;
-        if (rb.velocity.x < 0) StartCoroutine(Jump(jumpingPower));
-      }
-    }
-  }
-
-  private void RotateBasedOnDirection() {
+  protected void RotateBasedOnDirection() {
     if (state != State.walking) return;
     if (Mathf.Abs(rb.velocity.x) > 0.05f) {
       if (rb.velocity.x < 0)
@@ -182,7 +147,7 @@ public class Enemy : MonoBehaviour {
   }
 
   // checks to see if it's close enough to player
-  private void CheckForPlayerProximity() {
+  protected void CheckForPlayerProximity() {
     float distance = Vector2.Distance(transform.position, player.transform.position);
     if (distance <= distanceNearPlayer) {
       lockOnPlayer = true;
@@ -195,7 +160,7 @@ public class Enemy : MonoBehaviour {
   }
 
   // attacks player
-  private void Attack() {
+  protected virtual void Attack() {
     spriteRenderer.color = Color.white;
 
     // attack the player
@@ -209,14 +174,14 @@ public class Enemy : MonoBehaviour {
     }
   }
 
-  private Vector3 RandomOffset(Vector3 position) {
+  protected Vector3 RandomOffset(Vector3 position) {
     return new Vector3(position.x + Random.Range(0f, 0.5f),
       position.y + Random.Range(0f, 0.5f),
       position.z);
   }
 
   // follows player
-  private void AutoPath() {
+  protected virtual void AutoPath() {
 		rb.gravityScale = GRAVITY_SCALE;
 		float xDist = player.transform.position.x - transform.position.x;
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
@@ -231,13 +196,8 @@ public class Enemy : MonoBehaviour {
     }
 
     // adds jumping
-    if (grounded) {
-      if (randomWalkToRight) {
-          if (rb.velocity.x > 0) StartCoroutine(Jump(jumpingPower));
-        } else {
-          if (rb.velocity.x < 0) StartCoroutine(Jump(jumpingPower));
-        }
-    }
+    if (grounded)
+        StartCoroutine(Jump(jumpingPower));
   }
 
   
@@ -261,8 +221,8 @@ public class Enemy : MonoBehaviour {
 
   
   // when enemy is first damaged
-  private float deathStartTime;
-  private void Damage(float damageAmount, float knockback, Collider2D source) {
+  protected float deathStartTime;
+  protected virtual void Damage(float damageAmount, float knockback, Collider2D source) {
 		if (state == State.damaged || state == State.dead) return;
     damagedStartTime = Time.time;
     state = State.damaged;
@@ -287,7 +247,7 @@ public class Enemy : MonoBehaviour {
 
 	private const float JUMP_DELAY = 0.1f;
 	private bool jumping = false;
-	private IEnumerator Jump(float jumpPower) {
+	protected IEnumerator Jump(float jumpPower) {
 		jumping = true;
 		rb.velocity = Vector2.zero;
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -300,7 +260,7 @@ public class Enemy : MonoBehaviour {
 		yield return null;
 	}
   // enemy died
-  private void Death() {
+  protected virtual void Death() {
     rb.velocity = new Vector2(0, rb.velocity.y);
     if (Time.time - deathStartTime > .3f) spriteRenderer.color = Color.white;
     // deletes the game object
@@ -311,7 +271,7 @@ public class Enemy : MonoBehaviour {
     }
   }
 
-  private void HandleState() {
+  protected virtual void HandleState() {
     switch (state) {
       case State.attacking:
         Attack();

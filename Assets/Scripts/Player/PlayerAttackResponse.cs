@@ -6,7 +6,6 @@ public partial class Player : MonoBehaviour
 {
     private float startComboTime;
     private float lastComboTime;
-    public CameraController cameraContorller;
     public float timeFreezeDuration;
 
 
@@ -44,11 +43,11 @@ public partial class Player : MonoBehaviour
     private void Normal() {
         Debug.Log("this is a normal response to attacking");
         StartCoroutine(FreezeTime());
-        stamina.IncreaseStamina(generateStamina * 10f);
+        staminaBar.IncreaseStamina(generateStamina * 10f);
     }
 
     private void Strong() {
-        stamina.IncreaseStamina(generateStamina * 20f);
+        staminaBar.IncreaseStamina(generateStamina * 20f);
     }
 
     private void Blocked() {
@@ -58,11 +57,11 @@ public partial class Player : MonoBehaviour
     public float missStaminaPenalty;
     private void Missed() {
         Debug.Log("the player missed");
-        stamina.DecreaseStamina(missStaminaPenalty);
+        staminaBar.DecreaseStamina(missStaminaPenalty);
     }
 
     private void Combo() {
-        if (comboCount > 0) stamina.IncreaseStamina(generateStamina * 20f * comboCount);
+        if (comboCount > 0) staminaBar.IncreaseStamina(generateStamina * 20f * comboCount);
     }
 
     private bool timeFrozen;

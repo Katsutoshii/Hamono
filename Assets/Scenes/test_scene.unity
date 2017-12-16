@@ -122,12 +122,6 @@ Camera:
   m_PrefabParentObject: {fileID: 20672528059436694, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
     type: 2}
   m_PrefabInternal: {fileID: 1473868039}
---- !u!114 &162929030 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114160780534258230, guid: 3c53a60cc04983040adac58efe4be6c8,
-    type: 2}
-  m_PrefabInternal: {fileID: 881509474}
-  m_Script: {fileID: 11500000, guid: 48b14e791a78b4e09a3809c6e8d1717e, type: 3}
 --- !u!1 &182297168
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,11 +472,31 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114977486539889522, guid: e8f8d6ece32a741cb9cb683305e90a9c,
+    - target: {fileID: 114041075956034600, guid: e8f8d6ece32a741cb9cb683305e90a9c,
         type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 1271265347}
+    - target: {fileID: 114041075956034600, guid: e8f8d6ece32a741cb9cb683305e90a9c,
+        type: 2}
+      propertyPath: distanceNearPlayer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114041075956034600, guid: e8f8d6ece32a741cb9cb683305e90a9c,
+        type: 2}
+      propertyPath: healthAmount
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114041075956034600, guid: e8f8d6ece32a741cb9cb683305e90a9c,
+        type: 2}
+      propertyPath: jumpingPower
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114041075956034600, guid: e8f8d6ece32a741cb9cb683305e90a9c,
+        type: 2}
+      propertyPath: KP
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e8f8d6ece32a741cb9cb683305e90a9c, type: 2}
   m_IsPrefabParent: 0
@@ -889,21 +903,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 82072894372962322, guid: 0aa0d1d5e8f83c9448822babe119923d,
-        type: 2}
-      propertyPath: Mute
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 82072894372962322, guid: 0aa0d1d5e8f83c9448822babe119923d,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 82072894372962322, guid: 0aa0d1d5e8f83c9448822babe119923d,
-        type: 2}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 0ea640cc991ea594db5e59f4df1b1dfc, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0aa0d1d5e8f83c9448822babe119923d, type: 2}
   m_IsPrefabParent: 0
@@ -1087,55 +1086,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1271265347}
     - target: {fileID: 1522440620401066, guid: 6f3a96970d9140b4aa5fd9d7e25b51af, type: 2}
       propertyPath: m_Name
       value: MainCamera
       objectReference: {fileID: 0}
-    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
-        type: 2}
-      propertyPath: SCROLL_SPEED
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
-        type: 2}
-      propertyPath: smoothTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
-        type: 2}
-      propertyPath: shakeDuration
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
-        type: 2}
-      propertyPath: shakeAmount
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
-        type: 2}
-      propertyPath: decreaseFactor
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
-        type: 2}
-      propertyPath: screenFlash
-      value: 
-      objectReference: {fileID: 1768297942633858, guid: 320be759e8bf24a1997f117d26b1292a,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f3a96970d9140b4aa5fd9d7e25b51af, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1586179863 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114995473161410452, guid: 3c53a60cc04983040adac58efe4be6c8,
-    type: 2}
-  m_PrefabInternal: {fileID: 881509474}
-  m_Script: {fileID: 11500000, guid: 8901c93d44645544d93fba05c2443386, type: 3}
 --- !u!1001 &1610335478
 Prefab:
   m_ObjectHideFlags: 0
@@ -1222,12 +1179,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1686148513 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114420273513996834, guid: 3c53a60cc04983040adac58efe4be6c8,
-    type: 2}
-  m_PrefabInternal: {fileID: 881509474}
-  m_Script: {fileID: 11500000, guid: 47dd8e2bc532a4505b99fb0a87984744, type: 3}
 --- !u!1001 &1742864631
 Prefab:
   m_ObjectHideFlags: 0
@@ -1361,32 +1312,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: slashIndicator
-      value: 
-      objectReference: {fileID: 1586179863}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: stamina
-      value: 
-      objectReference: {fileID: 1686148513}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: health
-      value: 
-      objectReference: {fileID: 162929030}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: coinCountText
-      value: 
-      objectReference: {fileID: 1985458875}
-    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
-        type: 2}
-      propertyPath: pauseMenuPrefab
-      value: 
-      objectReference: {fileID: 1566175884572208, guid: 40e69366eaffa41fe974e7f3eb4576d5,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
   m_IsPrefabParent: 0
@@ -8263,12 +8188,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4610095002403480, guid: 139b318ece4cec2449221b6aa168e81f,
     type: 2}
   m_PrefabInternal: {fileID: 1315837240}
---- !u!114 &1985458875 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114993763927774622, guid: 3c53a60cc04983040adac58efe4be6c8,
-    type: 2}
-  m_PrefabInternal: {fileID: 881509474}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &2122388126
 GameObject:
   m_ObjectHideFlags: 0

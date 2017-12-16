@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 212478704518247742}
   - component: {fileID: 50009866304733840}
   - component: {fileID: 61069694831140012}
-  - component: {fileID: 114977486539889522}
   - component: {fileID: 82803282367702584}
   - component: {fileID: 95578905686148494}
+  - component: {fileID: 114041075956034600}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11929f8b3dbb2c241b11061878fafe45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114977486539889522
+--- !u!114 &114041075956034600
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1483470518808174}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576a6ea6d13124f6fb38e091f9871dcb, type: 3}
+  m_Script: {fileID: 11500000, guid: 87c35787766e76449a06ce1c08b9bf87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
@@ -326,17 +326,17 @@ MonoBehaviour:
   state: 0
   audioSource: {fileID: 0}
   grounded: 0
-  walkingSpeed: 2
-  jumpingPower: 5
-  distanceNearPlayer: 5
-  healthAmount: 3
-  receiveSlashDamage: 0.5
-  receiveDashDamage: 0.5
-  receiveSlashKnockback: 2.5
-  receiveDashKnockback: 2.5
-  SLASHING_X_DIST: 1.1
-  SLASHING_Y_DIST: 0.5
-  KP: 1
+  walkingSpeed: 5
+  jumpingPower: 3
+  distanceNearPlayer: 0
+  healthAmount: 0
+  receiveSlashDamage: 1
+  receiveDashDamage: 1
+  receiveSlashKnockback: 1
+  receiveDashKnockback: 1
+  SLASHING_X_DIST: 0.2
+  SLASHING_Y_DIST: 0.2
+  KP: 5
   GRAVITY_SCALE: 2
   randomChangetime: 2
 --- !u!212 &212478704518247742

@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Pot : MonoBehaviour {
 
-	public GameObject coinPrefab;
-	public GameObject heartPrefab;
-	public GameObject potPiecePrefab;
+	private GameObject coinPrefab;
+	private GameObject heartPrefab;
+	private GameObject potPiecePrefab;
 	private AudioSource audioSource;
 	private SpriteRenderer spriteRenderer;
 	private BoxCollider2D boxCollider2D;
@@ -19,6 +18,10 @@ public class Pot : MonoBehaviour {
 		audioSource = GetComponent<AudioSource>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		boxCollider2D = GetComponent<BoxCollider2D>();
+		
+    	coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
+    	heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
+		potPiecePrefab = Resources.Load<GameObject>("Prefabs/Environment/PotPiece");
 	}
 
 	/// <summary>
@@ -41,23 +44,20 @@ public class Pot : MonoBehaviour {
 	private void Break() {
 		audioSource.Play();
 		for (int i = 0; i < Random.Range(0, numCoins + 1); i++) 
-			PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), coinPrefab.transform.rotation, coinPrefab.transform.localScale);
+			PoolManager.instance.ReuseObject(coinPrefab, 
+				HamonoLib.RandomOffset(transform.position), coinPrefab.transform.rotation, coinPrefab.transform.localScale);
 
 		for (int i = 0; i < Random.Range(0, numHearts + 1); i++) 
-			PoolManager.instance.ReuseObject(heartPrefab, RandomOffset(transform.position), heartPrefab.transform.rotation, heartPrefab.transform.localScale);
+			PoolManager.instance.ReuseObject(heartPrefab, 
+				HamonoLib.RandomOffset(transform.position), heartPrefab.transform.rotation, heartPrefab.transform.localScale);
 
 		for (int i = 0; i < numPieces; i++)
-			PoolManager.instance.ReuseObject(potPiecePrefab, RandomOffset(transform.position), RandomOffset(transform.localEulerAngles), potPiecePrefab.transform.localScale);
+			PoolManager.instance.ReuseObject(potPiecePrefab, 
+				HamonoLib.RandomOffset(transform.position), HamonoLib.RandomOffset(transform.localEulerAngles), potPiecePrefab.transform.localScale);
 
 		spriteRenderer.color = new Color (0, 0, 0, 0);
 		boxCollider2D.enabled = false;
 
 		Destroy(gameObject, 1f);
 	}
-
-	private Vector3 RandomOffset(Vector3 position) {
-    return new Vector3(position.x + Random.Range(0f, 0.5f),
-      position.y + Random.Range(0f, 0.5f),
-      position.z);
-  	}
 }

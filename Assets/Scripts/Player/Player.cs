@@ -42,8 +42,8 @@ public partial class Player : MonoBehaviour {
 
 	// player representation
 	private SpriteRenderer spriteRenderer;
-	public Rigidbody2D rb;
-	public Animator animator;
+	private Rigidbody2D rb;
+	private Animator animator;
 
 	// temporary state checkers
 	public bool autoPathing;
@@ -56,9 +56,9 @@ public partial class Player : MonoBehaviour {
 	public Vector2 targetB;		// end point of a slash
 
 	// visible player information
-	public SlashIndicator slashIndicator;
-	public StaminaBar stamina;
-	public HealthBar health;
+	private SlashIndicator slashIndicator;
+	private StaminaBar staminaBar;
+	private HealthBar healthBar;
 	public float maxHealth;
 	public float healthAmount;
 	public float damagedTime;
@@ -67,14 +67,11 @@ public partial class Player : MonoBehaviour {
 	// counters
 	public int comboCount;
 	public int coinCount;
-	public Text coinCountText;
+	private Text coinCountText;
 	public bool jumping = false;
 	
 	// ui/ux elements
-	public GameObject pauseMenuPrefab;
-	public Texture2D cursorTexture;
-	public CursorMode cursorMode;
-	public Vector2 hotSpot;
+	private GameObject pauseMenuPrefab;
 	private AudioSource audioSource;
 	public float generateStamina;
 	
@@ -82,24 +79,26 @@ public partial class Player : MonoBehaviour {
 	
 	public const float GRAVITY_SCALE = 2f;
 
-	// private start times
-	public float attackStartTime;
-	
-	public float readyStartTime;
-	private float alphaToggleTime;
-
 	// Use this for initialization
 	void Start () {
-		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-		rb.isKinematic = false;
 
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		audioSource = gameObject.GetComponent<AudioSource>();
+		animator = gameObject.GetComponent<Animator>();
+		rb = GetComponent<Rigidbody2D>();
+		
+		rb.isKinematic = false;
 
 		// start states
 		state = State.idle;
 		attackType = AttackType.none;
 
+		// get UI objects
+		slashIndicator = FindObjectOfType<SlashIndicator>();
+		staminaBar = FindObjectOfType<StaminaBar>();
+		healthBar = FindObjectOfType<HealthBar>();
+		coinCountText = GameObject.Find("CoinCount").GetComponent<Text>();
+		pauseMenuPrefab = Resources.Load<GameObject>("Prefabs/UI/PauseMenu");
 		
 		// create pools for attack effects
 		PoolManager.instance.CreatePool(dustCloudPrefab, 1);
@@ -193,7 +192,7 @@ public partial class Player : MonoBehaviour {
 			case "Hear":
 				healthAmount += 1;
 				healthAmount = Mathf.Min(healthAmount, maxHealth);
-				health.HandleHealth(healthAmount);
+				healthBar.HandleHealth(healthAmount);
 				break;
 
 
@@ -230,7 +229,7 @@ public partial class Player : MonoBehaviour {
 		healthAmount -= damageAmount;
 		if ( healthAmount < 0) healthAmount = 0;
 
-		health.HandleHealth(healthAmount);
+		healthBar.HandleHealth(healthAmount);
 	}
 
 	public float damagedStartTime;
@@ -305,7 +304,7 @@ public partial class Player : MonoBehaviour {
 
 			case State.idle:
 				Controls();
-				if (grounded) stamina.IncreaseStamina(generateStamina);
+				if (grounded) staminaBar.IncreaseStamina(generateStamina);
 				rb.gravityScale = GRAVITY_SCALE;
 				rb.velocity = new Vector2(0, rb.velocity.y);
 				break;
@@ -323,6 +322,6 @@ public partial class Player : MonoBehaviour {
 		rb.velocity = new Vector2(0, rb.velocity.y);
 		rb.gravityScale = GRAVITY_SCALE;
 		spriteRenderer.color = new Color(1f, 1f, 1f, spriteRenderer.color.a);
-		if (grounded) stamina.IncreaseStamina(generateStamina);
+		if (grounded) staminaBar.IncreaseStamina(generateStamina);
 	}
 }

@@ -402,27 +402,19 @@ MonoBehaviour:
   state: 0
   attackType: 6
   attackResponse: 5
-  rb: {fileID: 50404783047066720}
-  animator: {fileID: 95266908316134988}
   autoPathing: 0
   grounded: 1
   invincible: 0
+  paused: 0
   targetA: {x: 0, y: 0}
   targetB: {x: 0, y: 0}
-  slashIndicator: {fileID: 0}
-  stamina: {fileID: 0}
-  health: {fileID: 0}
   maxHealth: 3
   healthAmount: 3
   damagedTime: 0.3
   hurtAlpha: 0.4
   comboCount: 0
   coinCount: 0
-  coinCountText: {fileID: 0}
   jumping: 0
-  cursorTexture: {fileID: 2800000, guid: 044a019ae00db4f15bca4730f0ad6cea, type: 3}
-  cursorMode: 0
-  hotSpot: {x: 0, y: 0}
   generateStamina: 0.02
   attackStartTime: 0
   readyStartTime: 0

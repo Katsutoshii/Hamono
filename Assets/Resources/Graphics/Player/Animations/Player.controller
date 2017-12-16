@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0002d7e95ef1c1e4f818e32e3d9806a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enterSound: {fileID: 8300000, guid: d76a5cf6c6018411ea750697b2fe827c, type: 3}
+  enterSound: {fileID: 8300000, guid: 49e78ce112c3d4ee7acc7d0e04f76765, type: 3}
 --- !u!114 &114356767205500988
 MonoBehaviour:
   m_ObjectHideFlags: 1

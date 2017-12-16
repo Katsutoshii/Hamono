@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public partial class Player : MonoBehaviour {
 
+	
+	public Vector2 maxSpeed;
 	private const float TURNING_THRESHOLD = 0.1f;
 
 	public const float KP = 4f;
-	public Vector2 maxSpeed;
 
     // effect prefabs
     // special effects game objects
@@ -49,7 +50,7 @@ public partial class Player : MonoBehaviour {
 	// method to handle the autopathing
 	public void AutoPath() {
         rb.gravityScale = GRAVITY_SCALE;
-        if (grounded) stamina.IncreaseStamina(generateStamina);
+        if (grounded) staminaBar.IncreaseStamina(generateStamina);
 
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y;
