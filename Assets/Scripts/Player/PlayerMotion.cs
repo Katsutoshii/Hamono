@@ -95,6 +95,8 @@ public partial class Player : MonoBehaviour {
 			rb.velocity = new Vector2(0, rb.velocity.y);
 		}
 
+		RotateSpriteForVelocity();
+
 		if (yDist >= AUTOPATH_Y_THRESHOLD && xDist <= JUMP_X_THRESHOLD && grounded) {
 			StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
 		}

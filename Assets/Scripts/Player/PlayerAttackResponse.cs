@@ -51,7 +51,9 @@ public partial class Player : MonoBehaviour
     }
 
     private void Blocked() {
-
+        if (transform.localScale == Vector3.one) rb.velocity = 10 * Vector2.left;
+        else rb.velocity = 20 * Vector2.right;
+        invincible = false;
     }
 
     public float missStaminaPenalty;
