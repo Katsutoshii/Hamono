@@ -212,7 +212,7 @@ public partial class Player : MonoBehaviour {
 		switch (other.name) {
 			case "EnemyHurtBox":
 				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) Damage(0.5f, 4f, other);
-				else attackResponse = AttackResponse.normal;
+				else { attackResponse = AttackResponse.normal; StartCoroutine(InvincibleBuffer()); }
 				break;
 		}
 	}
@@ -256,6 +256,14 @@ public partial class Player : MonoBehaviour {
 		}
 		invincible = false;
 		gameObject.layer = LayerMask.NameToLayer("Player");
+		yield return null;
+	}
+
+	private IEnumerator InvincibleBuffer() {
+		Debug.Log("are we in here?");
+		invincible = true;
+		yield return new WaitForSeconds(1f);
+		invincible = false;
 		yield return null;
 	}
 
