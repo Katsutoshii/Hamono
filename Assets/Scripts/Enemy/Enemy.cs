@@ -40,10 +40,9 @@ public class Enemy : MonoBehaviour {
   }
 
   // constants
-	protected float SLASHING_X_DIST;
-	protected float SLASHING_Y_DIST;
-  protected float KP;
-  protected float GRAVITY_SCALE;
+	protected float SLASHING_X_DIST = 0.5f;
+	protected float SLASHING_Y_DIST = 0.5f;
+  public float KP;
 
   private float autoPathStartTime;
 
@@ -119,7 +118,7 @@ public class Enemy : MonoBehaviour {
 
       switch (collider.gameObject.layer) {
         case 8: // we hit a wall, so turn around
-          transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
+          rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
           break;
 
         case 15: // we hit a boundary, so turn around
@@ -150,6 +149,7 @@ public class Enemy : MonoBehaviour {
   protected void CheckForPlayerProximity() {
     float distance = Vector2.Distance(transform.position, player.transform.position);
     if (distance <= distanceNearPlayer) {
+      Debug.Log("Enemy Near player!");
       lockOnPlayer = true;
     }
     // the player got out of range for the enemy to follow her
@@ -182,7 +182,6 @@ public class Enemy : MonoBehaviour {
 
   // follows player
   protected virtual void AutoPath() {
-		rb.gravityScale = GRAVITY_SCALE;
 		float xDist = player.transform.position.x - transform.position.x;
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
@@ -190,14 +189,9 @@ public class Enemy : MonoBehaviour {
 			return;
 		}
 
-		// otherwise, if we need to move in the x or y direction, do so
-		if (Mathf.Abs(xDist) >= 0.1) {
+    // if we need to move in the x or y direction, do so
+		if (Mathf.Abs(xDist) >= 0.1) 
 			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
-    }
-
-    // adds jumping
-    if (grounded)
-        StartCoroutine(Jump(jumpingPower));
   }
 
   
@@ -245,20 +239,6 @@ public class Enemy : MonoBehaviour {
     }
 	}
 
-	private const float JUMP_DELAY = 0.1f;
-	private bool jumping = false;
-	protected IEnumerator Jump(float jumpPower) {
-		jumping = true;
-		rb.velocity = Vector2.zero;
-		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-		
-		yield return new WaitForSeconds(JUMP_DELAY);
-		rb.velocity = Vector2.up * jumpPower;
-		yield return new WaitForSeconds(JUMP_DELAY);
-		
-		jumping = false;
-		yield return null;
-	}
   // enemy died
   protected virtual void Death() {
     rb.velocity = new Vector2(0, rb.velocity.y);

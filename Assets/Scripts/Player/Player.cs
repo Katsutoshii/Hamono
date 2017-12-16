@@ -109,7 +109,7 @@ public partial class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		if (!(state == State.damaged || state == State.dead)) Controls();
-		if (!(state == State.dashing || state == State.slashing)) ResetLayer();
+		if (!(state == State.dashing || state == State.slashing || invincible)) ResetLayer();
 
 		// handles the pause menu
 		if (Input.GetKeyDown("space") && !paused) PauseMenu();
@@ -247,6 +247,7 @@ public partial class Player : MonoBehaviour {
 
 	public int invincibleFlashes = 4;
 	private IEnumerator ToggleAlpha() {
+		gameObject.layer = LayerMask.NameToLayer("Dashing");
 		for (int i = 0; i < invincibleFlashes; i++) {
 			Color color = Color.white;
 			if (i % 2 == 0) color.a = hurtAlpha;
@@ -254,6 +255,7 @@ public partial class Player : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 		}
 		invincible = false;
+		gameObject.layer = LayerMask.NameToLayer("Player");
 		yield return null;
 	}
 

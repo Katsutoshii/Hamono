@@ -19,21 +19,14 @@ public class JumpingEnemy : Enemy {
     }
     
 
-    private void RandomWalkCycle() {
-        if (grounded) {
-            if (randomWalkToRight) {
-                rb.velocity = walkingSpeed * Vector2.right;
-                if (rb.velocity.x > 0) StartCoroutine(Jump(jumpingPower));
-            } 
-            else {
-                rb.velocity = walkingSpeed * Vector2.left;
-                if (rb.velocity.x < 0) StartCoroutine(Jump(jumpingPower));
-            }
+    private void RandomWalk() {
+        if (grounded && !jumping) {
+            if (randomWalkToRight) StartCoroutine(Jump(jumpingPower, walkingSpeed));
+            else StartCoroutine(Jump(jumpingPower, walkingSpeed));
         }
     }
 
     protected override void Walk() {
-        RotateBasedOnDirection();
         spriteRenderer.color = Color.white;
 
         if (lockOnPlayer) {
@@ -49,7 +42,33 @@ public class JumpingEnemy : Enemy {
 
         else {
             // randomly walk around
-            RandomWalkCycle();
+            RandomWalk();
         }
+    }
+
+    
+	private const float JUMP_DELAY = 0.5f;
+	private bool jumping = false;
+	protected IEnumerator Jump(float jumpPower, float xVelocity) {
+        Debug.Log("Enemy jump!");
+		jumping = true;
+		rb.velocity = Vector2.zero;
+		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+		
+		yield return new WaitForSeconds(JUMP_DELAY);
+		rb.velocity = Vector2.up * jumpingPower + Vector2.right * xVelocity;
+        //RotateBasedOnDirection();
+		yield return new WaitForSeconds(JUMP_DELAY);
+		
+		jumping = false;
+		yield return null;
+	}
+
+    protected override void AutoPath() {
+		float xDist = player.transform.position.x - transform.position.x;
+		float yDist = player.transform.position.y - transform.position.y + 0.5f;
+
+        // adds jumping
+        if (grounded && !jumping) StartCoroutine(Jump(jumpingPower, xDist));
     }
 }
