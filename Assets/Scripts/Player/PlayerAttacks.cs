@@ -142,6 +142,9 @@ public partial class Player : MonoBehaviour {
 		}
 	}
 
+	public void ResetLayer() {
+		gameObject.layer = LayerMask.NameToLayer("Player");
+	}
 
 	private void HandleAttack() {
 		switch (attackType) {
