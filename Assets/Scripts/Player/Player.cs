@@ -108,6 +108,7 @@ public partial class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		if (!(state == State.damaged || state == State.dead)) Controls();
+		if (!(state == State.dashing || state == State.slashing)) ResetLayer();
 
 		// handles the current state
 		HandleState();
