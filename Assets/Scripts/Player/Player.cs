@@ -49,6 +49,7 @@ public partial class Player : MonoBehaviour {
 	public bool autoPathing;
 	public bool grounded;
 	public bool invincible;
+	public bool paused;
 
 	// directional targets
 	public Vector2 targetA; 	// start point of a slash
@@ -70,6 +71,7 @@ public partial class Player : MonoBehaviour {
 	public bool jumping = false;
 	
 	// ui/ux elements
+	public GameObject pauseMenuPrefab;
 	public Texture2D cursorTexture;
 	public CursorMode cursorMode;
 	public Vector2 hotSpot;
@@ -109,6 +111,9 @@ public partial class Player : MonoBehaviour {
 	void Update() {
 		if (!(state == State.damaged || state == State.dead)) Controls();
 		if (!(state == State.dashing || state == State.slashing)) ResetLayer();
+
+		// handles the pause menu
+		if (Input.GetKeyDown("space") && !paused) PauseMenu();
 
 		// handles the current state
 		HandleState();
@@ -263,6 +268,11 @@ public partial class Player : MonoBehaviour {
 
 		Time.timeScale = 1;
 		SceneManager.LoadScene(0);
+	}
+
+	private void PauseMenu() {
+		GameObject pauseMenu = Instantiate(pauseMenuPrefab);
+		paused = true;
 	}
 
 	private void HandleState() {
