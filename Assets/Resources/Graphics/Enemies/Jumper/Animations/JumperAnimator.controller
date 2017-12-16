@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0002d7e95ef1c1e4f818e32e3d9806a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enterSound: {fileID: 8300000, guid: c0156cfb7fcee47ea9f8973d67da4b95, type: 3}
+  enterSound: {fileID: 8300000, guid: 4f6cda758def43946a3fce1d7463010c, type: 3}
 --- !u!114 &114390746008115500
 MonoBehaviour:
   m_ObjectHideFlags: 1

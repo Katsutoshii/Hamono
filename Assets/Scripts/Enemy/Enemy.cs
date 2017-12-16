@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour {
     noticed,
     attacking,
     damaged,
+    blocking,
     dead,
   }
 
@@ -111,6 +112,7 @@ public class Enemy : MonoBehaviour {
     animator.SetBool("dead", state == State.dead);
     animator.SetBool("noticed", state == State.noticed);
     animator.SetBool("grounded", grounded);
+    animator.SetBool("blocking", state == State.blocking);
   }
 
   // handles case when enemy runs into something
@@ -223,9 +225,13 @@ public class Enemy : MonoBehaviour {
 		if (state == State.damaged || state == State.dead) return;
 
     damagedStartTime = Time.time;
-    state = State.damaged;
     
-		if (damageAmount > 0) spriteRenderer.color = Color.red;
+    
+		if (damageAmount > 0) {
+      spriteRenderer.color = Color.red;
+      state = State.damaged;
+    }
+    else state = State.blocking;
 
     // spawn sparks
     for (int i = 0; i < 4; i++)
@@ -268,6 +274,10 @@ public class Enemy : MonoBehaviour {
         break;
 
       case State.damaged:
+        Damaged();
+        break;
+
+      case State.blocking:
         Damaged();
         break;
 

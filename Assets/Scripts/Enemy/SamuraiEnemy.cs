@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SamuraiEnemy : Enemy {
-    private AudioClip blockSound;
     public override void Start() {
         Debug.Log("SamuraiEnemy start");
         base.Start();
 
-        blockSound = (AudioClip) Resources.Load("Sounds/Collectibles/coin_collect");
         StartCoroutine(ChangeRandomWalkCycle());
 
     }
@@ -36,7 +34,6 @@ public class SamuraiEnemy : Enemy {
                 else {
                     player.attackResponse = Player.AttackResponse.blocked;
                     Damage(0, receiveSlashKnockback/2, other);
-                    audioSource.PlayOneShot(blockSound);
                 }
                 
                 break;
@@ -44,7 +41,6 @@ public class SamuraiEnemy : Enemy {
             case "PlayerDashHurtBox":
                 player.attackResponse = Player.AttackResponse.blocked;
                 Damage(0, receiveDashKnockback/2, other);
-                audioSource.PlayOneShot(blockSound);
                 break;
         }   
     }

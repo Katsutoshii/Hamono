@@ -327,8 +327,8 @@ MonoBehaviour:
   jumpingPower: 8
   distanceNearPlayer: 8
   healthAmount: 3
-  receiveSlashDamage: 5
-  receiveDashDamage: 5
+  receiveSlashDamage: 1
+  receiveDashDamage: 1
   receiveSlashKnockback: 1
   receiveDashKnockback: 1
   KP: 2
