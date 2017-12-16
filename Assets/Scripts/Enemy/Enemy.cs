@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// Base class for enemies
 public class Enemy : MonoBehaviour {
@@ -70,6 +71,8 @@ public class Enemy : MonoBehaviour {
   void Update() {
 
     StaticHealthBar();
+
+    UpdateHealthBar();
 
     CheckForPlayerProximity();
 
@@ -243,6 +246,11 @@ public class Enemy : MonoBehaviour {
       }   
     }
 	}
+
+  protected void UpdateHealthBar() {
+    Image bar = transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
+    bar.fillAmount = healthAmount / 5;
+  }
 
   // enemy died
   protected virtual void Death() {
