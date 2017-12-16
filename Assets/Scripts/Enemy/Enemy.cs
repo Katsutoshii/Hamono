@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// Base class for enemies
 public class Enemy : MonoBehaviour {
@@ -10,6 +11,7 @@ public class Enemy : MonoBehaviour {
   protected SpriteRenderer spriteRenderer;
   protected GameObject coinPrefab;
   protected GameObject heartPrefab;
+  protected GameObject healthBarPrefab;
   protected GameObject sparkPrefab;
   public State state;
   protected Animator animator;
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour {
 
   protected bool lockOnPlayer;
 
+  private float maxHealthAmount;
   public float healthAmount;
   public float receiveSlashDamage;
   public float receiveDashDamage;
@@ -58,9 +61,13 @@ public class Enemy : MonoBehaviour {
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     spriteRenderer.color = Color.white;
 
+    maxHealthAmount = healthAmount;
+
     coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
     heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
     sparkPrefab = Resources.Load<GameObject>("Prefabs/FX/Spark");
+    healthBarPrefab = transform.GetChild(2).gameObject;
+    healthBarPrefab.GetComponent<Canvas>().enabled = false;
 
     player = FindObjectOfType<Player>();
 
@@ -71,6 +78,11 @@ public class Enemy : MonoBehaviour {
   }
 
   void Update() {
+
+    StaticHealthBar();
+
+    UpdateHealthBar();
+
     CheckForPlayerProximity();
 
     HandleState();
@@ -79,9 +91,7 @@ public class Enemy : MonoBehaviour {
   }
 
   protected float noticedStartTime;
-  protected virtual void Walk() {
-    
-  }
+  protected virtual void Walk() {}
 
   // enemy notices player
   protected void Noticed() {
@@ -94,6 +104,8 @@ public class Enemy : MonoBehaviour {
 
   private float damagedStartTime;
 	protected void Damaged() {
+		spriteRenderer.color = Color.red;
+    if (!healthBarPrefab.GetComponent<Canvas>().enabled) healthBarPrefab.GetComponent<Canvas>().enabled = true;
     gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
 		
 		if (Time.time - damagedStartTime > 0.5f) {
@@ -146,6 +158,10 @@ public class Enemy : MonoBehaviour {
       else
         transform.localScale = new Vector3(-1, 1, 1);
     }
+  }
+
+  protected void StaticHealthBar() {
+    transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
   }
 
   // checks to see if it's close enough to player
@@ -254,6 +270,15 @@ public class Enemy : MonoBehaviour {
       }   
     }
 	}
+
+  protected void UpdateHealthBar() {
+    Image bar = transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
+    bar.fillAmount = healthAmount / maxHealthAmount;
+    if (bar.fillAmount <= .4)
+      bar.color = new Color(1, 0, 0, 1);
+    else if (bar.fillAmount <= .7)
+      bar.color = new Color(1, 0.39f, 0, 1);
+  }
 
   // enemy died
   protected virtual void Death() {
