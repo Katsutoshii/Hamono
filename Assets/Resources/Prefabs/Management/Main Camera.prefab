@@ -105,7 +105,7 @@ MonoBehaviour:
   SCROLL_SPEED: 0.05
   smoothTime: 0.1
   shakeDuration: 0.5
-  shakeAmount: 0.3
+  shakeAmount: 0.1
   decreaseFactor: 1
 --- !u!124 &124131894815049378
 Behaviour:

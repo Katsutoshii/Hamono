@@ -416,12 +416,9 @@ MonoBehaviour:
   coinCount: 0
   jumping: 0
   generateStamina: 0.02
-  attackStartTime: 0
-  readyStartTime: 0
   autoPathStartTime: 0
   damagedStartTime: 0
   invincibleFlashes: 8
-  cameraContorller: {fileID: 0}
   timeFreezeDuration: 0
   missStaminaPenalty: 0.1
   dashStaminaCost: 0.002

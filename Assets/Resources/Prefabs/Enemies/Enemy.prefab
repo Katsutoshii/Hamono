@@ -120,7 +120,7 @@ Rigidbody2D:
   m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: db9865676f10108478255e3a2948c22c, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -141,7 +141,7 @@ BoxCollider2D:
   m_Offset: {x: -0.017677784, y: -0.029333174}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.32}
+    pivot: {x: 0.5, y: 0.33}
     oldSize: {x: 1.16, y: 1.68}
     newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
@@ -188,7 +188,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029333591, y: 0.21219039}
+  m_Offset: {x: 0.029333591, y: 0.21016043}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -199,7 +199,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.89772415, y: 1.8685734}
+  m_Size: {x: 0.89772415, y: 1.8726336}
   m_EdgeRadius: 0
 --- !u!82 &82803282367702584
 AudioSource:
@@ -320,24 +320,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87c35787766e76449a06ce1c08b9bf87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  rb: {fileID: 0}
-  coinPrefab: {fileID: 1923347793606866, guid: 8b363b572e089004b96a5158a0897986, type: 2}
   state: 0
   audioSource: {fileID: 0}
   grounded: 0
-  walkingSpeed: 5
-  jumpingPower: 3
-  distanceNearPlayer: 0
-  healthAmount: 0
+  walkingSpeed: 3
+  jumpingPower: 8
+  distanceNearPlayer: 8
+  healthAmount: 6
   receiveSlashDamage: 1
   receiveDashDamage: 1
   receiveSlashKnockback: 1
   receiveDashKnockback: 1
-  SLASHING_X_DIST: 0.2
-  SLASHING_Y_DIST: 0.2
-  KP: 5
-  GRAVITY_SCALE: 2
+  KP: 2
   randomChangetime: 2
 --- !u!212 &212478704518247742
 SpriteRenderer:
