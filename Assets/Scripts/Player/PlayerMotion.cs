@@ -45,6 +45,7 @@ public partial class Player : MonoBehaviour {
     
     
 	private const float AUTOPATH_TIMEOUT = 1.5f;
+	public float autoPathLimitY;
     
 
 	// method to handle the autopathing
@@ -57,7 +58,7 @@ public partial class Player : MonoBehaviour {
         if (transform.position.y < targetA.y) yDist += 0.5f;
 
 		// timeout if the player
-		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT) {
+		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT || targetA.y - transform.position.y > autoPathLimitY) {
 			ResetToIdle();
 			return;
 		}

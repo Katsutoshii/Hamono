@@ -929,6 +929,31 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 114652575155847830, guid: 7286f1af248c6664fbbe039977eda263,
+        type: 2}
+      propertyPath: receiveSlashKnockback
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 61812478664041264, guid: 7286f1af248c6664fbbe039977eda263,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: 0.095217496
+      objectReference: {fileID: 0}
+    - target: {fileID: 61812478664041264, guid: 7286f1af248c6664fbbe039977eda263,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 2.0767937
+      objectReference: {fileID: 0}
+    - target: {fileID: 61812478664041264, guid: 7286f1af248c6664fbbe039977eda263,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0.11381215
+      objectReference: {fileID: 0}
+    - target: {fileID: 61812478664041264, guid: 7286f1af248c6664fbbe039977eda263,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1.4013828
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7286f1af248c6664fbbe039977eda263, type: 2}
   m_IsPrefabParent: 0
@@ -1423,6 +1448,16 @@ Prefab:
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: autoPathLimit
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638767232979100, guid: 912ce30ba4d82244d8548995963ae710,
+        type: 2}
+      propertyPath: autoPathLimitY
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
@@ -9725,7 +9760,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e93001c732e0e44d1b95e2cddf810c55, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -109,7 +109,7 @@ public partial class Player : MonoBehaviour {
 		UpdateAnimatorVariables();
 	}
 
-	private const float MIN_ATTACK_THRESH = 0.2f;
+	private const float MIN_ATTACK_THRESH = 0.5f;
 	public void GetAttackType() {
 		
 		targetB = Camera.main.ScreenToWorldPoint(Input.mousePosition);
