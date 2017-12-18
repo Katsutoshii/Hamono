@@ -6,7 +6,7 @@ public class SlashIndicator : MonoBehaviour {
 
 	public Vector3 targetA;
 	public bool drawing = false;
-	public Player player;
+	private Player player;
 
 	public SpriteRenderer spriteRenderer;
 
@@ -15,6 +15,7 @@ public class SlashIndicator : MonoBehaviour {
 		gameObject.transform.localScale = new Vector3(0, 0, 0);
 		drawing = false;
 
+		player = FindObjectOfType<Player>();
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
 	}
@@ -46,9 +47,9 @@ public class SlashIndicator : MonoBehaviour {
 			float width = Mathf.Sqrt(
 				(Input.mousePosition.x - targetAScreenPoint.x) * (Input.mousePosition.x - targetAScreenPoint.x)
 				 + (Input.mousePosition.y - targetAScreenPoint.y) * (Input.mousePosition.y - targetAScreenPoint.y)
-			) * 100 / spriteRenderer.sprite.rect.width;
+			) * 0.5f / spriteRenderer.sprite.rect.width;
 				
-			transform.localScale = new Vector3(width, 2f, 2f);
+			transform.localScale = new Vector3(width, 1, 1);
 
 			float angle = Mathf.Atan2(clickWorldPoint.y - targetA.y, 
 				clickWorldPoint.x - targetA.x) * 180 / Mathf.PI;
