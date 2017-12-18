@@ -25,7 +25,7 @@ public class SlashIndicator : MonoBehaviour {
 		if (Input.GetMouseButton(0) && !drawing && player.state != Player.State.talking) {
 			drawing = true;
 
-			Vector3 clickWorldPoint =ScreenToWorldPoint(Input.mousePosition);
+			Vector3 clickWorldPoint = ScreenToWorldPoint(Input.mousePosition);
 			
 			transform.position = clickWorldPoint;
 			targetA = clickWorldPoint;
