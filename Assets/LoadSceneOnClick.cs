@@ -14,6 +14,7 @@ public class LoadSceneOnClick : MonoBehaviour {
 		loadingBar = FindObjectOfType<LoadingBar>();
 	}
 	public void LoadScene(int sceneID) {
+		Debug.Log("starting scene " + sceneID);
 		loadingBar.RunAnimation();
 		SceneManager.LoadSceneAsync(sceneID);
 	}
