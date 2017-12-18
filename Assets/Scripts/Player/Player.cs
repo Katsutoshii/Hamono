@@ -131,7 +131,7 @@ public partial class Player : MonoBehaviour {
 	// method to handle all control inputs inside main loop
 	private void Controls() {
 		// for initiating action
-		if (Input.GetMouseButtonDown(0) && state != State.talking && state != State.finishedTalking && !paused) {
+		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(1)) && state != State.talking && state != State.finishedTalking && !paused) {
 
 			autoPathStartTime = Time.time;
 			state = State.autoPathing;
