@@ -292,11 +292,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!20 &113826364 stripped
-Camera:
-  m_PrefabParentObject: {fileID: 20672528059436694, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
-    type: 2}
-  m_PrefabInternal: {fileID: 1473868039}
 --- !u!1001 &175570701
 Prefab:
   m_ObjectHideFlags: 0
@@ -1662,16 +1657,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 114794640337671934, guid: 3c53a60cc04983040adac58efe4be6c8,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1271265347}
-    - target: {fileID: 223311192426954478, guid: 3c53a60cc04983040adac58efe4be6c8,
-        type: 2}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 113826364}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3c53a60cc04983040adac58efe4be6c8, type: 2}
   m_IsPrefabParent: 0
