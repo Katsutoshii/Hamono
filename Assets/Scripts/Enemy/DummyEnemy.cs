@@ -38,7 +38,7 @@ public class DummyEnemy : Enemy {
       leftHit = false;
       rightHit = false;
 			spriteRenderer.color = Color.white;
-      gameObject.layer = LayerMask.NameToLayer("Enemies");
+      gameObject.layer = LayerMask.NameToLayer("Dummies");
 
 			state = State.walking;
 		}
