@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour {
     died = false;
   }
 
-  void Update() {
+  public virtual void Update() {
 
     StaticHealthBar();
 
@@ -116,7 +116,7 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-  protected virtual void UpdateAnimatorVariables() {
+  public virtual void UpdateAnimatorVariables() {
     animator.SetFloat("speed", rb.velocity.magnitude);
     animator.SetBool("damaged", state == State.damaged);
     animator.SetBool("idle", state == State.idle);

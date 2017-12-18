@@ -1809,6 +1809,11 @@ Prefab:
       propertyPath: healthAmount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 95566042608535566, guid: 5c8091fe1da9c4d1bb286351954badda,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b2014ea40079f471ba407cb849cfe247, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c8091fe1da9c4d1bb286351954badda, type: 2}
   m_IsPrefabParent: 0
