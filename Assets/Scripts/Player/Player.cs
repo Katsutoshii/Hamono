@@ -197,8 +197,10 @@ public partial class Player : MonoBehaviour {
 
 
 			case "Spik":
-				if (!invincible) Damage(0.5f, 0f, other.collider);
-				rb.velocity = new Vector2(rb.velocity.x, 9f);
+				if (!invincible) {
+					Damage(0.5f, 0f, other.collider);
+					rb.velocity = new Vector2(rb.velocity.x, 9f);
+				}
 				break;
 		}
 	}
