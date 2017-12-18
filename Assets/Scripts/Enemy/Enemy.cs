@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour {
     died = false;
   }
 
-  void Update() {
+  public virtual void Update() {
 
     StaticHealthBar();
 
@@ -101,8 +101,8 @@ public class Enemy : MonoBehaviour {
       state = State.walking;
   }
 
-  private float damagedStartTime;
-	protected void Damaged() {
+  protected float damagedStartTime;
+	public virtual void Damaged() {
 		spriteRenderer.color = Color.red;
     if (!healthBarPrefab.GetComponent<Canvas>().enabled) healthBarPrefab.GetComponent<Canvas>().enabled = true;
     gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-  protected virtual void UpdateAnimatorVariables() {
+  public virtual void UpdateAnimatorVariables() {
     animator.SetFloat("speed", rb.velocity.magnitude);
     animator.SetBool("damaged", state == State.damaged);
     animator.SetBool("idle", state == State.idle);
@@ -159,12 +159,12 @@ public class Enemy : MonoBehaviour {
     }
   }
 
-  protected void StaticHealthBar() {
+  public virtual void StaticHealthBar() {
     transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
   }
 
   // checks to see if it's close enough to player
-  protected void CheckForPlayerProximity() {
+  public virtual void CheckForPlayerProximity() {
     float distance = Vector2.Distance(transform.position, player.transform.position);
     if (distance <= distanceNearPlayer) {
       lockOnPlayer = true;
@@ -235,7 +235,7 @@ public class Enemy : MonoBehaviour {
   
   // when enemy is first damaged
   protected float deathStartTime;
-  protected virtual void Damage(float damageAmount, float knockback, Collider2D source) {
+  public virtual void Damage(float damageAmount, float knockback, Collider2D source) {
 
 		if (state == State.damaged || state == State.dead) return;
 
@@ -270,7 +270,7 @@ public class Enemy : MonoBehaviour {
     }
 	}
 
-  protected void UpdateHealthBar() {
+  public virtual void UpdateHealthBar() {
     Image bar = transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
     bar.fillAmount = healthAmount / maxHealthAmount;
     //Debug.Log("cellphone: " + bar.fillAmount);

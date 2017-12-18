@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4702268169266706}
   - component: {fileID: 61508419877422528}
   - component: {fileID: 114494229243757060}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: PlayerSlashHurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 4977360019508160}
   - component: {fileID: 61434013151631290}
   - component: {fileID: 114246282131561358}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: PlayerDashHurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
