@@ -42,7 +42,7 @@ public class Pot : MonoBehaviour {
 				break;
 		}
 	}
-
+	
 	private void Break() {
 		audioSource.Play();
 		for (int i = 0; i < Random.Range(0, numCoins + 1); i++) 
