@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4958695899606742}
   - component: {fileID: 61875190351392994}
   - component: {fileID: 114898840632772032}
-  m_Layer: 9
+  m_Layer: 19
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 82459744134282366}
   - component: {fileID: 95566042608535566}
   - component: {fileID: 114309258020767868}
-  m_Layer: 9
+  m_Layer: 19
   m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
