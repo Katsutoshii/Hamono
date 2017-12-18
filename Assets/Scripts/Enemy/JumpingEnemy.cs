@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class JumpingEnemy : Enemy {
     public override void Start() {
-        Debug.Log("JumpingEnemy start");
         base.Start();
         StartCoroutine(ChangeRandomWalkCycle());
     }

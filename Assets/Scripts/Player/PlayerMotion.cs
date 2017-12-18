@@ -72,7 +72,6 @@ public partial class Player : MonoBehaviour {
 			(Mathf.Abs(yDist) < AUTOPATH_Y_THRESHOLD && grounded));			// OR we are gorunded and meet the grounded thresh
 
 		if (positionReached) {
-			Debug.Log("Reached position");
             rb.velocity = new Vector2(0, rb.velocity.y);
 			// if we are at the position to start slashing, freeze until we have an attack!
 			if (Input.GetMouseButton(0) || attackType != AttackType.none) {		// if we have an attack queued or we are still drawing
@@ -104,7 +103,6 @@ public partial class Player : MonoBehaviour {
 				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
 			
 			else if (yDist >= -2 && onEdge) {
-				Debug.Log("Jumpa cross from edge!");
 				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist) * AUTOPATH_Y_FACTOR + Mathf.Abs(xDist) * AUTOPATH_X_FACTOR), 20f)));
 			}
 		}

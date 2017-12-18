@@ -8,7 +8,6 @@ public class DummyEnemy : Enemy {
   protected bool rightHit;
 
   public override void Start() {
-    Debug.Log("DummyEnemy start");
     base.Start();
   }
 

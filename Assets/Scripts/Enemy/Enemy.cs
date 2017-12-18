@@ -61,14 +61,16 @@ public class Enemy : MonoBehaviour {
     spriteRenderer.color = Color.white;
 
     maxHealthAmount = healthAmount;
+    
+    player = FindObjectOfType<Player>();
 
     coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
     heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
     sparkPrefab = Resources.Load<GameObject>("Prefabs/FX/Spark");
-    healthBarPrefab = transform.GetChild(2).gameObject;
+
+    healthBarPrefab = Resources.Load<GameObject>("Prefabs/Enemies/EnemyHealthBar");
     healthBarPrefab.GetComponent<Canvas>().enabled = false;
 
-    player = FindObjectOfType<Player>();
 
     lockOnPlayer = false;
     state = State.walking;
