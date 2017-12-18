@@ -500,6 +500,7 @@ MonoBehaviour:
   maxSpeed: {x: 10, y: 20}
   dustCloudPrefab: {fileID: 1250923004883462, guid: 3aa9da3f77e263043a0d3c39ab39d9f1,
     type: 2}
+  AUTOPATH_X_FACTOR: 12
   autoPathLimitY: 7
 --- !u!212 &212073600475020504
 SpriteRenderer:

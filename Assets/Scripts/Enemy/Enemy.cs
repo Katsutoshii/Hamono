@@ -52,7 +52,6 @@ public class Enemy : MonoBehaviour {
   private float autoPathStartTime;
 
   public virtual void Start() {
-    Debug.Log("Enemy start!");
     rb = gameObject.GetComponent<Rigidbody2D>();
     rb.isKinematic = false;
 
