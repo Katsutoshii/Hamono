@@ -121,8 +121,6 @@ public partial class Player : MonoBehaviour {
 		// handles the attack responses
 		HandleAttackResponses();	
 
-		ChangePlatformType();
-
 		if(state != State.dashing) LimitVelocity();
 
 		UpdateAnimatorVariables();
@@ -204,26 +202,6 @@ public partial class Player : MonoBehaviour {
 					rb.velocity = new Vector2(rb.velocity.x, 9f);
 				}
 				break;
-			
-			case "Plat":
-					// Debug.Log(other.gameObject.GetComponent<Tilemap>());
-					// Debug.Log("I'm beneath a platform: " + transform.position.y + "     " + other.collider.transform.position.y); 
-				break;
-		}
-	}
-
-	void ChangePlatformType() {
-		if (rb.velocity.y > 0) {
-			// gameObject.GetComponent<Collider2D>().isTrigger = true;
-			// gameObject.layer = LayerMask.NameToLayer("Dashing");
-			// GameObject.Find("Platforms").GetComponent<CompositeCollider2D>().isTrigger = true;
-			// Debug.Log("ijemma is right here: " + GameObject.Find("Platforms").GetComponent<CompositeCollider2D>().isTrigger);
-		}
-		else {
-			// gameObject.GetComponent<Collider2D>().isTrigger = false;
-			// gameObject.layer = LayerMask.NameToLayer("Player");
-			// GameObject.Find("Platforms").GetComponent<CompositeCollider2D>().isTrigger = false;
-			// Debug.Log("ijemma is right after here: " + GameObject.Find("Platforms").GetComponent<CompositeCollider2D>().isTrigger);
 		}
 	}
 
