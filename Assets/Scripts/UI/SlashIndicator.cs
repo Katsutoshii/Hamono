@@ -45,9 +45,9 @@ public class SlashIndicator : MonoBehaviour {
 			else spriteRenderer.color = Color.red;
 
 			float width = Mathf.Sqrt(
-				(Input.mousePosition.x - targetAScreenPoint.x) * (Input.mousePosition.x - targetAScreenPoint.x)
-				 + (Input.mousePosition.y - targetAScreenPoint.y) * (Input.mousePosition.y - targetAScreenPoint.y)
-			) * 1.4f / spriteRenderer.sprite.rect.width;
+				(clickWorldPoint.x - targetA.x) * (clickWorldPoint.x - targetA.x)
+				 + (clickWorldPoint.y - targetA.y) * (clickWorldPoint.y - targetA.y)
+			)  * 100 / spriteRenderer.sprite.rect.width;
 				
 			transform.localScale = new Vector3(width, 2, 1);
 
