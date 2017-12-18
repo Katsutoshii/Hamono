@@ -20,7 +20,6 @@ public class Spark : PooledObject {
     }
 
     public override void OnObjectReuse() {
-        Debug.Log("On object reuse!");
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = Color.white;
 

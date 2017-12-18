@@ -48,6 +48,7 @@ public partial class Player : MonoBehaviour {
 	// temporary state checkers
 	public bool autoPathing;
 	public bool grounded;
+	public bool onEdge;
 	public bool invincible;
 	public bool paused;
 

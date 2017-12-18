@@ -41,6 +41,7 @@ public partial class Player : MonoBehaviour {
 	private const float SLASHING_Y_DIST = 0.5f;
 	private const float AUTOPATH_Y_THRESHOLD = 1.5f; 
 	private const float AUTOPATH_Y_FACTOR = 6.25f;
+	private const float AUTOPATH_X_FACTOR = 6.25f;
 	private const float JUMP_X_THRESHOLD = 3.5f;
     
     
@@ -98,8 +99,13 @@ public partial class Player : MonoBehaviour {
 
 		RotateSpriteForVelocity();
 
-		if (yDist >= AUTOPATH_Y_THRESHOLD && xDist <= JUMP_X_THRESHOLD && grounded) {
-			StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
+		if (!jumping && grounded) { 
+			if ((yDist >= AUTOPATH_Y_THRESHOLD && (xDist <= JUMP_X_THRESHOLD))) 
+				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
+			
+			else if (yDist >= 0 && onEdge) {
+				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist) * AUTOPATH_Y_FACTOR + Mathf.Abs(xDist) * AUTOPATH_X_FACTOR), 20f)));
+			}
 		}
 	}
 
