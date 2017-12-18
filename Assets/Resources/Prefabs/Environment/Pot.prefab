@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61282087046010756}
   - component: {fileID: 114564457877603450}
   - component: {fileID: 82205144438085874}
-  m_Layer: 8
+  m_Layer: 17
   m_Name: Pot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,11 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde4febd76312a84a920678670300498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 1923347793606866, guid: 8b363b572e089004b96a5158a0897986, type: 2}
-  heartPrefab: {fileID: 1449144718078270, guid: 7de5c466173a44740a0a6f3cabb8774a,
-    type: 2}
-  potPiecePrefab: {fileID: 1799168926636986, guid: 0fbca03f4e8bbfc4d9e280157bcc8a53,
-    type: 2}
   numCoins: 4
   numHearts: 1
   numPieces: 5
