@@ -18,7 +18,6 @@ public class DummyEnemy : Enemy {
   }
 
   public override void Damage(float damageAmount, float knockback, Collider2D source) {
-    base.spriteRenderer.color = Color.red;
     base.state = State.damaged;
 
     base.damagedStartTime = Time.time;
@@ -35,7 +34,7 @@ public class DummyEnemy : Enemy {
 
   public override void Damaged() {
     gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
-		if (Time.time - base.damagedStartTime > 1f) {
+		if (Time.time - base.damagedStartTime > 0.5f) {
       leftHit = false;
       rightHit = false;
 			spriteRenderer.color = Color.white;

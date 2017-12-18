@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4958695899606742}
   - component: {fileID: 61875190351392994}
   - component: {fileID: 114898840632772032}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ Animator:
   m_GameObject: {fileID: 1560799093750266}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b2014ea40079f471ba407cb849cfe247, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -256,11 +256,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   audioSource: {fileID: 0}
-  grounded: 0
+  grounded: 1
   walkingSpeed: 0
   jumpingPower: 0
   distanceNearPlayer: 0
-  healthAmount: 0
+  healthAmount: 1
   receiveSlashDamage: 0
   receiveDashDamage: 0
   receiveSlashKnockback: 0

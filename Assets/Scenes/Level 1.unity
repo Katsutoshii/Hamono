@@ -1096,7 +1096,7 @@ Transform:
   - {fileID: 1925324566}
   - {fileID: 182297169}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &720234849
 Prefab:
@@ -1658,7 +1658,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4130824684890484, guid: 38774e62c76abce41b83d7a8365e84c5, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 212405299389629148, guid: 38774e62c76abce41b83d7a8365e84c5,
         type: 2}
@@ -1794,26 +1794,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 61799841784342388, guid: 5c8091fe1da9c4d1bb286351954badda,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114309258020767868, guid: 5c8091fe1da9c4d1bb286351954badda,
-        type: 2}
-      propertyPath: grounded
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114309258020767868, guid: 5c8091fe1da9c4d1bb286351954badda,
-        type: 2}
-      propertyPath: healthAmount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 95566042608535566, guid: 5c8091fe1da9c4d1bb286351954badda,
-        type: 2}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b2014ea40079f471ba407cb849cfe247, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c8091fe1da9c4d1bb286351954badda, type: 2}
   m_IsPrefabParent: 0
