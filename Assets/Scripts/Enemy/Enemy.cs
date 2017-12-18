@@ -52,7 +52,6 @@ public class Enemy : MonoBehaviour {
   private float autoPathStartTime;
 
   public virtual void Start() {
-    Debug.Log("Enemy start!");
     rb = gameObject.GetComponent<Rigidbody2D>();
     rb.isKinematic = false;
 
@@ -274,7 +273,7 @@ public class Enemy : MonoBehaviour {
   public virtual void UpdateHealthBar() {
     Image bar = transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
     bar.fillAmount = healthAmount / maxHealthAmount;
-    Debug.Log("cellphone: " + bar.fillAmount);
+    //Debug.Log("cellphone: " + bar.fillAmount);
     if (bar.fillAmount <= .4)
       bar.color = new Color(1, 0, 0, 1);
     else if (bar.fillAmount <= .7)

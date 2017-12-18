@@ -41,10 +41,12 @@ public partial class Player : MonoBehaviour {
 	private const float SLASHING_Y_DIST = 0.5f;
 	private const float AUTOPATH_Y_THRESHOLD = 1.5f; 
 	private const float AUTOPATH_Y_FACTOR = 6.25f;
+	public float AUTOPATH_X_FACTOR = 5f;
 	private const float JUMP_X_THRESHOLD = 3.5f;
     
     
 	private const float AUTOPATH_TIMEOUT = 1.5f;
+	public float autoPathLimitY;
     
 
 	// method to handle the autopathing
@@ -56,8 +58,8 @@ public partial class Player : MonoBehaviour {
 		float yDist = targetA.y - transform.position.y;
         if (transform.position.y < targetA.y) yDist += 0.5f;
 
-		// timeout if the player
-		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT) {
+		// timeout if the player is too far from the target in the y direction
+		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT || Mathf.Abs(targetA.y - transform.position.y) > autoPathLimitY) {
 			ResetToIdle();
 			return;
 		}
@@ -70,10 +72,10 @@ public partial class Player : MonoBehaviour {
 			(Mathf.Abs(yDist) < AUTOPATH_Y_THRESHOLD && grounded));			// OR we are gorunded and meet the grounded thresh
 
 		if (positionReached) {
+			Debug.Log("Reached position");
             rb.velocity = new Vector2(0, rb.velocity.y);
 			// if we are at the position to start slashing, freeze until we have an attack!
 			if (Input.GetMouseButton(0) || attackType != AttackType.none) {		// if we have an attack queued or we are still drawing
-				
 				state = State.ready;
 				readyStartTime = Time.time;
 			}
@@ -91,14 +93,20 @@ public partial class Player : MonoBehaviour {
 
 		if (Mathf.Abs(xDist) >= tempSlashingXDist) 
 			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
-		else if (Mathf.Abs(xDist) <= 0.05) {
+		else if (Mathf.Abs(xDist) <= 0.01) {
 			rb.velocity = new Vector2(0, rb.velocity.y);
 		}
 
 		RotateSpriteForVelocity();
 
-		if (yDist >= AUTOPATH_Y_THRESHOLD && xDist <= JUMP_X_THRESHOLD && grounded) {
-			StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
+		if (!jumping && grounded) { 
+			if ((yDist >= AUTOPATH_Y_THRESHOLD && (xDist <= JUMP_X_THRESHOLD))) 
+				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
+			
+			else if (yDist >= -2 && onEdge) {
+				Debug.Log("Jumpa cross from edge!");
+				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist) * AUTOPATH_Y_FACTOR + Mathf.Abs(xDist) * AUTOPATH_X_FACTOR), 20f)));
+			}
 		}
 	}
 

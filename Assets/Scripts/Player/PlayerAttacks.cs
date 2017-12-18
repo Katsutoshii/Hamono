@@ -28,6 +28,11 @@ public partial class Player : MonoBehaviour {
 		rb.gravityScale = 0; // float
 		
 		rb.velocity = Vector2.zero;
+
+		// rotate based on slash direction
+		if (targetA.x > targetB.x) transform.localScale = new Vector3(-1, 1, 1);
+		else if (targetA.x < targetB.x) transform.localScale = new Vector3(1, 1, 1);
+
 		if (attackType != AttackType.none) Attack();	// attack if we have an attack queued
 		else attackResponse = AttackResponse.none;
 
@@ -109,7 +114,7 @@ public partial class Player : MonoBehaviour {
 		UpdateAnimatorVariables();
 	}
 
-	private const float MIN_ATTACK_THRESH = 0.2f;
+	private const float MIN_ATTACK_THRESH = 0.5f;
 	public void GetAttackType() {
 		
 		targetB = Camera.main.ScreenToWorldPoint(Input.mousePosition);

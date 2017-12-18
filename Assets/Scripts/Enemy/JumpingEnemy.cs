@@ -51,7 +51,6 @@ public class JumpingEnemy : Enemy {
 	private const float JUMP_DELAY = 0.5f;
 	private bool jumping = false;
 	protected IEnumerator Jump(float jumpPower, float xVelocity) {
-        Debug.Log("Enemy jump!");
 		jumping = true;
 		rb.velocity = Vector2.zero;
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
