@@ -442,6 +442,11 @@ Prefab:
       propertyPath: m_Mass
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 114498045358560762, guid: 8edd54abc1f6e4e3bb2cc78893e6eca4,
+        type: 2}
+      propertyPath: typeOfBot
+      value: head
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8edd54abc1f6e4e3bb2cc78893e6eca4, type: 2}
   m_IsPrefabParent: 0
@@ -1820,6 +1825,11 @@ Prefab:
         type: 2}
       propertyPath: m_Mass
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 114309258020767868, guid: 5c8091fe1da9c4d1bb286351954badda,
+        type: 2}
+      propertyPath: typeOfBot
+      value: normal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c8091fe1da9c4d1bb286351954badda, type: 2}

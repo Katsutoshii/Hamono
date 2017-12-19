@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DummyEnemy : Enemy {
 
+  public string typeOfBot;
+
   protected bool leftHit;
   protected bool rightHit;
 
@@ -23,13 +25,70 @@ public class DummyEnemy : Enemy {
 
     base.damagedStartTime = Time.time;
 
+    HandleAttack(source);
+  }
+  
+  private void HandleAttack(Collider2D source) {
     if (source.transform.position.x < transform.position.x) {
-      leftHit = true;
-      base.animator.SetBool("leftHit", leftHit);
+      switch(player.attackType) {
+
+        case Player.AttackType.straightSlash:
+        if (typeOfBot == "body") {
+          leftHit = true;
+          base.animator.SetBool("leftHit", leftHit);
+        }
+        break;
+
+        case Player.AttackType.upSlash:
+        if (typeOfBot == "head") {
+          leftHit = true;
+          base.animator.SetBool("leftHit", leftHit);
+        }
+        break;
+
+        case Player.AttackType.downSlash:
+        if (typeOfBot == "legs") {
+          leftHit = true;
+          base.animator.SetBool("leftHit", leftHit);
+        }
+        break;
+
+        default:
+          rightHit = true;
+          base.animator.SetBool("rightHit", rightHit);
+        break;
+      }
+
     }
     else {
-      rightHit = true;
-      base.animator.SetBool("rightHit", rightHit);
+      switch(player.attackType) {
+
+        case Player.AttackType.straightSlash:
+        if (typeOfBot == "body") {
+          rightHit = true;
+          base.animator.SetBool("rightHit", rightHit);
+        }
+        break;
+
+        case Player.AttackType.upSlash:
+        if (typeOfBot == "head") {
+          rightHit = true;
+          base.animator.SetBool("rightHit", rightHit);
+        }
+        break;
+
+        case Player.AttackType.downSlash:
+        if (typeOfBot == "legs") {
+          rightHit = true;
+          base.animator.SetBool("rightHit", rightHit);
+        }
+        break;
+        
+        default:
+          rightHit = true;
+          base.animator.SetBool("rightHit", rightHit);
+        break;
+      }
     }
   }
 
