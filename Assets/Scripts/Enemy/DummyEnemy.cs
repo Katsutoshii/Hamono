@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DummyEnemy : Enemy {
 
+  public string typeOfBot;
+
   protected bool leftHit;
   protected bool rightHit;
 
@@ -23,13 +25,68 @@ public class DummyEnemy : Enemy {
 
     base.damagedStartTime = Time.time;
 
+    HandleAttack(source);
+  }
+  
+  private void HandleAttack(Collider2D source) {
     if (source.transform.position.x < transform.position.x) {
-      leftHit = true;
-      base.animator.SetBool("leftHit", leftHit);
+        switch(typeOfBot) {
+          case "normal":
+          leftHit = true;
+          base.animator.SetBool("leftHit", leftHit);
+          break;
+
+          case "head":
+          if (player.attackType == Player.AttackType.upSlash) {
+            leftHit = true;
+            base.animator.SetBool("leftHit", leftHit);
+          }
+          break;
+
+          case "body":
+          if (player.attackType == Player.AttackType.straightSlash) {
+            leftHit = true;
+            base.animator.SetBool("leftHit", leftHit);
+          }
+          break;
+
+          case "legs":
+          if (player.attackType == Player.AttackType.downSlash) {
+            leftHit = true;
+            base.animator.SetBool("leftHit", leftHit);
+          }
+          break;
+        }
+
     }
     else {
-      rightHit = true;
-      base.animator.SetBool("rightHit", rightHit);
+      switch(typeOfBot) {
+          case "normal":
+          rightHit = true;
+          base.animator.SetBool("rightHit", rightHit);
+          break;
+
+          case "head":
+          if (player.attackType == Player.AttackType.upSlash) {
+            rightHit = true;
+            base.animator.SetBool("rightHit", rightHit);
+          }
+          break;
+
+          case "body":
+          if (player.attackType == Player.AttackType.straightSlash) {
+            rightHit = true;
+            base.animator.SetBool("rightHit", rightHit);
+          }
+          break;
+
+          case "legs":
+          if (player.attackType == Player.AttackType.downSlash) {
+            rightHit = true;
+            base.animator.SetBool("rightHit", rightHit);
+          }
+          break;
+        }
     }
   }
 
