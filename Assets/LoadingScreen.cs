@@ -31,9 +31,9 @@ public class LoadingScreen : MonoBehaviour {
       StartCoroutine(LoadNewScene());
     }
     float xPosition = image.transform.position.x + .1f;
-    if (image.transform.position.x + 3f > Screen.width)
-      image.transform.position = new Vector2(-3f, image.transform.position.y);
-    image.transform.position = new Vector2(image.transform.position.x + 3f, image.transform.position.y);
+    if (image.transform.position.x + 6f > Screen.width)
+      image.transform.position = new Vector2(-6f, image.transform.position.y);
+    image.transform.position = new Vector2(image.transform.position.x + 6f, image.transform.position.y);
 
     if (!loop && index == sprites.Length) return;
 		frame ++;
