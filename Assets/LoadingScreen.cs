@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class LoadingScreen : MonoBehaviour {
 
+  public float movementSpeed;
+
   [SerializeField]
   private int scene;
   private Text loadingText;
+  private bool finished;
 
   public Sprite[] sprites;
 	private int spritePerFrame = 6;
@@ -39,9 +42,11 @@ public class LoadingScreen : MonoBehaviour {
   // animation for image.sprite
   private void PlayerAnimation() {
     float xPosition = image.transform.position.x + .1f;
-    if (image.transform.position.x - 30f > Screen.width)
+    if (image.transform.position.x - 30f > Screen.width) {
       image.transform.position = new Vector2(-6f, image.transform.position.y);
-    image.transform.position = new Vector2(image.transform.position.x + 6f, image.transform.position.y);
+      finished = true;
+    }
+    image.transform.position = new Vector2(image.transform.position.x + movementSpeed, image.transform.position.y);
 
     if (!loop && index == sprites.Length) return;
 		frame ++;
@@ -57,8 +62,9 @@ public class LoadingScreen : MonoBehaviour {
 
   // loads a new scene
   IEnumerator LoadNewScene() {
-    yield return new WaitForSeconds(4f);
-
+    while (!finished)
+      yield return new WaitForSeconds(1f);
+      
     AsyncOperation async = Application.LoadLevelAsync(scene);
 
     while (!async.isDone)
