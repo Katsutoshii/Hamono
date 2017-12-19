@@ -24,14 +24,19 @@ public class LoadingScreen : MonoBehaviour {
 		image = transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
 	}
 
-
   void Update() {
-    if (Input.GetKeyUp(KeyCode.Space) && loadScene == false) {
-      loadScene = true;
-      StartCoroutine(LoadNewScene());
-    }
+    StartCoroutine(LoadNewScene());
+
+    PlayerAnimation();
+
+    loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, .8f));
+    
+  }
+
+  // animation for image.sprite
+  private void PlayerAnimation() {
     float xPosition = image.transform.position.x + .1f;
-    if (image.transform.position.x + 6f > Screen.width)
+    if (image.transform.position.x - 30f > Screen.width)
       image.transform.position = new Vector2(-6f, image.transform.position.y);
     image.transform.position = new Vector2(image.transform.position.x + 6f, image.transform.position.y);
 
@@ -45,12 +50,9 @@ public class LoadingScreen : MonoBehaviour {
 			if (loop) index = 0;
 			if (destroyOnEnd) Destroy (gameObject);
 		}
-
-    if (loadScene) {
-      loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, .8f));
-    }
   }
 
+  // loads a new scene
   IEnumerator LoadNewScene() {
     yield return new WaitForSeconds(3f);
 
