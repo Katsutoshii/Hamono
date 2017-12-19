@@ -21,8 +21,9 @@ GameObject:
   - component: {fileID: 4304202925896544}
   - component: {fileID: 212478170802356950}
   - component: {fileID: 108400632133893596}
+  - component: {fileID: 95391993578244150}
   m_Layer: 0
-  m_Name: Light
+  m_Name: Lantern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,6 +42,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95391993578244150
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1271315446157714}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 90a4e43d693be478da8cd764a0f51ae5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &108400632133893596
 Light:
   m_ObjectHideFlags: 1
@@ -111,7 +129,7 @@ SpriteRenderer:
   m_SortingLayerID: -129811065
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c043ec4db7485411c875164749047c3d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b2bb9b455d871416da289fa29d6b3e95, type: 3}
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
