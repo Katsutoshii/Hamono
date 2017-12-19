@@ -74,7 +74,7 @@ public class LoadingScreen : MonoBehaviour {
   // loads a new scene
   IEnumerator LoadNewScene() {
     while (!isFinished())
-      yield return new WaitForSeconds(loadingTime);
+      yield return new WaitForSeconds(3f);
       
     AsyncOperation async = Application.LoadLevelAsync(scene);
 
