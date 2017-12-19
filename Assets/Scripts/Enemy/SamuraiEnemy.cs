@@ -6,6 +6,9 @@ public class SamuraiEnemy : Enemy {
     public override void Start() {
         Debug.Log("SamuraiEnemy start");
         base.Start();
+        
+        hurtBox.offset = Vector2.zero;
+        hurtBox.size = new Vector2(1.3f, 1.3f);
 
         StartCoroutine(ChangeRandomWalkCycle());
 
@@ -93,4 +96,14 @@ public class SamuraiEnemy : Enemy {
 		jumping = false;
 		yield return null;
 	}
+
+    public void LaserOut() {
+        hurtBox.offset = new Vector2(-0.6f, 0);
+        hurtBox.size = new Vector2(2.3f, 1.3f);
+    }
+
+    public void LaserIn() {
+        hurtBox.offset = Vector2.zero;
+        hurtBox.size = new Vector2(1.3f, 1.3f);
+    }
 }

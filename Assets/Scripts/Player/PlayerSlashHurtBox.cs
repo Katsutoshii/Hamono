@@ -17,8 +17,18 @@ public class PlayerSlashHurtBox : MonoBehaviour {
 	void Update () {
 		if (player.state == Player.State.slashing) {
 			hurtBox.enabled = true;
+			switch (player.attackType) {
+				case Player.AttackType.straightSlash:
+					hurtBox.offset = new Vector2(0.3f, 0);
+					break;
+				case Player.AttackType.upSlash:
+					hurtBox.offset = new Vector2(0.3f, 0.2f);
+					break;
+				case Player.AttackType.downSlash:
+					hurtBox.offset = new Vector2(0.3f, -0.2f);
+					break;	
+			}
 			
-			hurtBox.offset = new Vector2(0.3f, 0);
 		}
 		else {
 			hurtBox.offset = new Vector2(0, 0);

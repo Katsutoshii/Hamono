@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour {
   public State state;
   protected Animator animator;
   public AudioSource audioSource;
+  protected BoxCollider2D hurtBox;
 
   public bool grounded;
   protected bool prevNotice;
@@ -56,6 +57,7 @@ public class Enemy : MonoBehaviour {
     rb.isKinematic = false;
 
     audioSource = GetComponent<AudioSource>();
+    hurtBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
     animator = GetComponent<Animator>();
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     spriteRenderer.color = Color.white;
@@ -109,6 +111,9 @@ public class Enemy : MonoBehaviour {
   protected float damagedStartTime;
 	public virtual void Damaged() {
 		spriteRenderer.color = Color.red;
+
+    if (healthAmount == 0) StartCoroutine(Death());	
+
     if (!healthBarPrefab.GetComponent<Canvas>().enabled) healthBarPrefab.GetComponent<Canvas>().enabled = true;
     gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
 		
@@ -129,6 +134,7 @@ public class Enemy : MonoBehaviour {
     animator.SetBool("noticed", state == State.noticed);
     animator.SetBool("grounded", grounded);
     animator.SetBool("blocking", state == State.blocking);
+    animator.SetBool("attacking", state == State.attacking);
   }
 
   // handles case when enemy runs into something
@@ -182,18 +188,21 @@ public class Enemy : MonoBehaviour {
   }
 
   // attacks player
-  protected virtual void Attack() {
-    spriteRenderer.color = Color.white;
+  public float attackDuration;
+  protected virtual IEnumerator Attack() { 
+    Debug.Log("Attakcing!");
+    if (player.transform.position.x > transform.position.x)
+				transform.localScale = new Vector3(-1, 1, 1);
+    else 
+      transform.localScale = new Vector3(1, 1, 1);
 
-    // attack the player
-    if (player.state != Player.State.dashing && player.state != Player.State.slashing) {
-      // the player is damaged
-      player.attackResponse = Player.AttackResponse.missed;
-    } else {
-      // the enemy is damaged
-      player.attackResponse = Player.AttackResponse.normal;
-      state = State.damaged;
-    }
+
+    rb.velocity = new Vector2(0, rb.velocity.y);
+    state = State.attacking;
+    yield return new WaitForSeconds(attackDuration);
+    state = State.walking;
+
+    yield return null;
   }
 
   protected Vector3 RandomOffset(Vector3 position) {
@@ -202,12 +211,14 @@ public class Enemy : MonoBehaviour {
       position.z);
   }
 
+  public float attackRange;
   // follows player
   protected virtual void AutoPath() {
 		float xDist = player.transform.position.x - transform.position.x;
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
-    if (Mathf.Abs(xDist) < 0.1 && Mathf.Abs(yDist) < 0.1) {
+    if (Mathf.Abs(xDist) < attackRange) {
+      StartCoroutine(Attack());
 			return;
 		}
 
@@ -239,7 +250,6 @@ public class Enemy : MonoBehaviour {
 
   
   // when enemy is first damaged
-  protected float deathStartTime;
   public virtual void Damage(float damageAmount, float knockback, Collider2D source) {
 
 		if (state == State.damaged || state == State.dead) return;
@@ -263,16 +273,6 @@ public class Enemy : MonoBehaviour {
 
     healthAmount -= damageAmount;
     if ( healthAmount < 0) healthAmount = 0;
-
-    if (healthAmount == 0) {
-      if (state != State.dead) {
-        deathStartTime = Time.time;
-        // destroys the hurtbox
-        state = State.dead;
-        spriteRenderer.color = Color.red;
-        Destroy(gameObject.transform.GetChild(0).GetComponent<Collider2D>());
-      }   
-    }
 	}
 
   public virtual void UpdateHealthBar() {
@@ -285,24 +285,27 @@ public class Enemy : MonoBehaviour {
       bar.color = new Color(1, 0.39f, 0, 1);
   }
 
-  // enemy died
-  protected virtual void Death() {
+  protected virtual IEnumerator Death() {
     rb.velocity = new Vector2(0, rb.velocity.y);
-    if (Time.time - deathStartTime > .3f) spriteRenderer.color = Color.white;
+    Destroy(hurtBox);
+
+		state = State.damaged;
+    spriteRenderer.color = Color.red;
+		yield return new WaitForSeconds(0.3f);
+
+		state = State.dead;
+    spriteRenderer.color = Color.white;
+    yield return new WaitForSeconds(0.5f);
+
     // deletes the game object
-    if (Time.time - deathStartTime > .8f) {
-      for (int i = 0; i < 4; i++)
-        PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
-      Destroy(gameObject);
-    }
+    for (int i = 0; i < 4; i++)
+      PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
+    Destroy(gameObject);
+    yield return null;
   }
 
   protected virtual void HandleState() {
     switch (state) {
-      case State.attacking:
-        Attack();
-        break;
-
       case State.damaged:
         Damaged();
         break;
@@ -324,4 +327,9 @@ public class Enemy : MonoBehaviour {
         break;
     }
   }
+  // method to play sounds from animator
+	public void PlayOneShot(AudioClip sound) {
+		audioSource.PlayOneShot(sound);
+	}
+  
 }

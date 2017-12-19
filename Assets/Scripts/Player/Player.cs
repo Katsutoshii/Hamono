@@ -194,7 +194,7 @@ public partial class Player : MonoBehaviour {
 	public float damagedStartTime;
 	private void Damaged() {
 		spriteRenderer.color = Color.red;
-		if (healthAmount == 0f) StartCoroutine(Death());		
+		if (healthAmount == 0) StartCoroutine(Death());		
 
 		// check if done being damaged
 		if (Time.time - damagedStartTime > damagedTime) {
