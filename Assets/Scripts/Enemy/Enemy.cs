@@ -68,10 +68,8 @@ public class Enemy : MonoBehaviour {
     heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
     sparkPrefab = Resources.Load<GameObject>("Prefabs/FX/Spark");
 
-    // healthBarPrefab = Resources.Load<GameObject>("Prefabs/Enemies/EnemyHealthBar");
     healthBarPrefab = transform.GetChild(2).gameObject;
     healthBarPrefab.GetComponent<Canvas>().enabled = false;
-    Debug.Log("debugging right here for the health bar: " + healthBarPrefab.GetComponent<Canvas>().enabled);
 
     lockOnPlayer = false;
     state = State.walking;
