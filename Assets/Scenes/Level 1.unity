@@ -437,6 +437,11 @@ Prefab:
       propertyPath: m_Name
       value: Head Dummy
       objectReference: {fileID: 0}
+    - target: {fileID: 50743580110407236, guid: 8edd54abc1f6e4e3bb2cc78893e6eca4,
+        type: 2}
+      propertyPath: m_Mass
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8edd54abc1f6e4e3bb2cc78893e6eca4, type: 2}
   m_IsPrefabParent: 0
