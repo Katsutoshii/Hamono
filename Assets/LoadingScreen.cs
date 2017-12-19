@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public class LoadingScreen : MonoBehaviour {
 
   public float movementSpeed;
+  public int maxLoops;
+  private int completedLoops;
 
   [SerializeField]
   private int scene;
   private Text loadingText;
-  private bool finished;
 
   public Sprite[] sprites;
 	private int spritePerFrame = 6;
@@ -24,6 +25,7 @@ public class LoadingScreen : MonoBehaviour {
 
   void Start() {
     loadingText = transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
+    completedLoops = 0;
   }
 
 	void Awake() {
@@ -42,10 +44,12 @@ public class LoadingScreen : MonoBehaviour {
   // animation for image.sprite
   private void PlayerAnimation() {
     float xPosition = image.transform.position.x + .1f;
+
     if (image.transform.position.x - 30f > Screen.width) {
+      completedLoops = completedLoops + 1;
       image.transform.position = new Vector2(-6f, image.transform.position.y);
-      finished = true;
     }
+
     image.transform.position = new Vector2(image.transform.position.x + movementSpeed, image.transform.position.y);
 
     if (!loop && index == sprites.Length) return;
@@ -60,10 +64,17 @@ public class LoadingScreen : MonoBehaviour {
 		}
   }
 
+  // always screen to move over to the next screen
+  private bool isFinished() {
+    if (completedLoops > maxLoops)
+      return true;
+    return false;
+  }
+
   // loads a new scene
   IEnumerator LoadNewScene() {
-    while (!finished)
-      yield return new WaitForSeconds(1f);
+    while (!isFinished())
+      yield return new WaitForSeconds(loadingTime);
       
     AsyncOperation async = Application.LoadLevelAsync(scene);
 
