@@ -5,20 +5,23 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadingScreen : MonoBehaviour {
-  private bool loadScene = false;
 
   [SerializeField]
   private int scene;
-  public Text loadingText;
+  private Text loadingText;
 
   public Sprite[] sprites;
-	public int spritePerFrame = 6;
-	public bool loop = true;
-	public bool destroyOnEnd = false;
+	private int spritePerFrame = 6;
+	private bool loop = true;
+	private bool destroyOnEnd = false;
 
 	private int index = 0;
 	private Image image;
 	private int frame = 0;
+
+  void Start() {
+    loadingText = transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
+  }
 
 	void Awake() {
 		image = transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
