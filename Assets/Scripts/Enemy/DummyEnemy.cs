@@ -30,65 +30,63 @@ public class DummyEnemy : Enemy {
   
   private void HandleAttack(Collider2D source) {
     if (source.transform.position.x < transform.position.x) {
-      switch(player.attackType) {
-
-        case Player.AttackType.straightSlash:
-        if (typeOfBot == "body") {
+        switch(typeOfBot) {
+          case "normal":
           leftHit = true;
           base.animator.SetBool("leftHit", leftHit);
-        }
-        break;
+          break;
 
-        case Player.AttackType.upSlash:
-        if (typeOfBot == "head") {
-          leftHit = true;
-          base.animator.SetBool("leftHit", leftHit);
-        }
-        break;
+          case "head":
+          if (player.attackType == Player.AttackType.upSlash) {
+            leftHit = true;
+            base.animator.SetBool("leftHit", leftHit);
+          }
+          break;
 
-        case Player.AttackType.downSlash:
-        if (typeOfBot == "legs") {
-          leftHit = true;
-          base.animator.SetBool("leftHit", leftHit);
-        }
-        break;
+          case "body":
+          if (player.attackType == Player.AttackType.straightSlash) {
+            leftHit = true;
+            base.animator.SetBool("leftHit", leftHit);
+          }
+          break;
 
-        default:
-          rightHit = true;
-          base.animator.SetBool("rightHit", rightHit);
-        break;
-      }
+          case "legs":
+          if (player.attackType == Player.AttackType.downSlash) {
+            leftHit = true;
+            base.animator.SetBool("leftHit", leftHit);
+          }
+          break;
+        }
 
     }
     else {
-      switch(player.attackType) {
+      switch(typeOfBot) {
+          case "normal":
+          rightHit = true;
+          base.animator.SetBool("rightHit", rightHit);
+          break;
 
-        case Player.AttackType.straightSlash:
-        if (typeOfBot == "body") {
-          rightHit = true;
-          base.animator.SetBool("rightHit", rightHit);
-        }
-        break;
+          case "head":
+          if (player.attackType == Player.AttackType.upSlash) {
+            rightHit = true;
+            base.animator.SetBool("rightHit", rightHit);
+          }
+          break;
 
-        case Player.AttackType.upSlash:
-        if (typeOfBot == "head") {
-          rightHit = true;
-          base.animator.SetBool("rightHit", rightHit);
-        }
-        break;
+          case "body":
+          if (player.attackType == Player.AttackType.straightSlash) {
+            rightHit = true;
+            base.animator.SetBool("rightHit", rightHit);
+          }
+          break;
 
-        case Player.AttackType.downSlash:
-        if (typeOfBot == "legs") {
-          rightHit = true;
-          base.animator.SetBool("rightHit", rightHit);
+          case "legs":
+          if (player.attackType == Player.AttackType.downSlash) {
+            rightHit = true;
+            base.animator.SetBool("rightHit", rightHit);
+          }
+          break;
         }
-        break;
-        
-        default:
-          rightHit = true;
-          base.animator.SetBool("rightHit", rightHit);
-        break;
-      }
     }
   }
 
