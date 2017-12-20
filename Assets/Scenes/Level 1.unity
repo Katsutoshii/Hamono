@@ -229,7 +229,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4304202925896544, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 79.9
+      value: 80.01
       objectReference: {fileID: 0}
     - target: {fileID: 4304202925896544, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2573,49 +2573,13 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  - first: {x: 26, y: -2, z: 0}
-    second:
-      m_TileIndex: 2
-      m_TileSpriteIndex: 3
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 27, y: -2, z: 0}
-    second:
-      m_TileIndex: 2
-      m_TileSpriteIndex: 3
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 39, y: -2, z: 0}
-    second:
-      m_TileIndex: 2
-      m_TileSpriteIndex: 3
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 40, y: -2, z: 0}
-    second:
-      m_TileIndex: 2
-      m_TileSpriteIndex: 3
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 77
+  - m_RefCount: 73
     m_Data: {fileID: 11400000, guid: 112ec287140e94afebb9bbe419ab3cac, type: 2}
   - m_RefCount: 14
     m_Data: {fileID: 11400000, guid: e0dcf432b2e064e53ac06059a4a1470a, type: 2}
@@ -2628,12 +2592,12 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 77
+  - m_RefCount: 73
     m_Data: {fileID: 21300000, guid: bfd1633aa8f404464943b0defc222cfc, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: e600e9bae67264ea39c131bc6237aa65, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 92
+  - m_RefCount: 88
     m_Data:
       e00: 1
       e01: 0
@@ -2652,7 +2616,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 92
+  - m_RefCount: 88
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -10157,42 +10121,42 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 2057037221}
     m_ColliderPaths:
-    - - X: 820000000
+    - - X: 800000000
+        Y: -80000000
+      - X: 780000000
+        Y: -80000000
+      - X: 780000000
+        Y: -100000000
+      - X: 760000000
+        Y: -100000000
+      - X: 760000000
+        Y: -140000000
+      - X: 580000000
+        Y: -140000000
+      - X: 580000000
+        Y: -80000000
+      - X: 520000000
+        Y: -80000000
+      - X: 520000000
+        Y: -40000000
+      - X: 500000000
+        Y: -40000000
+      - X: 500000000
+        Y: -100000000
+      - X: 560000000
+        Y: -100000000
+      - X: 560000000
+        Y: -160000000
+      - X: 840000000
+        Y: -160000000
+      - X: 840000000
+        Y: -40000000
+      - X: 820000000
         Y: -40000000
       - X: 820000000
         Y: -60000000
       - X: 800000000
         Y: -60000000
-      - X: 800000000
-        Y: -80000000
-      - X: 780000000
-        Y: -80000000
-      - X: 780000000
-        Y: -100000000
-      - X: 760000000
-        Y: -100000000
-      - X: 760000000
-        Y: -140000000
-      - X: 580000000
-        Y: -140000000
-      - X: 580000000
-        Y: -80000000
-      - X: 520000000
-        Y: -80000000
-      - X: 520000000
-        Y: -40000000
-      - X: 500000000
-        Y: -40000000
-      - X: 500000000
-        Y: -100000000
-      - X: 560000000
-        Y: -100000000
-      - X: 560000000
-        Y: -160000000
-      - X: 840000000
-        Y: -160000000
-      - X: 840000000
-        Y: -40000000
   m_CompositePaths:
     m_Paths:
     - - {x: 84, y: -4}
