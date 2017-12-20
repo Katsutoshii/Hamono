@@ -36,6 +36,7 @@ public partial class Player : MonoBehaviour {
 		none
 	}
 
+	public bool immediateAutoPathing;
 	public State state;
 	public AttackType attackType = AttackType.none;
 	public AttackResponse attackResponse = AttackResponse.none;
@@ -134,8 +135,8 @@ public partial class Player : MonoBehaviour {
 		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(1)) && state != State.talking && state != State.finishedTalking && !paused) {
 
 			autoPathStartTime = Time.time;
-			state = State.autoPathing;
 			attackType = AttackType.none;
+			if (immediateAutoPathing) state = State.autoPathing;
 			targetA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 			// turn the sprite around
@@ -146,6 +147,8 @@ public partial class Player : MonoBehaviour {
 		} else if (state == State.finishedTalking) state = State.idle;
 
 		if (Input.GetMouseButtonUp(0)) {
+			
+			if (!immediateAutoPathing) state = State.autoPathing;
 			GetAttackType();
 		}
 	}
