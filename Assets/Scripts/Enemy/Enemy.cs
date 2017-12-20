@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour {
 	protected float SLASHING_X_DIST = 0.5f;
 	protected float SLASHING_Y_DIST = 0.5f;
   public float KP;
+  public float size;
 
   private float autoPathStartTime;
 
@@ -110,8 +111,6 @@ public class Enemy : MonoBehaviour {
 
   protected float damagedStartTime;
 	public virtual void Damaged() {
-		spriteRenderer.color = Color.red;
-
     if (healthAmount == 0) StartCoroutine(Death());	
 
     if (!healthBarPrefab.GetComponent<Canvas>().enabled) healthBarPrefab.GetComponent<Canvas>().enabled = true;
@@ -164,9 +163,9 @@ public class Enemy : MonoBehaviour {
     if (state != State.walking) return;
     if (Mathf.Abs(rb.velocity.x) > 0.05f) {
       if (rb.velocity.x < 0)
-        transform.localScale = new Vector3(1, 1, 1);
+        transform.localScale = new Vector3(size, size, 1);
       else
-        transform.localScale = new Vector3(-1, 1, 1);
+        transform.localScale = new Vector3(-size, size, 1);
     }
   }
 
@@ -192,9 +191,9 @@ public class Enemy : MonoBehaviour {
   protected virtual IEnumerator Attack() { 
     Debug.Log("Attakcing!");
     if (player.transform.position.x > transform.position.x)
-				transform.localScale = new Vector3(-1, 1, 1);
+				transform.localScale = new Vector3(-size, size, 1);
     else 
-      transform.localScale = new Vector3(1, 1, 1);
+      transform.localScale = new Vector3(size, size, 1);
 
 
     rb.velocity = new Vector2(0, rb.velocity.y);
@@ -228,26 +227,6 @@ public class Enemy : MonoBehaviour {
 
     RotateBasedOnDirection();
   }
-
-  
-  /// <summary>
-  /// Sent when another object enters a trigger collider attached to this
-  /// object (2D physics only).
-  /// </summary>
-  /// <param name="other">The other Collider2D involved in this collision.</param>
-  public virtual void OnTriggerEnter2D(Collider2D other)
-  {
-      switch (other.name) {
-        case "PlayerSlashHurtBox":
-          Damage(receiveSlashDamage, receiveSlashKnockback, other);
-          break;
-
-        case "PlayerDashHurtBox":
-          Damage(receiveDashDamage, receiveDashKnockback, other);
-          break;
-      }
-  }
-
   
   // when enemy is first damaged
   public virtual void Damage(float damageAmount, float knockback, Collider2D source) {

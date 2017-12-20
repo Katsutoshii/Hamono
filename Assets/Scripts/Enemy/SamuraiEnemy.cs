@@ -11,7 +11,6 @@ public class SamuraiEnemy : Enemy {
         hurtBox.size = new Vector2(1.3f, 1.3f);
 
         StartCoroutine(ChangeRandomWalkCycle());
-
     }
     
     bool randomWalkToRight;
@@ -27,26 +26,26 @@ public class SamuraiEnemy : Enemy {
     /// Sent when another object enters a trigger collider attached to this
     /// object (2D physics only).
     /// </summary>
-    /// <param name="other">The other Collider2D involved in this collision.</param>
-    public override void OnTriggerEnter2D(Collider2D other)
-    {
-        switch (other.name) {
-            case "PlayerSlashHurtBox":
-                if (player.attackType == Player.AttackType.straightSlash)
-                    Damage(receiveSlashDamage, receiveSlashKnockback, other);
-                else {
-                    player.attackResponse = Player.AttackResponse.blocked;
-                    Damage(0, receiveSlashKnockback/2, other);
-                }
+    // /// <param name="other">The other Collider2D involved in this collision.</param>
+    // public override void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     switch (other.name) {
+    //         case "PlayerSlashHurtBox":
+    //             if (player.attackType == Player.AttackType.straightSlash)
+    //                 Damage(receiveSlashDamage, receiveSlashKnockback, other);
+    //             else {
+    //                 player.attackResponse = Player.AttackResponse.blocked;
+    //                 Damage(0, receiveSlashKnockback/2, other);
+    //             }
                 
-                break;
+    //             break;
 
-            case "PlayerDashHurtBox":
-                player.attackResponse = Player.AttackResponse.blocked;
-                Damage(0, receiveDashKnockback/2, other);
-                break;
-        }   
-    }
+    //         case "PlayerDashHurtBox":
+    //             player.attackResponse = Player.AttackResponse.blocked;
+    //             Damage(0, receiveDashKnockback/2, other);
+    //             break;
+    //     }   
+    // }
     
 
     private void RandomWalk() {
@@ -98,8 +97,8 @@ public class SamuraiEnemy : Enemy {
 	}
 
     public void LaserOut() {
-        hurtBox.offset = new Vector2(-0.6f, 0);
-        hurtBox.size = new Vector2(2.3f, 1.3f);
+        hurtBox.offset = new Vector2(-0.7f, 0);
+        hurtBox.size = new Vector2(2.4f, 1.3f);
     }
 
     public void LaserIn() {

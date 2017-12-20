@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d24fb0acb471f964cb9cb6debe389be2
-timeCreated: 1513658481
+guid: bc7e72ab4b0e62a42a6966ef7b84be11
+timeCreated: 1513736810
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -24,8 +24,6 @@ TextureImporter:
     21300034: Samurai Bot_ranged attack_17
     21300036: Samurai Bot_ranged attack_18
     21300038: Samurai Bot_ranged attack_19
-    21300040: Samurai Bot_ranged attack_20
-    21300042: Samurai Bot_ranged attack_21
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -79,60 +77,60 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
+    maxTextureSize: 4096
+    resizeAlgorithm: 1
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
   - buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
+    maxTextureSize: 4096
+    resizeAlgorithm: 1
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
   - buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
+    maxTextureSize: 4096
+    resizeAlgorithm: 1
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
   - buildTarget: tvOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
+    maxTextureSize: 4096
+    resizeAlgorithm: 1
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
   - buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
+    maxTextureSize: 4096
+    resizeAlgorithm: 1
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
   - buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
+    maxTextureSize: 4096
+    resizeAlgorithm: 1
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -146,7 +144,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 168
         width: 264
         height: 168
       alignment: 9
@@ -160,7 +158,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 264
-        y: 0
+        y: 168
         width: 264
         height: 168
       alignment: 9
@@ -174,7 +172,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 528
-        y: 0
+        y: 168
         width: 264
         height: 168
       alignment: 9
@@ -188,7 +186,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 792
-        y: 0
+        y: 168
         width: 264
         height: 168
       alignment: 9
@@ -202,7 +200,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1056
-        y: 0
+        y: 168
         width: 264
         height: 168
       alignment: 9
@@ -216,7 +214,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1320
-        y: 0
+        y: 168
         width: 264
         height: 168
       alignment: 9
@@ -230,7 +228,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1584
-        y: 0
+        y: 168
         width: 264
         height: 168
       alignment: 9
@@ -244,7 +242,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1848
-        y: 0
+        y: 168
         width: 264
         height: 168
       alignment: 9
@@ -258,7 +256,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2112
-        y: 0
+        y: 168
         width: 264
         height: 168
       alignment: 9
@@ -272,7 +270,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2376
-        y: 0
+        y: 168
         width: 264
         height: 168
       alignment: 9
@@ -286,7 +284,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2640
-        y: 0
+        y: 168
         width: 264
         height: 168
       alignment: 9
@@ -299,7 +297,7 @@ TextureImporter:
       name: Samurai Bot_ranged attack_11
       rect:
         serializedVersion: 2
-        x: 2904
+        x: 0
         y: 0
         width: 264
         height: 168
@@ -313,7 +311,7 @@ TextureImporter:
       name: Samurai Bot_ranged attack_12
       rect:
         serializedVersion: 2
-        x: 3168
+        x: 264
         y: 0
         width: 264
         height: 168
@@ -327,7 +325,7 @@ TextureImporter:
       name: Samurai Bot_ranged attack_13
       rect:
         serializedVersion: 2
-        x: 3432
+        x: 528
         y: 0
         width: 264
         height: 168
@@ -341,7 +339,7 @@ TextureImporter:
       name: Samurai Bot_ranged attack_14
       rect:
         serializedVersion: 2
-        x: 3696
+        x: 792
         y: 0
         width: 264
         height: 168
@@ -355,7 +353,7 @@ TextureImporter:
       name: Samurai Bot_ranged attack_15
       rect:
         serializedVersion: 2
-        x: 3960
+        x: 1056
         y: 0
         width: 264
         height: 168
@@ -369,7 +367,7 @@ TextureImporter:
       name: Samurai Bot_ranged attack_16
       rect:
         serializedVersion: 2
-        x: 4224
+        x: 1320
         y: 0
         width: 264
         height: 168
@@ -383,7 +381,7 @@ TextureImporter:
       name: Samurai Bot_ranged attack_17
       rect:
         serializedVersion: 2
-        x: 4488
+        x: 1584
         y: 0
         width: 264
         height: 168
@@ -397,7 +395,7 @@ TextureImporter:
       name: Samurai Bot_ranged attack_18
       rect:
         serializedVersion: 2
-        x: 4752
+        x: 1848
         y: 0
         width: 264
         height: 168
@@ -411,35 +409,7 @@ TextureImporter:
       name: Samurai Bot_ranged attack_19
       rect:
         serializedVersion: 2
-        x: 5016
-        y: 0
-        width: 264
-        height: 168
-      alignment: 9
-      pivot: {x: 0.7, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Samurai Bot_ranged attack_20
-      rect:
-        serializedVersion: 2
-        x: 5280
-        y: 0
-        width: 264
-        height: 168
-      alignment: 9
-      pivot: {x: 0.7, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Samurai Bot_ranged attack_21
-      rect:
-        serializedVersion: 2
-        x: 5544
+        x: 2112
         y: 0
         width: 264
         height: 168
