@@ -135,6 +135,7 @@ public partial class Player : MonoBehaviour {
 
 			autoPathStartTime = Time.time;
 			state = State.autoPathing;
+			attackType = AttackType.none;
 			targetA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 			// turn the sprite around
