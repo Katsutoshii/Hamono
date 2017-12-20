@@ -1344,18 +1344,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4081458332551002, guid: 0630f8c2bf3904c8c9f4611be981d1a4, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.6604625
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081458332551002, guid: 0630f8c2bf3904c8c9f4611be981d1a4, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.6242805
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081458332551002, guid: 0630f8c2bf3904c8c9f4611be981d1a4, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.61222
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0630f8c2bf3904c8c9f4611be981d1a4, type: 2}
   m_IsPrefabParent: 0
@@ -1964,18 +1952,6 @@ Prefab:
     - target: {fileID: 4701319408844642, guid: 5c8091fe1da9c4d1bb286351954badda, type: 2}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4701319408844642, guid: 5c8091fe1da9c4d1bb286351954badda, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.6122875
-      objectReference: {fileID: 0}
-    - target: {fileID: 4701319408844642, guid: 5c8091fe1da9c4d1bb286351954badda, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.6122875
-      objectReference: {fileID: 0}
-    - target: {fileID: 4701319408844642, guid: 5c8091fe1da9c4d1bb286351954badda, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.6122875
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c8091fe1da9c4d1bb286351954badda, type: 2}
@@ -15674,6 +15650,18 @@ CompositeCollider2D:
         Y: 60000000
       - X: 1400000000
         Y: 60000000
+    - - X: 780000000
+        Y: -20000000
+      - X: 580000000
+        Y: -20000000
+      - X: 580000000
+        Y: 20000000
+      - X: 560000000
+        Y: 20000000
+      - X: 560000000
+        Y: -40000000
+      - X: 780000000
+        Y: -40000000
     - - X: 840000000
         Y: -40000000
       - X: 1400000000
@@ -15762,26 +15750,6 @@ CompositeCollider2D:
         Y: -160000000
       - X: 840000000
         Y: -160000000
-    - - X: 780000000
-        Y: -20000000
-      - X: 580000000
-        Y: -20000000
-      - X: 580000000
-        Y: 20000000
-      - X: 560000000
-        Y: 20000000
-      - X: 560000000
-        Y: -40000000
-      - X: 780000000
-        Y: -40000000
-    - - X: 650000000
-        Y: -80000000
-      - X: 610000000
-        Y: -80000000
-      - X: 610000000
-        Y: -90000000
-      - X: 650000000
-        Y: -90000000
     - - X: 730000000
         Y: -80000000
       - X: 690000000
@@ -15790,12 +15758,26 @@ CompositeCollider2D:
         Y: -90000000
       - X: 730000000
         Y: -90000000
+    - - X: 650000000
+        Y: -80000000
+      - X: 610000000
+        Y: -80000000
+      - X: 610000000
+        Y: -90000000
+      - X: 650000000
+        Y: -90000000
   m_CompositePaths:
     m_Paths:
     - - {x: 140, y: 8}
       - {x: -20, y: 8}
       - {x: -20, y: 6}
       - {x: 140, y: 6}
+    - - {x: 78, y: -2}
+      - {x: 58, y: -2}
+      - {x: 58, y: 2}
+      - {x: 56, y: 2}
+      - {x: 56, y: -4}
+      - {x: 78, y: -4}
     - - {x: 84, y: -4}
       - {x: 140, y: -4}
       - {x: 140, y: -3}
@@ -15840,20 +15822,14 @@ CompositeCollider2D:
       - {x: 56, y: -10}
       - {x: 56, y: -16}
       - {x: 84, y: -16}
-    - - {x: 78, y: -2}
-      - {x: 58, y: -2}
-      - {x: 58, y: 2}
-      - {x: 56, y: 2}
-      - {x: 56, y: -4}
-      - {x: 78, y: -4}
-    - - {x: 65, y: -8}
-      - {x: 61, y: -8}
-      - {x: 61, y: -9}
-      - {x: 65, y: -9}
     - - {x: 73, y: -8}
       - {x: 69, y: -8}
       - {x: 69, y: -9}
       - {x: 73, y: -9}
+    - - {x: 65, y: -8}
+      - {x: 61, y: -8}
+      - {x: 61, y: -9}
+      - {x: 65, y: -9}
   m_VertexDistance: 0.0005
 --- !u!50 &2122388132
 Rigidbody2D:
