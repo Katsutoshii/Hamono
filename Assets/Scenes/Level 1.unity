@@ -729,7 +729,7 @@ Prefab:
     - target: {fileID: 61069694831140012, guid: e8f8d6ece32a741cb9cb683305e90a9c,
         type: 2}
       propertyPath: m_SpriteTilingProperty.pivot.y
-      value: 0.32
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 61069694831140012, guid: e8f8d6ece32a741cb9cb683305e90a9c,
         type: 2}
@@ -1802,16 +1802,6 @@ Prefab:
     - target: {fileID: 4701319408844642, guid: 5c8091fe1da9c4d1bb286351954badda, type: 2}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 50346666532549194, guid: 5c8091fe1da9c4d1bb286351954badda,
-        type: 2}
-      propertyPath: m_Mass
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 114309258020767868, guid: 5c8091fe1da9c4d1bb286351954badda,
-        type: 2}
-      propertyPath: typeOfBot
-      value: normal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c8091fe1da9c4d1bb286351954badda, type: 2}
