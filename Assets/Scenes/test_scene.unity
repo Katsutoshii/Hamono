@@ -828,7 +828,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4837619769899476, guid: c6f6bf12307589641800c974703ce6f1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.95
+      value: 5.132
       objectReference: {fileID: 0}
     - target: {fileID: 4837619769899476, guid: c6f6bf12307589641800c974703ce6f1, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1329,7 +1329,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4837619769899476, guid: c6f6bf12307589641800c974703ce6f1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.27
+      value: 4.074
       objectReference: {fileID: 0}
     - target: {fileID: 4837619769899476, guid: c6f6bf12307589641800c974703ce6f1, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1920,26 +1920,6 @@ Prefab:
       propertyPath: m_Name
       value: Flyer
       objectReference: {fileID: 0}
-    - target: {fileID: 61625289176305220, guid: a0c8deb440396064abea2ec1f7a68d8c,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: 0.08158946
-      objectReference: {fileID: 0}
-    - target: {fileID: 61625289176305220, guid: a0c8deb440396064abea2ec1f7a68d8c,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 0.49122763
-      objectReference: {fileID: 0}
-    - target: {fileID: 61625289176305220, guid: a0c8deb440396064abea2ec1f7a68d8c,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: -0.008368075
-      objectReference: {fileID: 0}
-    - target: {fileID: 61625289176305220, guid: a0c8deb440396064abea2ec1f7a68d8c,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 1.0728132
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0c8deb440396064abea2ec1f7a68d8c, type: 2}
   m_IsPrefabParent: 0
@@ -2032,6 +2012,42 @@ Prefab:
     - target: {fileID: 1532557732905684, guid: 0dccc4265e3648948bd2534c8b825f33, type: 2}
       propertyPath: m_Layer
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 61012817237810918, guid: 0dccc4265e3648948bd2534c8b825f33,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61012817237810918, guid: 0dccc4265e3648948bd2534c8b825f33,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61012817237810918, guid: 0dccc4265e3648948bd2534c8b825f33,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61012817237810918, guid: 0dccc4265e3648948bd2534c8b825f33,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061540703101872, guid: 0dccc4265e3648948bd2534c8b825f33, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 7.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061540703101872, guid: 0dccc4265e3648948bd2534c8b825f33, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 3.7952876
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061540703101872, guid: 0dccc4265e3648948bd2534c8b825f33, type: 2}
+      propertyPath: m_LocalScale.y
+      value: -0.56747043
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061540703101872, guid: 0dccc4265e3648948bd2534c8b825f33, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.09
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0dccc4265e3648948bd2534c8b825f33, type: 2}
@@ -13052,14 +13068,6 @@ CompositeCollider2D:
         Y: 70000000
       - X: 70000000
         Y: 70000000
-    - - X: 120000000
-        Y: 60000000
-      - X: 80000000
-        Y: 60000000
-      - X: 80000000
-        Y: 50000000
-      - X: 120000000
-        Y: 50000000
     - - X: 210000000
         Y: 60000000
       - X: 160000000
@@ -13067,6 +13075,14 @@ CompositeCollider2D:
       - X: 160000000
         Y: 50000000
       - X: 210000000
+        Y: 50000000
+    - - X: 120000000
+        Y: 60000000
+      - X: 80000000
+        Y: 60000000
+      - X: 80000000
+        Y: 50000000
+      - X: 120000000
         Y: 50000000
     - - X: 210000000
         Y: 20000000
@@ -13110,14 +13126,14 @@ CompositeCollider2D:
       - {x: -6, y: 8}
       - {x: -6, y: 7}
       - {x: 7, y: 7}
-    - - {x: 12, y: 6}
-      - {x: 8, y: 6}
-      - {x: 8, y: 5}
-      - {x: 12, y: 5}
     - - {x: 21, y: 6}
       - {x: 16, y: 6}
       - {x: 16, y: 5}
       - {x: 21, y: 5}
+    - - {x: 12, y: 6}
+      - {x: 8, y: 6}
+      - {x: 8, y: 5}
+      - {x: 12, y: 5}
     - - {x: 21, y: 2}
       - {x: 16, y: 2}
       - {x: 16, y: 1}
