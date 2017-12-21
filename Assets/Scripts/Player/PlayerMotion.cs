@@ -100,10 +100,10 @@ public partial class Player : MonoBehaviour {
 
 		if (!jumping && grounded) { 
 			if ((yDist >= AUTOPATH_Y_THRESHOLD && (xDist <= JUMP_X_THRESHOLD))) 
-				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 20f)));
+				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 30f)));
 			
 			else if (yDist >= -2 && onEdge) {
-				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist) * AUTOPATH_Y_FACTOR + Mathf.Abs(xDist) * AUTOPATH_X_FACTOR), 20f)));
+				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist) * AUTOPATH_Y_FACTOR * 3 + Mathf.Abs(xDist) * AUTOPATH_X_FACTOR), 30f)));
 			}
 		}
 	}
@@ -117,7 +117,7 @@ public partial class Player : MonoBehaviour {
 		yield return new WaitForSeconds(JUMP_DELAY);
 		PoolManager.instance.ReuseObject(dustCloudPrefab, jumpPos, transform.rotation, transform.localScale);
 		rb.velocity = Vector2.up * jumpPower;
-		yield return new WaitForSeconds(JUMP_DELAY);
+		yield return new WaitUntil(() => rb.velocity.y <= 0);
 		
 		jumping = false;
 		yield return null;
