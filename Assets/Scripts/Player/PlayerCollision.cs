@@ -28,7 +28,7 @@ public partial class Player : MonoBehaviour {
 	/// collider (2D physics only).
 	/// </summary>
 	/// <param name="other">The Collision2D data associated with this collision.</param>
-	void OnCollisionenter2D(Collision2D other)
+	void OnCollisionEnter2D(Collision2D other)
 	{
 		if (other.collider.name.Length < 4) Debug.Log("Object names must be greater than 4");
 		switch (other.collider.name.Substring(0, 4)) {

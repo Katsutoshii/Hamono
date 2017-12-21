@@ -483,7 +483,7 @@ MonoBehaviour:
   damagedTime: 0.3
   hurtAlpha: 0.4
   comboCount: 0
-  coinCount: 13
+  coinCount: 0
   jumping: 0
   generateStamina: 0.02
   autoPathStartTime: 15.1989765

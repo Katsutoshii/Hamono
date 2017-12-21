@@ -405,7 +405,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
@@ -901,9 +901,9 @@ Transform:
   m_Children:
   - {fileID: 1092307437}
   - {fileID: 2021456312}
-  - {fileID: 169966700}
   - {fileID: 1742864632}
   - {fileID: 292170868}
+  - {fileID: 169966700}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -944,7 +944,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4831066449755222, guid: 7286f1af248c6664fbbe039977eda263, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1417323078140502, guid: 7286f1af248c6664fbbe039977eda263, type: 2}
       propertyPath: m_Name
@@ -1915,7 +1915,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4800248331145870, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008, type: 2}
@@ -10764,14 +10764,6 @@ CompositeCollider2D:
         Y: 70000000
       - X: 70000000
         Y: 70000000
-    - - X: 210000000
-        Y: 60000000
-      - X: 150000000
-        Y: 60000000
-      - X: 150000000
-        Y: 50000000
-      - X: 210000000
-        Y: 50000000
     - - X: 120000000
         Y: 60000000
       - X: 80000000
@@ -10779,6 +10771,14 @@ CompositeCollider2D:
       - X: 80000000
         Y: 50000000
       - X: 120000000
+        Y: 50000000
+    - - X: 210000000
+        Y: 60000000
+      - X: 150000000
+        Y: 60000000
+      - X: 150000000
+        Y: 50000000
+      - X: 210000000
         Y: 50000000
     - - X: 210000000
         Y: 20000000
@@ -10822,14 +10822,14 @@ CompositeCollider2D:
       - {x: -6, y: 8}
       - {x: -6, y: 7}
       - {x: 7, y: 7}
-    - - {x: 21, y: 6}
-      - {x: 15, y: 6}
-      - {x: 15, y: 5}
-      - {x: 21, y: 5}
     - - {x: 12, y: 6}
       - {x: 8, y: 6}
       - {x: 8, y: 5}
       - {x: 12, y: 5}
+    - - {x: 21, y: 6}
+      - {x: 15, y: 6}
+      - {x: 15, y: 5}
+      - {x: 21, y: 5}
     - - {x: 21, y: 2}
       - {x: 15, y: 2}
       - {x: 15, y: 1}
