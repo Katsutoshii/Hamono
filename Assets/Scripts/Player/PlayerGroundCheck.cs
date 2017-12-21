@@ -20,7 +20,8 @@ public class PlayerGroundCheck : MonoBehaviour
     void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Terrain") || 
-                other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+                other.gameObject.layer == LayerMask.NameToLayer("Enemies") || 
+                other.gameObject.layer == LayerMask.NameToLayer("Spikes"))
             player.grounded = true;
     }	
 
