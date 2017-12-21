@@ -37,15 +37,16 @@ public partial class Player : MonoBehaviour {
     }
 
 
-	private const float SLASHING_X_DIST = 1f;
+	private const float SLASHING_X_DIST = 1.2f;
 	private const float SLASHING_Y_DIST = 0.5f;
 	private const float AUTOPATH_Y_THRESHOLD = 1.2f; 
-	private const float AUTOPATH_Y_FACTOR = 6.25f;
-	public float AUTOPATH_X_FACTOR = 5f;
-	private const float JUMP_X_THRESHOLD = 3.5f;
+	private const float AUTOPATH_Y_FACTOR = 5.85f;
+	private const float AUTOPATH_X_FACTOR = 0.9f;
+	private const float JUMP_X_THRESHOLD = 10f;
     
     
 	private const float AUTOPATH_TIMEOUT = 1.5f;
+	private const float SCALE_REACHER = 2f;
 	public float autoPathLimitY;
     
 
@@ -56,7 +57,7 @@ public partial class Player : MonoBehaviour {
 
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y;
-        if (transform.position.y < targetA.y) yDist += 0.5f;
+        if (transform.position.y < targetA.y) yDist += 0.7f;
 
 		// timeout if the player is too far from the target in the y direction
 		if (Time.time > autoPathStartTime + AUTOPATH_TIMEOUT || Mathf.Abs(targetA.y - transform.position.y) > autoPathLimitY) {
@@ -84,39 +85,34 @@ public partial class Player : MonoBehaviour {
 			return;
 		}
 
-		// if we are crouching for a jump
-		if (jumping && grounded) {
-			rb.velocity = new Vector2(0, rb.velocity.y);
-			return;
+		// motion towards the x target
+		if (Mathf.Abs(xDist) >= tempSlashingXDist && !(grounded & jumping)) {
+			rb.velocity = new Vector2(xDist * KP + 0.1f * Mathf.Sign(xDist), rb.velocity.y);
 		}
 
-		if (Mathf.Abs(xDist) >= tempSlashingXDist) 
-			rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
-		else if (Mathf.Abs(xDist) <= 0.01) {
-			rb.velocity = new Vector2(0, rb.velocity.y);
-		}
+		// prevents overshoot
+		if (Mathf.Abs(xDist) <= 0.01f) rb.velocity = new Vector2(0, rb.velocity.y);
 
 		RotateSpriteForVelocity();
 
 		if (!jumping && grounded) { 
-			if ((yDist >= AUTOPATH_Y_THRESHOLD && (xDist <= JUMP_X_THRESHOLD))) 
-				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR, 30f)));
-			
-			else if (yDist >= -2 && onEdge) {
-				StartCoroutine(Jump(Mathf.Min(Mathf.Sqrt(Mathf.Abs(yDist) * AUTOPATH_Y_FACTOR * 3 + Mathf.Abs(xDist) * AUTOPATH_X_FACTOR), 30f)));
-			}
+			if ((yDist >= AUTOPATH_Y_THRESHOLD && xDist <= JUMP_X_THRESHOLD) || (yDist >= -2 && onEdge)) {
+				jumping = true;
+				StartCoroutine(Jump(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR + Mathf.Sqrt(Mathf.Abs(xDist)) * AUTOPATH_X_FACTOR));
+			}	
 		}
 	}
 
 	private const float JUMP_DELAY = 0.05f;
 	IEnumerator Jump(float jumpPower) {
-		jumping = true;
+		Debug.Log("jump! power = " + jumpPower);
 		rb.velocity = Vector2.zero;
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		
 		yield return new WaitForSeconds(JUMP_DELAY);
 		PoolManager.instance.ReuseObject(dustCloudPrefab, jumpPos, transform.rotation, transform.localScale);
 		rb.velocity = Vector2.up * jumpPower;
+		yield return new WaitForSeconds(0.5f);
 		yield return new WaitUntil(() => rb.velocity.y <= 0);
 		
 		jumping = false;

@@ -1226,11 +1226,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114652575155847830, guid: 7286f1af248c6664fbbe039977eda263,
-        type: 2}
-      propertyPath: receiveSlashKnockback
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7286f1af248c6664fbbe039977eda263, type: 2}
   m_IsPrefabParent: 0
@@ -1772,6 +1767,56 @@ Prefab:
     - target: {fileID: 1643483362491860, guid: a0c8deb440396064abea2ec1f7a68d8c, type: 2}
       propertyPath: m_Name
       value: Flyer
+      objectReference: {fileID: 0}
+    - target: {fileID: 114220394647144768, guid: a0c8deb440396064abea2ec1f7a68d8c,
+        type: 2}
+      propertyPath: deathWaitTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114220394647144768, guid: a0c8deb440396064abea2ec1f7a68d8c,
+        type: 2}
+      propertyPath: randomChangetime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114220394647144768, guid: a0c8deb440396064abea2ec1f7a68d8c,
+        type: 2}
+      propertyPath: healthAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114220394647144768, guid: a0c8deb440396064abea2ec1f7a68d8c,
+        type: 2}
+      propertyPath: receiveSlashDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114220394647144768, guid: a0c8deb440396064abea2ec1f7a68d8c,
+        type: 2}
+      propertyPath: receiveDashDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114220394647144768, guid: a0c8deb440396064abea2ec1f7a68d8c,
+        type: 2}
+      propertyPath: receiveSlashKnockback
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114220394647144768, guid: a0c8deb440396064abea2ec1f7a68d8c,
+        type: 2}
+      propertyPath: receiveDashKnockback
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114220394647144768, guid: a0c8deb440396064abea2ec1f7a68d8c,
+        type: 2}
+      propertyPath: jumpingPower
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114220394647144768, guid: a0c8deb440396064abea2ec1f7a68d8c,
+        type: 2}
+      propertyPath: walkingSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114220394647144768, guid: a0c8deb440396064abea2ec1f7a68d8c,
+        type: 2}
+      propertyPath: distanceNearPlayer
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0c8deb440396064abea2ec1f7a68d8c, type: 2}
