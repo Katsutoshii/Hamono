@@ -43,7 +43,7 @@ public class Pot : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D other) {
+	void OnCollisionEnter2D(Collision2D other) {  
 		switch (LayerMask.LayerToName(other.gameObject.layer)) {
 			case "Spikes":
 				Break();
