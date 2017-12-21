@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ClickIndicator : MonoBehaviour {
 	private SpriteRenderer spriteRenderer;
+	private Player player;
 	// Use this for initialization
 	void Start () {
+		player = FindObjectOfType<Player>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		
 		spriteRenderer.color = new Color(1, 1, 1, 0);
@@ -21,7 +23,8 @@ public class ClickIndicator : MonoBehaviour {
 	IEnumerator SpinAndFade() {
 		transform.position = ScreenToWorldPoint(Input.mousePosition);
 
-		spriteRenderer.color = Color.white;
+		bool playerInRange = transform.position.y - player.transform.position.y < player.autoPathLimitY;
+		spriteRenderer.color = playerInRange ? Color.white : Color.red;
 		while (spriteRenderer.color.a >= 0) {
 			transform.localScale = Vector3.one * spriteRenderer.color.a * 5;
 			Color color = spriteRenderer.color;
