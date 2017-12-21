@@ -178,7 +178,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61276869355380908
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -379,20 +379,21 @@ MonoBehaviour:
   grounded: 0
   walkingSpeed: 1
   jumpingPower: 1
-  distanceNearPlayer: 4
+  distanceNearPlayer: 7
   healthAmount: 1
   receiveSlashDamage: 1
   receiveDashDamage: 1
   receiveSlashKnockback: 2
   receiveDashKnockback: 2
   stunned: 0
-  KP: 0
-  size: 0
+  KP: 1
+  size: 1
   stunTime: 0.5
   attackDuration: 0
   attackRange: 0
   deathWaitTime: 1
   randomChangetime: 2
+  jumping: 0
 --- !u!114 &114611038117621718
 MonoBehaviour:
   m_ObjectHideFlags: 1

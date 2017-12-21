@@ -46,26 +46,23 @@ public class FlyingEnemy : Enemy {
         }
     }
 
-    
-	private const float JUMP_DELAY = 0.5f;
-	private bool jumping = false;
+	public bool jumping = false;
 	protected IEnumerator Jump(float jumpPower) {
-        Debug.Log("Flyer jump!");
+        Debug.Log("Flyer jump! power = " + jumpPower);
 		jumping = true;
-		
-		yield return new WaitForSeconds(JUMP_DELAY);
-		rb.velocity = Vector2.up * jumpingPower + Vector2.right * rb.velocity.x;
+		rb.velocity = new Vector2(rb.velocity.x, jumpPower);
         RotateBasedOnDirection();
-		yield return new WaitUntil(() => rb.velocity.y < -0.5f);
+		yield return new WaitUntil(() => rb.velocity.y <= 0.1f);
 
         jumping = false;
 		yield return null;
 	}
 
     public void MakeJump() {
+        Debug.Log("Flying attempting jump");
         if (!jumping) {
             float yDist = player.transform.position.y - transform.position.y;
-            StartCoroutine(Jump(Mathf.Max(yDist, 10)));
+            StartCoroutine(Jump(Mathf.Max(2 * yDist, 1f)));
         }
     }
 }

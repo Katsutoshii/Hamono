@@ -142,9 +142,9 @@ public class Enemy : MonoBehaviour {
   }
 
   // handles case when enemy runs into something
-  void OnCollisionEnter2D(Collision2D collision) {
+  void OnCollisionStay2D(Collision2D collision) {
       Collider2D collider = collision.collider;
-      switch (collision.collider.name) {
+      switch (LayerMask.LayerToName(collider.gameObject.layer)) {
         case "Spikes":
           if( state == State.damaged) break;
           Damage(1f, 0, collision.collider);
@@ -194,10 +194,10 @@ public class Enemy : MonoBehaviour {
     state = State.attacking;
     yield return new WaitForSeconds(attackDuration);
 
-    state = State.idle;
+    if (state == State.attacking) state = State.idle;
     yield return new WaitForSeconds(attackDuration);
 
-    state = State.walking;
+    if (state == State.idle) state = State.walking;
     yield return null;
   }
 
@@ -274,7 +274,8 @@ public class Enemy : MonoBehaviour {
 
   protected virtual IEnumerator Death() {
     stunned = true;
-    rb.velocity = new Vector2(0, rb.velocity.y);
+    gameObject.layer = LayerMask.NameToLayer("Debris");
+    rb.velocity = Vector2.zero;
     Destroy(hurtBox);
 
 		state = State.damaged;
