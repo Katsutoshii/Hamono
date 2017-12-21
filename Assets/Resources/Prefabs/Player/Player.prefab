@@ -491,7 +491,7 @@ MonoBehaviour:
   invincibleFlashes: 12
   timeFreezeDuration: 0
   missStaminaPenalty: 0.1
-  dashStaminaCost: 0.0025
+  dashStaminaCost: 0.002
   slashStaminaCost: 0.1
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
     type: 2}
