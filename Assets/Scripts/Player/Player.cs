@@ -59,7 +59,7 @@ public partial class Player : MonoBehaviour {
 
 	// visible player information
 	private SlashIndicator slashIndicator;
-	private StaminaBar staminaBar;
+	public StaminaBar staminaBar;
 	private HealthBar healthBar;
 	public float maxHealth;
 	public float healthAmount;
@@ -134,9 +134,11 @@ public partial class Player : MonoBehaviour {
 		// for initiating action
 		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(1)) && state != State.talking && state != State.finishedTalking && !paused) {
 
-			autoPathStartTime = Time.time;
 			attackType = AttackType.none;
-			if (immediateAutoPathing || Input.GetMouseButton(1)) state = State.autoPathing;
+			if (immediateAutoPathing || Input.GetMouseButton(1)) {
+				state = State.autoPathing;
+				autoPathStartTime = Time.time;
+			}
 			targetA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 			// turn the sprite around
@@ -148,7 +150,10 @@ public partial class Player : MonoBehaviour {
 
 		if (Input.GetMouseButtonUp(0)) {
 			
-			if (!immediateAutoPathing) state = State.autoPathing;
+			if (!immediateAutoPathing) {
+				state = State.autoPathing;
+				autoPathStartTime = Time.time;
+			}
 			GetAttackType();
 		}
 	}
