@@ -20,8 +20,8 @@ public class FlyingEnemy : Enemy {
 
     private void RandomWalk() {
         if (!jumping) {
-            if (randomWalkToRight) StartCoroutine(Jump(jumpingPower, walkingSpeed));
-            else StartCoroutine(Jump(jumpingPower, walkingSpeed));
+            if (randomWalkToRight) rb.velocity = new Vector2(walkingSpeed, rb.velocity.y);
+            else rb.velocity = new Vector2(-walkingSpeed, rb.velocity.y);
         }
     }
 
@@ -49,13 +49,12 @@ public class FlyingEnemy : Enemy {
     
 	private const float JUMP_DELAY = 0.5f;
 	private bool jumping = false;
-	protected IEnumerator Jump(float jumpPower, float xVelocity) {
+	protected IEnumerator Jump(float jumpPower) {
+        Debug.Log("Flyer jump!");
 		jumping = true;
-		rb.velocity = Vector2.zero;
-		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		
 		yield return new WaitForSeconds(JUMP_DELAY);
-		rb.velocity = Vector2.up * jumpingPower + Vector2.right * xVelocity;
+		rb.velocity = Vector2.up * jumpingPower + Vector2.right * rb.velocity.x;
         RotateBasedOnDirection();
 		yield return new WaitUntil(() => rb.velocity.y < -0.5f);
 
@@ -63,12 +62,10 @@ public class FlyingEnemy : Enemy {
 		yield return null;
 	}
 
-
-    protected override void AutoPath() {
-		float xDist = player.transform.position.x - transform.position.x;
-		float yDist = player.transform.position.y - transform.position.y + 0.5f;
-
-        // adds jumping
-        if (!jumping) StartCoroutine(Jump(jumpingPower, xDist));
+    public void MakeJump() {
+        if (!jumping) {
+            float yDist = player.transform.position.y - transform.position.y;
+            StartCoroutine(Jump(Mathf.Max(yDist, 10)));
+        }
     }
 }

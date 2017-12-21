@@ -440,8 +440,10 @@ MonoBehaviour:
   receiveDashDamage: 1
   receiveSlashKnockback: 1
   receiveDashKnockback: 1
+  stunned: 0
   KP: 2
   size: 1
+  stunTime: 0.5
   attackDuration: 0
   attackRange: 0
   deathWaitTime: 1

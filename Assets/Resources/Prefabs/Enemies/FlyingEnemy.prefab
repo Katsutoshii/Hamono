@@ -170,7 +170,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -377,22 +377,22 @@ MonoBehaviour:
   state: 0
   audioSource: {fileID: 0}
   grounded: 0
-  walkingSpeed: 0
-  jumpingPower: 0
-  distanceNearPlayer: 0
-  healthAmount: 0
-  receiveSlashDamage: 0
-  receiveDashDamage: 0
-  receiveSlashKnockback: 0
-  receiveDashKnockback: 0
+  walkingSpeed: 1
+  jumpingPower: 1
+  distanceNearPlayer: 4
+  healthAmount: 1
+  receiveSlashDamage: 1
+  receiveDashDamage: 1
+  receiveSlashKnockback: 2
+  receiveDashKnockback: 2
   stunned: 0
   KP: 0
   size: 0
   stunTime: 0.5
   attackDuration: 0
   attackRange: 0
-  deathWaitTime: 0
-  randomChangetime: 0
+  deathWaitTime: 1
+  randomChangetime: 2
 --- !u!114 &114611038117621718
 MonoBehaviour:
   m_ObjectHideFlags: 1
