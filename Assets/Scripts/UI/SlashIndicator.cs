@@ -40,16 +40,19 @@ public class SlashIndicator : MonoBehaviour {
 			Vector3 clickWorldPoint = ScreenToWorldPoint(Input.mousePosition);
 			Vector3 targetAScreenPoint = Camera.main.WorldToScreenPoint(targetA);
 
-			if (Vector2.Distance(targetA, clickWorldPoint) > Player.SLASHING_THRESHOLD)
+			float distance = Vector2.Distance(targetA, clickWorldPoint);
+			if (distance < Player.MIN_ATTACK_THRESH)
+				spriteRenderer.color = Color.black;
+			else if (distance < Player.SLASHING_THRESHOLD) 
 				spriteRenderer.color = Color.blue;
-			else spriteRenderer.color = Color.red;
+			else spriteRenderer.color = Color.cyan;
 
 			float width = Mathf.Sqrt(
 				(clickWorldPoint.x - targetA.x) * (clickWorldPoint.x - targetA.x)
 				 + (clickWorldPoint.y - targetA.y) * (clickWorldPoint.y - targetA.y)
 			)  * 100 / spriteRenderer.sprite.rect.width;
 				
-			transform.localScale = new Vector3(width, 2, 1);
+			transform.localScale = new Vector3(width, 3, 1);
 
 			float angle = Mathf.Atan2(clickWorldPoint.y - targetA.y, 
 				clickWorldPoint.x - targetA.x) * 180 / Mathf.PI;
@@ -59,14 +62,6 @@ public class SlashIndicator : MonoBehaviour {
 		else {
 			transform.localScale = new Vector3(0, 0, 0);
 		}
-	}
-
-	/// <summary>
-	/// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
-	/// </summary>
-	void FixedUpdate()
-	{
-		
 	}
 
 	private Vector3 ScreenToWorldPoint(Vector3 screenPoint) {
