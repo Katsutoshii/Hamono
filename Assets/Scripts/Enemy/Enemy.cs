@@ -44,6 +44,8 @@ public class Enemy : MonoBehaviour {
     blocking,
     dead,
   }
+  public bool stunned;
+
 
   // constants
 	protected float SLASHING_X_DIST = 0.5f;
@@ -51,7 +53,6 @@ public class Enemy : MonoBehaviour {
   public float KP;
   public float size;
 
-  private float autoPathStartTime;
 
   public virtual void Start() {
     rb = gameObject.GetComponent<Rigidbody2D>();
@@ -110,17 +111,21 @@ public class Enemy : MonoBehaviour {
   }
 
   protected float damagedStartTime;
+  public float stunTime = 0.5f;
 	public virtual void Damaged() {
-    if (healthAmount == 0) StartCoroutine(Death());	
+    if (healthAmount == 0) {
+      StartCoroutine(Death());	
+      return;
+    }
 
     if (!healthBarPrefab.GetComponent<Canvas>().enabled) healthBarPrefab.GetComponent<Canvas>().enabled = true;
     gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
 		
 		if (Time.time - damagedStartTime > 0.5f) {
+      rb.velocity = Vector2.zero;
 			spriteRenderer.color = Color.white;
       gameObject.layer = LayerMask.NameToLayer("Enemies");
-
-			state = State.walking;
+      StartCoroutine(Stun(stunTime));
 		}
 	}
 
@@ -139,17 +144,6 @@ public class Enemy : MonoBehaviour {
   // handles case when enemy runs into something
   void OnCollisionEnter2D(Collision2D collision) {
       Collider2D collider = collision.collider;
-
-      switch (collider.gameObject.layer) {
-        case 8: // we hit a wall, so turn around
-          rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
-          break;
-
-        case 15: // we hit a boundary, so turn around
-          rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
-          break;
-      }
-
       switch (collision.collider.name) {
         case "Spikes":
           if( state == State.damaged) break;
@@ -214,6 +208,7 @@ public class Enemy : MonoBehaviour {
   }
 
   public float attackRange;
+  private float autoPathStartTime;
   // follows player
   protected virtual void AutoPath() {
 		float xDist = player.transform.position.x - transform.position.x;
@@ -268,7 +263,17 @@ public class Enemy : MonoBehaviour {
       bar.color = new Color(1, 0.39f, 0, 1);
   }
 
+  protected virtual IEnumerator Stun(float stunTime) {
+    rb.velocity = Vector2.zero;
+    stunned = true;
+    yield return new WaitForSeconds(stunTime);
+    stunned = false;
+    state = State.walking;
+    yield return null;
+  }
+
   protected virtual IEnumerator Death() {
+    stunned = true;
     rb.velocity = new Vector2(0, rb.velocity.y);
     Destroy(hurtBox);
 
@@ -289,6 +294,10 @@ public class Enemy : MonoBehaviour {
 
   protected virtual void HandleState() {
     switch (state) {
+      case State.idle:
+        Idle();
+        break;
+
       case State.damaged:
         Damaged();
         break;
@@ -309,10 +318,15 @@ public class Enemy : MonoBehaviour {
         Death();
         break;
     }
+
+    if (stunned) rb.velocity = new Vector2(0, rb.velocity.y);
   }
+
+  protected virtual void Idle() {
+  }
+
   // method to play sounds from animator
 	public void PlayOneShot(AudioClip sound) {
 		audioSource.PlayOneShot(sound);
 	}
-  
 }
