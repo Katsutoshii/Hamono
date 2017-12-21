@@ -199,8 +199,11 @@ public class Enemy : MonoBehaviour {
     rb.velocity = new Vector2(0, rb.velocity.y);
     state = State.attacking;
     yield return new WaitForSeconds(attackDuration);
-    state = State.walking;
 
+    state = State.idle;
+    yield return new WaitForSeconds(attackDuration);
+
+    state = State.walking;
     yield return null;
   }
 
@@ -254,6 +257,7 @@ public class Enemy : MonoBehaviour {
     if ( healthAmount < 0) healthAmount = 0;
 	}
 
+  public float deathWaitTime;
   public virtual void UpdateHealthBar() {
     Image bar = transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
     bar.fillAmount = healthAmount / maxHealthAmount;
@@ -274,7 +278,7 @@ public class Enemy : MonoBehaviour {
 
 		state = State.dead;
     spriteRenderer.color = Color.white;
-    yield return new WaitForSeconds(0.5f);
+    yield return new WaitForSeconds(deathWaitTime);
 
     // deletes the game object
     for (int i = 0; i < 4; i++)

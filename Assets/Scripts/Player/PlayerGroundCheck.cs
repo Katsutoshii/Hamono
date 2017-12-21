@@ -19,7 +19,8 @@ public class PlayerGroundCheck : MonoBehaviour
     /// <param name="other">The other Collider2D involved in this collision.</param>
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Terrain") || 
+                other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
             player.grounded = true;
     }	
 

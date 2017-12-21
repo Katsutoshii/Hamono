@@ -23,8 +23,11 @@ public class ClickIndicator : MonoBehaviour {
 	IEnumerator SpinAndFade() {
 		transform.position = ScreenToWorldPoint(Input.mousePosition);
 
-		bool playerInRange = transform.position.y - player.transform.position.y < player.autoPathLimitY;
+		bool playerInRange = Mathf.Abs(transform.position.y - player.transform.position.y) < player.autoPathLimitY 
+			&& player.grounded;
+
 		spriteRenderer.color = playerInRange ? Color.white : Color.red;
+		
 		while (spriteRenderer.color.a >= 0) {
 			transform.localScale = Vector3.one * spriteRenderer.color.a * 5;
 			Color color = spriteRenderer.color;

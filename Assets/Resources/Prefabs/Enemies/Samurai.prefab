@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 82282102784186374}
   - component: {fileID: 114652575155847830}
   - component: {fileID: 95188519105229060}
+  - component: {fileID: 61497783911195974}
   m_Layer: 9
   m_Name: Samurai
   m_TagString: Untagged
@@ -255,8 +256,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1417323078140502}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.077, y: -0.55, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.961039, y: -5.142101, z: -7.618035}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4386423076324422}
@@ -351,6 +352,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.73686504, y: 0.116583824}
   m_EdgeRadius: 0
+--- !u!61 &61497783911195974
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1417323078140502}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.009701371, y: -0.18044344}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.84, y: 1.68}
+    newSize: {x: 2.56, y: 2.56}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3161318, y: 0.5507726}
+  m_EdgeRadius: 0
 --- !u!61 &61734179086333178
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -388,7 +414,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.055262566}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -399,7 +425,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3, y: 1.3}
+  m_Size: {x: 1.3, y: 0.7750056}
   m_EdgeRadius: 0
 --- !u!61 &61925336864836618
 BoxCollider2D:
@@ -413,7 +439,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.056324482, y: -0.124478996}
+  m_Offset: {x: 0.04293382, y: -0.1646511}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -424,7 +450,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3268805, y: 1.1995134}
+  m_Size: {x: 0.88230777, y: 1.1191692}
   m_EdgeRadius: 0
 --- !u!82 &82282102784186374
 AudioSource:
@@ -715,6 +741,7 @@ MonoBehaviour:
   size: 2
   attackDuration: 1
   attackRange: 2
+  deathWaitTime: 1
   randomChangetime: 3
 --- !u!114 &114882536924919826
 MonoBehaviour:

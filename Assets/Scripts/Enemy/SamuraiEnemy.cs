@@ -8,7 +8,7 @@ public class SamuraiEnemy : Enemy {
         base.Start();
         
         hurtBox.offset = Vector2.zero;
-        hurtBox.size = new Vector2(1.3f, 1.3f);
+        hurtBox.size = Vector2.zero;
 
         StartCoroutine(ChangeRandomWalkCycle());
     }
@@ -97,12 +97,12 @@ public class SamuraiEnemy : Enemy {
 	}
 
     public void LaserOut() {
-        hurtBox.offset = new Vector2(-0.7f, 0);
-        hurtBox.size = new Vector2(2.4f, 1.3f);
+        hurtBox.offset = new Vector2(-1f, 0);
+        hurtBox.size = Vector2.one;
     }
 
     public void LaserIn() {
         hurtBox.offset = Vector2.zero;
-        hurtBox.size = new Vector2(1.3f, 1.3f);
+        hurtBox.size = Vector2.zero;
     }
 }

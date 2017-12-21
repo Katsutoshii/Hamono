@@ -39,7 +39,7 @@ public partial class Player : MonoBehaviour {
 
 	private const float SLASHING_X_DIST = 1f;
 	private const float SLASHING_Y_DIST = 0.5f;
-	private const float AUTOPATH_Y_THRESHOLD = 1.5f; 
+	private const float AUTOPATH_Y_THRESHOLD = 1.2f; 
 	private const float AUTOPATH_Y_FACTOR = 6.25f;
 	public float AUTOPATH_X_FACTOR = 5f;
 	private const float JUMP_X_THRESHOLD = 3.5f;
@@ -108,7 +108,7 @@ public partial class Player : MonoBehaviour {
 		}
 	}
 
-	private const float JUMP_DELAY = 0.1f;
+	private const float JUMP_DELAY = 0.05f;
 	IEnumerator Jump(float jumpPower) {
 		jumping = true;
 		rb.velocity = Vector2.zero;

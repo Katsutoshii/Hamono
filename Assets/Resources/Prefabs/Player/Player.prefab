@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4340478698722530}
   - component: {fileID: 61451349776370148}
   - component: {fileID: 114274451070623788}
-  m_Layer: 14
+  m_Layer: 11
   m_Name: EdgeChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4413722616883630}
   - component: {fileID: 61203960177793454}
   - component: {fileID: 114168312230010564}
-  m_Layer: 14
+  m_Layer: 11
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,6 +477,7 @@ MonoBehaviour:
   paused: 0
   targetA: {x: -4.2143736, y: 2.5172415}
   targetB: {x: -4.2143736, y: 2.5172415}
+  staminaBar: {fileID: 0}
   maxHealth: 3
   healthAmount: 3
   damagedTime: 0.3
@@ -490,7 +491,7 @@ MonoBehaviour:
   invincibleFlashes: 12
   timeFreezeDuration: 0
   missStaminaPenalty: 0.1
-  dashStaminaCost: 0.002
+  dashStaminaCost: 0.0025
   slashStaminaCost: 0.1
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
     type: 2}
@@ -502,7 +503,7 @@ MonoBehaviour:
   dustCloudPrefab: {fileID: 1250923004883462, guid: 3aa9da3f77e263043a0d3c39ab39d9f1,
     type: 2}
   AUTOPATH_X_FACTOR: 12
-  autoPathLimitY: 7
+  autoPathLimitY: 5
 --- !u!212 &212073600475020504
 SpriteRenderer:
   m_ObjectHideFlags: 1
