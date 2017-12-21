@@ -19,8 +19,9 @@ public class EnemyHitbox : MonoBehaviour {
     /// object (2D physics only).
     /// </summary>
     /// <param name="other">The other Collider2D involved in this collision.</param>
-    public virtual void OnTriggerEnter2D(Collider2D other)
+    public virtual void OnTriggerStay2D(Collider2D other)
     {
+        Debug.Log("Trigger with " + other.name + " " + LayerMask.LayerToName(other.gameObject.layer));
         switch (other.name) {
             case "PlayerSlashHurtBox":
                 enemy.Damage(enemy.receiveSlashDamage, enemy.receiveSlashKnockback, other);
@@ -29,6 +30,36 @@ public class EnemyHitbox : MonoBehaviour {
             case "PlayerDashHurtBox":
                 enemy.Damage(enemy.receiveDashDamage, enemy.receiveDashKnockback, other);
                 break;
+            
         }
+
+        switch (LayerMask.LayerToName(other.gameObject.layer)) {
+            case "Spikes":
+                if (enemy.state == Enemy.State.damaged) break;
+                enemy.Damage(1f, 0, other);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Sent each frame where a collider on another object is touching
+    /// this object's collider (2D physics only).
+    /// </summary>
+    /// <param name="other">The Collision2D data associated with this collision.</param>
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        Collider2D other = collision.collider;
+        Debug.Log("Collision with " + other.name + " " + LayerMask.LayerToName(other.gameObject.layer));
+        switch (LayerMask.LayerToName(other.gameObject.layer)) {
+            case "Spikes":
+                if (enemy.state == Enemy.State.damaged) break;
+                enemy.Damage(1f, 0, other);
+                break;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        Collider2D other = collision.collider;
+        Debug.Log("Collision with " + other.name + " " + LayerMask.LayerToName(other.gameObject.layer));
     }
 }

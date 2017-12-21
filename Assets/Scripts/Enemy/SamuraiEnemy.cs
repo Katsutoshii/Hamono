@@ -55,13 +55,11 @@ public class SamuraiEnemy : Enemy {
         }
     }
     public void LaserOut() {
-        if (state == State.dead) return;
         hurtBox.offset = new Vector2(-1f, 0);
         hurtBox.size = Vector2.one;
     }
 
     public void LaserIn() {
-        if (state == State.dead) return;
         hurtBox.offset = Vector2.zero;
         hurtBox.size = Vector2.zero;
     }

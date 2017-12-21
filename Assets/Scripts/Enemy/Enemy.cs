@@ -124,6 +124,7 @@ public class Enemy : MonoBehaviour {
 		if (Time.time - damagedStartTime > 0.5f) {
       rb.velocity = Vector2.zero;
 			spriteRenderer.color = Color.white;
+      hurtBox.enabled = true;
       gameObject.layer = LayerMask.NameToLayer("Enemies");
       StartCoroutine(Stun(stunTime));
 		}
@@ -141,17 +142,6 @@ public class Enemy : MonoBehaviour {
     animator.SetBool("attacking", state == State.attacking);
   }
 
-  // handles case when enemy runs into something
-  void OnCollisionStay2D(Collision2D collision) {
-      Collider2D collider = collision.collider;
-      switch (LayerMask.LayerToName(collider.gameObject.layer)) {
-        case "Spikes":
-          if( state == State.damaged) break;
-          Damage(1f, 0, collision.collider);
-          rb.velocity += 3 * Vector2.up;
-          break;
-      }
-  }
 
   protected void RotateBasedOnDirection() {
     if (state != State.walking) return;
@@ -189,7 +179,8 @@ public class Enemy : MonoBehaviour {
     else 
       transform.localScale = new Vector3(size, size, 1);
 
-
+    
+    hurtBox.enabled = true;
     rb.velocity = new Vector2(0, rb.velocity.y);
     state = State.attacking;
     yield return new WaitForSeconds(attackDuration);
@@ -232,6 +223,7 @@ public class Enemy : MonoBehaviour {
 		if (state == State.damaged || state == State.dead) return;
 
     damagedStartTime = Time.time;
+    hurtBox.enabled = false;
     
     
 		if (damageAmount > 0) {
@@ -276,7 +268,7 @@ public class Enemy : MonoBehaviour {
     stunned = true;
     gameObject.layer = LayerMask.NameToLayer("Debris");
     rb.velocity = Vector2.zero;
-    Destroy(hurtBox);
+    hurtBox.enabled = false;
 
 		state = State.damaged;
     spriteRenderer.color = Color.red;

@@ -135,25 +135,23 @@ public partial class Player : MonoBehaviour {
 		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(1)) && state != State.talking && state != State.finishedTalking && !paused) {
 
 			attackType = AttackType.none;
-			if (immediateAutoPathing || Input.GetMouseButton(1)) {
-				state = State.autoPathing;
-				autoPathStartTime = Time.time;
-			}
+			if (immediateAutoPathing || Input.GetMouseButton(1)) StartAutoPath();
+			
 			targetA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+		} else if (state == State.finishedTalking) state = State.idle;
+
+		if (Input.GetMouseButton(0)) {
 			// turn the sprite around
 			if (targetA.x > transform.position.x)
 				transform.localScale = new Vector3(1, 1, 1);
 			else 
 				transform.localScale = new Vector3(-1, 1, 1);
-		} else if (state == State.finishedTalking) state = State.idle;
+		}
 
 		if (Input.GetMouseButtonUp(0)) {
 			
-			if (!immediateAutoPathing) {
-				state = State.autoPathing;
-				autoPathStartTime = Time.time;
-			}
+			if (!immediateAutoPathing) StartAutoPath();
 			GetAttackType();
 		}
 	}
@@ -253,15 +251,14 @@ public partial class Player : MonoBehaviour {
 	}
 
 	private void HandleState() {
+		if (state != State.damaged) Controls();
 		switch (state) {
 			
 			case State.autoPathing:
-				Controls();
 				AutoPath();
 				break;
 
 			case State.ready:
-				Controls();
 				Ready();
 				break;
 			
@@ -281,7 +278,6 @@ public partial class Player : MonoBehaviour {
 				break;
 
 			case State.idle:
-				Controls();
 				if (grounded) staminaBar.IncreaseStamina(generateStamina);
 				rb.gravityScale = GRAVITY_SCALE;
 				rb.velocity = new Vector2(0, rb.velocity.y);

@@ -42,6 +42,14 @@ public class Pot : MonoBehaviour {
 				break;
 		}
 	}
+
+	void OnCollisionEnter2D(Collision2D other) {
+		switch (LayerMask.LayerToName(other.gameObject.layer)) {
+			case "Spikes":
+				Break();
+				break;
+		}
+	}
 	
 	private void Break() {
 		audioSource.Play();

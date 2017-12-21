@@ -36,6 +36,13 @@ public partial class Player : MonoBehaviour {
         return Mathf.Max(Mathf.Min(val, max), min);
     }
 
+	private void StartAutoPath() {
+		if (grounded) canJump = true;
+		else canJump = false;
+		
+		state = State.autoPathing;
+		autoPathStartTime = Time.time;
+	}
 
 	private const float SLASHING_X_DIST = 1.2f;
 	private const float SLASHING_Y_DIST = 0.5f;
@@ -48,6 +55,7 @@ public partial class Player : MonoBehaviour {
 	private const float AUTOPATH_TIMEOUT = 1.5f;
 	private const float SCALE_REACHER = 2f;
 	public float autoPathLimitY;
+	private bool canJump;
     
 
 	// method to handle the autopathing
@@ -95,7 +103,7 @@ public partial class Player : MonoBehaviour {
 
 		RotateSpriteForVelocity();
 
-		if (!jumping && grounded) { 
+		if (!jumping && grounded && canJump) { 
 			if ((yDist >= AUTOPATH_Y_THRESHOLD && xDist <= JUMP_X_THRESHOLD) || (yDist >= -2 && onEdge)) {
 				jumping = true;
 				StartCoroutine(Jump(Mathf.Sqrt(Mathf.Abs(yDist)) * AUTOPATH_Y_FACTOR + Mathf.Sqrt(Mathf.Abs(xDist)) * AUTOPATH_X_FACTOR));
@@ -105,7 +113,6 @@ public partial class Player : MonoBehaviour {
 
 	private const float JUMP_DELAY = 0.05f;
 	IEnumerator Jump(float jumpPower) {
-		Debug.Log("jump! power = " + jumpPower);
 		rb.velocity = Vector2.zero;
 		Vector3 jumpPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		

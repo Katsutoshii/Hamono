@@ -48,7 +48,6 @@ public class FlyingEnemy : Enemy {
 
 	public bool jumping = false;
 	protected IEnumerator Jump(float jumpPower) {
-        Debug.Log("Flyer jump! power = " + jumpPower);
 		jumping = true;
 		rb.velocity = new Vector2(rb.velocity.x, jumpPower);
         RotateBasedOnDirection();
@@ -59,7 +58,6 @@ public class FlyingEnemy : Enemy {
 	}
 
     public void MakeJump() {
-        Debug.Log("Flying attempting jump");
         if (!jumping) {
             float yDist = player.transform.position.y - transform.position.y;
             StartCoroutine(Jump(Mathf.Max(2 * yDist, 1f)));
