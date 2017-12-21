@@ -731,7 +731,7 @@ MonoBehaviour:
   grounded: 0
   walkingSpeed: 2
   jumpingPower: 2
-  distanceNearPlayer: 6
+  distanceNearPlayer: 4
   healthAmount: 3
   receiveSlashDamage: 1
   receiveDashDamage: 1
