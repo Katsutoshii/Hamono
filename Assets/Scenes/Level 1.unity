@@ -660,6 +660,7 @@ GameObject:
   - component: {fileID: 182297172}
   - component: {fileID: 182297171}
   - component: {fileID: 182297170}
+  - component: {fileID: 182297173}
   m_Layer: 8
   m_Name: Spikes
   m_TagString: Untagged
@@ -742,8 +743,8 @@ Tilemap:
   m_Tiles:
   - first: {x: 36, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -751,8 +752,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 37, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -760,8 +761,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 38, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -769,8 +770,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 39, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -778,8 +779,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 42, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -787,8 +788,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 43, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -796,8 +797,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 44, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -805,8 +806,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 45, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -814,8 +815,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 48, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -823,8 +824,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 49, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -832,8 +833,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 50, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -841,8 +842,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 51, y: -2, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -850,27 +851,27 @@ Tilemap:
       m_ColliderType: 1
   m_AnimatedTiles: {}
   m_TileAssetArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 12
-    m_Data: {fileID: 11400000, guid: 195d149e30336c84e8a5b6c848c498ce, type: 2}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+    m_Data: {fileID: 11400000, guid: f456becd8a56d41ce9db66d79692da4e, type: 2}
   m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 12
-    m_Data: {fileID: 21300000, guid: 3bb78f0e91f635b42a7685e8a955c8cc, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+    m_Data: {fileID: 21300000, guid: 5cb3e2c85997645f58eee9ca7c43a57a, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 12
     m_Data:
@@ -927,6 +928,17 @@ Tilemap:
     m_DirtyIndex: 0
   - serializedVersion: 1
     m_DirtyIndex: 0
+--- !u!114 &182297173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 182297168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 059516111425b45d19a07043aa689b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &190803480
 Prefab:
   m_ObjectHideFlags: 0
@@ -6225,9 +6237,13 @@ Prefab:
     - target: {fileID: 114157020721625334, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
         type: 2}
       propertyPath: text
-      value: The samurai of the past left their teachings on these walls. Read their
-        teachings, trace the lines of their slices, and you can reach their level
-        of mastery.
+      value: 'The samurai of the past left their teachings
+
+        on these walls. Read their teachings, trace
+
+        the lines of their slices, and you can
+
+        reach their level of mastery.'
       objectReference: {fileID: 0}
     - target: {fileID: 4800248331145870, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008, type: 2}
       propertyPath: m_LocalScale.x
