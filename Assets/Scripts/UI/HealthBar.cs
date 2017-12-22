@@ -10,9 +10,6 @@ public class HealthBar : MonoBehaviour
   public float fillAmount;
 
   private Image[] hearts;
-  private Image firstHeart;
-  private Image secondHeart;
-  private Image thirdHeart;
 
   public Sprite noHeart;
 
@@ -33,11 +30,17 @@ public class HealthBar : MonoBehaviour
     }
 
     // if we have a fractional amount of health left, set the fill amount
-    hearts[(int) healthAmount].fillAmount = healthAmount % 1f;
+    if (healthAmount % 1f != 0) hearts[(int) healthAmount].fillAmount = healthAmount % 1f;
+    else {
+      hearts[(int) healthAmount].sprite = noHeart;
+      hearts[(int) healthAmount].fillAmount = 1;
+    }
+
 
     // set the rest of the iamges to no heart
     for (int i = (int) healthAmount + 1; i < numHearts; i++) {
       hearts[i].sprite = noHeart;
+      hearts[i].fillAmount = 1;
     }
   }
 }
