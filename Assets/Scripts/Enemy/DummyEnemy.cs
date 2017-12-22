@@ -103,7 +103,7 @@ public class DummyEnemy : Enemy {
 	}
 
   protected virtual void UpdateAnimatorVariables() {
-    base.animator.SetBool("leftHit", leftHit);
+    base.animator.SetBogol("leftHit", leftHit);
     base.animator.SetBool("rightHit", rightHit);
   }
 
