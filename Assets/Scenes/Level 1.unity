@@ -6237,9 +6237,13 @@ Prefab:
     - target: {fileID: 114157020721625334, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008,
         type: 2}
       propertyPath: text
-      value: The samurai of the past left their teachings on these walls. Read their
-        teachings, trace the lines of their slices, and you can reach their level
-        of mastery.
+      value: 'The samurai of the past left their teachings
+
+        on these walls. Read their teachings, trace
+
+        the lines of their slices, and you can
+
+        reach their level of mastery.'
       objectReference: {fileID: 0}
     - target: {fileID: 4800248331145870, guid: 106e3dbdbdbb14cd3bee0d7e9f1c9008, type: 2}
       propertyPath: m_LocalScale.x
