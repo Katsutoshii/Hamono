@@ -19,7 +19,7 @@ public class EnemyHitbox : MonoBehaviour {
     /// object (2D physics only).
     /// </summary>
     /// <param name="other">The other Collider2D involved in this collision.</param>
-    public virtual void OnTriggerStay2D(Collider2D other)
+    public virtual void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Trigger with " + other.name + " " + LayerMask.LayerToName(other.gameObject.layer));
         switch (other.name) {
