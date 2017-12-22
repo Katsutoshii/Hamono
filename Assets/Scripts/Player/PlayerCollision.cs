@@ -51,6 +51,7 @@ public partial class Player : MonoBehaviour {
 	/// <param name="other">The other Collider involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other)
 	{
+
 		switch (other.name) {
 			case "EnemyHurtBox":
 				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) 
@@ -58,5 +59,22 @@ public partial class Player : MonoBehaviour {
 				else attackResponse = AttackResponse.normal; 
 				break;
 		}
+	}
+
+ 	/// <summary>
+	/// Sent each frame where another object is within a trigger collider
+	/// attached to this object (2D physics only).
+	/// </summary>
+	/// <param name="other">The other Collider2D involved in this collision.</param>
+	void OnTriggerStay2D(Collider2D other)
+	{
+			switch (other.name) {
+				case "Next Level Door":
+					if (state == State.idle && rb.velocity.x == 0 && rb.velocity.y == 0) {
+						// takes player to the next level
+						other.gameObject.GetComponent<NextLevelController>().NextLevel();
+					}
+					break;
+			}
 	}
 }
