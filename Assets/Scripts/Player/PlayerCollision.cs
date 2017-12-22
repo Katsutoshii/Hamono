@@ -70,19 +70,11 @@ public partial class Player : MonoBehaviour {
 	{
 			switch (other.name) {
 				case "Next Level Door":
-					if (state == State.idle && rb.velocity.x == 0 && rb.velocity.y == 0) NextLevel();
+					if (state == State.idle && rb.velocity.x == 0 && rb.velocity.y == 0) {
+						// takes player to the next level
+						other.gameObject.GetComponent<NextLevelController>().NextLevel();
+					}
 					break;
 			}
-	}
-
-	private void NextLevel() {
-		Instantiate(fadeToBlackEffect);
-		StartCoroutine(NextScene());
-	}
-
-	private IEnumerator NextScene() {
-		yield return new WaitForSeconds(.5f);
-		PlayerPrefs.SetInt("next_level", 2);
-		SceneManager.LoadScene(3);
 	}
 }
