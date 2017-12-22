@@ -267,15 +267,6 @@ Prefab:
       propertyPath: m_Name
       value: Light (12)
       objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Range
-      value: 20.046646
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
   m_IsPrefabParent: 0
@@ -494,15 +485,6 @@ Prefab:
     - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
       propertyPath: m_Name
       value: Light (13)
-      objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Range
-      value: 20.046646
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
@@ -998,15 +980,6 @@ Prefab:
       propertyPath: m_Name
       value: Light (17)
       objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Range
-      value: 20.046646
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
   m_IsPrefabParent: 0
@@ -1379,15 +1352,6 @@ Prefab:
     - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
       propertyPath: m_Name
       value: Light (14)
-      objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Range
-      value: 20.046646
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
@@ -5199,15 +5163,6 @@ Prefab:
       propertyPath: m_Name
       value: Light (16)
       objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Range
-      value: 20.046646
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
   m_IsPrefabParent: 0
@@ -5258,15 +5213,6 @@ Prefab:
     - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
       propertyPath: m_Name
       value: Light (19)
-      objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Range
-      value: 20.046646
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
@@ -6269,15 +6215,6 @@ Prefab:
     - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
       propertyPath: m_Name
       value: Light (15)
-      objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Range
-      value: 20.046646
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
@@ -7855,15 +7792,6 @@ Prefab:
     - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
       propertyPath: m_Name
       value: Light (18)
-      objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Range
-      value: 20.046646
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}

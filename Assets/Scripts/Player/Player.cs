@@ -139,15 +139,12 @@ public partial class Player : MonoBehaviour {
 			
 			targetA = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-		} else if (state == State.finishedTalking) state = State.idle;
-
-		if (Input.GetMouseButton(0)) {
-			// turn the sprite around
 			if (targetA.x > transform.position.x)
 				transform.localScale = new Vector3(1, 1, 1);
 			else 
 				transform.localScale = new Vector3(-1, 1, 1);
-		}
+
+		} else if (state == State.finishedTalking) state = State.idle;
 
 		if (Input.GetMouseButtonUp(0)) {
 			
