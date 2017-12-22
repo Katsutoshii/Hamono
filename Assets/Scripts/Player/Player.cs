@@ -74,6 +74,7 @@ public partial class Player : MonoBehaviour {
 	
 	// ui/ux elements
 	private GameObject pauseMenuPrefab;
+	private GameObject fadeToBlackEffect;
 	private AudioSource audioSource;
 	public float generateStamina;
 	
@@ -101,6 +102,7 @@ public partial class Player : MonoBehaviour {
 		healthBar = FindObjectOfType<HealthBar>();
 		coinCountText = GameObject.Find("CoinCount").GetComponent<Text>();
 		pauseMenuPrefab = Resources.Load<GameObject>("Prefabs/UI/PauseMenu");
+		fadeToBlackEffect = Resources.Load<GameObject>("Prefabs/Environment/FadeToBlack");
 		
 		// create pools for attack effects
 		PoolManager.instance.CreatePool(dustCloudPrefab, 1);

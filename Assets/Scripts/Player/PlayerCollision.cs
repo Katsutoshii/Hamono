@@ -77,7 +77,12 @@ public partial class Player : MonoBehaviour {
 
 	private void NextLevel() {
 		Debug.Log("moving to the next level");
-		SceneManager.LoadScene(3);
+		Instantiate(fadeToBlackEffect);
+		StartCoroutine(NextScene());
 	}
 
+	private IEnumerator NextScene() {
+		yield return new WaitForSeconds(.5f);
+		SceneManager.LoadScene(3);
+	}
 }
