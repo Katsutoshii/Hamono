@@ -11,10 +11,9 @@ public class LoadingScreen : MonoBehaviour {
   private int completedLoops;
 
   [SerializeField]
-  // private int scene;
+  private int scene;
   private Text loadingText;
 
-  private int scene;
 
   public Sprite[] sprites;
 	private int spritePerFrame = 6;
