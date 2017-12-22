@@ -14,6 +14,7 @@ public class LoadingScreen : MonoBehaviour {
   private int scene;
   private Text loadingText;
 
+
   public Sprite[] sprites;
 	private int spritePerFrame = 6;
 	private bool loop = true;
@@ -26,6 +27,7 @@ public class LoadingScreen : MonoBehaviour {
   void Start() {
     loadingText = transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
     completedLoops = 0;
+    scene = PlayerPrefs.GetInt("next_level");
   }
 
 	void Awake() {
@@ -75,10 +77,7 @@ public class LoadingScreen : MonoBehaviour {
   IEnumerator LoadNewScene() {
     while (!isFinished())
       yield return new WaitForSeconds(3f);
-      
-    AsyncOperation async = Application.LoadLevelAsync(scene);
-
-    while (!async.isDone)
+      SceneManager.LoadScene(scene);
       yield return null;
   }
 }
