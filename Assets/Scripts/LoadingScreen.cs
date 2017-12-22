@@ -11,8 +11,10 @@ public class LoadingScreen : MonoBehaviour {
   private int completedLoops;
 
   [SerializeField]
-  private int scene;
+  // private int scene;
   private Text loadingText;
+
+  private int scene;
 
   public Sprite[] sprites;
 	private int spritePerFrame = 6;
@@ -26,6 +28,7 @@ public class LoadingScreen : MonoBehaviour {
   void Start() {
     loadingText = transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
     completedLoops = 0;
+    scene = PlayerPrefs.GetInt("next_level");
   }
 
 	void Awake() {
