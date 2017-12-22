@@ -485,13 +485,13 @@ MonoBehaviour:
   comboCount: 0
   coinCount: 0
   jumping: 0
-  generateStamina: 0.02
+  generateStamina: 0.01
   autoPathStartTime: 15.1989765
   damagedStartTime: 0
   invincibleFlashes: 12
   timeFreezeDuration: 0
   missStaminaPenalty: 0.1
-  dashStaminaCost: 0.001
+  dashStaminaCost: 0.01
   slashStaminaCost: 0.1
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
     type: 2}
@@ -499,6 +499,7 @@ MonoBehaviour:
     type: 2}
   numAfterimage: 4
   afterimageColor: {r: 0.5268166, g: 0.8124567, b: 0.85294116, a: 0}
+  maxDash: 7
   maxSpeed: {x: 10, y: 20}
   dustCloudPrefab: {fileID: 1250923004883462, guid: 3aa9da3f77e263043a0d3c39ab39d9f1,
     type: 2}
