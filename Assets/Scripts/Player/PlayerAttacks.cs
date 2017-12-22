@@ -17,8 +17,8 @@ public partial class Player : MonoBehaviour {
 	// private constants
 	private const float ATTACK_TIMEOUT = 0.5f;
 
-	private const float DASH_SPEED = 8f;
-	private const float DASH_TARGET_THRESHOLD = 0.8f;
+	private const float DASH_SPEED = 10f;
+	private const float DASH_TARGET_THRESHOLD = 0.25f;
 	private const float READY_FLOAT_TIMEOUT = 0.5f;
 	
 	private float readyStartTime;
@@ -60,7 +60,7 @@ public partial class Player : MonoBehaviour {
 		}
 		
 		float distanceB = Vector2.Distance(rb.position, targetB);
-		staminaBar.DecreaseStamina(dashStaminaCost * distanceB * distanceB);
+		staminaBar.DecreaseStamina(dashStaminaCost);
 		
 		// if we are mid dash
 		if (distanceB > DASH_TARGET_THRESHOLD) {
@@ -114,12 +114,12 @@ public partial class Player : MonoBehaviour {
 		UpdateAnimatorVariables();
 	}
 
+	public float maxDash;
 	public const float MIN_ATTACK_THRESH = 0.5f;
 	public void GetAttackType() {
-		
-		targetB = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		float dist = Vector2.Distance(targetA, targetB);
+		StartCoroutine(PauseStaminaGen());
 
 		if (dist < MIN_ATTACK_THRESH) attackType = AttackType.none;
 		else if (dist > SLASHING_THRESHOLD) {
@@ -142,6 +142,16 @@ public partial class Player : MonoBehaviour {
 		else slashType = AttackType.straightSlash;
 		
 		return slashType;
+	}
+
+	private bool canGenerateStamina;
+	private const float STAMINA_WAIT = 1f;
+	private IEnumerator PauseStaminaGen() {
+		canGenerateStamina = false;
+		yield return new WaitForSeconds(STAMINA_WAIT);
+		canGenerateStamina = true;
+		yield return null;
+
 	}
 
 	public void CheckForSlashEnd() {

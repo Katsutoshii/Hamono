@@ -51,15 +51,20 @@ public class SlashIndicator : MonoBehaviour {
 			float length = Mathf.Sqrt(
 				(clickWorldPoint.x - targetA.x) * (clickWorldPoint.x - targetA.x)
 				 + (clickWorldPoint.y - targetA.y) * (clickWorldPoint.y - targetA.y)
-			)  * 100 / spriteRenderer.sprite.rect.width;
+			);
 
 			// if dashing, limit the length based on the stamina
-			if (spriteRenderer.color == Color.cyan) length = Mathf.Min(length, 36 * player.staminaBar.fillAmount);
+			if (spriteRenderer.color == Color.cyan) length = Mathf.Min(length, player.maxDash * player.staminaBar.fillAmount);
+			
 				
-			transform.localScale = new Vector3(length, 3, 1);
+			transform.localScale = new Vector3(length * 100 / spriteRenderer.sprite.rect.width, 3, 1);
 
 			float angle = Mathf.Atan2(clickWorldPoint.y - targetA.y, 
-				clickWorldPoint.x - targetA.x) * 180 / Mathf.PI;
+				clickWorldPoint.x - targetA.x) * 180f / Mathf.PI;
+
+			float radianAngle = angle * Mathf.PI / 180f;
+
+			player.targetB = targetA + new Vector3(Mathf.Cos(radianAngle) * length, Mathf.Sin(radianAngle) * length, 0);
 
 			transform.eulerAngles = new Vector3(0, 0, angle);
 		}

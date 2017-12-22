@@ -21,7 +21,6 @@ public class EnemyHitbox : MonoBehaviour {
     /// <param name="other">The other Collider2D involved in this collision.</param>
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Trigger with " + other.name + " " + LayerMask.LayerToName(other.gameObject.layer));
         switch (other.name) {
             case "PlayerSlashHurtBox":
                 enemy.Damage(enemy.receiveSlashDamage, enemy.receiveSlashKnockback, other);

@@ -275,7 +275,7 @@ public partial class Player : MonoBehaviour {
 				break;
 
 			case State.idle:
-				if (grounded) staminaBar.IncreaseStamina(generateStamina);
+				if (grounded && canGenerateStamina) staminaBar.IncreaseStamina(generateStamina);
 				rb.gravityScale = GRAVITY_SCALE;
 				rb.velocity = new Vector2(0, rb.velocity.y);
 				break;
