@@ -11,6 +11,23 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1664300716778720}
   m_IsPrefabParent: 1
+--- !u!1 &1236575183049114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4580398665222620}
+  - component: {fileID: 114223089371914006}
+  - component: {fileID: 61273570356842648}
+  m_Layer: 9
+  m_Name: EnemyHitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1371846748554664
 GameObject:
   m_ObjectHideFlags: 0
@@ -23,23 +40,6 @@ GameObject:
   - component: {fileID: 114281578631105280}
   m_Layer: 19
   m_Name: GroundChecker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1618459300321798
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4672436810557064}
-  - component: {fileID: 114513488868054670}
-  - component: {fileID: 61346308619658560}
-  m_Layer: 9
-  m_Name: EnemyHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,21 +72,21 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1664300716778720}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.12, y: -0.49, z: -0.11628268}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 34.39, y: -2.07, z: -2.183352}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4729622400154152}
-  - {fileID: 4672436810557064}
+  - {fileID: 4580398665222620}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4672436810557064
+--- !u!4 &4580398665222620
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1618459300321798}
+  m_GameObject: {fileID: 1236575183049114}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
@@ -152,12 +152,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9464035, y: 1.2137289}
   m_EdgeRadius: 0
---- !u!61 &61346308619658560
+--- !u!61 &61273570356842648
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1618459300321798}
+  m_GameObject: {fileID: 1236575183049114}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -321,11 +321,26 @@ MonoBehaviour:
   receiveDashDamage: 0
   receiveSlashKnockback: 0
   receiveDashKnockback: 0
+  stunned: 0
   KP: 0
   size: 0
+  stunTime: 0.5
   attackDuration: 0
   attackRange: 0
+  deathWaitTime: 0
   typeOfBot: body
+--- !u!114 &114223089371914006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236575183049114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ff66c95aec0394b92a3e28d9a435a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
 --- !u!114 &114281578631105280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -337,18 +352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11929f8b3dbb2c241b11061878fafe45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114513488868054670
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1618459300321798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10ff66c95aec0394b92a3e28d9a435a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
 --- !u!212 &212415112211910972
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -381,7 +384,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 848748911
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e1846b37be6e84dfaaf20da98ab18c84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

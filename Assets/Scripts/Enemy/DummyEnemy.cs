@@ -32,60 +32,68 @@ public class DummyEnemy : Enemy {
     if (source.transform.position.x < transform.position.x) {
         switch(typeOfBot) {
           case "normal":
-          leftHit = true;
-          base.animator.SetBool("leftHit", leftHit);
-          break;
+            leftHit = true;
+            base.animator.SetBool("leftHit", leftHit);
+            PoolManager.instance.ReuseObject(coinPrefab, transform.position, transform.rotation, coinPrefab.transform.localScale);
+            break;
 
           case "head":
-          if (player.attackType == Player.AttackType.upSlash) {
-            leftHit = true;
-            base.animator.SetBool("leftHit", leftHit);
-          }
-          break;
+            if (player.attackType == Player.AttackType.upSlash) {
+              leftHit = true;
+              base.animator.SetBool("leftHit", leftHit);
+              PoolManager.instance.ReuseObject(coinPrefab, transform.position, transform.rotation, coinPrefab.transform.localScale);
+            }
+            break;
 
           case "body":
-          if (player.attackType == Player.AttackType.straightSlash) {
-            leftHit = true;
-            base.animator.SetBool("leftHit", leftHit);
-          }
-          break;
+            if (player.attackType == Player.AttackType.straightSlash) {
+              leftHit = true;
+              base.animator.SetBool("leftHit", leftHit);
+              PoolManager.instance.ReuseObject(coinPrefab, transform.position, transform.rotation, coinPrefab.transform.localScale);
+            }
+            break;
 
           case "legs":
-          if (player.attackType == Player.AttackType.downSlash) {
-            leftHit = true;
-            base.animator.SetBool("leftHit", leftHit);
-          }
-          break;
+            if (player.attackType == Player.AttackType.downSlash) {
+              leftHit = true;
+              base.animator.SetBool("leftHit", leftHit);
+              PoolManager.instance.ReuseObject(coinPrefab, transform.position, transform.rotation, coinPrefab.transform.localScale);
+            }
+            break;
         }
 
     }
     else {
       switch(typeOfBot) {
           case "normal":
-          rightHit = true;
-          base.animator.SetBool("rightHit", rightHit);
-          break;
+            rightHit = true;
+            base.animator.SetBool("rightHit", rightHit);
+            PoolManager.instance.ReuseObject(coinPrefab, transform.position, transform.rotation, coinPrefab.transform.localScale);
+            break;
 
           case "head":
-          if (player.attackType == Player.AttackType.upSlash) {
-            rightHit = true;
-            base.animator.SetBool("rightHit", rightHit);
-          }
-          break;
+            if (player.attackType == Player.AttackType.upSlash) {
+              rightHit = true;
+              base.animator.SetBool("rightHit", rightHit);
+              PoolManager.instance.ReuseObject(coinPrefab, transform.position, transform.rotation, coinPrefab.transform.localScale);
+            }
+            break;
 
           case "body":
-          if (player.attackType == Player.AttackType.straightSlash) {
-            rightHit = true;
-            base.animator.SetBool("rightHit", rightHit);
-          }
-          break;
+            if (player.attackType == Player.AttackType.straightSlash) {
+              rightHit = true;
+              base.animator.SetBool("rightHit", rightHit);
+              PoolManager.instance.ReuseObject(coinPrefab, transform.position, transform.rotation, coinPrefab.transform.localScale);
+            }
+            break;
 
           case "legs":
-          if (player.attackType == Player.AttackType.downSlash) {
-            rightHit = true;
-            base.animator.SetBool("rightHit", rightHit);
-          }
-          break;
+            if (player.attackType == Player.AttackType.downSlash) {
+              rightHit = true;
+              base.animator.SetBool("rightHit", rightHit);
+              PoolManager.instance.ReuseObject(coinPrefab, transform.position, transform.rotation, coinPrefab.transform.localScale);
+            }
+            break;
         }
     }
   }
