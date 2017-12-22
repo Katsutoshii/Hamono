@@ -133,7 +133,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1486475674207076}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.884039, y: -4.5921006, z: -7.618035}
+  m_LocalPosition: {x: -90.81, y: -2.5232205, z: -2.0670693}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4413722616883630}
@@ -491,7 +491,7 @@ MonoBehaviour:
   invincibleFlashes: 12
   timeFreezeDuration: 0
   missStaminaPenalty: 0.1
-  dashStaminaCost: 0.002
+  dashStaminaCost: 0.001
   slashStaminaCost: 0.1
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
     type: 2}
@@ -535,7 +535,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -404258647
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300008, guid: a4dd9787ddc3f51479b334dfebe7f244, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
