@@ -28,7 +28,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4304202925896544
 Transform:
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1271315446157714}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.68, y: 3, z: -1}
+  m_LocalPosition: {x: 29.94, y: 1.6, z: -1}
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -70,8 +70,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 0.88965523, b: 0, a: 1}
-  m_Intensity: 3
-  m_Range: 20
+  m_Intensity: 9
+  m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 0.14
   frequency: 20
-  offset: 3
+  offset: 9
 --- !u!212 &212478170802356950
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -142,7 +142,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -129811065
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b2bb9b455d871416da289fa29d6b3e95, type: 3}
   m_Color: {r: 1, g: 1, b: 0, a: 1}
