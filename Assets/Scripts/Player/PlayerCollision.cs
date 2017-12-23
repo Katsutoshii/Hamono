@@ -20,6 +20,13 @@ public partial class Player : MonoBehaviour {
 					rb.velocity = new Vector2(rb.velocity.x, 9f);
 				}
 				break;
+
+			case "Hear":
+				Debug.Log("collision stay heart");
+				healthAmount += 1;
+				healthAmount = Mathf.Min(healthAmount, maxHealth);
+				healthBar.HandleHealth(healthAmount);
+				break;
 		}
 	}
 
@@ -38,13 +45,14 @@ public partial class Player : MonoBehaviour {
 				break;
 
 			case "Hear":
+				Debug.Log("collision with heart");
 				healthAmount += 1;
 				healthAmount = Mathf.Min(healthAmount, maxHealth);
 				healthBar.HandleHealth(healthAmount);
 				break;
 		}
 	}
-
+	
 	/// <summary>
 	/// OnTriggerEnter is called when the Collider other enters the trigger.
 	/// </summary>
