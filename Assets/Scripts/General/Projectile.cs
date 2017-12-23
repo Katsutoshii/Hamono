@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : PooledObject {
-	private SpriteRenderer spriteRenderer;
-	private Rigidbody2D rb;
-    private Animator animator;
+    public float speed;
+	protected SpriteRenderer spriteRenderer;
+	protected Rigidbody2D rb;
+    protected Animator animator;
 	
 	public override void OnObjectReuse() {
-        Debug.Log("making laser!");
+        Debug.Log("making projectile!");
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		spriteRenderer.color = Color.white;
 
@@ -23,15 +24,17 @@ public class Projectile : PooledObject {
     /// object (2D physics only).
     /// </summary>
     /// <param name="other">The other Collider2D involved in this collision.</param>
-    void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name != "RangedSamurai") {
+        Debug.Log("Trigger with" + other.name);
+        if (other.gameObject.layer != LayerMask.NameToLayer("Enemies")) {
             StartCoroutine(HitAnimation());
         }
     }
 
-    private const float HIT_ANIMATION_DURATION = 0.5f;
-    private IEnumerator HitAnimation() {
+    protected float HIT_ANIMATION_DURATION = 0.5f;
+    protected virtual IEnumerator HitAnimation() {
+        rb.velocity = Vector2.zero;
         animator.SetBool("collided", true);
         yield return new WaitForSeconds(HIT_ANIMATION_DURATION);
         gameObject.SetActive(false);

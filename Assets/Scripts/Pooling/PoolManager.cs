@@ -67,8 +67,10 @@ public class PoolManager : MonoBehaviour {
 			gameObject = objectInstance;
 			transform = gameObject.transform;
 			gameObject.SetActive(false);
+			//Debug.Log("Creating pooled object instance for " + gameObject.name);
 
 			if (gameObject.GetComponent<PooledObject>()) {
+				//Debug.Log("We have a pooled object component!");
 				hasPoolObjectComponent = true;
 				poolObjectScript = gameObject.GetComponent<PooledObject>();
 			}
