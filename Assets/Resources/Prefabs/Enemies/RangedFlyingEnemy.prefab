@@ -124,7 +124,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1305424510337256}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.45, y: -1.28, z: -15.23607}
+  m_LocalPosition: {x: -16.46, y: -1.16, z: -15.23607}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4773224082037108}
@@ -483,8 +483,9 @@ MonoBehaviour:
   attackDuration: 0
   attackRange: 0
   deathWaitTime: 1
-  randomChangetime: 2
+  bulletFrequency: 2
   jumping: 0
+  randomChangetime: 2
 --- !u!212 &212369043009581308
 SpriteRenderer:
   m_ObjectHideFlags: 1

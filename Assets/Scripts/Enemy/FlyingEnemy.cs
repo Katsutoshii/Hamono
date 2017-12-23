@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlyingEnemy : Enemy {
 
+    public float bulletFrequency;
 	public bool jumping = false;
     private GameObject bulletPrefab;
 
@@ -76,7 +77,7 @@ public class FlyingEnemy : Enemy {
 
     private IEnumerator ShootBullet() {
         while (true) {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(bulletFrequency);
             FlyerBullet bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity).GetComponent<FlyerBullet>();
         }
 
