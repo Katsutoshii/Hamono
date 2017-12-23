@@ -8,7 +8,7 @@ public class FlyingEnemy : Enemy {
 
     public override void Start() {
         base.Start();
-        // StartCoroutine(ChangeRandomWalkCycle());
+        StartCoroutine(ChangeRandomWalkCycle());
     }
     
     bool randomWalkToRight;
@@ -41,9 +41,8 @@ public class FlyingEnemy : Enemy {
                 prevNotice = true;
                 noticedStartTime = Time.time;
             }
-
             AutoPath();
-        } 
+        }
 
         else {
             // randomly walk around
@@ -65,7 +64,8 @@ public class FlyingEnemy : Enemy {
         if (Mathf.Abs(xDist) >= 0.1) 
             rb.velocity = new Vector2(xDist * KP, rb.velocity.y);
         
-        if (Mathf.Abs(yDist) <= 0.5)
+        // hovers at correct height
+        if (Mathf.Abs(yDist) <= 0.5 || player.transform.position.y >= transform.position.y + 0.5f)
             rb.velocity = new Vector2(rb.velocity.x, 3f);
 
         RotateBasedOnDirection();
