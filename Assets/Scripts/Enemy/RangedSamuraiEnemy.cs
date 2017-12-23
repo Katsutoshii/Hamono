@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedSamuriaenemy : SamuraiEnemy {
+public class RangedSamuraiEnemy : SamuraiEnemy {
     private GameObject laserPrefab;
     public override void Start() {
         Debug.Log("RangedSamuraiEnemy start");
@@ -12,6 +12,7 @@ public class RangedSamuriaenemy : SamuraiEnemy {
     }
 
     public override void LaserOut() {
+        Debug.Log("making laser!");
         PoolManager.instance.ReuseObject(laserPrefab, transform.position, transform.rotation, laserPrefab.transform.localScale);
     }
 

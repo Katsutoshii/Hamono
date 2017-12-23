@@ -8,7 +8,7 @@ public class Projectile : PooledObject {
     private Animator animator;
 	
 	public override void OnObjectReuse() {
-
+        Debug.Log("making laser!");
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		spriteRenderer.color = Color.white;
 
@@ -18,15 +18,16 @@ public class Projectile : PooledObject {
 		
 	}
 
-	/// <summary>
-    /// Sent when an incoming collider makes contact with this object's
-    /// collider (2D physics only).
+    /// <summary>
+    /// Sent when another object enters a trigger collider attached to this
+    /// object (2D physics only).
     /// </summary>
-    /// <param name="other">The Collision2D data associated with this collision.</param>
-    void OnCollisionEnter2D(Collision2D other)
+    /// <param name="other">The other Collider2D involved in this collision.</param>
+    void OnTriggerEnter2D(Collider2D other)
     {
-        Collider2D collider = other.collider;
-
+        if (other.name != "RangedSamurai") {
+            StartCoroutine(HitAnimation());
+        }
     }
 
     private const float HIT_ANIMATION_DURATION = 0.5f;
