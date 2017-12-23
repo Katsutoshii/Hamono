@@ -26,7 +26,6 @@ public class Projectile : PooledObject {
     /// <param name="other">The other Collider2D involved in this collision.</param>
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Trigger with" + other.name);
         if (other.gameObject.layer != LayerMask.NameToLayer("Enemies")) {
             StartCoroutine(HitAnimation());
         }

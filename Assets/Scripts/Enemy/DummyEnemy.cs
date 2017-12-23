@@ -23,8 +23,6 @@ public class DummyEnemy : Enemy {
   public override void Damage(float damageAmount, float knockback, Collider2D source) {
     base.state = State.damaged;
 
-    base.damagedStartTime = Time.time;
-
     HandleAttack(source);
   }
   
@@ -97,18 +95,6 @@ public class DummyEnemy : Enemy {
         }
     }
   }
-
-  public override void Damaged() {
-    gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
-		if (Time.time - base.damagedStartTime > 0.5f) {
-      leftHit = false;
-      rightHit = false;
-			spriteRenderer.color = Color.white;
-      gameObject.layer = LayerMask.NameToLayer("Dummies");
-
-			state = State.walking;
-		}
-	}
 
   public override void UpdateAnimatorVariables() {
     base.UpdateAnimatorVariables();

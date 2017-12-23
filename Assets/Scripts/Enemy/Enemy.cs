@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour {
   protected GameObject heartPrefab;
   protected GameObject healthBarPrefab;
   protected GameObject sparkPrefab;
+  protected HealthBar healthBar;
   public State state;
   protected Animator animator;
   public AudioSource audioSource;
@@ -94,7 +95,7 @@ public class Enemy : MonoBehaviour {
   }
 
   public virtual void GetHealthBar() {
-    healthBarPrefab = transform.GetChild(2).gameObject;
+    healthBarPrefab = transform.Find("EnemyHealthBar").gameObject;
     healthBarPrefab.GetComponent<Canvas>().enabled = false;
   }
 
@@ -109,26 +110,6 @@ public class Enemy : MonoBehaviour {
       // give time for the animation to run
       state = State.walking;
   }
-
-  protected float damagedStartTime;
-  public float stunTime = 0.5f;
-	public virtual void Damaged() {
-    if (healthAmount == 0) {
-      StartCoroutine(Death());	
-      return;
-    }
-
-    if (!healthBarPrefab.GetComponent<Canvas>().enabled) healthBarPrefab.GetComponent<Canvas>().enabled = true;
-    gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
-		
-		if (Time.time - damagedStartTime > 0.5f) {
-      rb.velocity = Vector2.zero;
-			spriteRenderer.color = Color.white;
-      hurtBox.enabled = true;
-      gameObject.layer = LayerMask.NameToLayer("Enemies");
-      StartCoroutine(Stun(stunTime));
-		}
-	}
 
   public virtual void UpdateAnimatorVariables() {
     animator.SetFloat("speed", rb.velocity.magnitude);
@@ -173,7 +154,6 @@ public class Enemy : MonoBehaviour {
   // attacks player
   public float attackDuration;
   protected virtual IEnumerator Attack() { 
-    Debug.Log("Attakcing!");
     if (player.transform.position.x > transform.position.x)
 				transform.localScale = new Vector3(-size, size, 1);
     else 
@@ -221,16 +201,13 @@ public class Enemy : MonoBehaviour {
   public virtual void Damage(float damageAmount, float knockback, Collider2D source) {
 
 		if (state == State.damaged || state == State.dead) return;
-
-    damagedStartTime = Time.time;
-    hurtBox.enabled = false;
-    
     
 		if (damageAmount > 0) {
+      Debug.Log("Turning red!");
       spriteRenderer.color = Color.red;
-      state = State.damaged;
     }
     else state = State.blocking;
+    StartCoroutine(Damaged());
 
     // spawn sparks
     for (int i = 0; i < 4; i++)
@@ -244,45 +221,61 @@ public class Enemy : MonoBehaviour {
     if ( healthAmount < 0) healthAmount = 0;
 	}
 
-  public float deathWaitTime;
+  private float damageTime = 0.5f;
+  private float stunTime = 0.25f;
+  public virtual IEnumerator Damaged() {
+    hurtBox.enabled = false;
+    
+    // damaged
+    if (!healthBarPrefab.GetComponent<Canvas>().enabled) healthBarPrefab.GetComponent<Canvas>().enabled = true;
+    gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
+    
+    yield return new WaitForSeconds(damageTime);
+
+    // stunned
+    spriteRenderer.color = Color.white;
+    hurtBox.enabled = true;
+    gameObject.layer = LayerMask.NameToLayer("Enemies");
+    
+    if (healthAmount == 0) {
+      state = State.dead;
+    }
+
+    rb.velocity = Vector2.zero;
+    stunned = true;
+    yield return new WaitForSeconds(stunTime);
+
+    stunned = false;
+    if (state != State.dead) state = State.walking;
+
+    yield return null;
+  }
+
   public virtual void UpdateHealthBar() {
     Image bar = transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
     bar.fillAmount = healthAmount / maxHealthAmount;
-    //Debug.Log("cellphone: " + bar.fillAmount);
     if (bar.fillAmount <= .4)
       bar.color = new Color(1, 0, 0, 1);
     else if (bar.fillAmount <= .7)
       bar.color = new Color(1, 0.39f, 0, 1);
   }
 
-  protected virtual IEnumerator Stun(float stunTime) {
-    rb.velocity = Vector2.zero;
-    stunned = true;
-    yield return new WaitForSeconds(stunTime);
-    stunned = false;
-    state = State.walking;
-    yield return null;
-  }
 
-  protected virtual IEnumerator Death() {
+  public void StartDying() {
     stunned = true;
+    
+    state = State.dead;
     gameObject.layer = LayerMask.NameToLayer("Debris");
     rb.velocity = Vector2.zero;
     hurtBox.enabled = false;
-
-		state = State.damaged;
-    spriteRenderer.color = Color.red;
-		yield return new WaitForSeconds(0.3f);
-
-		state = State.dead;
+  }
+  public void Kill() {
     spriteRenderer.color = Color.white;
-    yield return new WaitForSeconds(deathWaitTime);
 
     // deletes the game object
     for (int i = 0; i < 4; i++)
       PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
     Destroy(gameObject);
-    yield return null;
   }
 
   protected virtual void HandleState() {
@@ -291,24 +284,12 @@ public class Enemy : MonoBehaviour {
         Idle();
         break;
 
-      case State.damaged:
-        Damaged();
-        break;
-
-      case State.blocking:
-        Damaged();
-        break;
-
       case State.walking:
         Walk();
         break;
       
       case State.noticed:
         Noticed();
-        break;
-      
-      case State.dead:
-        Death();
         break;
     }
 

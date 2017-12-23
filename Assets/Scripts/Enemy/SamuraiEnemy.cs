@@ -35,8 +35,6 @@ public class SamuraiEnemy : Enemy {
     protected override void Walk() {
         if (stunned) return;
 
-        spriteRenderer.color = Color.white;
-
         if (lockOnPlayer) {
             // follow the player
             if (!prevNotice) {
