@@ -54,12 +54,12 @@ public class SamuraiEnemy : Enemy {
             RandomWalk();
         }
     }
-    public void LaserOut() {
+    public virtual void LaserOut() {
         hurtBox.offset = new Vector2(-1f, 0);
         hurtBox.size = Vector2.one;
     }
 
-    public void LaserIn() {
+    public virtual void LaserIn() {
         hurtBox.offset = Vector2.zero;
         hurtBox.size = Vector2.zero;
     }

@@ -14,6 +14,7 @@ public class GameInitializer : MonoBehaviour {
 	private GameObject potPiecePrefab;
 	private GameObject heartPrefab;
 	private GameObject sparkPrefab;
+	private GameObject samuraiLaserPrefab;
 
 	// Use this for initialization
 	void Start () {	
@@ -29,11 +30,13 @@ public class GameInitializer : MonoBehaviour {
     	heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
 		potPiecePrefab = Resources.Load<GameObject>("Prefabs/Environment/PotPiece");
 		sparkPrefab = Resources.Load<GameObject>("Prefabs/FX/Spark");
+		samuraiLaserPrefab = Resources.Load<GameObject>("Prefabs/Enemies/SamuraiLaser");
 
 
 		PoolManager.instance.CreatePool(coinPrefab, 20);
 		PoolManager.instance.CreatePool(potPiecePrefab, 20);
 		PoolManager.instance.CreatePool(heartPrefab, 3);
 		PoolManager.instance.CreatePool(sparkPrefab, 12);
+		PoolManager.instance.CreatePool(samuraiLaserPrefab, 4);
 	}
 }
