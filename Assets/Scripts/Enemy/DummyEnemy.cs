@@ -18,8 +18,6 @@ public class DummyEnemy : Enemy {
     this.UpdateAnimatorVariables();
   }
 
-  public override void GetHealthBar() {}
-
   public override void Damage(float damageAmount, float knockback, Collider2D source) {
     base.state = State.damaged;
 
@@ -94,6 +92,13 @@ public class DummyEnemy : Enemy {
             break;
         }
     }
+    StartCoroutine(ResetHit());
+  }
+
+  private IEnumerator ResetHit() {
+      yield return new WaitForSeconds(0.2f);
+      rightHit = false;
+      leftHit = false;
   }
 
   public override void UpdateAnimatorVariables() {
@@ -101,11 +106,6 @@ public class DummyEnemy : Enemy {
     animator.SetBool("leftHit", leftHit);
     animator.SetBool("rightHit", rightHit);
   }
-
-  // overriding functions to suppress errors
-  public override void StaticHealthBar() {}
-
-  public override void UpdateHealthBar() {}
 
   public override void CheckForPlayerProximity() {}
 }

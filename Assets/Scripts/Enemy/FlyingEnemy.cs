@@ -41,7 +41,6 @@ public class FlyingEnemy : Enemy {
 
         else {
             // randomly walk around
-            healthBarPrefab.GetComponent<Canvas>().enabled = false;
             RandomWalk();
         }
     }

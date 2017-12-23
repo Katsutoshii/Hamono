@@ -11,9 +11,8 @@ public class Enemy : MonoBehaviour {
   protected SpriteRenderer spriteRenderer;
   protected GameObject coinPrefab;
   protected GameObject heartPrefab;
-  protected GameObject healthBarPrefab;
   protected GameObject sparkPrefab;
-  protected HealthBar healthBar;
+  protected GameObject healthBar;
   public State state;
   protected Animator animator;
   public AudioSource audioSource;
@@ -65,6 +64,12 @@ public class Enemy : MonoBehaviour {
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     spriteRenderer.color = Color.white;
 
+    try {    
+      healthBar = transform.Find("EnemyHealthBar").gameObject;
+    }
+    catch { }
+
+
     maxHealthAmount = healthAmount;
     
     player = FindObjectOfType<Player>();
@@ -72,8 +77,6 @@ public class Enemy : MonoBehaviour {
     coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
     heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
     sparkPrefab = Resources.Load<GameObject>("Prefabs/FX/Spark");
-
-    GetHealthBar();
 
     lockOnPlayer = false;
     state = State.walking;
@@ -83,8 +86,6 @@ public class Enemy : MonoBehaviour {
 
   public virtual void Update() {
 
-    StaticHealthBar();
-
     UpdateHealthBar();
 
     CheckForPlayerProximity();
@@ -92,11 +93,6 @@ public class Enemy : MonoBehaviour {
     HandleState();
 
     UpdateAnimatorVariables();
-  }
-
-  public virtual void GetHealthBar() {
-    healthBarPrefab = transform.Find("EnemyHealthBar").gameObject;
-    healthBarPrefab.GetComponent<Canvas>().enabled = false;
   }
 
   protected float noticedStartTime;
@@ -132,10 +128,6 @@ public class Enemy : MonoBehaviour {
       else
         transform.localScale = new Vector3(-size, size, 1);
     }
-  }
-
-  public virtual void StaticHealthBar() {
-    transform.GetChild(2).transform.localScale = new Vector3(transform.localScale.x, 1, 1);
   }
 
   // checks to see if it's close enough to player
@@ -227,7 +219,7 @@ public class Enemy : MonoBehaviour {
     hurtBox.enabled = false;
     
     // damaged
-    if (!healthBarPrefab.GetComponent<Canvas>().enabled) healthBarPrefab.GetComponent<Canvas>().enabled = true;
+    if (!healthBar.activeInHierarchy) healthBar.SetActive(true);
     gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
     
     yield return new WaitForSeconds(damageTime);
@@ -252,17 +244,20 @@ public class Enemy : MonoBehaviour {
   }
 
   public virtual void UpdateHealthBar() {
-    Image bar = transform.GetChild(2).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
+    Image bar = healthBar.transform.Find("HealthBar/Bar").GetComponent<Image>();
+
     bar.fillAmount = healthAmount / maxHealthAmount;
     if (bar.fillAmount <= .4)
       bar.color = new Color(1, 0, 0, 1);
     else if (bar.fillAmount <= .7)
       bar.color = new Color(1, 0.39f, 0, 1);
+    healthBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);;
   }
 
 
   public void StartDying() {
     stunned = true;
+    healthBar.SetActive(false);
     
     state = State.dead;
     gameObject.layer = LayerMask.NameToLayer("Debris");
