@@ -11,7 +11,7 @@ public class JumpingEnemy : Enemy {
     bool randomWalkToRight;
     public float randomChangetime;
     private IEnumerator ChangeRandomWalkCycle() {
-        while( true) {
+        while (true) {
             randomWalkToRight = Random.Range(0, 1f) >= 0.5f;
             yield return new WaitForSeconds(randomChangetime);
         }

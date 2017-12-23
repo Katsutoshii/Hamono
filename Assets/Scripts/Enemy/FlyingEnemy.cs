@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class FlyingEnemy : Enemy {
 
-    public float bulletFrequency;
 	public bool jumping = false;
-    private GameObject bulletPrefab;
 
     public override void Start() {
         base.Start();
-        bulletPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/FlyerBullet");
         StartCoroutine(ChangeRandomWalkCycle());
-        StartCoroutine(ShootBullet());
     }   
 
     bool randomWalkToRight;
@@ -71,14 +67,6 @@ public class FlyingEnemy : Enemy {
             rb.velocity = new Vector2(rb.velocity.x, 3f);
 
         RotateBasedOnDirection();
-    }
-
-    private IEnumerator ShootBullet() {
-        while (true) {
-        yield return new WaitForSeconds(bulletFrequency);
-            FlyerBullet bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity).GetComponent<FlyerBullet>();
-        }
-
     }
 
 }

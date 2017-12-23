@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyDeathOnEndState : StateMachineBehaviour {
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		animator.gameObject.GetComponent<Enemy>().StartDying();
+        animator.gameObject.GetComponent<Enemy>().Kill();
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
