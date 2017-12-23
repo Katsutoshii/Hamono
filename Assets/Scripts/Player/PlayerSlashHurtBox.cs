@@ -12,11 +12,9 @@ public class PlayerSlashHurtBox : MonoBehaviour {
 		hurtBox = GetComponent<BoxCollider2D>();
 		hurtBox.enabled = false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (player.state == Player.State.slashing) {
-			hurtBox.enabled = true;
+
+	public void Slash(Player.AttackType slashType) {
+		hurtBox.enabled = true;
 			switch (player.attackType) {
 				case Player.AttackType.straightSlash:
 					hurtBox.offset = new Vector2(0.3f, 0);
@@ -28,12 +26,9 @@ public class PlayerSlashHurtBox : MonoBehaviour {
 					hurtBox.offset = new Vector2(0.3f, -0.2f);
 					break;	
 			}
-			
-		}
-		else {
-			hurtBox.offset = new Vector2(0, 0);
-			hurtBox.enabled = false;
-			
-		}
+	}
+	
+	public void StopSlash() {
+		hurtBox.enabled = false;
 	}
 }

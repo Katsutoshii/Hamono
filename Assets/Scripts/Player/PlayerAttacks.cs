@@ -187,4 +187,12 @@ public partial class Player : MonoBehaviour {
 				break;
 		}
 	}
+
+	public void Slash() {
+		slashHurtBox.Slash(attackType);
+	}
+
+	public void EndSlash() {
+		slashHurtBox.StopSlash();
+	}
 }

@@ -9,6 +9,5 @@ public class SamuraiLaser : Projectile {
         Vector2 direction = player.transform.position - transform.position;
         direction /= direction.magnitude;
         rb.velocity = direction * speed;
-        Debug.Log("rb vel = " + rb.velocity.x + ", " + rb.velocity.y);
 	}
 }

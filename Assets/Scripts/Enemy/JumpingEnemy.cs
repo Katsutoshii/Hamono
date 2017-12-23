@@ -26,7 +26,6 @@ public class JumpingEnemy : Enemy {
     }
 
     protected override void Walk() {
-        spriteRenderer.color = Color.white;
 
         if (lockOnPlayer) {
             // follow the player

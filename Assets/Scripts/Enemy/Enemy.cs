@@ -191,9 +191,9 @@ public class Enemy : MonoBehaviour {
   
   // when enemy is first damaged
   public virtual void Damage(float damageAmount, float knockback, Collider2D source) {
-
 		if (state == State.damaged || state == State.dead) return;
-    
+
+    state = State.damaged;
 		if (damageAmount > 0) {
       Debug.Log("Turning red!");
       spriteRenderer.color = Color.red;
@@ -208,6 +208,7 @@ public class Enemy : MonoBehaviour {
     if (knockback != 0)
       rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x, 
         transform.position.y - source.transform.position.y + 1.5f);
+    else rb.velocity = Vector2.zero;
 
     healthAmount -= damageAmount;
     if ( healthAmount < 0) healthAmount = 0;
@@ -224,14 +225,16 @@ public class Enemy : MonoBehaviour {
     
     yield return new WaitForSeconds(damageTime);
 
+    // check for death
+    if (healthAmount <= 0) {
+      state = State.dead;
+      yield return null;
+    }
+
     // stunned
     spriteRenderer.color = Color.white;
     hurtBox.enabled = true;
     gameObject.layer = LayerMask.NameToLayer("Enemies");
-    
-    if (healthAmount == 0) {
-      state = State.dead;
-    }
 
     rb.velocity = Vector2.zero;
     stunned = true;
@@ -265,6 +268,7 @@ public class Enemy : MonoBehaviour {
     hurtBox.enabled = false;
   }
   public void Kill() {
+    
     spriteRenderer.color = Color.white;
 
     // deletes the game object
