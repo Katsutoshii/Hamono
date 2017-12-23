@@ -295,8 +295,7 @@ public class Enemy : MonoBehaviour {
     if (stunned) rb.velocity = new Vector2(0, rb.velocity.y);
   }
 
-  protected virtual void Idle() {
-  }
+  protected virtual void Idle() {}
 
   // method to play sounds from animator
 	public void PlayOneShot(AudioClip sound) {
