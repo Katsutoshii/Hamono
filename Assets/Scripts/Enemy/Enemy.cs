@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour {
 
     try {    
       healthBar = transform.Find("EnemyHealthBar").gameObject;
+      healthBar.SetActive(false);
     }
     catch { }
 
