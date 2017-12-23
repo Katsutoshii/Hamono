@@ -110,9 +110,10 @@ public class DummyEnemy : Enemy {
 		}
 	}
 
-  protected virtual void UpdateAnimatorVariables() {
-    base.animator.SetBool("leftHit", leftHit);
-    base.animator.SetBool("rightHit", rightHit);
+  public override void UpdateAnimatorVariables() {
+    base.UpdateAnimatorVariables();
+    animator.SetBool("leftHit", leftHit);
+    animator.SetBool("rightHit", rightHit);
   }
 
   // overriding functions to suppress errors
