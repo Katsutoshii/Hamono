@@ -54,11 +54,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4181406685971762}
   - component: {fileID: 212369043009581308}
-  - component: {fileID: 114860871435183082}
   - component: {fileID: 50066518361083432}
   - component: {fileID: 61504995139047104}
   - component: {fileID: 82512170334182536}
   - component: {fileID: 95787216333778728}
+  - component: {fileID: 114474309449308450}
   m_Layer: 9
   m_Name: RangedFlyingEnemy
   m_TagString: Untagged
@@ -390,6 +390,36 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114474309449308450
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1305424510337256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccaa311e5d7664590ab6193875fe79af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  audioSource: {fileID: 0}
+  grounded: 0
+  walkingSpeed: 1
+  jumpingPower: 1
+  distanceNearPlayer: 7
+  healthAmount: 1
+  receiveSlashDamage: 1
+  receiveDashDamage: 1
+  receiveSlashKnockback: 2
+  receiveDashKnockback: 2
+  stunned: 0
+  KP: 1
+  size: 1
+  attackDuration: 0
+  attackRange: 0
+  jumping: 0
+  randomChangetime: 2
+  bulletFrequency: 1
 --- !u!114 &114498822780456572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,38 +484,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114860871435183082
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1305424510337256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ca9829752804a648aa0ebe973c88c8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  audioSource: {fileID: 0}
-  grounded: 0
-  walkingSpeed: 1
-  jumpingPower: 1
-  distanceNearPlayer: 7
-  healthAmount: 1
-  receiveSlashDamage: 1
-  receiveDashDamage: 1
-  receiveSlashKnockback: 2
-  receiveDashKnockback: 2
-  stunned: 0
-  KP: 1
-  size: 1
-  stunTime: 0.5
-  attackDuration: 0
-  attackRange: 0
-  deathWaitTime: 1
-  bulletFrequency: 2
-  jumping: 0
-  randomChangetime: 2
 --- !u!212 &212369043009581308
 SpriteRenderer:
   m_ObjectHideFlags: 1
