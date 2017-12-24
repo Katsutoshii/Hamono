@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4024821754240152}
   - component: {fileID: 108327445639880400}
-  m_Layer: 9
+  m_Layer: 21
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 50908127348537670}
   - component: {fileID: 114383671968261022}
   - component: {fileID: 82858104672751534}
-  m_Layer: 9
+  m_Layer: 21
   m_Name: SamuraiLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4710167172467074}
   - component: {fileID: 61086503800717748}
-  m_Layer: 9
+  m_Layer: 21
   m_Name: EnemyHurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
