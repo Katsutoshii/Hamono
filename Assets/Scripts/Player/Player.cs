@@ -43,7 +43,7 @@ public partial class Player : MonoBehaviour {
 
 	// player representation
 	private SpriteRenderer spriteRenderer;
-	private Rigidbody2D rb;
+	public Rigidbody2D rb;
 	private Animator animator;
 	private PlayerSlashHurtBox slashHurtBox;
 

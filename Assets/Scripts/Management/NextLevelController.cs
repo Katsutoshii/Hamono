@@ -7,20 +7,32 @@ using UnityEngine.UI;
 public class NextLevelController : MonoBehaviour {
 
   public int nextLevel;
-	private GameObject fadeToBlackEffect;
+	public GameObject fadeToBlackEffect;
 
 	void Start() {
-		fadeToBlackEffect = Resources.Load<GameObject>("Prefabs/Environment/FadeToBlack");
-	}
-
-  public void NextLevel() {
-		Instantiate(fadeToBlackEffect);
-		StartCoroutine(NextScene());
+		Debug.Log("next door!");
+		fadeToBlackEffect = GameObject.Find("/UI/FadeToBlack");
+		fadeToBlackEffect.SetActive(false);
 	}
 
 	private IEnumerator NextScene() {
-		yield return new WaitForSeconds(.5f);
+		
+		fadeToBlackEffect.SetActive(true);
+		yield return new WaitForSeconds(0.6f);
 		PlayerPrefs.SetInt("next_level", nextLevel);
-		SceneManager.LoadScene(3); // takes player to the loading scene
+		SceneManager.LoadSceneAsync(3); // takes player to the loading scene
+	}
+
+	/// <summary>
+	/// Sent each frame where another object is within a trigger collider
+	/// attached to this object (2D physics only).
+	/// </summary>
+	/// <param name="other">The other Collider2D involved in this collision.</param>
+	void OnTriggerStay2D(Collider2D other)
+	{
+			if (other.name == "Player") {
+				Player player = other.gameObject.GetComponent<Player>();
+			 	if (player.state == Player.State.idle && player.rb.velocity.x == 0 && player.rb.velocity.y == 0) StartCoroutine(NextScene());
+			}
 	}
 }

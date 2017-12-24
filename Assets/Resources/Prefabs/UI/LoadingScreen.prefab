@@ -73,7 +73,6 @@ GameObject:
   - component: {fileID: 223431833210955134}
   - component: {fileID: 114759452502086614}
   - component: {fileID: 114737101025017456}
-  - component: {fileID: 114147348236944902}
   - component: {fileID: 114173564134959206}
   m_Layer: 5
   m_Name: LoadingScreen
@@ -126,7 +125,7 @@ Animator:
   m_GameObject: {fileID: 1906721254263078}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c41817a3d609646a2a918941ff33997d, type: 2}
+  m_Controller: {fileID: 9100000, guid: f4dcc455e633dca449b86b5af20896fc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -194,29 +193,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Hamono
---- !u!114 &114147348236944902
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1822698093472288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88c570107cdd42509c8f116e1e7cf2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 6
-  maxLoops: 2
-  scene: 0
-  sprites:
-  - {fileID: 21300000, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300002, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300004, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300006, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300008, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300010, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300012, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300014, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
 --- !u!114 &114173564134959206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,17 +205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 16
-  maxLoops: 2
+  maxLoops: 1
   scene: 0
-  sprites:
-  - {fileID: 21300000, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300002, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300004, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300006, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300008, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300010, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300012, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300014, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
 --- !u!114 &114287551997640724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -447,9 +414,9 @@ RectTransform:
   m_Father: {fileID: 224893482554498942}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 15.39, y: 46.747776}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 46.75}
   m_SizeDelta: {x: 142.97, y: 142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224532672830632712
