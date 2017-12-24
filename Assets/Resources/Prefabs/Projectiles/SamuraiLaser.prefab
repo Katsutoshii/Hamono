@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 95330078515586874}
   - component: {fileID: 61315317087934546}
   - component: {fileID: 50908127348537670}
-  - component: {fileID: 114356437791205154}
+  - component: {fileID: 114383671968261022}
   - component: {fileID: 82858104672751534}
   m_Layer: 9
   m_Name: SamuraiLaser
@@ -308,7 +308,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114356437791205154
+--- !u!114 &114383671968261022
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1361296767679504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6385ce4338107c4387b67e272071ed6, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e61201ddb6ba47ebb25070ca08d75b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10

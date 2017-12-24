@@ -7,7 +7,7 @@ public class RangedSamuraiEnemy : SamuraiEnemy {
     public override void Start() {
         base.Start();
         
-        laserPrefab = Resources.Load<GameObject>("Prefabs/Enemies/SamuraiLaser");
+        laserPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/SamuraiLaser");
     }
 
     public override void LaserOut() {

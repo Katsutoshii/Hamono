@@ -196,7 +196,6 @@ public class Enemy : MonoBehaviour {
 
     state = State.damaged;
 		if (damageAmount > 0) {
-      Debug.Log("Turning red!");
       spriteRenderer.color = Color.red;
     }
     else state = State.blocking;
