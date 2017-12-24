@@ -258,7 +258,7 @@ public class Enemy : MonoBehaviour {
     healthBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);;
   }
 
-  public void Kill() {
+  public void Dying() {
     stunned = true;
     healthBar.SetActive(false);
     
@@ -266,6 +266,9 @@ public class Enemy : MonoBehaviour {
     gameObject.layer = LayerMask.NameToLayer("Debris");
     rb.velocity = Vector2.zero;
     hurtBox.enabled = false;
+  }
+
+  public void Kill() {
 
     spriteRenderer.color = Color.white;
 
