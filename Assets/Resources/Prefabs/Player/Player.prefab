@@ -133,7 +133,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1486475674207076}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.01, y: -2.5232205, z: -2.0670693}
+  m_LocalPosition: {x: -4.884039, y: -3.06, z: -7.618035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4413722616883630}
@@ -276,7 +276,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.22692741, y: 0}
+  m_Offset: {x: 0.1848187, y: -0.008150108}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -287,7 +287,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 0.44614515, y: 0.3}
+  m_Size: {x: 0.36192772, y: 0.20763235}
   m_EdgeRadius: 0
 --- !u!61 &61671867867945532
 BoxCollider2D:
@@ -474,7 +474,6 @@ MonoBehaviour:
   grounded: 1
   onEdge: 0
   invincible: 0
-  paused: 0
   targetA: {x: -4.2143736, y: 2.5172415}
   targetB: {x: -4.2143736, y: 2.5172415}
   staminaBar: {fileID: 0}
@@ -491,7 +490,7 @@ MonoBehaviour:
   invincibleFlashes: 12
   timeFreezeDuration: 0
   missStaminaPenalty: 0.1
-  dashStaminaCost: 0.01
+  dashStaminaCost: 0.008
   slashStaminaCost: 0.1
   afterimagePrefab: {fileID: 1521242237315836, guid: 6e11b17f2eeef034bb4cf769da8cba66,
     type: 2}
