@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FlickeringLight : MonoBehaviour {
-    private Light light;
+    private new Light light;
     public float amplitude;
     public float frequency;
     public float offset;

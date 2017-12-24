@@ -49,7 +49,7 @@ public class FlyingEnemy : Enemy {
         }
     }
 
-    protected virtual void AutoPath() {
+    protected override void AutoPath() {
 		float xDist = player.transform.position.x - transform.position.x;
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
