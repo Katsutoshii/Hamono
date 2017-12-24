@@ -6,23 +6,19 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour {
 
-  private Button resumeButton;
-  private Button quitButton;
-
-  private Player player;
-  private bool paused;
+  private Slider musicSlider;
+  private AudioSource musicAudio;
 
   /// <summary>
   /// This function is called when the object becomes enabled and active.
   /// </summary>
   void OnEnable() {
-    GameManager.paused = true;
-    resumeButton = GameObject.Find("Resume").GetComponent<Button>();
-    resumeButton.onClick.AddListener(Resume);
-    quitButton = GameObject.Find("Quit").GetComponent<Button>();
-    quitButton.onClick.AddListener(Quit);
 
-    player = GameObject.Find("Player").GetComponent<Player>();
+    musicSlider = GameObject.Find("MusicSlider").GetComponent<Slider>();
+    musicAudio = GameObject.Find("MusicPlayer").GetComponent<AudioSource>();
+    
+    // represents the current volume of the game
+    musicSlider.value = musicAudio.volume;
 
     Time.timeScale = 0.0f;
   }
