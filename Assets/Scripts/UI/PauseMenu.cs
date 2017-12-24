@@ -20,13 +20,6 @@ public class PauseMenu : MonoBehaviour {
     sfxSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
     musicAudio = GameObject.Find("MusicPlayer").GetComponent<AudioSource>();
     sfxAudio = (AudioSource[]) GameObject.FindObjectsOfType(typeof(AudioSource));
-
-
-    foreach (AudioSource source in sfxAudio) {
-      if (source.name != "MusicPlayer") {
-        Debug.Log("getting all audio sources: " + source.name);
-      }
-    }
     
     // represents the current volume of the game
     musicSlider.value = musicAudio.volume;
