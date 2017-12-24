@@ -11,7 +11,7 @@ public class JumpingEnemy : Enemy {
     bool randomWalkToRight;
     public float randomChangetime;
     private IEnumerator ChangeRandomWalkCycle() {
-        while (true) {
+        while( true) {
             randomWalkToRight = Random.Range(0, 1f) >= 0.5f;
             yield return new WaitForSeconds(randomChangetime);
         }
@@ -26,7 +26,6 @@ public class JumpingEnemy : Enemy {
     }
 
     protected override void Walk() {
-        spriteRenderer.color = Color.white;
 
         if (lockOnPlayer) {
             // follow the player

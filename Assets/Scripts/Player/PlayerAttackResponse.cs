@@ -41,7 +41,6 @@ public partial class Player : MonoBehaviour
     }
 
     private void Normal() {
-        Debug.Log("this is a normal response to attacking");
         StartCoroutine(FreezeTime());
         staminaBar.IncreaseStamina(generateStamina * 10f);
     }
@@ -56,7 +55,6 @@ public partial class Player : MonoBehaviour
 
     public float missStaminaPenalty;
     private void Missed() {
-        Debug.Log("the player missed");
         staminaBar.DecreaseStamina(missStaminaPenalty);
     }
 

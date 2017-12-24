@@ -45,13 +45,13 @@ public partial class Player : MonoBehaviour {
 	private SpriteRenderer spriteRenderer;
 	private Rigidbody2D rb;
 	private Animator animator;
+	private PlayerSlashHurtBox slashHurtBox;
 
 	// temporary state checkers
 	public bool autoPathing;
 	public bool grounded;
 	public bool onEdge;
 	public bool invincible;
-	public bool paused;
 
 	// directional targets
 	public Vector2 targetA; 	// start point of a slash
@@ -73,7 +73,6 @@ public partial class Player : MonoBehaviour {
 	public bool jumping = false;
 	
 	// ui/ux elements
-	private GameObject pauseMenuPrefab;
 	private AudioSource audioSource;
 	public float generateStamina;
 	
@@ -88,6 +87,7 @@ public partial class Player : MonoBehaviour {
 		audioSource = gameObject.GetComponent<AudioSource>();
 		animator = gameObject.GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
+		slashHurtBox = GetComponentInChildren<PlayerSlashHurtBox>();
 		
 		rb.isKinematic = false;
 
@@ -100,7 +100,6 @@ public partial class Player : MonoBehaviour {
 		staminaBar = FindObjectOfType<StaminaBar>();
 		healthBar = FindObjectOfType<HealthBar>();
 		coinCountText = GameObject.Find("CoinCount").GetComponent<Text>();
-		pauseMenuPrefab = Resources.Load<GameObject>("Prefabs/UI/PauseMenu");
 		
 		// create pools for attack effects
 		PoolManager.instance.CreatePool(dustCloudPrefab, 1);
@@ -112,9 +111,6 @@ public partial class Player : MonoBehaviour {
 	void Update() {
 		if (!(state == State.damaged || state == State.dead)) Controls();
 		if (!(state == State.dashing || state == State.slashing || invincible)) ResetLayer();
-
-		// handles the pause menu
-		if (Input.GetKeyDown("space") && !paused) PauseMenu();
 
 		// handles the current state
 		HandleState();
@@ -131,8 +127,10 @@ public partial class Player : MonoBehaviour {
 	public float autoPathStartTime;
 	// method to handle all control inputs inside main loop
 	private void Controls() {
+		if (state == State.talking || state == State.finishedTalking || GameManager.paused) return;
+
 		// for initiating action
-		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(1)) && state != State.talking && state != State.finishedTalking && !paused) {
+		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(1))) {
 
 			attackType = AttackType.none;
 			if (immediateAutoPathing || Input.GetMouseButton(1)) StartAutoPath();
@@ -180,7 +178,6 @@ public partial class Player : MonoBehaviour {
 	}
 
 	private void Damage(float damageAmount, float knockback, Collider2D source) {
-		Debug.Log("Damaged! invincible = " + invincible);
 		invincible = true;
 		damagedStartTime = Time.time;
 		attackResponse = AttackResponse.missed;
@@ -240,11 +237,6 @@ public partial class Player : MonoBehaviour {
 
 		Time.timeScale = 1;
 		SceneManager.LoadScene(0);
-	}
-
-	private void PauseMenu() {
-		GameObject pauseMenu = Instantiate(pauseMenuPrefab);
-		paused = true;
 	}
 
 	private void HandleState() {
