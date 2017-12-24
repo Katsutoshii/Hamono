@@ -13,20 +13,13 @@ public class LoadingScreen : MonoBehaviour {
   [SerializeField]
   private int scene;
   private Text loadingText;
-
-
-  public Sprite[] sprites;
-	private int spritePerFrame = 6;
-	private bool loop = true;
-	private bool destroyOnEnd = false;
-
-	private int index = 0;
 	private Image image;
-	private int frame = 0;
 
   void Start() {
+    Debug.Log("Starting load scene");
     loadingText = transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
     completedLoops = 0;
+
     scene = PlayerPrefs.GetInt("next_level");
   }
 
@@ -34,8 +27,7 @@ public class LoadingScreen : MonoBehaviour {
 		image = transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
 	}
 
-  void Update() {
-    StartCoroutine(LoadNewScene());
+  void FixedUpdate() {
 
     PlayerAnimation();
 
@@ -43,41 +35,17 @@ public class LoadingScreen : MonoBehaviour {
     
   }
 
+  private float x = 0;
   // animation for image.sprite
   private void PlayerAnimation() {
-    float xPosition = image.transform.position.x + .1f;
+    x += movementSpeed;
+    if (x  >= Screen.width) {
+      completedLoops++;
+      if (completedLoops >= maxLoops) SceneManager.LoadSceneAsync(scene);
 
-    if (image.transform.position.x - 30f > Screen.width) {
-      completedLoops = completedLoops + 1;
-      image.transform.position = new Vector2(-6f, image.transform.position.y);
+      x %= Screen.width;
     }
 
-    image.transform.position = new Vector2(image.transform.position.x + movementSpeed, image.transform.position.y);
-
-    if (!loop && index == sprites.Length) return;
-		frame ++;
-		if (frame < spritePerFrame) return;
-		image.sprite = sprites [index];
-		frame = 0;
-		index ++;
-		if (index >= sprites.Length) {
-			if (loop) index = 0;
-			if (destroyOnEnd) Destroy (gameObject);
-		}
-  }
-
-  // always screen to move over to the next screen
-  private bool isFinished() {
-    if (completedLoops > maxLoops)
-      return true;
-    return false;
-  }
-
-  // loads a new scene
-  IEnumerator LoadNewScene() {
-    while (!isFinished())
-      yield return new WaitForSeconds(3f);
-      SceneManager.LoadScene(scene);
-      yield return null;
+    image.transform.position = new Vector3(x, image.transform.position.y, image.transform.position.z);
   }
 }

@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -529,9 +530,9 @@ RectTransform:
   m_Father: {fileID: 1330138593}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 15.39, y: 46.747776}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 46.75}
   m_SizeDelta: {x: 142.97, y: 142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1334153363
@@ -544,7 +545,7 @@ Animator:
   m_GameObject: {fileID: 1334153361}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c41817a3d609646a2a918941ff33997d, type: 2}
+  m_Controller: {fileID: 9100000, guid: f4dcc455e633dca449b86b5af20896fc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -599,7 +600,6 @@ GameObject:
   - component: {fileID: 1445461734}
   - component: {fileID: 1445461733}
   - component: {fileID: 1445461732}
-  - component: {fileID: 1445461736}
   - component: {fileID: 1445461731}
   m_Layer: 5
   m_Name: LoadingScreen
@@ -622,16 +622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 16
   maxLoops: 2
-  loadingText: {fileID: 713382170}
-  sprites:
-  - {fileID: 21300000, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300002, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300004, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300006, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300008, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300010, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300012, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
-  - {fileID: 21300014, guid: 12f8e77072ec5ce4b9b0871c9d4ed9a1, type: 3}
+  scene: 0
 --- !u!114 &1445461732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,18 +704,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1445461736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114147348236944902, guid: 6ff4eb9d9af07410e9c9d117fe6be6a8,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1445461730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1675785045
 GameObject:
   m_ObjectHideFlags: 0
