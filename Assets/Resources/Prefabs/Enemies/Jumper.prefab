@@ -82,7 +82,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1485896014034384
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,8 +443,10 @@ MonoBehaviour:
   stunned: 0
   KP: 2
   size: 1
+  stunTime: 0.5
   attackDuration: 0
   attackRange: 0
+  deathWaitTime: 1
   randomChangetime: 2
 --- !u!114 &114051726353510062
 MonoBehaviour:

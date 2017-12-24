@@ -10,34 +10,34 @@ public class PauseMenu : MonoBehaviour {
   private Button quitButton;
 
   private Player player;
-  private bool paused;
 
-  /// <summary>
-  /// This function is called when the object becomes enabled and active.
-  /// </summary>
-  void OnEnable() {
-    GameManager.paused = true;
+  void Start() {
     resumeButton = GameObject.Find("Resume").GetComponent<Button>();
     resumeButton.onClick.AddListener(Resume);
     quitButton = GameObject.Find("Quit").GetComponent<Button>();
     quitButton.onClick.AddListener(Quit);
 
     player = GameObject.Find("Player").GetComponent<Player>();
-
     Time.timeScale = 0.0f;
+
   }
+
+  void Update() {}
 
   // event handler for the resume button
   public void Resume() {
+    Destroy(gameObject);
+    player.paused = false;
     Time.timeScale = 1.0f;
-    gameObject.SetActive(false);
-    GameManager.paused = false;
   }
 
   // event handler for the quit button
   public void Quit() {
+    Destroy(gameObject);
+    player.paused = false;
+    Time.timeScale = 1.0f;
     // goes back to the title screen
-    SceneManager.LoadSceneAsync(0);
-    Resume();    
+    SceneManager.LoadScene(0);
   }
+
 }

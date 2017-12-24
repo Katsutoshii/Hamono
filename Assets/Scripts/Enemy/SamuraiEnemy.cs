@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SamuraiEnemy : Enemy {
     public override void Start() {
+        Debug.Log("SamuraiEnemy start");
         base.Start();
         
         hurtBox.offset = Vector2.zero;

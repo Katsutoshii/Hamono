@@ -9,6 +9,7 @@ public class Projectile : PooledObject {
     protected Animator animator;
 	
 	public override void OnObjectReuse() {
+        Debug.Log("making projectile!");
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		spriteRenderer.color = Color.white;
 

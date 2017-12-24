@@ -32,6 +32,7 @@ public class FlyingEnemy : Enemy {
     }
 
     protected override void Walk() {
+        spriteRenderer.color = Color.white;
 
         if (lockOnPlayer) {
             // follow the player

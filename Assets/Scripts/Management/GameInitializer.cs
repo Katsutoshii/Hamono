@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameInitializer : MonoBehaviour {
 	public float timeScale;
-	public static bool paused;
     
 	public Texture2D cursorTexture;
 	public CursorMode cursorMode;
@@ -16,8 +15,6 @@ public class GameManager : MonoBehaviour {
 	private GameObject heartPrefab;
 	private GameObject sparkPrefab;
 	private GameObject samuraiLaserPrefab;
-	
-	private GameObject pauseMenuPrefab;
 
 	// Use this for initialization
 	void Start () {	
@@ -42,5 +39,4 @@ public class GameManager : MonoBehaviour {
 		PoolManager.instance.CreatePool(sparkPrefab, 12);
 		PoolManager.instance.CreatePool(samuraiLaserPrefab, 4);
 	}
-	
 }
