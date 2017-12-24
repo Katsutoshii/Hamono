@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour {
 
   private Slider musicSlider;
+  private Slider sfxSlider;
   private AudioSource musicAudio;
+  private AudioSource[] sfxAudio;
 
   /// <summary>
   /// This function is called when the object becomes enabled and active.
@@ -15,12 +17,30 @@ public class PauseMenu : MonoBehaviour {
   void OnEnable() {
 
     musicSlider = GameObject.Find("MusicSlider").GetComponent<Slider>();
+    sfxSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
     musicAudio = GameObject.Find("MusicPlayer").GetComponent<AudioSource>();
+    sfxAudio = (AudioSource[]) GameObject.FindObjectsOfType(typeof(AudioSource));
+
+
+    foreach (AudioSource source in sfxAudio) {
+      if (source.name != "MusicPlayer") {
+        Debug.Log("getting all audio sources: " + source.name);
+      }
+    }
     
     // represents the current volume of the game
     musicSlider.value = musicAudio.volume;
+    sfxSlider.value = sfxAudio[0].volume;
 
     Time.timeScale = 0.0f;
+  }
+
+  public void ChangeSFXVolume() {
+    foreach (AudioSource source in sfxAudio) {
+      if (source.name != "MusicPlayer") {
+        source.volume = sfxSlider.value;
+      }
+    }
   }
 
   // event handler for the resume button
