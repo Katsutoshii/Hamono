@@ -44,11 +44,11 @@ public partial class Player : MonoBehaviour
 
     private void Normal() {
         StartCoroutine(FreezeTime());
-        staminaBar.IncreaseStamina(generateStamina * 10f);
+        staminaBar.IncreaseStamina(generateStamina * 40f);
     }
 
     private void Strong() {
-        staminaBar.IncreaseStamina(generateStamina * 20f);
+        staminaBar.IncreaseStamina(generateStamina * 40f);
     }
 
     private void Blocked() {

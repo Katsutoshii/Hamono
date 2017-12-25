@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212222404382656316}
   - component: {fileID: 61576697571188582}
   - component: {fileID: 114432993478176562}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: NextLevelDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1580430618684710}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 148.88, y: -0.24, z: -54.112053}
+  m_LocalPosition: {x: -4.64, y: 9.78, z: -54.112053}
   m_LocalScale: {x: 2.0399594, y: 2.0399594, z: 2.0399594}
   m_Children: []
   m_Father: {fileID: 0}
