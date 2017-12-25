@@ -7,6 +7,7 @@ public class FlyerBullet : Projectile {
 
   void Start() {
     OnObjectReuse();
+    HIT_ANIMATION_DURATION = 0.1f;
   }
 
   public override void OnObjectReuse() {
