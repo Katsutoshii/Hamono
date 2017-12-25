@@ -44,15 +44,12 @@ public class StaminaBar : MonoBehaviour
     private void HandleColor() {
       if (this.bar.fillAmount <= .3) {
         // turn red
-        Debug.Log("turning red");
         this.bar.color = new Color(1, 0, 0, 1);
       } else if (this.bar.fillAmount <= .7) {
         // turn orange
-        Debug.Log("turning orange");
         this.bar.color = new Color(1, 0.39f, 0, 1);
       } else {
         // turn green
-        Debug.Log("turning green");
         this.bar.color = new Color(1, 1, 1, 1);
       }
     }
