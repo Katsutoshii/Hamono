@@ -6,25 +6,30 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour {
 
-  private Button resumeButton;
-  private Button quitButton;
-
-  private Player player;
-  private bool paused;
+  private Slider musicSlider;
+  private Slider sfxSlider;
+  private AudioSource musicAudio;
+  private AudioSource[] sfxAudio;
 
   /// <summary>
   /// This function is called when the object becomes enabled and active.
   /// </summary>
   void OnEnable() {
-    GameManager.paused = true;
-    resumeButton = GameObject.Find("Resume").GetComponent<Button>();
-    resumeButton.onClick.AddListener(Resume);
-    quitButton = GameObject.Find("Quit").GetComponent<Button>();
-    quitButton.onClick.AddListener(Quit);
 
-    player = GameObject.Find("Player").GetComponent<Player>();
+    musicSlider = GameObject.Find("MusicSlider").GetComponent<Slider>();
+    sfxSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
+    musicAudio = GameObject.Find("MusicPlayer").GetComponent<AudioSource>();
+    musicAudio.ignoreListenerVolume = true;
+    
+    // represents the current volume of the game
+    musicSlider.value = musicAudio.volume;
+    sfxSlider.value = AudioListener.volume;
 
     Time.timeScale = 0.0f;
+  }
+
+  public void ChangeSFXVolume() {
+    AudioListener.volume = sfxSlider.value;
   }
 
   // event handler for the resume button
