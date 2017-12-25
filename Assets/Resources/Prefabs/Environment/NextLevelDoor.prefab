@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1580430618684710}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 148.96, y: -0.26, z: 0}
+  m_LocalPosition: {x: 148.88, y: -0.24, z: -54.112053}
   m_LocalScale: {x: 2.0399594, y: 2.0399594, z: 2.0399594}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevel: 1
+  fadeToBlackEffect: {fileID: 1060656377033904, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+    type: 2}
 --- !u!212 &212222404382656316
 SpriteRenderer:
   m_ObjectHideFlags: 1
