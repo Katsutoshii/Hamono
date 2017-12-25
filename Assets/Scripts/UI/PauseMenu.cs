@@ -19,21 +19,17 @@ public class PauseMenu : MonoBehaviour {
     musicSlider = GameObject.Find("MusicSlider").GetComponent<Slider>();
     sfxSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
     musicAudio = GameObject.Find("MusicPlayer").GetComponent<AudioSource>();
-    sfxAudio = (AudioSource[]) GameObject.FindObjectsOfType(typeof(AudioSource));
+    musicAudio.ignoreListenerVolume = true;
     
     // represents the current volume of the game
     musicSlider.value = musicAudio.volume;
-    sfxSlider.value = sfxAudio[0].volume;
+    sfxSlider.value = AudioListener.volume;
 
     Time.timeScale = 0.0f;
   }
 
   public void ChangeSFXVolume() {
-    foreach (AudioSource source in sfxAudio) {
-      if (source.name != "MusicPlayer") {
-        source.volume = sfxSlider.value;
-      }
-    }
+    AudioListener.volume = sfxSlider.value;
   }
 
   // event handler for the resume button
