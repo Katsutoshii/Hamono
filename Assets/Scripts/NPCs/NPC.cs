@@ -36,7 +36,7 @@ public class NPC : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (dialogStarted && Input.GetMouseButtonDown(0)) StartDialogue(); // continue dialog if we click anwhere
+		if (dialogStarted && Input.GetMouseButtonDown(0)) StartDialogue(); // continue dialog if we click anywhere
 	}
 
 	/// <summary>
