@@ -40,10 +40,25 @@ public class StaminaBar : MonoBehaviour
       return this.exhausted;
     }
 
+    // visual representation of stamina
+    private void HandleColor() {
+      if (this.bar.fillAmount <= .3) {
+        // turn red
+        this.bar.color = new Color(1, 0, 0, 1);
+      } else if (this.bar.fillAmount <= .7) {
+        // turn orange
+        this.bar.color = new Color(1, 0.39f, 0, 1);
+      } else {
+        // turn green
+        this.bar.color = new Color(1, 1, 1, 1);
+      }
+    }
+
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
     void Update() {
         fillAmount = bar.fillAmount;
+        HandleColor();
     }
 }

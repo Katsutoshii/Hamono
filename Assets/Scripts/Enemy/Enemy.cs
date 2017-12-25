@@ -46,7 +46,6 @@ public class Enemy : MonoBehaviour {
   }
   public bool stunned;
 
-
   // constants
 	protected float SLASHING_X_DIST = 0.5f;
 	protected float SLASHING_Y_DIST = 0.5f;

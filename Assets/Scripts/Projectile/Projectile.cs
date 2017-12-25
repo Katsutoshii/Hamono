@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : PooledObject {
     public float speed;
+    protected float HIT_ANIMATION_DURATION = 0.5f;
 	protected SpriteRenderer spriteRenderer;
 	protected Rigidbody2D rb;
     protected Animator animator;
@@ -30,7 +31,6 @@ public class Projectile : PooledObject {
         }
     }
 
-    protected float HIT_ANIMATION_DURATION = 0.5f;
     protected virtual IEnumerator HitAnimation() {
         rb.velocity = Vector2.zero;
         animator.SetBool("collided", true);
