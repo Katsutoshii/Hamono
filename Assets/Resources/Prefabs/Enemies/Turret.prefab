@@ -545,7 +545,7 @@ MonoBehaviour:
   walkingSpeed: 0
   jumpingPower: 0
   distanceNearPlayer: 5
-  healthAmount: 1
+  healthAmount: 2
   receiveSlashDamage: 1
   receiveDashDamage: 1
   receiveSlashKnockback: 0
