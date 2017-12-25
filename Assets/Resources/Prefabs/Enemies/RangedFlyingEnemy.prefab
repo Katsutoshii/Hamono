@@ -417,6 +417,7 @@ MonoBehaviour:
   size: 1
   attackDuration: 0
   attackRange: 0
+  stunTime: 0.25
   jumping: 0
   randomChangetime: 2
   bulletFrequency: 1

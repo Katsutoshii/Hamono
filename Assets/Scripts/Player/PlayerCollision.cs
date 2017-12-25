@@ -18,6 +18,7 @@ public partial class Player : MonoBehaviour {
 				if (!invincible) {
 					Damage(0.5f, 0f, other.collider);
 					rb.velocity = new Vector2(rb.velocity.x, 9f);
+					
 				}
 				break;
 
@@ -40,6 +41,7 @@ public partial class Player : MonoBehaviour {
 		switch (other.collider.name.Substring(0, 4)) {
 			case "Coin":
 				coinCount++;
+				PlayerPrefs.SetInt("coin_coint", coinCount);
 				coinCountText.text = "" + coinCount;
 				break;
 

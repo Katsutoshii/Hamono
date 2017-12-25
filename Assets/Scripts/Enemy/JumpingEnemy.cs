@@ -19,15 +19,6 @@ public class JumpingEnemy : Enemy {
         }
     }
     
-
-    protected override void RandomWalk() {
-        if (grounded && !jumping) {
-            if (randomWalkToRight) StartCoroutine(Jump(jumpingPower, walkingSpeed));
-            else StartCoroutine(Jump(jumpingPower, walkingSpeed));
-        }
-    }
-
-    
 	private const float JUMP_DELAY = 0.5f;
 	private bool jumping = false;
 	protected IEnumerator Jump(float jumpPower, float xVelocity) {

@@ -98,6 +98,7 @@ public partial class Player : MonoBehaviour {
 		staminaBar = FindObjectOfType<StaminaBar>();
 		healthBar = FindObjectOfType<HealthBar>();
 		coinCountText = GameObject.Find("CoinCount").GetComponent<Text>();
+		coinCount = PlayerPrefs.GetInt("coin_count");
 		
 		// create pools for attack effects
 		PoolManager.instance.CreatePool(dustCloudPrefab, 1);

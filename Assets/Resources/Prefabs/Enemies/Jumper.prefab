@@ -167,7 +167,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1483470518808174}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.22596121, y: -4.4521008, z: -7.618035}
+  m_LocalPosition: {x: 22.34, y: -4.4521008, z: -7.618035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4884861050180686}
@@ -222,7 +222,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.017677784, y: -0.029333174}
+  m_Offset: {x: -0.017677784, y: -0.062662184}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.33}
@@ -233,7 +233,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.69962215, y: 1.0092218}
+  m_Size: {x: 0.69962215, y: 0.9425638}
   m_EdgeRadius: 0
 --- !u!61 &61398354956249030
 BoxCollider2D:
@@ -297,7 +297,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029333591, y: 0.21016043}
+  m_Offset: {x: 0.0111848265, y: 0.17050064}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -308,7 +308,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.89772415, y: 1.8726336}
+  m_Size: {x: 0.7162496, y: 1.793314}
   m_EdgeRadius: 0
 --- !u!82 &82803282367702584
 AudioSource:
@@ -445,6 +445,7 @@ MonoBehaviour:
   size: 1
   attackDuration: 0
   attackRange: 0
+  stunTime: 0.25
   randomChangetime: 2
 --- !u!114 &114051726353510062
 MonoBehaviour:

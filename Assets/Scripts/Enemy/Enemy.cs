@@ -236,7 +236,7 @@ public class Enemy : MonoBehaviour {
 	}
 
   private float damageTime = 0.5f;
-  private float stunTime = 0.25f;
+  public float stunTime;
   public virtual IEnumerator Damaged() {
     hurtBox.enabled = false;
     

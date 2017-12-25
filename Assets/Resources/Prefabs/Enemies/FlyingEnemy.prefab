@@ -388,12 +388,11 @@ MonoBehaviour:
   stunned: 0
   KP: 1
   size: 1
-  stunTime: 0.5
   attackDuration: 0
   attackRange: 0
-  deathWaitTime: 1
-  randomChangetime: 2
+  stunTime: 0.25
   jumping: 0
+  randomChangetime: 2
 --- !u!114 &114611038117621718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -517,7 +516,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 848748911
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: 56e48f92f594d2a4083f06a1c6754888, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
