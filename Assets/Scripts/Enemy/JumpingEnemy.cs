@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable CS0219  
+
 public class JumpingEnemy : Enemy {
     public override void Start() {
         base.Start();
@@ -18,29 +20,10 @@ public class JumpingEnemy : Enemy {
     }
     
 
-    private void RandomWalk() {
+    protected override void RandomWalk() {
         if (grounded && !jumping) {
             if (randomWalkToRight) StartCoroutine(Jump(jumpingPower, walkingSpeed));
             else StartCoroutine(Jump(jumpingPower, walkingSpeed));
-        }
-    }
-
-    protected override void Walk() {
-
-        if (lockOnPlayer) {
-            // follow the player
-            if (!prevNotice) {
-                state = State.noticed;
-                prevNotice = true;
-                noticedStartTime = Time.time;
-            }
-
-            AutoPath();
-        } 
-
-        else {
-            // randomly walk around
-            RandomWalk();
         }
     }
 

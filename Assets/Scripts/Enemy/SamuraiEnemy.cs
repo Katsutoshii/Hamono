@@ -22,34 +22,14 @@ public class SamuraiEnemy : Enemy {
     }
     
 
-    private void RandomWalk() {
+    protected override void RandomWalk() {
         if (grounded) {
             if (randomWalkToRight) rb.velocity = Vector2.right * walkingSpeed;
             else rb.velocity = Vector2.left * walkingSpeed;
             RotateBasedOnDirection();
-
         }
     }
 
-    protected override void Walk() {
-        if (stunned) return;
-
-        if (lockOnPlayer) {
-            // follow the player
-            if (!prevNotice) {
-                state = State.noticed;
-                prevNotice = true;
-                noticedStartTime = Time.time;
-            }
-
-            AutoPath();
-        } 
-
-        else {
-            // randomly walk around
-            RandomWalk();
-        }
-    }
     public virtual void LaserOut() {
         hurtBox.offset = new Vector2(-1f, 0);
         hurtBox.size = Vector2.one;

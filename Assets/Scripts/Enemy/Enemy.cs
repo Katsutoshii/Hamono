@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+#pragma warning disable CS0219  
+
 /// Base class for enemies
 public class Enemy : MonoBehaviour {
 
@@ -96,7 +98,25 @@ public class Enemy : MonoBehaviour {
   }
 
   protected float noticedStartTime;
-  protected virtual void Walk() {}
+  protected virtual void Walk() {
+    if (lockOnPlayer) {
+      // follow the player
+      if (!prevNotice) {
+          state = State.noticed;
+          prevNotice = true;
+          noticedStartTime = Time.time;
+      }
+
+      AutoPath();
+    } 
+
+    else {
+      // randomly walk around
+      RandomWalk();
+    }
+  }
+  
+  protected virtual void RandomWalk() {}
 
   // enemy notices player
   protected void Noticed() {
@@ -113,7 +133,7 @@ public class Enemy : MonoBehaviour {
     animator.SetBool("idle", state == State.idle);
     animator.SetBool("walking", state == State.walking);
     animator.SetBool("dead", state == State.dead);
-    animator.SetBool("noticed", state == State.noticed);
+    animator.SetBool("noticed", lockOnPlayer);
     animator.SetBool("grounded", grounded);
     animator.SetBool("blocking", state == State.blocking);
     animator.SetBool("attacking", state == State.attacking);
@@ -133,6 +153,7 @@ public class Enemy : MonoBehaviour {
   // checks to see if it's close enough to player
   public virtual void CheckForPlayerProximity() {
     float distance = Vector2.Distance(transform.position, player.transform.position);
+
     if (distance <= distanceNearPlayer) {
       lockOnPlayer = true;
     }
@@ -178,6 +199,7 @@ public class Enemy : MonoBehaviour {
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
     if (Mathf.Abs(xDist) < attackRange) {
+      Debug.Log("Attacking");
       StartCoroutine(Attack());
 			return;
 		}
@@ -266,7 +288,7 @@ public class Enemy : MonoBehaviour {
     hurtBox.enabled = false;
   }
 
-  public void Kill() {
+  public virtual void Kill() {
 
     spriteRenderer.color = Color.white;
 

@@ -38,7 +38,6 @@ public class SlashIndicator : MonoBehaviour {
 		// when drawing, scale the UI indicator based on the start position and the current mouse position
 		if (drawing) {
 			Vector3 clickWorldPoint = ScreenToWorldPoint(Input.mousePosition);
-			Vector3 targetAScreenPoint = Camera.main.WorldToScreenPoint(targetA);
 
 			float distance = Vector2.Distance(targetA, clickWorldPoint);
 

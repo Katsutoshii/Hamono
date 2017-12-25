@@ -58,7 +58,6 @@ public partial class Player : MonoBehaviour {
 	public Vector2 targetB;		// end point of a slash
 
 	// visible player information
-	private SlashIndicator slashIndicator;
 	public StaminaBar staminaBar;
 	private HealthBar healthBar;
 	public float maxHealth;
@@ -96,7 +95,6 @@ public partial class Player : MonoBehaviour {
 		attackType = AttackType.none;
 
 		// get UI objects
-		slashIndicator = FindObjectOfType<SlashIndicator>();
 		staminaBar = FindObjectOfType<StaminaBar>();
 		healthBar = FindObjectOfType<HealthBar>();
 		coinCountText = GameObject.Find("CoinCount").GetComponent<Text>();

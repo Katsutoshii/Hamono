@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable CS0219  
+
 public partial class Player : MonoBehaviour
 {
     private float startComboTime;

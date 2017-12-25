@@ -21,31 +21,13 @@ public class FlyingEnemy : Enemy {
     }
     
 
-    private void RandomWalk() {
+    protected override void RandomWalk() {
         if (!jumping) {
             if (randomWalkToRight) {
                 rb.velocity = new Vector2(walkingSpeed, (rb.velocity.y < -3f) ? 2f : rb.velocity.y);
             } else {
                 rb.velocity = new Vector2(-walkingSpeed, (rb.velocity.y < -3f) ? 2f : rb.velocity.y);
             }
-        }
-    }
-
-    protected override void Walk() {
-
-        if (lockOnPlayer) {
-            // follow the player
-            if (!prevNotice) {
-                state = State.noticed;
-                prevNotice = true;
-                noticedStartTime = Time.time;
-            }
-            AutoPath();
-        }
-
-        else {
-            // randomly walk around
-            RandomWalk();
         }
     }
 
