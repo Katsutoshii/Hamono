@@ -11,8 +11,7 @@ public class NextLevelController : MonoBehaviour {
 
 	void Start() {
 		Debug.Log("next door!");
-		fadeToBlackEffect = GameObject.Find("/UI/FadeToBlack");
-		fadeToBlackEffect.SetActive(false);
+		fadeToBlackEffect = Resources.Load<GameObject>("Prefabs/Environment/FadeToBlack");
 	}
 
 	private IEnumerator NextScene() {
