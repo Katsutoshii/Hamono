@@ -6,51 +6,46 @@ using UnityEngine.UI;
 
 public class Story : MonoBehaviour {
 
-	public GameObject speechText;
+
+  private TextTyper storyText;
 	 [TextArea(3,10)]
  	public string text;
 	
-	public HashSet<GameObject> allSpeech;
-	
 	public bool completedSpeech;
+  private bool startedSpeech;
 	private bool dialogStarted;
 
 	// Use this for initialization
 	void Start () {
 
 		completedSpeech = false;
-		allSpeech = new HashSet<GameObject>();
+    startedSpeech = false;
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown(0)) StartDialogue(); // continue dialog if we click anywhere
+		if (Input.GetMouseButtonDown(0)) StartStory(); // continue dialog if we click anywhere
 	}
 
-	private void StartDialogue() {
+	private void StartStory() {
 		dialogStarted = true;
-		Debug.Log("starting dialogue");
+		Debug.Log("starting story");
 		// triggers a speech bubble
-		TextTyper NPCTextChild;
 
-		NPCTextChild = GameObject.Find("StoryText").GetComponent<TextTyper>();
+		storyText = GameObject.Find("StoryText").GetComponent<TextTyper>();
 		Debug.Log("completed speech?: " + completedSpeech);
 
 		if (completedSpeech) {
 			// ending conversation
-			foreach (GameObject item in allSpeech)
-				Destroy(item);
 			dialogStarted = false;
 			completedSpeech = false;
-		} else {
-			// starting converstation
-			// allSpeech.Add(npcText);
-			NPCTextChild.TypeText(text);
+      startedSpeech = false;
+		} else if (!startedSpeech && !completedSpeech) {
+			storyText.TypeText(text);
 			completedSpeech = false;
-    }
-		// } else if (!completedSpeech && player.state == Player.State.talking) {
-		// 	NPCTextChild.Skip();
-		// }
+      startedSpeech = true;
+    } else if (startedSpeech && !completedSpeech)
+      storyText.Skip();
 	}
 }
