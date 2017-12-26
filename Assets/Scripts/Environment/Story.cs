@@ -128,6 +128,5 @@ public class Story : MonoBehaviour {
       yield return new WaitForSeconds(.1f);
     }
     SceneManager.LoadSceneAsync(0); // takes player to title screen
-    yield return null;
   }
 }
