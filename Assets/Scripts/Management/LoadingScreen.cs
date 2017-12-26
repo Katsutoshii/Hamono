@@ -17,14 +17,14 @@ public class LoadingScreen : MonoBehaviour {
 
   void Start() {
     Debug.Log("Starting load scene");
-    loadingText = transform.GetChild(1).transform.GetChild(1).GetComponent<Text>();
+    loadingText = GameObject.Find("Loading").GetComponent<Text>();
     completedLoops = 0;
 
     scene = PlayerPrefs.GetInt("next_level");
   }
 
 	void Awake() {
-		image = transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>();
+		image = GameObject.Find("Image").GetComponent<Image>();
 	}
 
   void FixedUpdate() {
