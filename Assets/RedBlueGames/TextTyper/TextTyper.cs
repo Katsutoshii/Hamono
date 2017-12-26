@@ -42,10 +42,14 @@
 
         public AudioSource completedCharacterAudio;
         public NPC NPC;
+        public Story story;
 
         private void AlertCompletion() {
             Debug.Log("The message completed");
-            NPC.completedSpeech = true;
+            if (NPC != null)
+                NPC.completedSpeech = true;
+            if (story != null)
+                story.completedSpeech = true;
         }
 
         private void CharacterDone(string character) {
