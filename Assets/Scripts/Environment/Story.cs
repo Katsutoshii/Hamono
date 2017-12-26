@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RedBlueGames.Tools.TextTyper;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Story : MonoBehaviour {
 
@@ -74,6 +75,9 @@ public class Story : MonoBehaviour {
       scriptIndex++;
     } else if (startedSpeech && !completedSpeech)
       storyText.Skip();
+      else if (scriptIndex >= text.Length) {
+        SceneManager.LoadSceneAsync(0); // takes player to title screen
+      }
 	}
 
    IEnumerator NextImage() {
