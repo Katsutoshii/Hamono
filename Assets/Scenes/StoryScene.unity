@@ -166,7 +166,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 5bda435891eba37409a461a52108f00a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -230,22 +230,22 @@ Prefab:
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 824
+      value: -0.30034
       objectReference: {fileID: 0}
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 283
+      value: 37.97999
       objectReference: {fileID: 0}
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 1648
+      value: -57.301
       objectReference: {fileID: 0}
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 566
+      value: -76
       objectReference: {fileID: 0}
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
@@ -255,17 +255,17 @@ Prefab:
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.27210245
       objectReference: {fileID: 0}
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}

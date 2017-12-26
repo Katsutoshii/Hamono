@@ -66,18 +66,23 @@ public class Story : MonoBehaviour {
 		storyText = GameObject.Find("StoryText").GetComponent<TextTyper>();
 		Debug.Log("completed speech?: " + completedSpeech);
 
-		if (!startedSpeech && !completedSpeech) {
-			storyText.TypeText(text[scriptIndex]);
-      NextImage();
-			completedSpeech = false;
+		if (!startedSpeech && !completedSpeech && scriptIndex < text.Length) {
+      storyText.TypeText(text[scriptIndex]);
+      StartCoroutine(NextImage());
+      completedSpeech = false;
       startedSpeech = true;
-      if (scriptIndex < text.Length) scriptIndex++;
+      scriptIndex++;
     } else if (startedSpeech && !completedSpeech)
       storyText.Skip();
 	}
 
-  private void NextImage() {
-    storyImage.sprite = sprites[imageIndex];
-    if (imageIndex < sprites.Length) imageIndex++;
+   IEnumerator NextImage() {
+    if (imageIndex < sprites.Length) {
+      fadeToBlackEffect.SetActive(true);
+      yield return new WaitForSeconds(1f);
+      storyImage.sprite = sprites[imageIndex];
+      imageIndex++;
+      fadeToBlackEffect.SetActive(false);
+    }
   }
 }
