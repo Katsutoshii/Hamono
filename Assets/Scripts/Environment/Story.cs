@@ -13,6 +13,8 @@ public class Story : MonoBehaviour {
  	public string[] text;
   public Sprite[] sprites;
 
+  public float readingTime;
+
   private int scriptIndex;
   private int imageIndex;
 
@@ -54,7 +56,7 @@ public class Story : MonoBehaviour {
 	}
 
   IEnumerator AutoNextScript() {
-    yield return new WaitForSeconds(2f);
+    yield return new WaitForSeconds(readingTime);
     if (!clicked)
       StartStory();
     else
@@ -99,8 +101,8 @@ public class Story : MonoBehaviour {
       yield return new WaitForSeconds(1f);
       storyImage.sprite = sprites[imageIndex];
       imageIndex++;
+      // reverses animation
       anim.SetFloat("direction", -1f);
-      anim.Play("FadeInAnimation", -1, float.NegativeInfinity);
       yield return new WaitForSeconds(1f);
       fadeToBlackEffect.SetActive(false);
 
