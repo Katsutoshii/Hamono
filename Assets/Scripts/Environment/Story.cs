@@ -53,6 +53,8 @@ public class Story : MonoBehaviour {
     storyImage = GameObject.Find("StoryImage").GetComponent<Image>();
     anim = fadeToBlackEffect.transform.GetChild(0).GetComponent<Animator>();
     musicAudio = GameObject.Find("MusicPlayer").GetComponent<AudioSource>();
+		storyText = GameObject.Find("StoryText").GetComponent<TextTyper>();
+
     StartStory();
 	}
 	
@@ -87,8 +89,6 @@ public class Story : MonoBehaviour {
 	private void StartStory() {
 		dialogStarted = true;
 		Debug.Log("starting story");
-
-		storyText = GameObject.Find("StoryText").GetComponent<TextTyper>();
 		Debug.Log("completed speech?: " + completedSpeech);
 
 		if (!startedSpeech && !completedSpeech && scriptIndex < text.Length) {
