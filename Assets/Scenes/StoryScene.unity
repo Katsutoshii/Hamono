@@ -843,6 +843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40868536fcc3c2c458788a1cd1298e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PrintDelaySetting: 0.06
   printCompleted:
     m_PersistentCalls:
       m_Calls: []
