@@ -67,6 +67,7 @@ public class Story : MonoBehaviour {
     }
 	}
 
+  // if player doesn't click, the next script will automatically start
   IEnumerator AutoNextScript() {
     yield return new WaitForSeconds(readingTime);
     if (!clicked)
@@ -75,6 +76,7 @@ public class Story : MonoBehaviour {
       yield return null;
   }
 
+  // clears the current script
   private void ClearScript() {
     if (completedSpeech) {
       // clearing script
@@ -86,6 +88,7 @@ public class Story : MonoBehaviour {
     }
   }
 
+  // moves to the next script
 	private void StartStory() {
 		dialogStarted = true;
 		Debug.Log("starting story");
@@ -109,6 +112,7 @@ public class Story : MonoBehaviour {
       }
 	}
 
+  // moves to the next image
    IEnumerator NextImage() {
     if (imageIndex < sprites.Length) {
       fadeToBlackEffect.SetActive(true);
@@ -122,6 +126,7 @@ public class Story : MonoBehaviour {
     }
   }
 
+  // starts entire screen fade and moves to next scene
   IEnumerator MoveToNextScene() {
     while (musicAudio.volume > 0) {
       musicAudio.volume = musicAudio.volume - .01f;
