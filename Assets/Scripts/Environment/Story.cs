@@ -27,8 +27,11 @@ public class Story : MonoBehaviour {
 
   private Animator anim;
   private bool fade;
+  private float animationWait = 1f;
 
   private GameObject fadeToBlackEffect;
+  private GameObject fadeToBlackEffectScreen;
+  private AudioSource musicAudio;
 
   /// <summary>
   /// Awake is called when the script instance is being loaded.
@@ -36,7 +39,9 @@ public class Story : MonoBehaviour {
   void Awake()
   {
       fadeToBlackEffect = GameObject.Find("FadeToBlack");
+      fadeToBlackEffectScreen = GameObject.Find("FadeToBlack_Screen");
       fadeToBlackEffect.SetActive(false);
+      fadeToBlackEffectScreen.SetActive(false);
   }
 
 	// Use this for initialization
@@ -47,12 +52,17 @@ public class Story : MonoBehaviour {
 
     storyImage = GameObject.Find("StoryImage").GetComponent<Image>();
     anim = fadeToBlackEffect.transform.GetChild(0).GetComponent<Animator>();
+    musicAudio = GameObject.Find("MusicPlayer").GetComponent<AudioSource>();
+    StartStory();
 	}
 	
 	// Update is called once per frame
 	void Update () {
     ClearScript();
-		if (Input.GetMouseButtonDown(0)) StartStory(); // continue dialog if we click anywhere
+		if (Input.GetMouseButtonDown(0)) {
+      clicked = true;
+      StartStory(); // continue dialog if we click anywhere
+    }
 	}
 
   IEnumerator AutoNextScript() {
@@ -77,7 +87,6 @@ public class Story : MonoBehaviour {
 	private void StartStory() {
 		dialogStarted = true;
 		Debug.Log("starting story");
-    clicked = true;
 
 		storyText = GameObject.Find("StoryText").GetComponent<TextTyper>();
 		Debug.Log("completed speech?: " + completedSpeech);
@@ -88,24 +97,37 @@ public class Story : MonoBehaviour {
       completedSpeech = false;
       startedSpeech = true;
       scriptIndex++;
-    } else if (startedSpeech && !completedSpeech)
+      animationWait = 1f;
+    } else if (startedSpeech && !completedSpeech) {
+      animationWait = 0f;
       storyText.Skip();
-      else if (scriptIndex >= text.Length) {
-        SceneManager.LoadSceneAsync(0); // takes player to title screen
+    } else if (scriptIndex >= text.Length) {
+        anim = fadeToBlackEffectScreen.transform.GetChild(0).GetComponent<Animator>();
+        anim.speed = .1f;
+        fadeToBlackEffectScreen.SetActive(true);
+        StartCoroutine(MoveToNextScene());
       }
 	}
 
    IEnumerator NextImage() {
     if (imageIndex < sprites.Length) {
       fadeToBlackEffect.SetActive(true);
-      yield return new WaitForSeconds(1f);
+      yield return new WaitForSeconds(animationWait);
       storyImage.sprite = sprites[imageIndex];
       imageIndex++;
       // reverses animation
       anim.SetFloat("direction", -1f);
-      yield return new WaitForSeconds(1f);
+      yield return new WaitForSeconds(animationWait);
       fadeToBlackEffect.SetActive(false);
-
     }
+  }
+
+  IEnumerator MoveToNextScene() {
+    while (musicAudio.volume > 0) {
+      musicAudio.volume = musicAudio.volume - .01f;
+      yield return new WaitForSeconds(.1f);
+    }
+    SceneManager.LoadSceneAsync(0); // takes player to title screen
+    yield return null;
   }
 }
