@@ -5,19 +5,13 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Image
+  m_Name: RangedSamuraiTitle
   serializedVersion: 5
-  m_AnimatorParameters:
-  - m_Name: direction
-    m_Type: 1
-    m_DefaultFloat: 1
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+  m_AnimatorParameters: []
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
-    m_StateMachine: {fileID: 1107762332323701606}
+    m_StateMachine: {fileID: 1107042641611229500}
     m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
@@ -27,13 +21,13 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1102 &1102485544657677670
+--- !u!1102 &1102044785287446078
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: FadeInAnimation
+  m_Name: RangedSamuraiAttackTitle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -42,17 +36,17 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 1
+  m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 992708054b2bc4e4cb3ea6ee226c1d46, type: 2}
+  m_Motion: {fileID: 7400000, guid: c6b69fb0036624718bc5a6096a71b677, type: 2}
   m_Tag: 
-  m_SpeedParameter: direction
+  m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1107 &1107762332323701606
+--- !u!1107 &1107042641611229500
 AnimatorStateMachine:
   serializedVersion: 5
   m_ObjectHideFlags: 1
@@ -61,8 +55,8 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 1102485544657677670}
-    m_Position: {x: 396, y: 108, z: 0}
+    m_State: {fileID: 1102044785287446078}
+    m_Position: {x: 240, y: 24, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -72,4 +66,4 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102485544657677670}
+  m_DefaultState: {fileID: 1102044785287446078}

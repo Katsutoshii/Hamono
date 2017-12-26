@@ -15,7 +15,7 @@
         /// <summary>
         /// The print delay setting. Could make this an option some day, for fast readers.
         /// </summary>
-        private const float PrintDelaySetting = 0.02f;
+        public float PrintDelaySetting = 0.02f;
 
         // Characters that are considered punctuation in this language. TextTyper pauses on these characters
         // a bit longer by default. Could be a setting sometime since this doesn't localize.
@@ -42,10 +42,14 @@
 
         public AudioSource completedCharacterAudio;
         public NPC NPC;
+        public Story story;
 
         private void AlertCompletion() {
             Debug.Log("The message completed");
-            NPC.completedSpeech = true;
+            if (NPC != null)
+                NPC.completedSpeech = true;
+            if (story != null)
+                story.completedSpeech = true;
         }
 
         private void CharacterDone(string character) {
