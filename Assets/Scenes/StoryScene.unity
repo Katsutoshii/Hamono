@@ -167,7 +167,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a4dd9787ddc3f51479b334dfebe7f244, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5bda435891eba37409a461a52108f00a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -188,7 +188,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 65357094}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ece19385c811e496e96ac7266259f173, type: 2}
   m_CullingMode: 0
@@ -312,7 +312,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1060656377033904, guid: 0680985e72e9d4c109b65d1c07c8ccd6, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0680985e72e9d4c109b65d1c07c8ccd6, type: 2}
@@ -578,7 +578,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 472e160970b6a524694c8e7ae3845cef, type: 3}
   - {fileID: 21300000, guid: cd5d8a88b2cf9d04693f98063118f4c5, type: 3}
   completedSpeech: 0
-  fadeToBlackEffect: {fileID: 2021459660}
 --- !u!1 &1497307328
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,11 +826,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!1 &2021459660 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1060656377033904, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
-    type: 2}
-  m_PrefabInternal: {fileID: 180496817}
 --- !u!224 &2021459661 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,

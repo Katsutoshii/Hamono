@@ -23,7 +23,19 @@ public class Story : MonoBehaviour {
 	private bool dialogStarted;
   private bool clicked;
 
-  public GameObject fadeToBlackEffect;
+  private Animator anim;
+  private bool fade;
+
+  private GameObject fadeToBlackEffect;
+
+  /// <summary>
+  /// Awake is called when the script instance is being loaded.
+  /// </summary>
+  void Awake()
+  {
+      fadeToBlackEffect = GameObject.Find("FadeToBlack");
+      fadeToBlackEffect.SetActive(false);
+  }
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +44,7 @@ public class Story : MonoBehaviour {
     startedSpeech = false;
 
     storyImage = GameObject.Find("StoryImage").GetComponent<Image>();
+    anim = fadeToBlackEffect.transform.GetChild(0).GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -86,7 +99,11 @@ public class Story : MonoBehaviour {
       yield return new WaitForSeconds(1f);
       storyImage.sprite = sprites[imageIndex];
       imageIndex++;
+      anim.SetFloat("direction", -1f);
+      anim.Play("FadeInAnimation", -1, float.NegativeInfinity);
+      yield return new WaitForSeconds(1f);
       fadeToBlackEffect.SetActive(false);
+
     }
   }
 }
