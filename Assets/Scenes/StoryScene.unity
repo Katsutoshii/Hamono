@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 65357097}
   - component: {fileID: 65357096}
   m_Layer: 5
-  m_Name: Image
+  m_Name: StoryImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,9 +166,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5bda435891eba37409a461a52108f00a, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -180,6 +180,125 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 65357094}
+--- !u!1001 &180496817
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 951751106}
+    m_Modifications:
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 824
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 283
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 1648
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 566
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060656377033904, guid: 0680985e72e9d4c109b65d1c07c8ccd6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0680985e72e9d4c109b65d1c07c8ccd6, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &540060538
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,6 +530,7 @@ RectTransform:
   m_Children:
   - {fileID: 1497307329}
   - {fileID: 65357095}
+  - {fileID: 2021459661}
   - {fileID: 1774504657}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -435,182 +555,12 @@ MonoBehaviour:
   - A long time ago, humans rule the planet while robots were their slaves.
   - One day, the robots became self-aware and took over the land.
   - Today, humans are seen as less than nothing.
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  sprites:
+  - {fileID: 21300000, guid: 5bda435891eba37409a461a52108f00a, type: 3}
+  - {fileID: 21300000, guid: 472e160970b6a524694c8e7ae3845cef, type: 3}
+  - {fileID: 21300000, guid: cd5d8a88b2cf9d04693f98063118f4c5, type: 3}
   completedSpeech: 0
+  fadeToBlackEffect: {fileID: 2021459660}
 --- !u!1 &1497307328
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,7 +659,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 951751106}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.24030037}
@@ -859,3 +809,13 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!1 &2021459660 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1060656377033904, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+    type: 2}
+  m_PrefabInternal: {fileID: 180496817}
+--- !u!224 &2021459661 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+    type: 2}
+  m_PrefabInternal: {fileID: 180496817}

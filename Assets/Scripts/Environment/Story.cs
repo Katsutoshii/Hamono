@@ -10,19 +10,27 @@ public class Story : MonoBehaviour {
   private TextTyper storyText;
 	 [TextArea(3,10)]
  	public string[] text;
+  public Sprite[] sprites;
+
   private int scriptIndex;
+  private int imageIndex;
+
+  private Image storyImage;
 	
 	public bool completedSpeech;
   private bool startedSpeech;
 	private bool dialogStarted;
   private bool clicked;
 
+  public GameObject fadeToBlackEffect;
+
 	// Use this for initialization
 	void Start () {
 
 		completedSpeech = false;
     startedSpeech = false;
-		
+
+    storyImage = GameObject.Find("StoryImage").GetComponent<Image>();
 	}
 	
 	// Update is called once per frame
@@ -54,17 +62,22 @@ public class Story : MonoBehaviour {
 		dialogStarted = true;
 		Debug.Log("starting story");
     clicked = true;
-		// triggers a speech bubble
 
 		storyText = GameObject.Find("StoryText").GetComponent<TextTyper>();
 		Debug.Log("completed speech?: " + completedSpeech);
 
 		if (!startedSpeech && !completedSpeech) {
 			storyText.TypeText(text[scriptIndex]);
+      NextImage();
 			completedSpeech = false;
       startedSpeech = true;
-      scriptIndex++;
+      if (scriptIndex < text.Length) scriptIndex++;
     } else if (startedSpeech && !completedSpeech)
       storyText.Skip();
 	}
+
+  private void NextImage() {
+    storyImage.sprite = sprites[imageIndex];
+    if (imageIndex < sprites.Length) imageIndex++;
+  }
 }
