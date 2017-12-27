@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour {
 
+  private Player player;
   private Slider musicSlider;
   private Slider sfxSlider;
   private AudioSource musicAudio;
@@ -16,6 +17,7 @@ public class PauseMenu : MonoBehaviour {
   /// </summary>
   void OnEnable() {
 
+    player = GameObject.Find("Player").GetComponent<Player>();
     musicSlider = GameObject.Find("MusicSlider").GetComponent<Slider>();
     sfxSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
     musicAudio = GameObject.Find("MusicPlayer").GetComponent<AudioSource>();
@@ -34,6 +36,7 @@ public class PauseMenu : MonoBehaviour {
 
   // event handler for the resume button
   public void Resume() {
+    StartCoroutine(player.AfterEventWait());
     Time.timeScale = 1.0f;
     gameObject.SetActive(false);
     GameManager.paused = false;

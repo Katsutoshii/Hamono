@@ -15,9 +15,13 @@ public class ClickIndicator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(1)) && !(player.state == Player.State.talking || player.state == Player.State.finishedTalking)) {
+		if (DrawIndicator()) {
 			StartCoroutine(SpinAndFade());
 		}
+	}
+
+	private bool DrawIndicator() {
+		return (Input.GetMouseButtonDown(0) || Input.GetMouseButton(1)) && !(player.state == Player.State.talking || player.state == Player.State.finishedTalking);
 	}
 
 	IEnumerator SpinAndFade() {
