@@ -110,6 +110,7 @@ public partial class Player : MonoBehaviour {
 	void Update() {
 		if (!(state == State.damaged || state == State.dead)) Controls();
 		if (!(state == State.dashing || state == State.slashing || invincible)) ResetLayer();
+		if (state == State.finishedTalking) StartCoroutine(AfterEventWait());
 
 		// handles the current state
 		HandleState();
@@ -236,6 +237,13 @@ public partial class Player : MonoBehaviour {
 
 		Time.timeScale = 1;
 		SceneManager.LoadScene(0);
+	}
+
+	public IEnumerator AfterEventWait() {
+		// stops player from moving right after pause menu is disabled
+		state = State.finishedTalking;
+		yield return new WaitForSeconds(.2f);
+		state = State.idle;
 	}
 
 	private void HandleState() {

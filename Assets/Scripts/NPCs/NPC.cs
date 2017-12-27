@@ -4,93 +4,60 @@ using UnityEngine;
 using RedBlueGames.Tools.TextTyper;
 using UnityEngine.UI;
 
-public class NPC : MonoBehaviour {
-
-	private Player player;
+public class NPC : TextScript {
 	
-	private GameObject npcText;
-	public GameObject speechText;
-	 [TextArea(3,10)]
- 	public string text;
-	
-	public HashSet<GameObject> allSpeech;
-	
-	public bool completedSpeech;
-	private bool dialogStarted;
+	private GameObject NPCMessage;
 
 	public Texture2D cursorTexture;
 	public Texture2D speechBubble;
 	public CursorMode cursorMode;
 	public Vector2 hotSpot;
 
-	// Use this for initialization
-	void Start () {
-		
-		player = GameObject.Find("Player").GetComponent<Player>();
-
-		completedSpeech = false;
-		allSpeech = new HashSet<GameObject>();
-		
-		npcText = null;
+	void Awake() {
+		NPCMessage = transform.GetChild(0).gameObject;
+		NPCMessage.SetActive(false);
+		textOutput = NPCMessage.transform.GetChild(1).GetComponent<TextTyper>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (dialogStarted && Input.GetMouseButtonDown(0)) StartDialogue(); // continue dialog if we click anywhere
+		if (dialogStarted && Input.GetMouseButtonDown(0)) StartText(); // continue dialog if we click anywhere
 	}
 
 	/// <summary>
 	/// Called every frame while the mouse is over the GUIElement or Collider.
 	/// </summary>
-	void OnMouseOver()
-	{
+	void OnMouseOver() {
 		Cursor.SetCursor(speechBubble, hotSpot, cursorMode);
 		if(Input.GetMouseButtonDown(1)) {
-			StartDialogue();
+			StartText();
 		}
 	}
 
 	/// <summary>
 	/// Called when the mouse is not any longer over the GUIElement or Collider.
 	/// </summary>
-	void OnMouseExit()
-	{
+	void OnMouseExit() {
 		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
 	}
 
-	private void StartDialogue() {
-		dialogStarted = true;
-		Debug.Log("starting dialogue");
-		// triggers a speech bubble
-		TextTyper NPCTextChild;
+	// cleans up screen after dialogue
+	protected override void ResetTextOutput() {
+		NPCMessage.SetActive(false);
+	}
 
-		if (npcText == null) {
-			npcText = Instantiate(speechText);
-			npcText.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, 0);
-		}
-		NPCTextChild = npcText.transform.GetChild(1).gameObject.GetComponent<TextTyper>();
-		npcText.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
-		NPCTextChild.NPC = gameObject.GetComponent<NPC>();
+	// sets up the text
+	protected override void SetUpText() {
+		TextTyper NPCMessageText;
+
+		// shows on screen
+		if (!NPCMessage.active) NPCMessage.SetActive(true);
+
+		// gets TextTyper object
+		NPCMessageText = NPCMessage.transform.GetChild(1).GetComponent<TextTyper>();
+		NPCMessage.transform.GetChild(2).GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+		NPCMessageText.NPC = gameObject.GetComponent<NPC>();
 		Debug.Log("completed speech?: " + completedSpeech);
-
-		if (completedSpeech) {
-			// ending conversation
-			foreach (GameObject item in allSpeech)
-				Destroy(item);
-			dialogStarted = false;
-			completedSpeech = false;
-			npcText = null;
-			player.state = Player.State.finishedTalking;
-		} else if (!completedSpeech && player.state != Player.State.talking) {
-			// starting converstation
-			player.ResetToIdle();
-			player.state = Player.State.talking;
-			allSpeech.Add(npcText);
-			NPCTextChild.TypeText(text);
-			completedSpeech = false;
-		} else if (!completedSpeech && player.state == Player.State.talking) {
-			NPCTextChild.Skip();
-		}
 	}
 
 	// Grabs the nearest NPC able to chat
