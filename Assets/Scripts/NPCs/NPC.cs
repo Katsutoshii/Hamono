@@ -27,8 +27,7 @@ public class NPC : TextScript {
 	/// <summary>
 	/// Called every frame while the mouse is over the GUIElement or Collider.
 	/// </summary>
-	void OnMouseOver()
-	{
+	void OnMouseOver() {
 		Cursor.SetCursor(speechBubble, hotSpot, cursorMode);
 		if(Input.GetMouseButtonDown(1)) {
 			StartText();
@@ -38,15 +37,16 @@ public class NPC : TextScript {
 	/// <summary>
 	/// Called when the mouse is not any longer over the GUIElement or Collider.
 	/// </summary>
-	void OnMouseExit()
-	{
+	void OnMouseExit() {
 		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
 	}
 
+	// cleans up screen after dialogue
 	protected override void ResetTextOutput() {
 		NPCMessage.SetActive(false);
 	}
 
+	// sets up the text
 	protected override void SetUpText() {
 		TextTyper NPCMessageText;
 
@@ -59,39 +59,6 @@ public class NPC : TextScript {
 		NPCMessageText.NPC = gameObject.GetComponent<NPC>();
 		Debug.Log("completed speech?: " + completedSpeech);
 	}
-
-	// private void StartDialogue() {
-	// 	dialogStarted = true;
-	// 	Debug.Log("starting dialogue");
-	// 	// triggers a speech bubble
-		
-	// 	TextTyper NPCMessageText;
-
-	// 	// shows on screen
-	// 	if (!NPCMessage.active) NPCMessage.SetActive(true);
-
-	// 	// gets TextTyper object
-	// 	NPCMessageText = NPCMessage.transform.GetChild(1).GetComponent<TextTyper>();
-	// 	NPCMessage.transform.GetChild(2).GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
-	// 	NPCMessageText.NPC = gameObject.GetComponent<NPC>();
-	// 	Debug.Log("completed speech?: " + completedSpeech);
-
-	// 	if (completedSpeech) {
-	// 		// ending conversation
-	// 		dialogStarted = false;
-	// 		completedSpeech = false;
-	// 		NPCMessage.SetActive(false);
-	// 		player.state = Player.State.finishedTalking;
-	// 	} else if (!completedSpeech && player.state != Player.State.talking) {
-	// 		// starting converstation
-	// 		player.ResetToIdle();
-	// 		player.state = Player.State.talking;
-	// 		NPCMessageText.TypeText(text);
-	// 		completedSpeech = false;
-	// 	} else if (!completedSpeech && player.state == Player.State.talking) {
-	// 		NPCMessageText.Skip();
-	// 	}
-	// }
 
 	// Grabs the nearest NPC able to chat
 	// distance defines the area space that picks up NPCs

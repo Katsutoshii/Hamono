@@ -27,17 +27,13 @@ public class TextScript : MonoBehaviour {
 
 	}
 
-
   // handles the text at the end of the interaction
-  protected virtual void ResetTextOutput() {
-    // NPCMessage.SetActive(false);
-  }
+  protected virtual void ResetTextOutput() {}
 
   // sets up extra prefabs and/or game objects
-  protected virtual void SetUpText() {
+  protected virtual void SetUpText() {}
 
-  }
-
+  // moves to next line of text
   protected virtual void StartText() {
     dialogStarted = true;
 		Debug.Log("starting dialogue");
@@ -48,7 +44,6 @@ public class TextScript : MonoBehaviour {
 			// ending conversation
 			dialogStarted = false;
 			completedSpeech = false;
-			// NPCMessage.SetActive(false);
       ResetTextOutput();
 			player.state = Player.State.finishedTalking;
 		} else if (!completedSpeech && player.state != Player.State.talking) {
