@@ -21,20 +21,18 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {	
-        cursorTexture = (Texture2D) Resources.Load("Graphics/UI/ui_cursor");
-        cursorMode = CursorMode.Auto;
-        hotSpot = Vector2.zero;
+		cursorTexture = (Texture2D) Resources.Load("Graphics/UI/ui_cursor");
+		cursorMode = CursorMode.Auto;
+		hotSpot = Vector2.zero;
         
 		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-        Time.timeScale = timeScale;	
+		Time.timeScale = timeScale;	
 
-		
-    	coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
-    	heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
+		coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
+		heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
 		potPiecePrefab = Resources.Load<GameObject>("Prefabs/Environment/PotPiece");
 		sparkPrefab = Resources.Load<GameObject>("Prefabs/FX/Spark");
 		samuraiLaserPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/SamuraiLaser");
-
 
 		PoolManager.instance.CreatePool(coinPrefab, 20);
 		PoolManager.instance.CreatePool(potPiecePrefab, 20);
