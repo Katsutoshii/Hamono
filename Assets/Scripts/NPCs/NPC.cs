@@ -8,12 +8,9 @@ public class NPC : MonoBehaviour {
 
 	private Player player;
 	
-	private GameObject npcText;
-	public GameObject speechText;
+	private GameObject NPCMessage;
 	 [TextArea(3,10)]
  	public string text;
-	
-	public HashSet<GameObject> allSpeech;
 	
 	public bool completedSpeech;
 	private bool dialogStarted;
@@ -23,15 +20,17 @@ public class NPC : MonoBehaviour {
 	public CursorMode cursorMode;
 	public Vector2 hotSpot;
 
+	void Awake() {
+		NPCMessage = transform.GetChild(0).gameObject;
+		NPCMessage.SetActive(false);
+	}
+
 	// Use this for initialization
 	void Start () {
 		
 		player = GameObject.Find("Player").GetComponent<Player>();
-
 		completedSpeech = false;
-		allSpeech = new HashSet<GameObject>();
-		
-		npcText = null;
+
 	}
 	
 	// Update is called once per frame
@@ -62,34 +61,31 @@ public class NPC : MonoBehaviour {
 		dialogStarted = true;
 		Debug.Log("starting dialogue");
 		// triggers a speech bubble
-		TextTyper NPCTextChild;
+		TextTyper NPCMessageText;
 
-		if (npcText == null) {
-			npcText = Instantiate(speechText);
-			npcText.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, 0);
-		}
-		NPCTextChild = npcText.transform.GetChild(1).gameObject.GetComponent<TextTyper>();
-		npcText.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
-		NPCTextChild.NPC = gameObject.GetComponent<NPC>();
+		// shows on screen
+		if (!NPCMessage.active) NPCMessage.SetActive(true);
+
+		// gets TextTyper object
+		NPCMessageText = NPCMessage.transform.GetChild(1).GetComponent<TextTyper>();
+		NPCMessage.transform.GetChild(2).GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+		NPCMessageText.NPC = gameObject.GetComponent<NPC>();
 		Debug.Log("completed speech?: " + completedSpeech);
 
 		if (completedSpeech) {
 			// ending conversation
-			foreach (GameObject item in allSpeech)
-				Destroy(item);
 			dialogStarted = false;
 			completedSpeech = false;
-			npcText = null;
+			NPCMessage.SetActive(false);
 			player.state = Player.State.finishedTalking;
 		} else if (!completedSpeech && player.state != Player.State.talking) {
 			// starting converstation
 			player.ResetToIdle();
 			player.state = Player.State.talking;
-			allSpeech.Add(npcText);
-			NPCTextChild.TypeText(text);
+			NPCMessageText.TypeText(text);
 			completedSpeech = false;
 		} else if (!completedSpeech && player.state == Player.State.talking) {
-			NPCTextChild.Skip();
+			NPCMessageText.Skip();
 		}
 	}
 
