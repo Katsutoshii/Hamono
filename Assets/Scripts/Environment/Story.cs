@@ -89,10 +89,10 @@ public class Story : MonoBehaviour {
   }
 
   // moves to the next script
-	private void StartStory() {
+	void StartStory() {
 		dialogStarted = true;
 		Debug.Log("starting story");
-		Debug.Log("completed speech?: " + completedSpeech);
+    Debug.Log("completed speech?: " + completedSpeech);
 
 		if (!startedSpeech && !completedSpeech && scriptIndex < text.Length) {
       storyText.TypeText(text[scriptIndex]);
