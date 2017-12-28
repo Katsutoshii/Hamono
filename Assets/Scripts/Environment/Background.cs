@@ -17,9 +17,6 @@ public class Background : MonoBehaviour {
     float width = sr.sprite.bounds.size.x - .3f;
     float height = sr.sprite.bounds.size.y - .5f;
 
-    Debug.Log("width: " + width);
-    Debug.Log("height: " + height);
-
     float worldScreenHeight = Camera.main.orthographicSize * 2.0f;
     float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
 
