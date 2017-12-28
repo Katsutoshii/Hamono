@@ -51,7 +51,7 @@ public class NPC : TextScript {
 		TextTyper NPCMessageText;
 
 		// shows on screen
-		if (!NPCMessage.active) NPCMessage.SetActive(true);
+		if (!NPCMessage.activeInHierarchy) NPCMessage.SetActive(true);
 
 		// gets TextTyper object
 		NPCMessageText = NPCMessage.transform.GetChild(1).GetComponent<TextTyper>();

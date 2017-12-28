@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public partial class Player : MonoBehaviour {
+
+	private bool touchingEnemy = false;
+
     /// <summary>
 	/// Called each frame the player collides with something
 	/// collider (2D physics only).
@@ -28,6 +31,13 @@ public partial class Player : MonoBehaviour {
 				healthBar.HandleHealth(healthAmount);
 				break;
 		}
+
+		switch (LayerMask.LayerToName(other.gameObject.layer)) {
+			case "Enemies":
+				touchingEnemy = true;
+				break;
+
+		}
 	}
 
 	/// <summary>
@@ -49,6 +59,20 @@ public partial class Player : MonoBehaviour {
 				healthAmount += 1;
 				healthAmount = Mathf.Min(healthAmount, maxHealth);
 				healthBar.HandleHealth(healthAmount);
+				break;
+		}
+	}
+
+	/// <summary>
+	/// OnCollisionExit is called when this collider/rigidbody has
+	/// stopped touching another rigidbody/collider.
+	/// </summary>
+	/// <param name="other">The Collision data associated with this collision.</param>
+	void OnCollisionExit(Collision other)
+	{
+		switch (LayerMask.LayerToName(other.gameObject.layer)) {
+			case "Enemies":
+				touchingEnemy = false;
 				break;
 		}
 	}

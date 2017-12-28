@@ -63,6 +63,8 @@ public partial class Player : MonoBehaviour {
         rb.gravityScale = GRAVITY_SCALE;
         if (grounded) staminaBar.IncreaseStamina(generateStamina);
 
+		if (touchingEnemy && Vector2.Distance(targetA, transform.position) < 1) targetA = transform.position;
+
 		float xDist = targetA.x - transform.position.x;
 		float yDist = targetA.y - transform.position.y;
         if (transform.position.y < targetA.y) yDist += 0.7f;
