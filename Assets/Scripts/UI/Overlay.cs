@@ -17,9 +17,11 @@ public class Overlay : MonoBehaviour {
     backdrop = GameObject.Find("Backdrop").GetComponent<Image>();
     overlayImage = GameObject.Find("OverlayImage").GetComponent<Image>();
     player = GameObject.Find("Player").GetComponent<Player>();
-    player.state = Player.State.talking;
-    Debug.Log("player.state: " + player.state);
     if (toggleOverlay) StartCoroutine(ToggleImage());
+  }
+
+  void Update() {
+    player.state = Player.State.talking;
   }
 
   private IEnumerator ToggleImage() {
