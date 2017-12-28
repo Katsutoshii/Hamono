@@ -7,12 +7,18 @@ public class Overlay : MonoBehaviour {
 
   public bool toggleOverlay;
   public float toggleFrequency;
+
   private Image backdrop;
   private Image overlayImage;
+
+  private Player player;
 
   void Start() {
     backdrop = GameObject.Find("Backdrop").GetComponent<Image>();
     overlayImage = GameObject.Find("OverlayImage").GetComponent<Image>();
+    player = GameObject.Find("Player").GetComponent<Player>();
+    player.state = Player.State.talking;
+    Debug.Log("player.state: " + player.state);
     if (toggleOverlay) StartCoroutine(ToggleImage());
   }
 
@@ -32,5 +38,6 @@ public class Overlay : MonoBehaviour {
       backdrop.color = new Color(backdrop.color.r, backdrop.color.g, backdrop.color.b, backdrop.color.a - .1f);
     }
     gameObject.SetActive(false);
+    player.state = Player.State.idle;
   }
 }
