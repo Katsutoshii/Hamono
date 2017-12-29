@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour {
   }
 
   // event handler for the resume button
-  public void Resume() {
+  public void Resume() { 
     StartCoroutine(player.AfterEventWait());
     Time.timeScale = 1.0f;
     gameObject.SetActive(false);
