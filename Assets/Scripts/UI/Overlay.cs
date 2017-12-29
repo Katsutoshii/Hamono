@@ -19,11 +19,11 @@ public class Overlay : MonoBehaviour {
     overlayImage = GameObject.Find("OverlayImage").GetComponent<Image>();
     player = GameObject.Find("Player").GetComponent<Player>();
     UICanvas = GameObject.Find("UI Canvas");
-    UICanvas.SetActive(false);
     if (toggleOverlay) StartCoroutine(ToggleImage());
   }
 
   void Update() {
+    UICanvas.SetActive(false);
     player.state = Player.State.talking;
   }
 
