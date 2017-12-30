@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 224669521558324236}
   - component: {fileID: 222018937931310236}
   - component: {fileID: 114513616878403666}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 223592146374863978}
   - component: {fileID: 114790100177303830}
   - component: {fileID: 114350747264685820}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 114742320923850902}
   - component: {fileID: 95579669899712008}
   - component: {fileID: 82002403998847708}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 224346524975564092}
   - component: {fileID: 222694528392816112}
   - component: {fileID: 114815550101403610}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
