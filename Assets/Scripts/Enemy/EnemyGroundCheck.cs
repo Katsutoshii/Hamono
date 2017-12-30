@@ -14,7 +14,7 @@ public class EnemyGroundCheck : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (collider2D.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+        if (collider2D.gameObject.layer == LayerMask.NameToLayer("Terrain") || collider2D.gameObject.layer == LayerMask.NameToLayer("LevelBoundaries"))
             enemy.grounded = true;
     }
 

@@ -19,7 +19,7 @@ public class PlayerEdgeCheck : MonoBehaviour
     /// <param name="other">The other Collider2D involved in this collision.</param>
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Terrain") || other.gameObject.layer == LayerMask.NameToLayer("LevelBoundaries"))
             player.onEdge = false;
     }
 
@@ -30,7 +30,7 @@ public class PlayerEdgeCheck : MonoBehaviour
     /// <param name="other">The other Collider2D involved in this collision.</param>
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Terrain") && player.grounded)
+        if ((other.gameObject.layer == LayerMask.NameToLayer("Terrain") || other.gameObject.layer == LayerMask.NameToLayer("LevelBoundaries")) && player.grounded)
             player.onEdge = true;
     }
 }
