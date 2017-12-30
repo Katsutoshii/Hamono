@@ -16,7 +16,7 @@ public class NPC : TextScript {
 	void Awake() {
 		NPCMessage = transform.GetChild(0).gameObject;
 		NPCMessage.SetActive(false);
-		textOutput = NPCMessage.transform.GetChild(1).GetComponent<TextTyper>();
+		textOutput = NPCMessage.transform.GetChild(0).transform.GetChild(0).GetComponent<TextTyper>();
 	}
 	
 	// Update is called once per frame
@@ -54,8 +54,8 @@ public class NPC : TextScript {
 		if (!NPCMessage.activeInHierarchy) NPCMessage.SetActive(true);
 
 		// gets TextTyper object
-		NPCMessageText = NPCMessage.transform.GetChild(1).GetComponent<TextTyper>();
-		NPCMessage.transform.GetChild(2).GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+		NPCMessageText = NPCMessage.transform.GetChild(0).transform.GetChild(0).GetComponent<TextTyper>();
+		NPCMessage.transform.GetChild(0).transform.GetChild(1).GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 		NPCMessageText.NPC = gameObject.GetComponent<NPC>();
 		Debug.Log("completed speech?: " + completedSpeech);
 	}
