@@ -44,7 +44,7 @@ public partial class Player : MonoBehaviour {
 		autoPathStartTime = Time.time;
 	}
 
-	private const float SLASHING_X_DIST = 1.2f;
+	private const float SLASHING_X_DIST = 1.1f;
 	private const float SLASHING_Y_DIST = 0.5f;
 	private const float AUTOPATH_Y_THRESHOLD = 1.2f; 
 	private const float AUTOPATH_Y_FACTOR = 5.85f;

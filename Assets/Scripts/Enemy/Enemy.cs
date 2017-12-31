@@ -295,6 +295,8 @@ public class Enemy : MonoBehaviour {
     // deletes the game object
     for (int i = 0; i < 4; i++)
       PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
+    
+    if (Random.Range(0, 1) > 0.2) PoolManager.instance.ReuseObject(heartPrefab, RandomOffset(transform.position), transform.rotation, heartPrefab.transform.localScale);
     Destroy(gameObject);
   }
 
