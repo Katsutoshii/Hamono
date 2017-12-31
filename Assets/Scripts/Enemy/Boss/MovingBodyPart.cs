@@ -9,11 +9,11 @@ using UnityEngine.UI;
 public class MovingBodyPart : MonoBehaviour {
 
   public float rotationalSpeed;
+  public float radius = .2f;
   public bool clockwise;
 
   private float angle = 0;
   private float speed; // 2 * PI in degrees is 360, so you get 5 seconds to complete a circle
-  float radius = .2f;
 
   private float originalX;
   private float originalY;
