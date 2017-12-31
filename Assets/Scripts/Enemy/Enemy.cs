@@ -241,7 +241,7 @@ public class Enemy : MonoBehaviour {
     hurtBox.enabled = false;
     
     // damaged
-    if (!healthBar.activeInHierarchy) healthBar.SetActive(true);
+    if (!healthBar.activeInHierarchy && maxHealthAmount > 1) healthBar.SetActive(true);
     gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
     
     yield return new WaitForSeconds(damageTime);
