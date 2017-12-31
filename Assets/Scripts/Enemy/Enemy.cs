@@ -199,7 +199,6 @@ public class Enemy : MonoBehaviour {
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
     if (Mathf.Abs(xDist) < attackRange) {
-      Debug.Log("Attacking");
       StartCoroutine(Attack());
 			return;
 		}
@@ -278,6 +277,7 @@ public class Enemy : MonoBehaviour {
     healthBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);;
   }
 
+
   public void Dying() {
     stunned = true;
     healthBar.SetActive(false);
@@ -288,16 +288,22 @@ public class Enemy : MonoBehaviour {
     hurtBox.enabled = false;
   }
 
+  // method to destroy the enemy object after a death naimation and drop the loot
   public virtual void Kill() {
 
     spriteRenderer.color = Color.white;
 
-    // deletes the game object
+    DropLoot();
+    Destroy(gameObject);
+  }
+
+  // method to drop tthe loot of an enemy after death
+  protected void DropLoot() {
+    if (Random.Range(0, 100f) > 50)
+      PoolManager.instance.ReuseObject(heartPrefab, RandomOffset(transform.position), transform.rotation, heartPrefab.transform.localScale);
+
     for (int i = 0; i < 4; i++)
       PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
-    
-    if (Random.Range(0, 1) > 0.2) PoolManager.instance.ReuseObject(heartPrefab, RandomOffset(transform.position), transform.rotation, heartPrefab.transform.localScale);
-    Destroy(gameObject);
   }
 
   protected virtual void HandleState() {

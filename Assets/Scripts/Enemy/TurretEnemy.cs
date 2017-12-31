@@ -14,12 +14,11 @@ public class TurretEnemy : Enemy {
         PoolManager.instance.ReuseObject(laserPrefab, transform.position, transform.rotation, laserPrefab.transform.localScale);
     }
 
+    // kill without destroying game object
     public override void Kill() {
 
         spriteRenderer.color = Color.white;
 
-        // deletes the game object
-        for (int i = 0; i < 4; i++)
-        PoolManager.instance.ReuseObject(coinPrefab, RandomOffset(transform.position), transform.rotation, coinPrefab.transform.localScale);
+        DropLoot();
     }
 }
