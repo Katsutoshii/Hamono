@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 1560799093750266}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -55.51281, y: -0.36322045, z: -2.183352}
-  m_LocalScale: {x: 1.6122875, y: 1.6122875, z: 1.6122875}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_Children:
   - {fileID: 4958695899606742}
   - {fileID: 4307520082469358}
@@ -161,7 +161,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.007862091, y: -0.03145075}
@@ -326,6 +326,7 @@ MonoBehaviour:
   size: 0
   attackDuration: 0
   attackRange: 0
+  stunTime: 0
   typeOfBot: normal
 --- !u!114 &114898840632772032
 MonoBehaviour:
