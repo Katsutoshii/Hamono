@@ -133,7 +133,7 @@ public class Enemy : MonoBehaviour {
     animator.SetBool("idle", state == State.idle);
     animator.SetBool("walking", state == State.walking);
     animator.SetBool("dead", state == State.dead);
-    animator.SetBool("noticed", lockOnPlayer);
+    // animator.SetBool("noticed", lockOnPlayer);
     animator.SetBool("grounded", grounded);
     animator.SetBool("blocking", state == State.blocking);
     animator.SetBool("attacking", state == State.attacking);
@@ -199,7 +199,6 @@ public class Enemy : MonoBehaviour {
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
     if (Mathf.Abs(xDist) < attackRange) {
-      Debug.Log("Attacking");
       StartCoroutine(Attack());
 			return;
 		}
@@ -301,7 +300,7 @@ public class Enemy : MonoBehaviour {
     Destroy(gameObject);
   }
 
-  protected virtual void HandleState() {
+  public virtual void HandleState() {
     switch (state) {
       case State.idle:
         Idle();

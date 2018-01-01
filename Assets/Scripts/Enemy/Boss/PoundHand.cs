@@ -6,11 +6,33 @@ using UnityEngine;
 
 public class PoundHand : Enemy {
 
+  private Vector2 originalScale;
+
+  protected void Awake() {
+    originalScale = transform.localScale;
+  }
+
+  public virtual void Update() {
+
+    this.UpdateHealthBar();
+    base.Update();
+
+    transform.localScale = originalScale;
+  }
+
   public override void UpdateHealthBar() {}
 
-  public override void CheckForPlayerProximity() {}
+  public override void HandleState() {
+    // switch (state) {
+    //   // case State.idle:
+    //   //   base.Idle();
+    //   //   break;
 
-  public override void UpdateAnimatorVariables() {
-    animator.SetBool("attacking", state == State.attacking);
+    //   case State.walking:
+    //     base.Walk();
+    //     break;
+    // }
+    Walk();
+    if (stunned) rb.velocity = new Vector2(0, rb.velocity.y);
   }
 }

@@ -60,7 +60,6 @@ public class Boss : MonoBehaviour {
     float xDist = player.transform.position.x - transform.position.x;
 
     if (Mathf.Abs(xDist) < attackRange) {
-      Debug.Log("Attacking");
       // StartCoroutine(Attack());
       return;
     }

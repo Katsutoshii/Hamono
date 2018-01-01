@@ -192,18 +192,18 @@ MonoBehaviour:
   grounded: 0
   walkingSpeed: 0
   jumpingPower: 0
-  distanceNearPlayer: 0
-  healthAmount: 0
-  receiveSlashDamage: 0
-  receiveDashDamage: 0
+  distanceNearPlayer: 1
+  healthAmount: 10
+  receiveSlashDamage: 1
+  receiveDashDamage: 2
   receiveSlashKnockback: 0
   receiveDashKnockback: 0
   stunned: 0
   KP: 0
   size: 0
-  attackDuration: 0
-  attackRange: 0
-  stunTime: 0
+  attackDuration: 3
+  attackRange: 3
+  stunTime: 1
 --- !u!212 &212653577057528742
 SpriteRenderer:
   m_ObjectHideFlags: 1
