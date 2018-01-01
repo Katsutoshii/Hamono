@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour {
   public State state;
   protected Animator animator;
   public AudioSource audioSource;
-  protected BoxCollider2D hurtBox;
+  protected BoxCollider2D[] hurtBox;
 
   public bool grounded;
   protected bool prevNotice;
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour {
     rb.isKinematic = false;
 
     audioSource = GetComponent<AudioSource>();
-    hurtBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
+    hurtBox = transform.GetChild(0).GetComponents<BoxCollider2D>();
     animator = GetComponent<Animator>();
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     spriteRenderer.color = Color.white;
@@ -172,8 +172,8 @@ public class Enemy : MonoBehaviour {
     else 
       transform.localScale = new Vector3(size, size, 1);
 
-    
-    hurtBox.enabled = true;
+    foreach (BoxCollider2D box in hurtBox)
+      box.enabled = true;
     rb.velocity = new Vector2(0, rb.velocity.y);
     state = State.attacking;
     yield return new WaitForSeconds(attackDuration);
@@ -237,7 +237,8 @@ public class Enemy : MonoBehaviour {
   private float damageTime = 0.5f;
   public float stunTime;
   public virtual IEnumerator Damaged() {
-    hurtBox.enabled = false;
+    foreach (BoxCollider2D box in hurtBox)
+      box.enabled = false;
     
     // damaged
     if (!healthBar.activeInHierarchy && maxHealthAmount > 1) healthBar.SetActive(true);
@@ -253,7 +254,8 @@ public class Enemy : MonoBehaviour {
 
     // stunned
     spriteRenderer.color = Color.white;
-    hurtBox.enabled = true;
+    foreach (BoxCollider2D box in hurtBox)
+      box.enabled = false;
     gameObject.layer = LayerMask.NameToLayer("Enemies");
 
     rb.velocity = Vector2.zero;
@@ -285,7 +287,8 @@ public class Enemy : MonoBehaviour {
     state = State.dead;
     gameObject.layer = LayerMask.NameToLayer("Debris");
     rb.velocity = Vector2.zero;
-    hurtBox.enabled = false;
+    foreach (BoxCollider2D box in hurtBox)
+      box.enabled = false;
   }
 
   // method to destroy the enemy object after a death naimation and drop the loot
