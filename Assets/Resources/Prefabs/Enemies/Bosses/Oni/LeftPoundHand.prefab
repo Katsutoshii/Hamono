@@ -21,7 +21,10 @@ GameObject:
   - component: {fileID: 4362179765034748}
   - component: {fileID: 212653577057528742}
   - component: {fileID: 114287679422802636}
-  m_Layer: 0
+  - component: {fileID: 50619955000173976}
+  - component: {fileID: 95602434523522260}
+  - component: {fileID: 114609137010083562}
+  m_Layer: 9
   m_Name: LeftPoundHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +41,7 @@ GameObject:
   - component: {fileID: 4702169912290340}
   - component: {fileID: 61295902521046820}
   - component: {fileID: 61431303418716662}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyHurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,6 +75,26 @@ Transform:
   m_Father: {fileID: 4362179765034748}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50619955000173976
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1072198160499208}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61295902521046820
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -122,6 +145,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18078744, y: 0.37020445}
   m_EdgeRadius: 0
+--- !u!95 &95602434523522260
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1072198160499208}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a489e202d25742fa93ed9f766cb927b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114287679422802636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,6 +176,34 @@ MonoBehaviour:
   rotationalSpeed: 2
   radius: 0.2
   clockwise: 1
+--- !u!114 &114609137010083562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1072198160499208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6c63ff4e5554345807835badcd9cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  audioSource: {fileID: 0}
+  grounded: 0
+  walkingSpeed: 0
+  jumpingPower: 0
+  distanceNearPlayer: 0
+  healthAmount: 0
+  receiveSlashDamage: 0
+  receiveDashDamage: 0
+  receiveSlashKnockback: 0
+  receiveDashKnockback: 0
+  stunned: 0
+  KP: 0
+  size: 0
+  attackDuration: 0
+  attackRange: 0
+  stunTime: 0
 --- !u!212 &212653577057528742
 SpriteRenderer:
   m_ObjectHideFlags: 1

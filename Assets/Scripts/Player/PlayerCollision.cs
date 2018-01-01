@@ -86,7 +86,7 @@ public partial class Player : MonoBehaviour {
 
 		switch (other.name) {
 			case "EnemyHurtBox":
-				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) 
+				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible)
 					Damage(0.5f, 4f, other);
 				else attackResponse = AttackResponse.normal; 
 				break;

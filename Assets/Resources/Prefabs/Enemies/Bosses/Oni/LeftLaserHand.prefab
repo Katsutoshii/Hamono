@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4174024366063734}
   - component: {fileID: 212739859775187092}
   - component: {fileID: 114690731269318196}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftLaserHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4486711601022200}
   - component: {fileID: 61152817738316970}
   - component: {fileID: 114706905717641826}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4013036781945126}
   - component: {fileID: 61949527428161204}
   - component: {fileID: 61804430839331786}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyHurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4564645544194226}
   - component: {fileID: 61190025390602302}
   - component: {fileID: 61486090734617192}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyHurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4992768387469880}
   - component: {fileID: 212864372778874736}
   - component: {fileID: 114804921580742018}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightPoundHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
