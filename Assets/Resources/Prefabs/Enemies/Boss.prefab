@@ -39,7 +39,8 @@ GameObject:
   - component: {fileID: 4462469214813296}
   - component: {fileID: 114921284567701540}
   - component: {fileID: 212480690712906526}
-  m_Layer: 0
+  - component: {fileID: 61189715454008356}
+  m_Layer: 8
   m_Name: RightFist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +73,8 @@ GameObject:
   - component: {fileID: 4047290786392910}
   - component: {fileID: 114305739684352004}
   - component: {fileID: 212132031052414180}
-  m_Layer: 0
+  - component: {fileID: 61714134122792894}
+  m_Layer: 8
   m_Name: LeftFist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +185,57 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!61 &61189715454008356
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1733178561107998}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.85, y: 2.85}
+    newSize: {x: 2.85, y: 2.85}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.85, y: 2.85}
+  m_EdgeRadius: 0
+--- !u!61 &61714134122792894
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1893569132783268}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.85, y: 2.85}
+    newSize: {x: 2.85, y: 2.85}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.85, y: 2.85}
+  m_EdgeRadius: 0
 --- !u!82 &82933748520077220
 AudioSource:
   m_ObjectHideFlags: 1

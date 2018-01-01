@@ -6,9 +6,14 @@ public class BossFist : MonoBehaviour {
 
 	private Boss boss;
 	private SpriteRenderer spriteRenderer;
+	private BoxCollider2D boxCollider2D;
 	// Use this for initialization
 	void Start () {
 		boss = GetComponentInParent<Boss>();
+
+		boxCollider2D = GetComponent<BoxCollider2D>();
+		boxCollider2D.enabled = false;
+
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		spriteRenderer.sortingLayerName = "BackgroundDetails";
 	}
@@ -20,5 +25,6 @@ public class BossFist : MonoBehaviour {
 
 	public void Ready() {
 		spriteRenderer.sortingLayerName = "EntityBackground";
+		boxCollider2D.enabled = true;
 	}
 }
