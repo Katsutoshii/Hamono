@@ -110,7 +110,7 @@ public class Boss : MonoBehaviour {
 	}
 
 	private bool TargetReachedY() {
-		return Mathf.Abs(target.y - transform.position.y) < 0.1f;
+		return Mathf.Abs(target.y - transform.position.y + 3f) < 0.1f;
 	}
 
 
