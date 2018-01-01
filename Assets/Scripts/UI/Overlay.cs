@@ -12,12 +12,14 @@ public class Overlay : MonoBehaviour {
   private Image overlayImage;
 
   private Player player;
+  private Boss boss;
   private GameObject UICanvas;
 
   void Start() {
     backdrop = GameObject.Find("Backdrop").GetComponent<Image>();
     overlayImage = GameObject.Find("OverlayImage").GetComponent<Image>();
     player = GameObject.Find("Player").GetComponent<Player>();
+    boss = GameObject.Find("Boss").GetComponent<Boss>();
     UICanvas = GameObject.Find("UI Canvas");
     if (toggleOverlay) StartCoroutine(ToggleImage());
   }
@@ -44,6 +46,7 @@ public class Overlay : MonoBehaviour {
     }
     gameObject.SetActive(false);
     UICanvas.SetActive(true);
+    boss.StartBattle();
     player.state = Player.State.idle;
   }
 }
