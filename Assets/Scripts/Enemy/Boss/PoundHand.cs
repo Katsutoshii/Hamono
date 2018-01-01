@@ -5,5 +5,8 @@ using UnityEngine;
 #pragma warning disable CS0219  
 
 public class PoundHand : Enemy {
-  
+
+  public override void UpdateHealthBar() {}
+
+  public override void CheckForPlayerProximity() {}
 }

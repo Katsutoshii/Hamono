@@ -60,7 +60,6 @@ public class Enemy : MonoBehaviour {
     rb.isKinematic = false;
 
     audioSource = GetComponent<AudioSource>();
-    // hurtBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
     hurtBox = transform.Find("EnemyHurtBox").gameObject.GetComponents<BoxCollider2D>();
     animator = GetComponent<Animator>();
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
