@@ -6,8 +6,10 @@ public class SamuraiEnemy : Enemy {
     public override void Start() {
         base.Start();
         
-        hurtBox.offset = Vector2.zero;
-        hurtBox.size = Vector2.zero;
+        foreach (BoxCollider2D box in hurtBox) {
+            box.offset = Vector2.zero;
+            box.size = Vector2.zero;
+        }
 
         StartCoroutine(ChangeRandomWalkCycle());
     }
@@ -31,12 +33,16 @@ public class SamuraiEnemy : Enemy {
     }
 
     public virtual void LaserOut() {
-        hurtBox.offset = new Vector2(-1f, 0);
-        hurtBox.size = Vector2.one;
+        foreach (BoxCollider2D box in hurtBox) {
+            box.offset = new Vector2(-1f, 0);
+            box.size = Vector2.one;
+        }
     }
 
     public virtual void LaserIn() {
-        hurtBox.offset = Vector2.zero;
-        hurtBox.size = Vector2.zero;
+        foreach (BoxCollider2D box in hurtBox) {
+            box.offset = Vector2.zero;
+            box.size = Vector2.zero;
+            }
     }
 }

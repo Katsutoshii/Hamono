@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour {
   public State state;
   protected Animator animator;
   public AudioSource audioSource;
-  protected BoxCollider2D hurtBox;
+  protected BoxCollider2D[] hurtBox;
 
   public bool grounded;
   protected bool prevNotice;
@@ -60,7 +60,8 @@ public class Enemy : MonoBehaviour {
     rb.isKinematic = false;
 
     audioSource = GetComponent<AudioSource>();
-    hurtBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
+    // hurtBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
+    hurtBox = transform.Find("EnemyHurtBox").gameObject.GetComponents<BoxCollider2D>();
     animator = GetComponent<Animator>();
     spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     spriteRenderer.color = Color.white;
@@ -172,8 +173,8 @@ public class Enemy : MonoBehaviour {
     else 
       transform.localScale = new Vector3(size, size, 1);
 
-    
-    hurtBox.enabled = true;
+    foreach (BoxCollider2D box in hurtBox)
+      box.enabled = true;
     rb.velocity = new Vector2(0, rb.velocity.y);
     state = State.attacking;
     yield return new WaitForSeconds(attackDuration);
@@ -238,7 +239,8 @@ public class Enemy : MonoBehaviour {
   private float damageTime = 0.5f;
   public float stunTime;
   public virtual IEnumerator Damaged() {
-    hurtBox.enabled = false;
+    foreach (BoxCollider2D box in hurtBox)
+      box.enabled = false;
     
     // damaged
     if (!healthBar.activeInHierarchy && maxHealthAmount > 1) healthBar.SetActive(true);
@@ -254,7 +256,8 @@ public class Enemy : MonoBehaviour {
 
     // stunned
     spriteRenderer.color = Color.white;
-    hurtBox.enabled = true;
+    foreach (BoxCollider2D box in hurtBox)
+      box.enabled = true;
     gameObject.layer = LayerMask.NameToLayer("Enemies");
 
     rb.velocity = Vector2.zero;
@@ -275,7 +278,7 @@ public class Enemy : MonoBehaviour {
       bar.color = new Color(1, 0, 0, 1);
     else if (bar.fillAmount <= .7)
       bar.color = new Color(1, 0.39f, 0, 1);
-    healthBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);;
+    healthBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);
   }
 
   public void Dying() {
@@ -285,7 +288,8 @@ public class Enemy : MonoBehaviour {
     state = State.dead;
     gameObject.layer = LayerMask.NameToLayer("Debris");
     rb.velocity = Vector2.zero;
-    hurtBox.enabled = false;
+    foreach (BoxCollider2D box in hurtBox)
+      box.enabled = false;
   }
 
   public virtual void Kill() {
