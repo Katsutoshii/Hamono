@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using RedBlueGames.Tools.TextTyper;
 
 public class Dustcloud : PooledObject {
+
+    public string animationName;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
@@ -27,7 +29,7 @@ public class Dustcloud : PooledObject {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = Color.white;
         animator = GetComponent<Animator>();
-        animator.Play("Dustcloud");
+        animator.Play(animationName);
     }
 
     public override void OnObjectReuse() {
