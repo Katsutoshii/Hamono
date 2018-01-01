@@ -74,7 +74,7 @@ Transform:
   m_GameObject: {fileID: 1664300716778720}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 24.369995, y: -2.07, z: -2.183352}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_Children:
   - {fileID: 4729622400154152}
   - {fileID: 4580398665222620}
@@ -326,6 +326,7 @@ MonoBehaviour:
   size: 0
   attackDuration: 0
   attackRange: 0
+  stunTime: 0
   typeOfBot: body
 --- !u!114 &114223089371914006
 MonoBehaviour:
