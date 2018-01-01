@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#pragma warning disable CS0219  
+#pragma warning disable CS0219, CS0414
 
 public class JumpingEnemy : Enemy {
     public override void Start() {

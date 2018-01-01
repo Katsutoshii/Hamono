@@ -4,6 +4,7 @@ using UnityEngine;
 using RedBlueGames.Tools.TextTyper;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+#pragma warning disable CS0219, CS0414
 
 public class Story : MonoBehaviour {
 

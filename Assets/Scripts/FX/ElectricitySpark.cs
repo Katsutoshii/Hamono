@@ -5,7 +5,7 @@ using UnityEngine;
 public class ElectricitySpark : MonoBehaviour {
 
   void Awake() {
-    Light lightSource = gameObject.AddComponent<Light>() as Light;
+    Light lightSource = transform.GetChild(0).gameObject.AddComponent<Light>() as Light;
     Debug.Log("ijemma: " + gameObject);
     lightSource.type = LightType.Point;
     lightSource.range = 10f; 
