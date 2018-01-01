@@ -15,7 +15,7 @@ public class ClickIndicator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (DrawIndicator()) {
+		if (DrawIndicator() && canCreate) {
 			StartCoroutine(SpinAndFade());
 		}
 	}
@@ -24,8 +24,11 @@ public class ClickIndicator : MonoBehaviour {
 		return (Input.GetMouseButtonDown(0) || Input.GetMouseButton(1)) && !(player.state == Player.State.talking || player.state == Player.State.finishedTalking);
 	}
 
+	private bool canCreate = true;
 	IEnumerator SpinAndFade() {
+		canCreate = false;
 		transform.position = ScreenToWorldPoint(Input.mousePosition);
+		yield return new WaitForEndOfFrame();
 
 		bool playerInRange = Mathf.Abs(transform.position.y - player.transform.position.y) < player.autoPathLimitY 
 			&& player.grounded;
@@ -42,6 +45,9 @@ public class ClickIndicator : MonoBehaviour {
 
 			yield return new WaitForEndOfFrame();
 		} 
+		
+		canCreate = true;
+		
 		yield return null;
 	}
 
