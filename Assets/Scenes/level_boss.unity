@@ -2506,7 +2506,7 @@ GameObject:
   m_PrefabParentObject: {fileID: 1369860358398650, guid: 98b12cc210a78c24493ebf4e395d1f85,
     type: 2}
   m_PrefabInternal: {fileID: 1345190042}
---- !u!61 &1006149386
+--- !u!61 &1006149388
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2540,11 +2540,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -8.24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.05
+      value: -1.23
       objectReference: {fileID: 0}
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2657,6 +2657,24 @@ Prefab:
     - target: {fileID: 4817295620528606, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1864438932177180, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967928143218784, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 212535718768355126, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212189565979717598, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
@@ -2943,7 +2961,7 @@ GameObject:
   m_PrefabParentObject: {fileID: 1875262665143426, guid: 98b12cc210a78c24493ebf4e395d1f85,
     type: 2}
   m_PrefabInternal: {fileID: 1345190042}
---- !u!61 &1921711979
+--- !u!61 &1921711981
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
