@@ -76,7 +76,11 @@ public class Boss : MonoBehaviour {
 	}
 
 	private bool AttackFinished() {
-		return leftFist.state == Enemy.State.idle && rightFist.state == Enemy.State.idle;
+		if (leftFist.state == Enemy.State.idle && rightFist.state == Enemy.State.idle) {
+			state = State.autoPathing;
+			return true;
+		}
+		return false;
 	}
 
 	private void Attack() {
