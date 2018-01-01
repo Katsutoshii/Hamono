@@ -9,4 +9,8 @@ public class PoundHand : Enemy {
   public override void UpdateHealthBar() {}
 
   public override void CheckForPlayerProximity() {}
+
+  public override void UpdateAnimatorVariables() {
+    animator.SetBool("attacking", state == State.attacking);
+  }
 }
