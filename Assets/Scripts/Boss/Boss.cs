@@ -5,6 +5,7 @@ using UnityEngine;
 public class Boss : MonoBehaviour {
 
 	public float healthAmount;
+	public float maxHealthAmount;
 	public int phase;
 	public float speedX;
 	public float speedY;
@@ -44,6 +45,7 @@ public class Boss : MonoBehaviour {
 	private void HandleState() {
 		switch (state) {
 			case State.idle:
+				Idle();
 				break;
 
 			case State.autoPathing:
@@ -63,17 +65,29 @@ public class Boss : MonoBehaviour {
 		while (phase < 2) {
 			yield return new WaitForSeconds(attackCycleTime);
 			target = new Vector2(player.transform.position.x, transform.position.y);
-			if (TargetReachedX()) Attack();
+
+			if (TargetReachedX()) {
+				Attack();
+				break;
+			}
 		}
 
 		yield return null;
 	}
 
 	private void Attack() {
+		Debug.Log("boss attack!");
+		state = State.idle;
 
+		if (player.transform.position.x > transform.position.x) 
+			leftFist.state = Enemy.State.walking;
+		else 
+			rightFist.state = Enemy.State.walking;
 	}
+
 	private void Idle() {
 		rb.velocity = Vector2.zero;
+		target = player.transform.position;
 	}
 
 	private void AutoPath() {
@@ -84,7 +98,7 @@ public class Boss : MonoBehaviour {
 
 	
 	private bool TargetReachedX() {
-		return Mathf.Abs(target.x - transform.position.x) < 0.1f;
+		return Mathf.Abs(target.x - transform.position.x) < 6;
 	}
 
 	private bool TargetReachedY() {
@@ -93,7 +107,7 @@ public class Boss : MonoBehaviour {
 
 
 	private IEnumerator RiseToLevel() {
-		target = new Vector2(transform.position.x, 1f);
+		target = new Vector2(transform.position.x, 0f);
 
 		rb.velocity = Vector2.up * speedY;
 		yield return new WaitUntil(TargetReachedY);
