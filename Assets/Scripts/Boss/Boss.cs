@@ -76,7 +76,11 @@ public class Boss : MonoBehaviour {
 	}
 
 	private bool AttackFinished() {
-		return leftFist.state == Enemy.State.idle && rightFist.state == Enemy.State.idle;
+		if (leftFist.state == Enemy.State.idle && rightFist.state == Enemy.State.idle) {
+			state = State.autoPathing;
+			return true;
+		}
+		return false;
 	}
 
 	private void Attack() {
@@ -106,7 +110,7 @@ public class Boss : MonoBehaviour {
 	}
 
 	private bool TargetReachedY() {
-		return Mathf.Abs(target.y - transform.position.y) < 0.1f;
+		return Mathf.Abs(target.y - transform.position.y + 3f) < 0.1f;
 	}
 
 
