@@ -68,18 +68,22 @@ public class Boss : MonoBehaviour {
 
 			if (TargetReachedX()) {
 				Attack();
-				break;
+				yield return new WaitUntil(AttackFinished);
 			}
 		}
 
 		yield return null;
 	}
 
+	private bool AttackFinished() {
+		return leftFist.state == Enemy.State.idle && rightFist.state == Enemy.State.idle;
+	}
+
 	private void Attack() {
 		Debug.Log("boss attack!");
 		state = State.idle;
 
-		if (player.transform.position.x > transform.position.x) 
+		if (player.transform.position.x < transform.position.x) 
 			leftFist.state = Enemy.State.walking;
 		else 
 			rightFist.state = Enemy.State.walking;
