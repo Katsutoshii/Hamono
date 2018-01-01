@@ -58,7 +58,6 @@ public class Boss : MonoBehaviour {
 	private IEnumerator AttackCycle() {
 		while (phase < 2) {
 			yield return new WaitForSeconds(attackCycleTime);
-			Debug.Log("moving to new target!");
 			target = new Vector2(player.transform.position.x, transform.position.y);
 			if (TargetReachedX()) Attack();
 		}
@@ -85,13 +84,12 @@ public class Boss : MonoBehaviour {
 	}
 
 	private bool TargetReachedY() {
-		Debug.Log(Mathf.Abs(target.y - transform.position.y));
 		return Mathf.Abs(target.y - transform.position.y) < 0.1f;
 	}
 
 
 	private IEnumerator RiseToLevel() {
-		target = new Vector2(-8.6f, 0.2f);
+		target = new Vector2(transform.position.x, 1f);
 
 		rb.velocity = Vector2.up * speedY;
 		yield return new WaitUntil(TargetReachedY);
