@@ -10,6 +10,8 @@ public class Boss : MonoBehaviour {
 	public float speedY;
 	public Vector2 target;
 	private Player player;
+	private BossFist leftFist;
+	private BossFist rightFist;
 	private Rigidbody2D rb;
 	public enum State {
 		entering,
@@ -28,6 +30,8 @@ public class Boss : MonoBehaviour {
 
 		player = FindObjectOfType<Player>();
 		rb = GetComponent<Rigidbody2D>();
+		leftFist = transform.Find("LeftFist").GetComponent<BossFist>();
+		rightFist = transform.Find("RightFist").GetComponent<BossFist>();
 
 		StartCoroutine(RiseToLevel());
 	}
@@ -75,7 +79,7 @@ public class Boss : MonoBehaviour {
 	private void AutoPath() {
 		float distX = target.x - transform.position.x;
 
-		rb.velocity = Vector2.right * speedX * Mathf.Sign(distX);
+		rb.velocity = Vector2.right * Mathf.Min(Mathf.Abs(speedX * distX), speedX) * Mathf.Sign(distX);
 	}
 
 	
@@ -94,6 +98,9 @@ public class Boss : MonoBehaviour {
 		rb.velocity = Vector2.up * speedY;
 		yield return new WaitUntil(TargetReachedY);
 		rb.velocity = Vector2.zero;
+		
+		leftFist.Ready();
+		rightFist.Ready();
 		state = State.idle;
 		//play roar
 	}
