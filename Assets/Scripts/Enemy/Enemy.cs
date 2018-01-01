@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour {
   }
 
 
-  protected void RotateBasedOnDirection() {
+  protected virtual void RotateBasedOnDirection() {
     if (state != State.walking) return;
     if (Mathf.Abs(rb.velocity.x) > 0.05f) {
       if (rb.velocity.x < 0)
