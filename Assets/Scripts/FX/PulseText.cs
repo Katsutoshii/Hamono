@@ -21,7 +21,7 @@ public class PulseText : MonoBehaviour {
     /// </summary>
     void Update()
     {
-		float scaleVal = amplitude * Mathf.Sin(frequency * Time.time) + offset;
+		float scaleVal = FlashWithMusic.val * 1.2f + offset;
         rectTransform.localScale = new Vector3(scaleVal, scaleVal, 1);
     }
 }
