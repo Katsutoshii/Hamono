@@ -10,11 +10,15 @@ public class BossFist : Enemy {
 	public float speedX;
 	private Vector2 target;
 	private BoxCollider2D boxCollider2D;
+	private Rigidbody2D rb;
+	private float originalX;
+	private float originalY;
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
 
 		boxCollider2D = GetComponent<BoxCollider2D>();
+		rb = GetComponent<Rigidbody2D>();
 		spriteRenderer.sortingLayerName = "BackgroundDetails";
 		boss = GetComponentInParent<Boss>();
 		state = State.idle;
@@ -26,6 +30,8 @@ public class BossFist : Enemy {
 		spriteRenderer.sortingLayerName = "Entities";
 		gameObject.layer = LayerMask.NameToLayer("Enemies");
 		boxCollider2D.enabled = true;
+		originalX = transform.position.x;
+		originalY = transform.position.y;
 	}
 
 	public override void Update() {
@@ -56,10 +62,29 @@ public class BossFist : Enemy {
 		rb.velocity = Vector2.zero;
 		state = State.attacking;
 		Debug.Log("slam down!"); 
-
+		StartCoroutine(RaiseFist());
 		// attack here
 		yield return new WaitForSeconds(1);
 		state = State.idle;
+	}
+
+	private bool TargetReachedY() {
+		return Mathf.Abs(transform.position.y - originalY) >= 5f;
+	}
+
+	private IEnumerator RaiseFist() {
+		rb.velocity = Vector2.up * 3f;
+		yield return new WaitUntil(TargetReachedY);
+		rb.velocity = Vector2.zero;
+		StartCoroutine(SlamFist());
+	}
+
+	private IEnumerator SlamFist() {
+		rb.velocity = Vector2.down * 7f;
+		yield return new WaitUntil(() => transform.position.y <= 7f);
+		Debug.Log("slammed");
+		yield return new WaitForSeconds(3f);
+		Debug.Log("waited three seconds");
 	}
 
 	  public override void Damage(float damageAmount, float knockback, Collider2D source) {
