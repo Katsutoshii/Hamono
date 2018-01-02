@@ -1,0 +1,111 @@
+@font-face {
+  font-family: 'pixelSix';
+  src: url('./fonts/pixelsix00.ttf');
+}
+
+@font-face {
+  font-family: 'M';
+  src: url('./fonts/m3x6.ttf');
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  /* background-image: url('./assets/stone_block.png'); */
+}
+
+h1, h2, h3 {
+  font-family: 'M', Helvetica, sans-serif;
+  text-shadow: 2px 2px rgb(187, 187, 187);
+}
+
+h1 {
+  font-size: 4em;
+}
+
+h4, h5, h6 {
+  font-family: 'pixelSix', Helvetica, sans-serif;
+  margin: 1em 0 0 0;
+}
+
+h4 {
+  text-shadow: 1px 1px rgb(95, 95, 95);
+}
+
+h5 {
+  color: black;
+}
+
+.main-container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 3000px;
+  width: 100%;
+  /* background: url('./assets/crate_block.png'); */
+  background: rgb(223, 223, 223);
+}
+
+.container {
+  margin: 0 auto;
+  width: 80%;
+}
+
+#header-container {
+  /* height: 100%; */
+  /* background-image: url('./assets/boss_battle.png'); */
+  background-size: contain;
+}
+
+header {
+  font-family: 'M', Arial, Helvetica, sans-serif;
+  font-size: 20em;
+  text-shadow: 2px 2px rgb(187, 187, 187);
+}
+
+.background-information {
+  display: flex;
+}
+
+.reverse-row {
+  flex-direction: row-reverse;
+}
+
+.background-image {
+  height: 200px;
+  width: 200px;
+  background-color: transparent;
+}
+
+.background-text {
+  font-family: 'pixelSix', Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: white;
+}
+
+.unity-demo {
+  margin: 0 auto;
+  height: 500px;
+  width: 90%;
+  background-color: rgb(4, 0, 58);
+  color: white;
+}
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.member-container {
+  display: flex;
+  flex-direction: column;
+  margin: 3em 3em 0em 3em;
+}
+
+.member-image {
+  height: 250px;
+  width: 250px;
+  background-color: black;
+}
