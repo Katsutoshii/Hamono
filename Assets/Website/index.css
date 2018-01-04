@@ -11,12 +11,17 @@
 body {
   margin: 0 auto;
   padding: 0;
-  /* background-image: url('./assets/stone_block.png'); */
+  background: #021c2f;
 }
 
 h1, h2, h3 {
   font-family: 'M', Helvetica, sans-serif;
   text-shadow: 2px 2px rgb(187, 187, 187);
+}
+
+.header-text {
+  color: white;
+  text-shadow: none;
 }
 
 h1 {
@@ -25,6 +30,7 @@ h1 {
 
 h4, h5, h6 {
   font-family: 'pixelSix', Helvetica, sans-serif;
+  color: white;
   margin: 1em 0 0 0;
 }
 
@@ -33,7 +39,7 @@ h4 {
 }
 
 h5 {
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 .main-container {
@@ -41,10 +47,9 @@ h5 {
   display: flex;
   flex-direction: column;
   text-align: center;
-  height: 2100px;
   width: 100%;
-  /* background: url('./assets/stone_block.png'); */
-  background: rgb(116, 133, 142);
+  background: #021c2f;
+  padding-bottom: 5em;
 }
 
 .container {
@@ -53,9 +58,16 @@ h5 {
 }
 
 #header-container {
-  /* height: 100%; */
-  /* background-image: url('./assets/boss_battle.png'); */
-  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-image: url('./assets/boss_room_background.png');
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: 50%;
+  background-repeat: no-repeat;
 }
 
 header {
@@ -86,10 +98,48 @@ header {
 
 .unity-demo {
   margin: 0 auto;
-  height: 500px;
+  height: 33%;
   width: 90%;
   background-color: rgb(4, 0, 58);
   color: white;
+}
+
+.download-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  height: 35%;
+  width: 80%;
+  background-color: rgb(241, 241, 241);
+  color: black;
+  box-shadow: 0 0 0 2px rgb(54, 54, 54),
+  0 0 0 3px rgb(255, 254, 254),
+  0 0 0 9px rgb(214, 214, 214),
+  0 0 0 12px rgb(161, 161, 161),
+  0 0 0 13px rgb(119, 119, 119),
+  0 0 0 14px rgb(68, 68, 68),
+  0 0 0 15px rgb(46, 46, 46);
+}
+
+.download {
+  height: 60px;
+  width: 60%;
+  font-family: 'M', 'pixelSix', Arial, Helvetica, sans-serif;
+  font-size: 3em;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px rgb(90, 89, 89);
+  background-color: #3a5869;
+  box-shadow: 0 7px 0 0 #1e2d36;
+  border: none;
+  outline: none;
+}
+
+.download:hover {
+  background-color: #5a87a1;
+  box-shadow: 0 7px 0 0 #2d4352;
+  cursor: pointer;
 }
 
 .image-gallery {
@@ -108,4 +158,12 @@ header {
   height: 250px;
   width: 250px;
   background-color: black;
+  margin-bottom: .5em;
+  box-shadow: 0 0 0 2px rgb(54, 54, 54),
+  0 0 0 3px rgb(255, 254, 254),
+  0 0 0 9px rgb(214, 214, 214),
+  0 0 0 12px rgb(161, 161, 161),
+  0 0 0 13px rgb(119, 119, 119),
+  0 0 0 14px rgb(68, 68, 68),
+  0 0 0 15px rgb(46, 46, 46);
 }
