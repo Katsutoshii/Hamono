@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour {
 		PoolManager.instance.CreatePool(sparkPrefab, 12);
 		PoolManager.instance.CreatePool(samuraiLaserPrefab, 4);
 
-		Screen.SetResolution(256, 192, true);
+		Screen.SetResolution(960, 540, true);
 	}
 	
 }

@@ -126,7 +126,7 @@ public partial class Player : MonoBehaviour {
 	public float autoPathStartTime;
 	// method to handle all control inputs inside main loop
 	private void Controls() {
-		if (state == State.talking || state == State.finishedTalking || GameManager.paused) return;
+		if (state == State.talking || state == State.finishedTalking || flattened || GameManager.paused) return;
 
 		// for initiating action
 		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(1))) {
@@ -188,6 +188,7 @@ public partial class Player : MonoBehaviour {
 		healthAmount -= damageAmount;
 		if ( healthAmount < 0) healthAmount = 0;
 
+		gameObject.layer = LayerMask.NameToLayer("Dashing");
 		healthBar.HandleHealth(healthAmount);
 	}
 

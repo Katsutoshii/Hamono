@@ -24,7 +24,7 @@ public class BossFist : Enemy {
 	// after the entry, initializes the fist
 	public void Ready() {
 		Debug.Log("fist ready");
-		spriteRenderer.sortingLayerName = "Entities";
+		spriteRenderer.sortingLayerName = "Foreground";
 		gameObject.layer = LayerMask.NameToLayer("Enemies");
 		boxCollider2D.enabled = true;
 	}
@@ -33,6 +33,7 @@ public class BossFist : Enemy {
 		base.Update();
 		if (boss.state == Boss.State.entering) rb.position = boss.transform.position + offset;
 		if (slamming) rb.velocity = Vector2.down * dropSpeed;
+		if (rising) rb.velocity = Vector2.up * risingSpeed;
 	}
 
 	protected override void RotateBasedOnDirection() {
@@ -57,7 +58,8 @@ public class BossFist : Enemy {
 
 	public float dropSpeed;
 	public float risingSpeed;
-	private bool slamming = false;
+	public bool slamming = false;
+	private bool rising = false;
 	protected override IEnumerator Attack() {
 		Debug.Log("move up a bit!");
 		rb.velocity = Vector2.zero + Vector2.up * dropSpeed;
@@ -71,10 +73,14 @@ public class BossFist : Enemy {
 		slamming = false;
 		rb.velocity = Vector2.zero;
 		yield return new WaitForSeconds(1.5f);
-		
+
+		rising = true;
 		Debug.Log("rising up");
-		rb.velocity = Vector2.up * risingSpeed;
 		yield return new WaitUntil(() => rb.position.y >= 1.56f);
+
+		rb.velocity = Vector2.zero;
+		rising = false;
+		Debug.Log("rising done");
 		state = State.idle;
 	}
 
@@ -84,6 +90,6 @@ public class BossFist : Enemy {
 	}
 
 	protected override void Idle() {
-		rb.velocity = Vector2.zero;
+		//rb.velocity = Vector2.zero;
 	}
 }

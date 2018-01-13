@@ -87,28 +87,38 @@ public partial class Player : MonoBehaviour {
 		switch (other.name) {
 			case "EnemyHurtBox":
 				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) {
-					string parent = other.gameObject.transform.parent.name;
-					Debug.Log("parent:" + parent);
+					Transform parent = other.gameObject.transform.parent;
+					Debug.Log("parent:" + parent.name);
 					// for the boss
-					if (parent.Equals("RightFist") || parent.Equals("LeftFist")) {
-						Debug.Log("Damaged by fist!");
-						Damage(1f, 4f, other);
-						StartCoroutine(Flatten());
+					if (parent.name.Equals("RightFist") || parent.name.Equals("LeftFist")) {
+						if (grounded && parent.GetComponent<BossFist>().slamming) {
+							Debug.Log("Damaged by fist!");
+							StartCoroutine(Flatten());
+							Damage(1f, 4f, other);
+						}
+						else Damage(0.5f, 4f, other);
 					}
 					else Damage(0.5f, 4f, other);
 				}
-				else attackResponse = AttackResponse.normal; 
+				else attackResponse = AttackResponse.normal;
 				break;
 		}
 	}
 
+	private bool flattened;
 	private IEnumerator Flatten() {
 		transform.position = new Vector3(transform.position.x, transform.position.y - 0.6f, transform.position.z);
 		transform.localScale = new Vector3(transform.localScale.x * 1.5f, transform.localScale.y / 5, transform.localScale.z);
 		
 		rb.simulated = false;
-		yield return new WaitForSeconds(2f);
+		flattened = true;
+		yield return new WaitForSeconds(2.5f);
+
+		transform.position = new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z);
+		transform.localScale = new Vector3(transform.localScale.x / 1.5f, transform.localScale.y * 5, transform.localScale.z);
+		
 		rb.simulated = true;
+		flattened = false;
 		//transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z);
 		yield return null;
 	}

@@ -703,7 +703,7 @@ MonoBehaviour:
   stunTime: 0
   offset: {x: 6, y: 1, z: 0}
   speedX: 2
-  dropSpeed: 10
+  dropSpeed: 20
   risingSpeed: 5
 --- !u!1001 &599878084
 Prefab:
@@ -4089,7 +4089,7 @@ MonoBehaviour:
   stunTime: 0
   offset: {x: -6, y: 1, z: 0}
   speedX: 2
-  dropSpeed: 10
+  dropSpeed: 20
   risingSpeed: 5
 --- !u!1 &1702313365
 GameObject:
