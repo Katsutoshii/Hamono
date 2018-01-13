@@ -32,7 +32,10 @@ public class BossFist : Enemy {
 	public override void Update() {
 		base.Update();
 		if (boss.state == Boss.State.entering) rb.position = boss.transform.position + offset;
-		if (slamming) rb.velocity = Vector2.down * dropSpeed;
+		if (slamming) {
+			if (grounded) rb.velocity = Vector2.zero;
+			else rb.velocity = Vector2.down * dropSpeed;
+		}
 		if (rising) rb.velocity = Vector2.up * risingSpeed;
 	}
 
@@ -70,11 +73,11 @@ public class BossFist : Enemy {
 		rb.velocity = Vector2.zero + Vector2.down * dropSpeed;
 		yield return new WaitUntil(() => grounded);
 
-		slamming = false;
 		rb.velocity = Vector2.zero;
-		yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(2f);
 
 		rising = true;
+		slamming = false;
 		Debug.Log("rising up");
 		yield return new WaitUntil(() => rb.position.y >= 1.56f);
 
@@ -85,11 +88,11 @@ public class BossFist : Enemy {
 	}
 
 	public override void Damage(float damageAmount, float knockback, Collider2D source) {
-		if (grounded) damageAmount = 0;
+		if (rising) damageAmount = 1;
 		base.Damage(damageAmount, knockback, source);
 	}
 
 	protected override void Idle() {
-		//rb.velocity = Vector2.zero;
+		rb.velocity = Vector2.zero;
 	}
 }
