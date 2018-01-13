@@ -119,7 +119,7 @@ public partial class Player : MonoBehaviour {
 		
 		rb.simulated = true;
 		flattened = false;
-		//transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z);
+		ResetToIdle();
 		yield return null;
 	}
 }
