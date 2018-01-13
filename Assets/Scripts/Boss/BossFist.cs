@@ -52,8 +52,8 @@ public class BossFist : Enemy {
 		}
 
 		// if we need to move in the x or y direction, do so
-			if (Mathf.Abs(xDist) >= 0.1) 
-				rb.velocity = new Vector2(xDist * KP + 1.5f * Mathf.Sign(xDist), 0);
+		if (Mathf.Abs(xDist) >= 0.1) 
+			rb.velocity = new Vector2(xDist * KP + 1.5f * Mathf.Sign(xDist), 0);
 	}
 
 	public float dropSpeed;

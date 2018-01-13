@@ -13,7 +13,7 @@ public class BossHand : Enemy {
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
-
+        
 		boxCollider2D = GetComponent<BoxCollider2D>();
 		spriteRenderer.sortingLayerName = "BackgroundDetails";
 		boss = GetComponentInParent<Boss>();
@@ -23,7 +23,7 @@ public class BossHand : Enemy {
 
 	// after the entry, initializes the fist
 	public void Ready() {
-		Debug.Log("fist ready");
+		Debug.Log("hand ready");
 		spriteRenderer.sortingLayerName = "Foreground";
 		gameObject.layer = LayerMask.NameToLayer("Enemies");
 		boxCollider2D.enabled = true;
@@ -52,8 +52,8 @@ public class BossHand : Enemy {
 		}
 
 		// if we need to move in the x or y direction, do so
-			if (Mathf.Abs(xDist) >= 0.1) 
-				rb.velocity = new Vector2(xDist * KP + 1.5f * Mathf.Sign(xDist), 0);
+        if (Mathf.Abs(xDist) >= 0.1) 
+            rb.velocity = new Vector2(xDist * KP + 1.5f * Mathf.Sign(xDist), 0);
 	}
 
 	public float dropSpeed;
@@ -64,24 +64,6 @@ public class BossHand : Enemy {
 		Debug.Log("move up a bit!");
 		rb.velocity = Vector2.zero + Vector2.up * dropSpeed;
 		yield return new WaitForSeconds(0.2f);
-
-		Debug.Log("slam down!"); 
-		slamming = true;
-		rb.velocity = Vector2.zero + Vector2.down * dropSpeed;
-		yield return new WaitUntil(() => grounded);
-
-		slamming = false;
-		rb.velocity = Vector2.zero;
-		yield return new WaitForSeconds(1.5f);
-
-		rising = true;
-		Debug.Log("rising up");
-		yield return new WaitUntil(() => rb.position.y >= 1.56f);
-
-		rb.velocity = Vector2.zero;
-		rising = false;
-		Debug.Log("rising done");
-		state = State.idle;
 	}
 
 	public override void Damage(float damageAmount, float knockback, Collider2D source) {
