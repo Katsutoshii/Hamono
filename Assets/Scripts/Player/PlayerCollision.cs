@@ -76,20 +76,40 @@ public partial class Player : MonoBehaviour {
 				break;
 		}
 	}
-	
+
 	/// <summary>
 	/// OnTriggerEnter is called when the Collider other enters the trigger.
 	/// </summary>
 	/// <param name="other">The other Collider involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other)
 	{
-
+		Debug.Log("Collision with " + other.name);
 		switch (other.name) {
 			case "EnemyHurtBox":
-				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) 
-					Damage(0.5f, 4f, other);
+				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) {
+					string parent = other.gameObject.transform.parent.name;
+					Debug.Log("parent:" + parent);
+					// for the boss
+					if (parent.Equals("RightFist") || parent.Equals("LeftFist")) {
+						Debug.Log("Damaged by fist!");
+						Damage(1f, 4f, other);
+						StartCoroutine(Flatten());
+					}
+					else Damage(0.5f, 4f, other);
+				}
 				else attackResponse = AttackResponse.normal; 
 				break;
 		}
+	}
+
+	private IEnumerator Flatten() {
+		transform.position = new Vector3(transform.position.x, transform.position.y - 0.6f, transform.position.z);
+		transform.localScale = new Vector3(transform.localScale.x * 1.5f, transform.localScale.y / 5, transform.localScale.z);
+		
+		rb.simulated = false;
+		yield return new WaitForSeconds(2f);
+		rb.simulated = true;
+		//transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z);
+		yield return null;
 	}
 }

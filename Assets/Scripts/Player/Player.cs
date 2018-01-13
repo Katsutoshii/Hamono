@@ -122,7 +122,6 @@ public partial class Player : MonoBehaviour {
 
 		UpdateAnimatorVariables();
 	}
-
 	
 	public float autoPathStartTime;
 	// method to handle all control inputs inside main loop
