@@ -41,6 +41,7 @@ public class LoadingScreen : MonoBehaviour {
     x += movementSpeed;
     if (x  >= Screen.width) {
       completedLoops++;
+      Debug.Log("next level");
       if (completedLoops >= maxLoops) SceneManager.LoadSceneAsync(scene);
 
       x %= Screen.width;

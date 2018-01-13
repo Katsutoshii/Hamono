@@ -20,7 +20,7 @@ public class NextLevelController : MonoBehaviour {
 		fadeToBlackEffect.SetActive(true);
 		yield return new WaitForSeconds(0.6f);
 		PlayerPrefs.SetInt("next_level", nextLevel);
-		SceneManager.LoadSceneAsync(3); // takes player to the loading scene
+		SceneManager.LoadScene(nextLevel); // takes player to the loading scene
 	}
 
 	/// <summary>

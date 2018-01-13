@@ -15258,11 +15258,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.35
+      value: 14.28
       objectReference: {fileID: 0}
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.7
+      value: 43.35
       objectReference: {fileID: 0}
     - target: {fileID: 4486713837678026, guid: 912ce30ba4d82244d8548995963ae710, type: 2}
       propertyPath: m_LocalPosition.z
@@ -15744,6 +15744,11 @@ Prefab:
     - target: {fileID: 1580430618684710, guid: ebd3747478494430bb47ca19944d2709, type: 2}
       propertyPath: m_Name
       value: Next Level Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 114432993478176562, guid: ebd3747478494430bb47ca19944d2709,
+        type: 2}
+      propertyPath: nextLevel
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ebd3747478494430bb47ca19944d2709, type: 2}
@@ -44979,6 +44984,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1663272746397186, guid: 3c53a60cc04983040adac58efe4be6c8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3c53a60cc04983040adac58efe4be6c8, type: 2}
   m_IsPrefabParent: 0
@@ -45932,6 +45941,11 @@ Prefab:
     - target: {fileID: 1522440620401066, guid: 6f3a96970d9140b4aa5fd9d7e25b51af, type: 2}
       propertyPath: m_Name
       value: MainCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733796836667532, guid: 6f3a96970d9140b4aa5fd9d7e25b51af,
+        type: 2}
+      propertyPath: maxY
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f3a96970d9140b4aa5fd9d7e25b51af, type: 2}
@@ -48859,24 +48873,6 @@ CompositeCollider2D:
         Y: 392700000
       - X: 146200000
         Y: 392700000
-    - - X: 6400000
-        Y: 392900000
-      - X: 8400000
-        Y: 395200000
-      - X: 8400000
-        Y: 396699968
-      - X: -28400000
-        Y: 396699968
-      - X: -28400000
-        Y: 395600000
-      - X: -28300000
-        Y: 395200000
-      - X: -26500000
-        Y: 392800000
-      - X: -26199998
-        Y: 392700000
-      - X: 6200000
-        Y: 392700000
     - - X: 76400000
         Y: 392900000
       - X: 78400000
@@ -48894,6 +48890,24 @@ CompositeCollider2D:
       - X: 33800000
         Y: 392700000
       - X: 76200000
+        Y: 392700000
+    - - X: 6400000
+        Y: 392900000
+      - X: 8400000
+        Y: 395200000
+      - X: 8400000
+        Y: 396699968
+      - X: -28400000
+        Y: 396699968
+      - X: -28400000
+        Y: 395600000
+      - X: -28300000
+        Y: 395200000
+      - X: -26500000
+        Y: 392800000
+      - X: -26199998
+        Y: 392700000
+      - X: 6200000
         Y: 392700000
     - - X: 216400000
         Y: 392900000
@@ -49176,15 +49190,6 @@ CompositeCollider2D:
       - {x: 11.35, y: 39.28}
       - {x: 11.38, y: 39.27}
       - {x: 14.62, y: 39.27}
-    - - {x: 0.64, y: 39.29}
-      - {x: 0.84000003, y: 39.52}
-      - {x: 0.84000003, y: 39.67}
-      - {x: -2.84, y: 39.67}
-      - {x: -2.84, y: 39.56}
-      - {x: -2.83, y: 39.52}
-      - {x: -2.65, y: 39.28}
-      - {x: -2.62, y: 39.27}
-      - {x: 0.62, y: 39.27}
     - - {x: 7.64, y: 39.29}
       - {x: 7.84, y: 39.52}
       - {x: 7.84, y: 39.67}
@@ -49194,6 +49199,15 @@ CompositeCollider2D:
       - {x: 3.3500001, y: 39.28}
       - {x: 3.38, y: 39.27}
       - {x: 7.62, y: 39.27}
+    - - {x: 0.64, y: 39.29}
+      - {x: 0.84000003, y: 39.52}
+      - {x: 0.84000003, y: 39.67}
+      - {x: -2.84, y: 39.67}
+      - {x: -2.84, y: 39.56}
+      - {x: -2.83, y: 39.52}
+      - {x: -2.65, y: 39.28}
+      - {x: -2.62, y: 39.27}
+      - {x: 0.62, y: 39.27}
     - - {x: 21.64, y: 39.29}
       - {x: 21.84, y: 39.52}
       - {x: 21.84, y: 39.67}
