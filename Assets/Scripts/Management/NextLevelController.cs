@@ -12,7 +12,7 @@ public class NextLevelController : MonoBehaviour {
 	void Start() {
 		Debug.Log("next door!");
 		fadeToBlackEffect = GameObject.Find("FadeToBlack");
-		fadeToBlackEffect.SetActive(false);
+		if (fadeToBlackEffect != null) fadeToBlackEffect.SetActive(false);
 	}
 
 	private IEnumerator NextScene() {
