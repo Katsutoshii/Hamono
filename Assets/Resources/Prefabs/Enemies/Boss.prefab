@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4840542023020834}
   - component: {fileID: 61576011267857316}
+  - component: {fileID: 61260197115793182}
   m_Layer: 9
   m_Name: EnemyHurtBox
   m_TagString: Untagged
@@ -266,7 +267,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4999472567097528}
   - component: {fileID: 212592135565079086}
-  m_Layer: 19
+  - component: {fileID: 50537635649552126}
+  - component: {fileID: 114260676512327814}
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,6 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4801488541645730}
   - component: {fileID: 61099449954328436}
+  - component: {fileID: 61637247297715044}
   m_Layer: 9
   m_Name: EnemyHurtBox
   m_TagString: Untagged
@@ -298,7 +302,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4859143429423348}
   - component: {fileID: 212915302174702792}
-  m_Layer: 0
+  - component: {fileID: 50632131131405164}
+  - component: {fileID: 114013692540528756}
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,6 +506,46 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!50 &50537635649552126
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864438932177180}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!50 &50632131131405164
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1967928143218784}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!50 &50679563017194806
 Rigidbody2D:
   serializedVersion: 4
@@ -645,6 +691,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1739743, y: 1.4077654}
   m_EdgeRadius: 0
+--- !u!61 &61260197115793182
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1369860358398650}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.1974947, y: 1.4151154}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.4677813, y: 1.6590962}
+  m_EdgeRadius: 0
 --- !u!61 &61276527806135450
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -694,6 +765,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 2.3644533, y: 4.9162025}
+  m_EdgeRadius: 0
+--- !u!61 &61637247297715044
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1875262665143426}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.1782466, y: 1.4547005}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.49743104, y: 1.6444436}
   m_EdgeRadius: 0
 --- !u!61 &61947081401446104
 BoxCollider2D:
@@ -834,6 +930,21 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114013692540528756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1967928143218784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910023ff0b7bf4d49bf1fa35d67f6751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationalSpeed: 1.5
+  radius: 0.3
+  clockwise: 0
+  move: 0
 --- !u!114 &114014866751778222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -872,6 +983,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114260676512327814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864438932177180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 910023ff0b7bf4d49bf1fa35d67f6751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationalSpeed: 2
+  radius: 0.3
+  clockwise: 1
+  move: 0
 --- !u!114 &114316960723051506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -902,6 +1028,8 @@ MonoBehaviour:
   stunTime: 0
   offset: {x: -6, y: 1, z: 0}
   speedX: 2
+  dropSpeed: 10
+  risingSpeed: 3
 --- !u!114 &114336011598122116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1098,6 +1226,8 @@ MonoBehaviour:
   stunTime: 0
   offset: {x: 6, y: 1, z: 0}
   speedX: 2
+  dropSpeed: 10
+  risingSpeed: 3
 --- !u!114 &114914795063209108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1174,7 +1304,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 848748911
   m_SortingLayer: 6
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 8071860dcc91f8844a5ec7e5b63398fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1218,7 +1348,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 848748911
   m_SortingLayer: 6
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 8071860dcc91f8844a5ec7e5b63398fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

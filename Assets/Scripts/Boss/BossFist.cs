@@ -23,6 +23,7 @@ public class BossFist : Enemy {
 
 	// after the entry, initializes the fist
 	public void Ready() {
+		Debug.Log("fist ready");
 		spriteRenderer.sortingLayerName = "Entities";
 		gameObject.layer = LayerMask.NameToLayer("Enemies");
 		boxCollider2D.enabled = true;
@@ -52,22 +53,31 @@ public class BossFist : Enemy {
 				rb.velocity = new Vector2(xDist * KP + 0.5f * Mathf.Sign(xDist), 0);
 	}
 
+	public float dropSpeed;
+	public float risingSpeed;
 	protected override IEnumerator Attack() {
-		rb.velocity = Vector2.zero;
-		state = State.attacking;
-		Debug.Log("slam down!"); 
+		Debug.Log("move up a bit!");
+		yield return new WaitForSeconds(0.5f);
 
-		// attack here
+		Debug.Log("slam down!"); 
+		rb.velocity = Vector2.zero + Vector2.down * dropSpeed;
+		state = State.attacking;
+		yield return new WaitUntil(() => grounded);
+
+		rb.velocity = Vector2.zero;
+		yield return new WaitForSeconds(2);
+		
+		rb.velocity = Vector2.up * risingSpeed;
 		yield return new WaitForSeconds(1);
 		state = State.idle;
 	}
 
-	  public override void Damage(float damageAmount, float knockback, Collider2D source) {
-		  if (grounded) damageAmount = 0;
-		  base.Damage(damageAmount, knockback, source);
-	  }
+	public override void Damage(float damageAmount, float knockback, Collider2D source) {
+		if (grounded) damageAmount = 0;
+		base.Damage(damageAmount, knockback, source);
+	}
 
-	  protected override void Idle() {
-		  rb.velocity = Vector2.zero;
-	  }
+	protected override void Idle() {
+		rb.velocity = Vector2.zero;
+	}
 }
