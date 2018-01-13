@@ -844,7 +844,7 @@ MonoBehaviour:
   - The surviving humans formed a resistance to fight back against these robots.
   - One young hero begins her journey to fight back against the robots.
   sprites:
-  - {fileID: 21300000, guid: 5bda435891eba37409a461a52108f00a, type: 3}
+  - {fileID: 21300000, guid: ab279201bcf5440c29e54ea1fa38afcb, type: 3}
   - {fileID: 21300000, guid: 37f4263d2177c4bd4a96b57bd3ffd22f, type: 3}
   - {fileID: 21300000, guid: b2a8af7531f3d4fea92a2e77a1687906, type: 3}
   - {fileID: 21300000, guid: 910d82db28c864cc6a9045001075c59d, type: 3}
