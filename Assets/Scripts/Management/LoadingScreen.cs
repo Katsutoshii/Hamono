@@ -17,7 +17,7 @@ public class LoadingScreen : MonoBehaviour {
 
   void Start() {
     Debug.Log("Starting load scene");
-    loadingText = GameObject.Find("Loading").GetComponent<Text>();
+    loadingText = GameObject.Find("Traveling").GetComponent<Text>();
     completedLoops = 0;
 
     scene = PlayerPrefs.GetInt("next_level");
