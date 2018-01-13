@@ -12,7 +12,7 @@ public class EnemyGroundCheck : MonoBehaviour
         enemy = gameObject.GetComponentInParent<Enemy>();
     }
 
-    void OnTriggerStay(Collider2D collider2D)
+    void OnTriggerStay2D(Collider2D collider2D)
     {
         if (collider2D.gameObject.layer == LayerMask.NameToLayer("Terrain") || collider2D.gameObject.layer == LayerMask.NameToLayer("LevelBoundaries"))
             enemy.grounded = true;

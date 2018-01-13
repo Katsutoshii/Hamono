@@ -32,6 +32,7 @@ public class BossFist : Enemy {
 	public override void Update() {
 		base.Update();
 		if (boss.state == Boss.State.entering) rb.position = boss.transform.position + offset;
+		if (slamming) rb.velocity = Vector2.down * dropSpeed;
 	}
 
 	protected override void RotateBasedOnDirection() {
@@ -51,21 +52,25 @@ public class BossFist : Enemy {
 
 		// if we need to move in the x or y direction, do so
 			if (Mathf.Abs(xDist) >= 0.1) 
-				rb.velocity = new Vector2(xDist * KP + 0.5f * Mathf.Sign(xDist), 0);
+				rb.velocity = new Vector2(xDist * KP + 1.5f * Mathf.Sign(xDist), 0);
 	}
 
 	public float dropSpeed;
 	public float risingSpeed;
+	private bool slamming = false;
 	protected override IEnumerator Attack() {
 		Debug.Log("move up a bit!");
-		yield return new WaitForSeconds(0.5f);
+		rb.velocity = Vector2.zero + Vector2.up * dropSpeed;
+		yield return new WaitForSeconds(0.2f);
 
 		Debug.Log("slam down!"); 
+		slamming = true;
 		rb.velocity = Vector2.zero + Vector2.down * dropSpeed;
 		yield return new WaitUntil(() => grounded);
 
+		slamming = false;
 		rb.velocity = Vector2.zero;
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(1.5f);
 		
 		Debug.Log("rising up");
 		rb.velocity = Vector2.up * risingSpeed;
