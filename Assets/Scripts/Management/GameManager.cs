@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
 	private GameObject pauseMenuPrefab;
 
 	// Use this for initialization
-	void Start () {	
+	void Start () {
 		cursorTexture = (Texture2D) Resources.Load("Graphics/UI/ui_cursor");
 		cursorMode = CursorMode.Auto;
 		hotSpot = Vector2.zero;
