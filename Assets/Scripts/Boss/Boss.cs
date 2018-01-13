@@ -56,7 +56,12 @@ public class Boss : MonoBehaviour {
 
 	public void StartBattle() {
 		Debug.Log("Starting battle");
+		rb.velocity = Vector2.zero;
+		
+		leftFist.Ready();
+		rightFist.Ready();
 		state = State.autoPathing;
+		
 		StartCoroutine(AttackCycle());
 	}
 
@@ -110,20 +115,17 @@ public class Boss : MonoBehaviour {
 	}
 
 	private bool TargetReachedY() {
-		return Mathf.Abs(target.y - transform.position.y + 3f) < 0.1f;
+		return Mathf.Abs(target.y - transform.position.y) < 0.1f;
 	}
 
-
 	private IEnumerator RiseToLevel() {
-		target = new Vector2(transform.position.x, 0f);
+		Debug.Log("Rising to level");
+		target = new Vector2(transform.position.x, 1f);
 
 		rb.velocity = Vector2.up * speedY;
 		yield return new WaitUntil(TargetReachedY);
-		rb.velocity = Vector2.zero;
-		
-		leftFist.Ready();
-		rightFist.Ready();
-		state = State.idle;
-		//play roar
+		Debug.Log("Level reached");
+		StartBattle();
+		yield return null;
 	}
 }

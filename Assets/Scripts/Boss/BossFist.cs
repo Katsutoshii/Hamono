@@ -39,14 +39,15 @@ public class BossFist : Enemy {
   	}
 
 	protected override void AutoPath() {
-		Debug.Log("Autopathing for " + gameObject.name);
+		// Debug.Log("Autopathing for " + gameObject.name);
 		float xDist = player.transform.position.x - transform.position.x;
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
 		if (Mathf.Abs(xDist) < attackRange) {
+			state = State.attacking;
 			StartCoroutine(Attack());
-				return;
-			}
+			return;
+		}
 
 		// if we need to move in the x or y direction, do so
 			if (Mathf.Abs(xDist) >= 0.1) 
@@ -61,14 +62,14 @@ public class BossFist : Enemy {
 
 		Debug.Log("slam down!"); 
 		rb.velocity = Vector2.zero + Vector2.down * dropSpeed;
-		state = State.attacking;
 		yield return new WaitUntil(() => grounded);
 
 		rb.velocity = Vector2.zero;
 		yield return new WaitForSeconds(2);
 		
+		Debug.Log("rising up");
 		rb.velocity = Vector2.up * risingSpeed;
-		yield return new WaitForSeconds(1);
+		yield return new WaitUntil(() => rb.position.y >= 1.56f);
 		state = State.idle;
 	}
 

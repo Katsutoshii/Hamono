@@ -46,7 +46,6 @@ public class Overlay : MonoBehaviour {
     }
     gameObject.SetActive(false);
     UICanvas.SetActive(true);
-    boss.StartBattle();
     player.state = Player.State.idle;
   }
 }
