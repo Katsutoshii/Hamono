@@ -2643,6 +2643,21 @@ Prefab:
       propertyPath: dropSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114943252474320770, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: healthAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114943252474320770, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: direction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114754894584173410, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: direction
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
   m_IsPrefabParent: 0

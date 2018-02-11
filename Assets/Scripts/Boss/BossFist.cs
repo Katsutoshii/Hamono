@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BossFist : Enemy {
 
+	public float deathDirection;
 	public Vector3 offset;
 	private Boss boss;
 	public float speedX;
@@ -58,6 +59,19 @@ public class BossFist : Enemy {
 			rb.velocity = new Vector2(xDist * KP + 1.5f * Mathf.Sign(xDist), 0);
 	}
 
+	public override void UpdateAnimatorVariables() {
+    animator.SetFloat("speed", rb.velocity.magnitude);
+    animator.SetBool("damaged", state == State.damaged);
+    animator.SetBool("idle", state == State.idle);
+    animator.SetBool("walking", state == State.walking);
+    animator.SetBool("dead", state == State.dead);
+    animator.SetBool("noticed", lockOnPlayer);
+    animator.SetBool("grounded", grounded);
+    animator.SetBool("blocking", state == State.blocking);
+    animator.SetBool("attacking", state == State.attacking);
+		animator.SetFloat("direction", deathDirection);
+  }
+
 	public float dropSpeed;
 	public float risingSpeed;
 	public bool slamming = false;
@@ -89,7 +103,7 @@ public class BossFist : Enemy {
 	public override void Damage(float damageAmount, float knockback, Collider2D source) {
 		if (rising) damageAmount = 1;
 		boss.healthAmount -= 5;
-		base.Damage(damageAmount, knockback, source);
+		if (grounded) base.Damage(damageAmount, knockback, source);
 	}
 
 	protected override void Idle() {
