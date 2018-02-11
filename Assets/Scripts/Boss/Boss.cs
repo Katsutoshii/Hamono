@@ -14,6 +14,10 @@ public class Boss : MonoBehaviour {
 	private Player player;
 	private BossFist leftFist;
 	private BossFist rightFist;
+	private BossHand leftHand;
+	private BossHand rightHand;
+	private GameObject laserHands;
+	private int levelCount;
 	private Rigidbody2D rb;
 	public enum State {
 		entering,
@@ -27,6 +31,7 @@ public class Boss : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		levelCount = 0;
 		state = State.entering;
 		healthAmount = 100;
 
@@ -34,6 +39,7 @@ public class Boss : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 		leftFist = transform.Find("LeftFist").GetComponent<BossFist>();
 		rightFist = transform.Find("RightFist").GetComponent<BossFist>();
+		// laserHands = FindLaserHands();
 
 		StartCoroutine(RiseToLevel());
 	}
@@ -41,6 +47,7 @@ public class Boss : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		 HandleState();
+		//  HandleNextLevel();
 	}
 
 	private void HandleState() {
@@ -53,6 +60,27 @@ public class Boss : MonoBehaviour {
 				AutoPath();
 				break;
 		}
+	}
+
+	private void HandleNextLevel() {
+		if (leftFist == null && rightFist == null && levelCount < 1) {
+			// introduces the laser hands
+			levelCount += 1;
+			laserHands.SetActive(true);
+			leftHand = laserHands.transform.Find("LeftHand").GetComponent<BossHand>();
+			rightHand = laserHands.transform.Find("RightHand").GetComponent<BossHand>();
+		}
+	}
+
+	private GameObject FindLaserHands() {
+		Transform[] trs = this.gameObject.GetComponentsInChildren<Transform>(true);
+		foreach(Transform t in trs) {
+			if (t.name == "LaserHands") {
+				Debug.Log("found the laser hands");
+				return t.gameObject;
+			}
+		}
+		return new GameObject();
 	}
 
 	public void StartBattle() {
@@ -82,7 +110,9 @@ public class Boss : MonoBehaviour {
 	}
 
 	private bool AttackFinished() {
-		if (leftFist.state == Enemy.State.idle && rightFist.state == Enemy.State.idle) {
+		if (leftFist.state == Enemy.State.idle && rightFist.state == Enemy.State.idle
+				|| leftFist == null && rightFist.state == Enemy.State.idle
+				|| leftFist.state == Enemy.State.idle && rightFist == null) {
 			state = State.autoPathing;
 			return true;
 		}

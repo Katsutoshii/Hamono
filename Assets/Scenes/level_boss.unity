@@ -2646,7 +2646,7 @@ Prefab:
     - target: {fileID: 114943252474320770, guid: 98b12cc210a78c24493ebf4e395d1f85,
         type: 2}
       propertyPath: healthAmount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114943252474320770, guid: 98b12cc210a78c24493ebf4e395d1f85,
         type: 2}
@@ -2667,6 +2667,19 @@ Prefab:
         type: 2}
       propertyPath: deathDirection
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167062220113840, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466121651806848, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114754894584173410, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: healthAmount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
