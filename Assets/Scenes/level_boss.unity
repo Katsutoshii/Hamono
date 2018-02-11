@@ -2745,6 +2745,11 @@ Prefab:
       propertyPath: risingSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 95206659975864164, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 52df9f4752513a74c9eb756e4589b158, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
   m_IsPrefabParent: 0
