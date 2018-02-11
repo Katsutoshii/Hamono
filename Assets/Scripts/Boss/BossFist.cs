@@ -44,7 +44,6 @@ public class BossFist : Enemy {
   	}
 
 	protected override void AutoPath() {
-		// Debug.Log("Autopathing for " + gameObject.name);
 		float xDist = player.transform.position.x - transform.position.x;
 		float yDist = player.transform.position.y - transform.position.y + 0.5f;
 

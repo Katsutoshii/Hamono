@@ -41,7 +41,6 @@ public class Boss : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		 HandleState();
-		 HandleFistHealth();
 	}
 
 	private void HandleState() {
@@ -54,11 +53,6 @@ public class Boss : MonoBehaviour {
 				AutoPath();
 				break;
 		}
-	}
-
-	private void HandleFistHealth() {
-		leftFist.healthAmount = Math.Min(leftFist.healthAmount, rightFist.healthAmount);
-		rightFist.healthAmount = Math.Min(leftFist.healthAmount, rightFist.healthAmount);
 	}
 
 	public void StartBattle() {
