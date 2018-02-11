@@ -39,7 +39,7 @@ public class Boss : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 		leftFist = transform.Find("LeftFist").GetComponent<BossFist>();
 		rightFist = transform.Find("RightFist").GetComponent<BossFist>();
-		// laserHands = FindLaserHands();
+		laserHands = FindLaserHands();
 
 		StartCoroutine(RiseToLevel());
 	}
@@ -47,7 +47,7 @@ public class Boss : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		 HandleState();
-		//  HandleNextLevel();
+		 HandleNextLevel();
 	}
 
 	private void HandleState() {
@@ -65,6 +65,7 @@ public class Boss : MonoBehaviour {
 	private void HandleNextLevel() {
 		if (leftFist == null && rightFist == null && levelCount < 1) {
 			// introduces the laser hands
+			Debug.Log("handle next level");
 			levelCount += 1;
 			laserHands.SetActive(true);
 			leftHand = laserHands.transform.Find("LeftHand").GetComponent<BossHand>();
