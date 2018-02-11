@@ -291,7 +291,7 @@ public class Enemy : MonoBehaviour {
       box.enabled = false;
   }
 
-  // method to destroy the enemy object after a death naimation and drop the loot
+  // method to destroy the enemy object after a death animation and drop the loot
   public virtual void Kill() {
 
     spriteRenderer.color = Color.white;
@@ -300,7 +300,7 @@ public class Enemy : MonoBehaviour {
     Destroy(gameObject);
   }
 
-  // method to drop tthe loot of an enemy after death
+  // method to drop the loot of an enemy after death
   protected void DropLoot() {
     if (Random.Range(0, 100f) > 50)
       PoolManager.instance.ReuseObject(heartPrefab, RandomOffset(transform.position), transform.rotation, heartPrefab.transform.localScale);

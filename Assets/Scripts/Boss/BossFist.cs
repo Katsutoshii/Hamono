@@ -66,7 +66,7 @@ public class BossFist : Enemy {
 	protected override IEnumerator Attack() {
 		Debug.Log("move up a bit!");
 		rb.velocity = Vector2.zero + Vector2.up * dropSpeed;
-		yield return new WaitForSeconds(0.2f);
+		yield return new WaitForSeconds(1f);
 
 		Debug.Log("slam down!"); 
 		slamming = true;
@@ -84,11 +84,12 @@ public class BossFist : Enemy {
 		rb.velocity = Vector2.zero;
 		rising = false;
 		Debug.Log("rising done");
-		state = State.idle;
+		if (state != State.dead) state = State.idle;
 	}
 
 	public override void Damage(float damageAmount, float knockback, Collider2D source) {
 		if (rising) damageAmount = 1;
+		boss.healthAmount -= 5;
 		base.Damage(damageAmount, knockback, source);
 	}
 
