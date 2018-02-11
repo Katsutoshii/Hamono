@@ -69,7 +69,7 @@ public class BossFist : Enemy {
     animator.SetBool("grounded", grounded);
     animator.SetBool("blocking", state == State.blocking);
     animator.SetBool("attacking", state == State.attacking);
-		animator.SetFloat("direction", deathDirection);
+		animator.SetFloat("deathDirection", deathDirection);
   }
 
 	public float dropSpeed;
