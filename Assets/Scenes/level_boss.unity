@@ -2681,6 +2681,70 @@ Prefab:
       propertyPath: healthAmount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1171608948635840, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
+      propertyPath: m_Name
+      value: RightHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: walkingSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: distanceNearPlayer
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: healthAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: receiveSlashDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: receiveDashDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: KP
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: attackRange
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: deathDirection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: offset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: speedX
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: dropSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: risingSpeed
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
   m_IsPrefabParent: 0
