@@ -102,8 +102,10 @@ public class BossFist : Enemy {
 
 	public override void Damage(float damageAmount, float knockback, Collider2D source) {
 		if (rising) damageAmount = 1;
-		boss.healthAmount -= 5;
-		if (grounded) base.Damage(damageAmount, knockback, source);
+		if (grounded) {
+			base.Damage(damageAmount, knockback, source);
+			boss.healthAmount -= 5;
+		}
 	}
 
 	protected override void Idle() {

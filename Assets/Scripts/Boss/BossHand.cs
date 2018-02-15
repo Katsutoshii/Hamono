@@ -11,7 +11,7 @@ public class BossHand : Enemy {
 	public float speedX;
 	private Vector2 target;
 	private BoxCollider2D boxCollider2D;
-
+	// Use this for initialization
 	public override void Start () {
 		base.Start();
 
@@ -32,6 +32,13 @@ public class BossHand : Enemy {
 
 	public override void Update() {
 		base.Update();
+		if (state == State.idle) state = State.noticed;
+		if (boss.state == Boss.State.entering) rb.position = boss.transform.position + offset;
+		if (slamming) {
+			if (grounded) rb.velocity = Vector2.zero;
+			else rb.velocity = Vector2.down * dropSpeed;
+		}
+		if (rising) rb.velocity = Vector2.up * risingSpeed;
 	}
 
 	protected override void RotateBasedOnDirection() {
@@ -96,12 +103,13 @@ public class BossHand : Enemy {
 
 	public override void Damage(float damageAmount, float knockback, Collider2D source) {
 		if (rising) damageAmount = 1;
-		boss.healthAmount -= 5;
-		if (grounded) base.Damage(damageAmount, knockback, source);
+		if (grounded) {
+			base.Damage(damageAmount, knockback, source);
+			boss.healthAmount -= 5;
+		}
 	}
 
 	protected override void Idle() {
 		rb.velocity = Vector2.zero;
 	}
-
 }

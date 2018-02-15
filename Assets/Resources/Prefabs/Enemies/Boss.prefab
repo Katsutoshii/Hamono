@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 50002883750680976}
   - component: {fileID: 95496522968877728}
   m_Layer: 9
-  m_Name: LeftHand (1)
+  m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1306,7 +1306,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 0.08482289, y: -0.5035784}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -1406,7 +1406,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 0.08482289, y: -0.5035784}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -1796,24 +1796,25 @@ MonoBehaviour:
   state: 0
   audioSource: {fileID: 0}
   grounded: 0
-  walkingSpeed: 1
+  walkingSpeed: 4
   jumpingPower: 0
-  distanceNearPlayer: 0
-  healthAmount: 0
-  receiveSlashDamage: 0
-  receiveDashDamage: 0
+  distanceNearPlayer: 100
+  healthAmount: 1
+  receiveSlashDamage: 1
+  receiveDashDamage: 1
   receiveSlashKnockback: 0
   receiveDashKnockback: 0
   stunned: 0
-  KP: 1
+  KP: 2
   size: 1
   attackDuration: 0
-  attackRange: 0
+  attackRange: 0.1
   stunTime: 1
-  offset: {x: -6, y: 0, z: 0}
-  speedX: 0
-  dropSpeed: 0
-  risingSpeed: 0
+  deathDirection: 1
+  offset: {x: -6, y: 1, z: 0}
+  speedX: 2
+  dropSpeed: 10
+  risingSpeed: 2
   slamming: 0
 --- !u!114 &114260676512327814
 MonoBehaviour:
@@ -1890,6 +1891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b613b25af25f047917a0f29f7359f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   healthAmount: 100
   maxHealthAmount: 0
   phase: 0
@@ -1999,24 +2001,25 @@ MonoBehaviour:
   state: 0
   audioSource: {fileID: 0}
   grounded: 0
-  walkingSpeed: 1
+  walkingSpeed: 4
   jumpingPower: 0
-  distanceNearPlayer: 0
-  healthAmount: 0
-  receiveSlashDamage: 0
-  receiveDashDamage: 0
+  distanceNearPlayer: 100
+  healthAmount: 1
+  receiveSlashDamage: 1
+  receiveDashDamage: 1
   receiveSlashKnockback: 0
   receiveDashKnockback: 0
   stunned: 0
-  KP: 1
+  KP: 2
   size: 1
   attackDuration: 0
-  attackRange: 0
+  attackRange: 0.1
   stunTime: 1
-  offset: {x: 6, y: 0, z: 0}
-  speedX: 0
-  dropSpeed: 0
-  risingSpeed: 0
+  deathDirection: 1
+  offset: {x: -6, y: 1, z: 0}
+  speedX: 2
+  dropSpeed: 10
+  risingSpeed: 2
   slamming: 0
 --- !u!114 &114722995258847852
 MonoBehaviour:
@@ -2089,7 +2092,7 @@ MonoBehaviour:
   walkingSpeed: 4
   jumpingPower: 0
   distanceNearPlayer: 100
-  healthAmount: 3
+  healthAmount: 1
   receiveSlashDamage: 1
   receiveDashDamage: 1
   receiveSlashKnockback: 0
@@ -2100,6 +2103,7 @@ MonoBehaviour:
   attackDuration: 0
   attackRange: 0.1
   stunTime: 0
+  deathDirection: 1
   offset: {x: 6, y: 1, z: 0}
   speedX: 2
   dropSpeed: 20
@@ -2216,7 +2220,7 @@ MonoBehaviour:
   walkingSpeed: 4
   jumpingPower: 0
   distanceNearPlayer: 100
-  healthAmount: 3
+  healthAmount: 1
   receiveSlashDamage: 1
   receiveDashDamage: 1
   receiveSlashKnockback: 0
@@ -2227,6 +2231,7 @@ MonoBehaviour:
   attackDuration: 0
   attackRange: 0.1
   stunTime: 0
+  deathDirection: 1
   offset: {x: -6, y: 1, z: 0}
   speedX: 2
   dropSpeed: 20

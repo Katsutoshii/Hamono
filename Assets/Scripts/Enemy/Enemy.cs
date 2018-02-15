@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour {
   }
 
   protected float noticedStartTime;
-  protected virtual void Walk() {
+  public virtual void Walk() {
     if (lockOnPlayer) {
       // follow the player
       if (!prevNotice) {

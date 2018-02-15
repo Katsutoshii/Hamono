@@ -2638,123 +2638,38 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114943252474320770, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: risingSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114943252474320770, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: dropSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114943252474320770, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: healthAmount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114943252474320770, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: direction
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114754894584173410, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: direction
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114943252474320770, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: deathDirection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114754894584173410, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: deathDirection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1167062220113840, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
+    - target: {fileID: 1466121651806848, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1466121651806848, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
+    - target: {fileID: 1667438178365098, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1408579871979122, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114754894584173410, guid: 98b12cc210a78c24493ebf4e395d1f85,
+    - target: {fileID: 61577091581042058, guid: 98b12cc210a78c24493ebf4e395d1f85,
         type: 2}
-      propertyPath: healthAmount
-      value: 1
+      propertyPath: m_Offset.x
+      value: -0.00022852421
       objectReference: {fileID: 0}
-    - target: {fileID: 1171608948635840, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
-      propertyPath: m_Name
-      value: RightHand
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+    - target: {fileID: 61577091581042058, guid: 98b12cc210a78c24493ebf4e395d1f85,
         type: 2}
-      propertyPath: walkingSpeed
-      value: 4
+      propertyPath: m_Size.x
+      value: 2.8982775
       objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+    - target: {fileID: 61577091581042058, guid: 98b12cc210a78c24493ebf4e395d1f85,
         type: 2}
-      propertyPath: distanceNearPlayer
-      value: 100
+      propertyPath: m_Offset.y
+      value: -0.75226635
       objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
+    - target: {fileID: 61577091581042058, guid: 98b12cc210a78c24493ebf4e395d1f85,
         type: 2}
-      propertyPath: healthAmount
-      value: 1
+      propertyPath: m_Size.y
+      value: 4.5159025
       objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: receiveSlashDamage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: receiveDashDamage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: KP
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: attackRange
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: deathDirection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: offset.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: speedX
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: dropSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114231822906063638, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: risingSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 95206659975864164, guid: 98b12cc210a78c24493ebf4e395d1f85,
-        type: 2}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 52df9f4752513a74c9eb756e4589b158, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
   m_IsPrefabParent: 0
