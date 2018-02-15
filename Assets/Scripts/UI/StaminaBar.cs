@@ -11,26 +11,31 @@ public class StaminaBar : MonoBehaviour
     public float fillAmount;
 
     public Image bar;
-    private Player player;
+    public GameObject subject;
     private bool exhausted;
 
     // Use this for initialization
-    void Start()
-    {
-      player = GameObject.Find("Player").GetComponent<Player>();
-    }
+    void Start() {}
 
-    // increases the player's stamina
+    // increases the subject's stamina
     public void IncreaseStamina(float amount) {
       if (this.bar.fillAmount < 1) 
         this.bar.fillAmount += amount;
       this.exhausted = false;
     }
 
-    // decreases the player's stamina
+    // decreases the subject's stamina
     public void DecreaseStamina(float amount) {
       if (this.bar.fillAmount > 0)
         this.bar.fillAmount -= amount;
+      else
+        this.exhausted = true;
+    }
+
+    // sets the subject's stamina amount
+    public void SetStamina(float amount) {
+      if (amount > 0)
+        this.bar.fillAmount = amount;
       else
         this.exhausted = true;
     }

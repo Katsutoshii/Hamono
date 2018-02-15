@@ -5,6 +5,7 @@ using System;
 
 public class Boss : MonoBehaviour {
 
+	public StaminaBar healthBar;
 	public float healthAmount;
 	public float maxHealthAmount;
 	public int phase;
@@ -37,6 +38,7 @@ public class Boss : MonoBehaviour {
 
 		player = FindObjectOfType<Player>();
 		rb = GetComponent<Rigidbody2D>();
+		healthBar = GameObject.Find("BossHealthBar").GetComponent<StaminaBar>();
 		leftFist = transform.Find("LeftFist").GetComponent<BossFist>();
 		rightFist = transform.Find("RightFist").GetComponent<BossFist>();
 		laserHands = FindLaserHands();
@@ -51,6 +53,7 @@ public class Boss : MonoBehaviour {
 	}
 
 	private void HandleState() {
+		healthBar.SetStamina(healthAmount / 100);
 		switch (state) {
 			case State.idle:
 				Idle();

@@ -95,7 +95,7 @@ public partial class Player : MonoBehaviour {
 		attackType = AttackType.none;
 
 		// get UI objects
-		staminaBar = FindObjectOfType<StaminaBar>();
+		staminaBar = GameObject.Find("StaminaBar").GetComponent<StaminaBar>();
 		healthBar = FindObjectOfType<HealthBar>();
 		coinCountText = GameObject.Find("CoinCount").GetComponent<Text>();
 		coinCount = PlayerPrefs.GetInt("coin_count");
