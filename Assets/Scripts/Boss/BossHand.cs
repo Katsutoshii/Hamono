@@ -19,7 +19,6 @@ public class BossHand : Enemy {
 		spriteRenderer.sortingLayerName = "BackgroundDetails";
 		boss = GetComponentInParent<Boss>();
 		state = State.idle;
-		gameObject.layer = LayerMask.NameToLayer("Default");
 	}
 
 	// after the entry, initializes the fist

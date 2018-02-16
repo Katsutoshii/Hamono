@@ -373,8 +373,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4570921052735784}
-  - component: {fileID: 114273940752093596}
   - component: {fileID: 61549396744427556}
+  - component: {fileID: 114273940752093596}
   m_Layer: 9
   m_Name: GroundChecker
   m_TagString: Untagged
@@ -441,8 +441,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4953258281691106}
-  - component: {fileID: 114313435588096338}
   - component: {fileID: 61305833832438814}
+  - component: {fileID: 114313435588096338}
   m_Layer: 9
   m_Name: GroundChecker
   m_TagString: Untagged
@@ -1004,10 +1004,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.23940003, y: -0.24962997}
+  m_Offset: {x: 0.01788652, y: -0.42861176}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1018,7 +1018,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3711998, y: 2.2689686}
+  m_Size: {x: 2.885773, y: 2.6269321}
   m_EdgeRadius: 0
 --- !u!61 &61110288257128750
 BoxCollider2D:
@@ -1129,7 +1129,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.020268917, y: -1.7076268}
@@ -1279,7 +1279,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.027205944, y: -1.7102041}
@@ -1454,10 +1454,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.23940003, y: -0.24962997}
+  m_Offset: {x: 0.0066999197, y: -0.4062395}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1468,7 +1468,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3711998, y: 2.2689686}
+  m_Size: {x: 2.8633997, y: 2.5821877}
   m_EdgeRadius: 0
 --- !u!61 &61958433793731532
 BoxCollider2D:
