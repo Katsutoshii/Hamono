@@ -21,6 +21,7 @@ public class NextLevelController : MonoBehaviour {
 		fadeToBlackEffect.SetActive(true);
 		yield return new WaitForSeconds(0.6f);
 		PlayerPrefs.SetFloat("health", player.healthAmount);
+		PlayerPrefs.SetInt("coin_count", player.coinCount);
 		PlayerPrefs.SetInt("next_level", nextLevel);
 		SceneManager.LoadScene(5); // takes player to the loading scene
 	}

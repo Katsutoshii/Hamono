@@ -51,7 +51,6 @@ public partial class Player : MonoBehaviour {
 		switch (other.collider.name.Substring(0, 4)) {
 			case "Coin":
 				coinCount++;
-				PlayerPrefs.SetInt("coin_coint", coinCount);
 				coinCountText.text = "" + coinCount;
 				break;
 

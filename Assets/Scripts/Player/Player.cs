@@ -100,6 +100,7 @@ public partial class Player : MonoBehaviour {
 		healthBar = FindObjectOfType<HealthBar>();
 		coinCountText = GameObject.Find("CoinCount").GetComponent<Text>();
 		coinCount = PlayerPrefs.GetInt("coin_count");
+		coinCountText.text = "" + coinCount;
 		healthBar.HandleHealth(healthAmount);
 		
 		// create pools for attack effects
