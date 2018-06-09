@@ -33,11 +33,6 @@ public class BossHand : Enemy {
 		base.Update();
 		if (state == State.idle) state = State.noticed;
 		if (boss.state == Boss.State.entering) rb.position = boss.transform.position + offset;
-		if (slamming) {
-			if (grounded) rb.velocity = Vector2.zero;
-			else rb.velocity = Vector2.down * dropSpeed;
-		}
-		if (rising) rb.velocity = Vector2.up * risingSpeed;
 	}
 
 	protected override void RotateBasedOnDirection() {
@@ -60,48 +55,37 @@ public class BossHand : Enemy {
 	}
 
 	public override void UpdateAnimatorVariables() {
-    animator.SetFloat("speed", rb.velocity.magnitude);
-    animator.SetBool("damaged", state == State.damaged);
-    animator.SetBool("idle", state == State.idle);
-    animator.SetBool("walking", state == State.walking);
-    animator.SetBool("dead", state == State.dead);
-    animator.SetBool("noticed", lockOnPlayer);
-    animator.SetBool("grounded", grounded);
-    animator.SetBool("blocking", state == State.blocking);
-    animator.SetBool("attacking", state == State.attacking);
+		animator.SetFloat("speed", rb.velocity.magnitude);
+		animator.SetBool("damaged", state == State.damaged);
+		animator.SetBool("idle", state == State.idle);
+		animator.SetBool("walking", state == State.walking);
+		animator.SetBool("dead", state == State.dead);
+		animator.SetBool("noticed", lockOnPlayer);
+		animator.SetBool("grounded", grounded);
+		animator.SetBool("blocking", state == State.blocking);
+		animator.SetBool("attacking", state == State.attacking);
 		animator.SetFloat("deathDirection", deathDirection);
   }
 
 	public float dropSpeed;
 	public float risingSpeed;
-	public bool slamming = false;
-	private bool rising = false;
+	public bool charging;
+
 	protected override IEnumerator Attack() {
-		Debug.Log("move up a bit!");
-		rb.velocity = Vector2.zero + Vector2.up * dropSpeed;
+		Debug.Log("charging!");
 		yield return new WaitForSeconds(1f);
 
-		Debug.Log("slam down!"); 
-		slamming = true;
-		rb.velocity = Vector2.zero + Vector2.down * dropSpeed;
-		yield return new WaitUntil(() => grounded);
-
-		rb.velocity = Vector2.zero;
-		yield return new WaitForSeconds(2f);
-
-		rising = true;
-		slamming = false;
+		charging = true;
 		Debug.Log("rising up");
 		yield return new WaitUntil(() => rb.position.y >= 1.56f);
 
 		rb.velocity = Vector2.zero;
-		rising = false;
+
 		Debug.Log("rising done");
 		if (state != State.dead) state = State.idle;
 	}
 
 	public override void Damage(float damageAmount, float knockback, Collider2D source) {
-		if (rising) damageAmount = 1;
 		if (grounded) {
 			base.Damage(damageAmount, knockback, source);
 			boss.healthAmount -= 5;
