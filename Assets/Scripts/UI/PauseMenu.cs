@@ -61,9 +61,11 @@ public class PauseMenu : MonoBehaviour {
   }
 
   public void ChangeMusicVolume() {
-    musicAudio.volume = musicSlider .value;
-    PlayerPrefs.SetInt("set_sfx_volume", 1);
-    PlayerPrefs.SetFloat("sfx_volume", sfxSlider.value);
+    if (musicAudio != null) {
+      musicAudio.volume = musicSlider.value;
+      PlayerPrefs.SetInt("set_sfx_volume", 1);
+      PlayerPrefs.SetFloat("sfx_volume", sfxSlider.value);
+    }
   }
 
   // event handler for the resume button
