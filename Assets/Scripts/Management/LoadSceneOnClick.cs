@@ -12,6 +12,7 @@ public class LoadSceneOnClick : MonoBehaviour {
 	void Start()
 	{
 		loadingBar = FindObjectOfType<LoadingBar>();
+		PlayerPrefs.DeleteAll();
 	}
 	public void LoadScene(int sceneID) {
 		Debug.Log("starting scene " + sceneID);
