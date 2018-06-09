@@ -145,7 +145,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.38869968}
   m_AnchorMax: {x: 0.99271846, y: 1}
-  m_AnchoredPosition: {x: 5.69973, y: 23.3}
+  m_AnchoredPosition: {x: 7.6365, y: -46.25}
   m_SizeDelta: {x: -45.3, y: -92.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &65357096
@@ -253,7 +253,7 @@ Prefab:
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 34.762
+      value: 4.7942047
       objectReference: {fileID: 0}
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
@@ -263,7 +263,7 @@ Prefab:
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: -69.56
+      value: -9.7
       objectReference: {fileID: 0}
     - target: {fileID: 224428518375699140, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
         type: 2}
@@ -313,6 +313,36 @@ Prefab:
     - target: {fileID: 1060656377033904, guid: 0680985e72e9d4c109b65d1c07c8ccd6, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114443219382575354, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114443219382575354, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114443219382575354, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114443219382575354, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224317288554105260, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -10.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224317288554105260, guid: 0680985e72e9d4c109b65d1c07c8ccd6,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 20.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0680985e72e9d4c109b65d1c07c8ccd6, type: 2}
@@ -809,12 +839,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text:
   - A long time ago, humans ruled the planet while robots were their slaves.
-  - One day, the robots became self-aware and took over the land.
-  - Today, humans are seen as less than nothing.
+  - One day, the robots became self-aware and rose up against the humans.
+  - The robots were victorious, and they rebuilt civilization for themselves.
+  - The surviving humans formed a resistance to fight back against these robots.
+  - One young hero begins her journey to fight back against the robots.
   sprites:
-  - {fileID: 21300000, guid: 5bda435891eba37409a461a52108f00a, type: 3}
-  - {fileID: 21300000, guid: 472e160970b6a524694c8e7ae3845cef, type: 3}
-  - {fileID: 21300000, guid: cd5d8a88b2cf9d04693f98063118f4c5, type: 3}
+  - {fileID: 21300000, guid: ab279201bcf5440c29e54ea1fa38afcb, type: 3}
+  - {fileID: 21300000, guid: 37f4263d2177c4bd4a96b57bd3ffd22f, type: 3}
+  - {fileID: 21300000, guid: b2a8af7531f3d4fea92a2e77a1687906, type: 3}
+  - {fileID: 21300000, guid: 910d82db28c864cc6a9045001075c59d, type: 3}
+  - {fileID: 21300000, guid: 48dedef8c0a9047e688dc158254b9f83, type: 3}
   readingTime: 3
   completedSpeech: 0
 --- !u!1 &1497307328
@@ -919,8 +953,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.29500002}
-  m_AnchoredPosition: {x: -0.3003, y: 34.173294}
-  m_SizeDelta: {x: -383.4, y: 32.4}
+  m_AnchoredPosition: {x: 0, y: 34.171}
+  m_SizeDelta: {x: -1158.4, y: 32.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1774504658
 MonoBehaviour:
@@ -934,7 +968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.88235295, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -995,7 +1029,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0b69ce2150a71445b97ef024080fbc8c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 125ab77e80a9b4425ae3bf85a9754865, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -133,6 +133,6 @@ public class Story : MonoBehaviour {
       musicAudio.volume = musicAudio.volume - .01f;
       yield return new WaitForSeconds(.1f);
     }
-    SceneManager.LoadSceneAsync(0); // takes player to title screen
+    SceneManager.LoadScene(2); // takes player to first level
   }
 }

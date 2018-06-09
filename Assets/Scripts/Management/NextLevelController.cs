@@ -8,6 +8,7 @@ public class NextLevelController : MonoBehaviour {
 
   public int nextLevel;
 	public GameObject fadeToBlackEffect;
+	private Player player;
 
 	void Start() {
 		Debug.Log("next door!");
@@ -16,11 +17,13 @@ public class NextLevelController : MonoBehaviour {
 	}
 
 	private IEnumerator NextScene() {
-		
+		player = FindObjectOfType<Player>();
 		fadeToBlackEffect.SetActive(true);
 		yield return new WaitForSeconds(0.6f);
+		PlayerPrefs.SetFloat("health", player.healthAmount);
+		PlayerPrefs.SetInt("coin_count", player.coinCount);
 		PlayerPrefs.SetInt("next_level", nextLevel);
-		SceneManager.LoadSceneAsync(3); // takes player to the loading scene
+		SceneManager.LoadScene(5); // takes player to the loading scene
 	}
 
 	/// <summary>
