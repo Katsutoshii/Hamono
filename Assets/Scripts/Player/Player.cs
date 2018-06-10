@@ -93,12 +93,15 @@ public partial class Player : MonoBehaviour {
 		// start states
 		state = State.idle;
 		attackType = AttackType.none;
+		healthAmount = SetHealth();
 
 		// get UI objects
 		staminaBar = GameObject.Find("StaminaBar").GetComponent<StaminaBar>();
 		healthBar = FindObjectOfType<HealthBar>();
 		coinCountText = GameObject.Find("CoinCount").GetComponent<Text>();
 		coinCount = PlayerPrefs.GetInt("coin_count");
+		coinCountText.text = "" + coinCount;
+		healthBar.HandleHealth(healthAmount);
 		
 		// create pools for attack effects
 		PoolManager.instance.CreatePool(dustCloudPrefab, 1);
@@ -122,6 +125,15 @@ public partial class Player : MonoBehaviour {
 
 		UpdateAnimatorVariables();
 	}
+
+	private float SetHealth() {
+		float loadedHealth = PlayerPrefs.GetFloat("health");
+		if (loadedHealth != 0) {
+			return loadedHealth;
+		}
+		return 3;
+	}
+
 	
 	public float autoPathStartTime;
 	// method to handle all control inputs inside main loop

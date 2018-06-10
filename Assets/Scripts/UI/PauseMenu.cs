@@ -24,14 +24,48 @@ public class PauseMenu : MonoBehaviour {
     musicAudio.ignoreListenerVolume = true;
     
     // represents the current volume of the game
-    musicSlider.value = musicAudio.volume;
-    sfxSlider.value = AudioListener.volume;
+    musicSlider.value = GetMusicVolume();
+    sfxSlider.value = GetSFXVolume();
 
     Time.timeScale = 0.0f;
   }
 
+  private float GetMusicVolume() {
+    if (PlayerPrefs.GetInt("set_music_volume") == 0) {
+      // music volume has never been set
+      PlayerPrefs.SetInt("set_music_volume", 1);
+      PlayerPrefs.SetFloat("music_volume", musicAudio.volume);
+      return musicAudio.volume;
+    } else {
+      // music volume has been set
+      return PlayerPrefs.GetFloat("music_volume");
+    }
+  }
+
+  private float GetSFXVolume() {
+    if (PlayerPrefs.GetInt("set_sfx_volume") == 0) {
+      // sfx volume has never been set
+      PlayerPrefs.SetInt("set_sfx_volume", 1);
+      PlayerPrefs.SetFloat("sfx_volume", AudioListener.volume);
+      return AudioListener.volume;
+    } else {
+      // sfx volume has been set
+      return PlayerPrefs.GetFloat("sfx_volume");
+    }
+  }
+
   public void ChangeSFXVolume() {
     AudioListener.volume = sfxSlider.value;
+    PlayerPrefs.SetInt("set_sfx_volume", 1);
+    PlayerPrefs.SetFloat("sfx_volume", sfxSlider.value);
+  }
+
+  public void ChangeMusicVolume() {
+    if (musicAudio != null) {
+      musicAudio.volume = musicSlider.value;
+      PlayerPrefs.SetInt("set_sfx_volume", 1);
+      PlayerPrefs.SetFloat("sfx_volume", sfxSlider.value);
+    }
   }
 
   // event handler for the resume button
