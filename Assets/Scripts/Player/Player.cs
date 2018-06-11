@@ -162,6 +162,9 @@ public partial class Player : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Method to update the variables of the attached animator based on state variables
+	/// </summary>
 	public void UpdateAnimatorVariables() {
 		// update animator variables
     	animator.SetBool("grounded", grounded);

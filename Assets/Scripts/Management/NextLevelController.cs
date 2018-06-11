@@ -11,7 +11,7 @@ public class NextLevelController : MonoBehaviour {
 	private Player player;
 
 	void Start() {
-		Debug.Log("next door!");
+		// Debug.Log("next door!");
 		fadeToBlackEffect = GameObject.Find("FadeToBlack");
 		if (fadeToBlackEffect != null) fadeToBlackEffect.SetActive(false);
 	}

@@ -5,20 +5,18 @@ using System;
 
 public class Boss : MonoBehaviour {
 
-	public StaminaBar healthBar;
-	public float healthAmount;
-	public float maxHealthAmount;
-	public int phase;
-	public float speedX;
-	public float speedY;
-	public Vector2 target;
-	private Player player;
-	private BossFist leftFist;
-	private BossFist rightFist;
-	private BossHand leftHand;
-	private BossHand rightHand;
-	private GameObject laserHands;
-	private int levelCount;
+	public StaminaBar healthBar;	// health bar object
+	public float healthAmount;		// boss current hp amount
+	public float maxHealthAmount; 	// boss total health
+	public float speedX;			// horizontal speed
+	public float speedY;			// vertical speed
+	public Vector2 target;			// target location to move towards
+	public Player player;			// player
+	private BossFist leftFist;		// the left fist for phase 1
+	private BossFist rightFist;		// the right fist for phase 1
+	private BossLaserHands laserHands;
+
+	private int phase;			// which phase we are on
 	private Rigidbody2D rb;
 	public enum State {
 		entering,
@@ -32,7 +30,7 @@ public class Boss : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		levelCount = 0;
+		phase = 0;
 		state = State.entering;
 		healthAmount = 100;
 
@@ -41,7 +39,7 @@ public class Boss : MonoBehaviour {
 		healthBar = GameObject.Find("BossHealthBar").GetComponent<StaminaBar>();
 		leftFist = transform.Find("LeftFist").GetComponent<BossFist>();
 		rightFist = transform.Find("RightFist").GetComponent<BossFist>();
-		laserHands = FindLaserHands();
+		laserHands = transform.Find("LaserHands").GetComponent<BossLaserHands>();
 
 		StartCoroutine(RiseToLevel());
 	}
@@ -66,25 +64,12 @@ public class Boss : MonoBehaviour {
 	}
 
 	private void HandleNextLevel() {
-		if (leftFist == null && rightFist == null && levelCount < 1) {
+		if (leftFist == null && rightFist == null && phase < 1) {
 			// introduces the laser hands
 			Debug.Log("handle next level");
-			levelCount += 1;
-			laserHands.SetActive(true);
-			leftHand = laserHands.transform.Find("LeftHand").GetComponent<BossHand>();
-			rightHand = laserHands.transform.Find("RightHand").GetComponent<BossHand>();
+			phase += 1;
+			laserHands.Activate();
 		}
-	}
-
-	private GameObject FindLaserHands() {
-		Transform[] trs = this.gameObject.GetComponentsInChildren<Transform>(true);
-		foreach(Transform t in trs) {
-			if (t.name == "LaserHands") {
-				Debug.Log("found the laser hands");
-				return t.gameObject;
-			}
-		}
-		return new GameObject();
 	}
 
 	public void StartBattle() {
@@ -105,7 +90,7 @@ public class Boss : MonoBehaviour {
 			target = new Vector2(player.transform.position.x, transform.position.y);
 
 			if (TargetReachedX()) {
-				Attack();
+				FistAttack();
 				yield return new WaitUntil(AttackFinished);
 			}
 		}
@@ -123,7 +108,10 @@ public class Boss : MonoBehaviour {
 		return false;
 	}
 
-	private void Attack() {
+	/// <summary>
+	/// Makes the fists attack
+	/// </summary>
+	private void FistAttack() {
 		Debug.Log("boss attack!");
 		state = State.idle;
 
@@ -154,12 +142,12 @@ public class Boss : MonoBehaviour {
 	}
 
 	private IEnumerator RiseToLevel() {
-		Debug.Log("Rising to level");
+		// Debug.Log("Rising to level");
 		target = new Vector2(transform.position.x, 1f);
 
 		rb.velocity = Vector2.up * speedY;
 		yield return new WaitUntil(TargetReachedY);
-		Debug.Log("Level reached");
+		// Debug.Log("Level reached");
 		StartBattle();
 		yield return null;
 	}

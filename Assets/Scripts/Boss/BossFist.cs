@@ -46,7 +46,7 @@ public class BossFist : Enemy {
 
 	protected override void AutoPath() {
 		float xDist = player.transform.position.x - transform.position.x;
-		float yDist = player.transform.position.y - transform.position.y + 0.5f;
+		// float yDist = player.transform.position.y - transform.position.y + 0.5f;
 
 		if (Mathf.Abs(xDist) < attackRange) {
 			state = State.attacking;
@@ -76,12 +76,17 @@ public class BossFist : Enemy {
 	public float risingSpeed;
 	public bool slamming = false;
 	private bool rising = false;
+
+	/// <summary>
+	/// Coroutine for the fist attack
+	/// </summary>
+	/// <returns></returns>
 	protected override IEnumerator Attack() {
-		Debug.Log("move up a bit!");
+		// Debug.Log("move up a bit!");
 		rb.velocity = Vector2.zero + Vector2.up * dropSpeed;
 		yield return new WaitForSeconds(1f);
 
-		Debug.Log("slam down!"); 
+		// Debug.Log("slam down!"); 
 		slamming = true;
 		rb.velocity = Vector2.zero + Vector2.down * dropSpeed;
 		yield return new WaitUntil(() => grounded);
@@ -91,12 +96,12 @@ public class BossFist : Enemy {
 
 		rising = true;
 		slamming = false;
-		Debug.Log("rising up");
+		// Debug.Log("rising up");
 		yield return new WaitUntil(() => rb.position.y >= 1.56f);
 
 		rb.velocity = Vector2.zero;
 		rising = false;
-		Debug.Log("rising done");
+		// Debug.Log("rising done");
 		if (state != State.dead) state = State.idle;
 	}
 

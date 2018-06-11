@@ -82,16 +82,16 @@ public partial class Player : MonoBehaviour {
 	/// <param name="other">The other Collider involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log("Collision with " + other.name);
+		// Debug.Log("Collision with " + other.name);
 		switch (other.name) {
 			case "EnemyHurtBox":
 				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) {
 					Transform parent = other.gameObject.transform.parent;
-					Debug.Log("parent:" + parent.name);
+					// Debug.Log("parent:" + parent.name);
 					// for the boss
 					if (parent.name.Equals("RightFist") || parent.name.Equals("LeftFist")) {
 						if (grounded && parent.GetComponent<BossFist>().slamming) {
-							Debug.Log("Damaged by fist!");
+							// Debug.Log("Damaged by fist!");
 							StartCoroutine(Flatten());
 							Damage(1f, 4f, other);
 						}

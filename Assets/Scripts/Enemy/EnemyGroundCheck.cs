@@ -13,7 +13,7 @@ public class EnemyGroundCheck : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collider2D) {
-        Debug.Log("landing right here ijemma: " + GetComponent<Collider2D>().gameObject.layer);
+        //Debug.Log("landing right here ijemma: " + GetComponent<Collider2D>().gameObject.layer);
     }
 
     void OnTriggerStay2D(Collider2D collider2D)
