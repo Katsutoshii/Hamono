@@ -11,11 +11,16 @@ public class BossFist : Enemy {
 	public float speedX;
 	private Vector2 target;
 	private BoxCollider2D boxCollider2D;
+	private AudioSource audioSource;
+
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
 
 		boxCollider2D = GetComponent<BoxCollider2D>();
+		audioSource = GetComponent<AudioSource>();
+		audioSource.volume = 0;
+		
 		spriteRenderer.sortingLayerName = "BackgroundDetails";
 		boss = GetComponentInParent<Boss>();
 		state = State.idle;
@@ -27,6 +32,7 @@ public class BossFist : Enemy {
 		Debug.Log("fist ready");
 		spriteRenderer.sortingLayerName = "Foreground";
 		gameObject.layer = LayerMask.NameToLayer("Enemies");
+		audioSource.volume = 1;
 		boxCollider2D.enabled = true;
 	}
 
