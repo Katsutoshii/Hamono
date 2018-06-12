@@ -11,7 +11,6 @@ public class BossFist : Enemy {
 	public float speedX;
 	private Vector2 target;
 	private BoxCollider2D boxCollider2D;
-	private AudioSource audioSource;
 
 	// Use this for initialization
 	public override void Start () {
@@ -20,7 +19,7 @@ public class BossFist : Enemy {
 		boxCollider2D = GetComponent<BoxCollider2D>();
 		audioSource = GetComponent<AudioSource>();
 		audioSource.volume = 0;
-		
+		 
 		spriteRenderer.sortingLayerName = "BackgroundDetails";
 		boss = GetComponentInParent<Boss>();
 		state = State.idle;

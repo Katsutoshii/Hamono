@@ -15,13 +15,28 @@ public class BossHand : Enemy
     // Use this for initialization
     public override void Start()
     {
-        base.Start();
 
-        boxCollider2D = GetComponent<BoxCollider2D>();
-        boss = GetComponentInParent<Boss>();
-        spriteRenderer.sortingLayerName = "BackgroundDetails";
+        // initialize instance variables
+        audioSource = GetComponent<AudioSource>();
+        hurtBox = transform.GetChild(0).GetComponents<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        boss = GetComponentInParent<BossLaserHands>().boss;
 
-        state = State.idle;
+        player = FindObjectOfType<Player>();
+
+
+        // load prefabs for pooled objects
+        coinPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Coin");
+        heartPrefab = Resources.Load<GameObject>("Prefabs/Collectibles/Heart");
+        sparkPrefab = Resources.Load<GameObject>("Prefabs/FX/Spark");
+
+        // set state variables
+        lockOnPlayer = false;
+        state = State.walking;
+        prevNotice = false;
+        died = false;
+
     }
 
     // after the entry, initializes the fist
@@ -37,7 +52,7 @@ public class BossHand : Enemy
     {
         base.Update();
         if (state == State.idle) state = State.noticed;
-        if (boss.state == Boss.State.entering) rb.position = boss.transform.position + offset;
+        if (boss.state == Boss.State.entering) transform.position = boss.transform.position + offset;
     }
 
     protected override void RotateBasedOnDirection()
@@ -115,23 +130,26 @@ public class BossHand : Enemy
 
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="damageAmount"></param>
-    /// <param name="knockback"></param>
-    /// <param name="source"></param>
     public override void Damage(float damageAmount, float knockback, Collider2D source)
     {
-        if (grounded)
-        {
-            base.Damage(damageAmount, knockback, source);
-            boss.healthAmount -= 5;
-        }
+        // add a small amount of damage to make it turn red
+        float trivialDamage = 0.1f;
+        base.Damage(trivialDamage, knockback, source);
+
+        healthAmount += trivialDamage;
+        boss.healthAmount -= 5;
     }
 
     protected override void Idle()
     {
         rb.velocity = Vector2.zero;
+    }
+
+    protected override void Noticed()
+    {
+        animator.SetBool("noticed", state == State.noticed);
+        if (Time.time - noticedStartTime > .7f)
+            // give time for the animation to run
+            state = State.walking;
     }
 }

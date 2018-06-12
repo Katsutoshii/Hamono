@@ -87,6 +87,7 @@ public partial class Player : MonoBehaviour {
 		animator = gameObject.GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 		slashHurtBox = GetComponentInChildren<PlayerSlashHurtBox>();
+
 		
 		rb.isKinematic = false;
 

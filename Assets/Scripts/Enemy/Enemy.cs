@@ -134,7 +134,7 @@ public class Enemy : MonoBehaviour
     protected virtual void RandomWalk() { }
 
     // enemy notices player
-    protected void Noticed()
+    protected virtual void Noticed()
     {
         rb.velocity = new Vector2(0, rb.velocity.y);
         animator.SetBool("noticed", state == State.noticed);
@@ -256,7 +256,7 @@ public class Enemy : MonoBehaviour
         if (knockback != 0)
             rb.velocity = knockback * new Vector2(transform.position.x - source.transform.position.x,
               transform.position.y - source.transform.position.y + 1.5f);
-        else rb.velocity = Vector2.zero;
+        else if (rb != null) rb.velocity = Vector2.zero;
 
         healthAmount -= damageAmount;
         if (healthAmount < 0) healthAmount = 0;
@@ -266,11 +266,16 @@ public class Enemy : MonoBehaviour
     public float stunTime;
     public virtual IEnumerator Damaged()
     {
-        foreach (BoxCollider2D box in hurtBox)
-            box.enabled = false;
+        bool[] hurtBoxesEnabled = new bool[hurtBox.Length];
+        for (int i = 0; i < hurtBox.Length; i++)
+        {
+            hurtBoxesEnabled[i] = hurtBox[i].enabled;   // keep track of which hurtboxes were on
+            hurtBox[i].enabled = false;
+        }
 
         // damaged
-        if (!healthBar.activeInHierarchy && maxHealthAmount > 1) healthBar.SetActive(true);
+        if (healthBar != null && !healthBar.activeInHierarchy && maxHealthAmount > 1)
+            healthBar.SetActive(true);
         gameObject.layer = LayerMask.NameToLayer("EnemiesDamaged");
 
         yield return new WaitForSeconds(damageTime);
@@ -284,16 +289,18 @@ public class Enemy : MonoBehaviour
 
         // stunned
         spriteRenderer.color = Color.white;
-        foreach (BoxCollider2D box in hurtBox)
-            box.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Enemies");
 
-        rb.velocity = Vector2.zero;
+        if (rb != null) rb.velocity = Vector2.zero;
         stunned = true;
         yield return new WaitForSeconds(stunTime);
 
         stunned = false;
         if (state != State.dead) state = State.walking;
+
+        // reenable hurt boxes that were on
+        for (int i = 0; i < hurtBox.Length; i++)
+            hurtBox[i].enabled = hurtBoxesEnabled[i];
 
         yield return null;
     }
@@ -301,7 +308,7 @@ public class Enemy : MonoBehaviour
     public virtual void UpdateHealthBar()
     {
         if (healthBar == null) return;
-        
+
         Image bar = healthBar.transform.Find("HealthBar/Bar").GetComponent<Image>();
 
         bar.fillAmount = healthAmount / maxHealthAmount;
@@ -362,7 +369,7 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
-        if (stunned) rb.velocity = new Vector2(0, rb.velocity.y);
+        if (stunned && rb != null) rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
     protected virtual void Idle() { }

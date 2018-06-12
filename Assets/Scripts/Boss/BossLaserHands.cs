@@ -8,7 +8,7 @@ public class BossLaserHands : Enemy
 
     public float deathDirection;
     public Vector3 offset;
-    private Boss boss;
+    public Boss boss;
     public float speedX;
     private Vector2 target;
     private BoxCollider2D boxCollider2D;
@@ -19,10 +19,19 @@ public class BossLaserHands : Enemy
     // Use this for initialization
     public override void Start()
     {
-        base.Start();
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.isKinematic = false;
 
-        boxCollider2D = GetComponent<BoxCollider2D>();
-        spriteRenderer.sortingLayerName = "BackgroundDetails";
+        // initialize instance variables
+        audioSource = GetComponent<AudioSource>();
+        hurtBox = transform.GetChild(0).GetComponents<BoxCollider2D>();
+        player = FindObjectOfType<Player>();
+
+        // set state variables
+        lockOnPlayer = false;
+        prevNotice = false;
+        died = false;
+
         boss = GetComponentInParent<Boss>();
         leftHand = transform.Find("LeftHand").GetComponent<BossHand>();
         rightHand = transform.Find("RightHand").GetComponent<BossHand>();
@@ -66,9 +75,10 @@ public class BossLaserHands : Enemy
     {
         Debug.Log("Pathing towards player!");
         float xDist = player.transform.position.x - transform.position.x;
-        float yDist = player.transform.position.y - transform.position.y + 0.5f;
+        float yDist = player.transform.position.y - transform.position.y;
 
-        if (Mathf.Abs(xDist) < attackRange && Mathf.Abs(yDist) < attackRange )
+        // if close enough to attack, attack!
+        if (Mathf.Abs(xDist) < attackRange && Mathf.Abs(yDist) < attackRange / 4 )
         {
             state = State.attacking;
             StartCoroutine(Attack());
@@ -76,11 +86,14 @@ public class BossLaserHands : Enemy
         }
 
         // if we need to move in the x or y direction, do so
+        float xComp = 0f, yComp = 0f;
         if (Mathf.Abs(xDist) >= 0.1)
-            rb.velocity = new Vector2(xDist * KP + 1.5f * Mathf.Sign(xDist), 0);
+            xComp = xDist * KP + 1.5f * Mathf.Sign(xDist);
 
-        if (Mathf.Abs(yDist) >= 0.1)
-            rb.velocity = new Vector2(yDist * KP + 1.5f * Mathf.Sign(yDist), 0);
+        if (Mathf.Abs(yDist) >= 0.05)
+            yComp = yDist * KP + 1.5f * Mathf.Sign(yDist);
+
+        rb.velocity = new Vector2(xComp, yComp);
     }
 
     public override void UpdateAnimatorVariables()
@@ -95,6 +108,8 @@ public class BossLaserHands : Enemy
 
     protected override IEnumerator Attack()
     {
+        rb.velocity = Vector2.zero;
+
         Debug.Log("charging!");
         interrupted = false;
         leftHand.StartChargingLaser();
@@ -111,11 +126,12 @@ public class BossLaserHands : Enemy
             handLaser.Shoot();
 
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
 
             Debug.Log("shooting done");
             leftHand.StopShooting();
             rightHand.StopShooting();
+            handLaser.StopShooting();
         }
 
         if (state != State.dead) state = State.idle;
@@ -133,6 +149,11 @@ public class BossLaserHands : Enemy
 
     protected override void Idle()
     {
-        rb.velocity = Vector2.zero;
+        // do nothing when idle
+    }
+
+    protected override void Noticed()
+    {
+        state = State.walking;
     }
 }
