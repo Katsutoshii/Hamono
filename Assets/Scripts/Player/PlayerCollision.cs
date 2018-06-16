@@ -75,20 +75,50 @@ public partial class Player : MonoBehaviour {
 				break;
 		}
 	}
-	
+
 	/// <summary>
 	/// OnTriggerEnter is called when the Collider other enters the trigger.
 	/// </summary>
 	/// <param name="other">The other Collider involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other)
 	{
-
+		// Debug.Log("Collision with " + other.name);
 		switch (other.name) {
 			case "EnemyHurtBox":
-				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) 
-					Damage(0.5f, 4f, other);
-				else attackResponse = AttackResponse.normal; 
+				if (state != State.dashing && state != State.slashing && state != State.damaged && !invincible) {
+					Transform parent = other.gameObject.transform.parent;
+					// Debug.Log("parent:" + parent.name);
+					// for the boss
+					if (parent.name.Equals("RightFist") || parent.name.Equals("LeftFist")) {
+						if (grounded && parent.GetComponent<BossFist>().slamming) {
+							// Debug.Log("Damaged by fist!");
+							StartCoroutine(Flatten());
+							Damage(1f, 4f, other);
+						}
+						else Damage(0.5f, 4f, other);
+					}
+					else Damage(0.5f, 4f, other);
+				}
+				else attackResponse = AttackResponse.normal;
 				break;
 		}
+	}
+
+	private bool flattened;
+	private IEnumerator Flatten() {
+		transform.position = new Vector3(transform.position.x, transform.position.y - 0.6f, transform.position.z);
+		transform.localScale = new Vector3(transform.localScale.x * 1.5f, transform.localScale.y / 5, transform.localScale.z);
+		
+		rb.simulated = false;
+		flattened = true;
+		yield return new WaitForSeconds(2.5f);
+
+		transform.position = new Vector3(transform.position.x, transform.position.y + 0.6f, transform.position.z);
+		transform.localScale = new Vector3(transform.localScale.x / 1.5f, transform.localScale.y * 5, transform.localScale.z);
+		
+		rb.simulated = true;
+		flattened = false;
+		ResetToIdle();
+		yield return null;
 	}
 }

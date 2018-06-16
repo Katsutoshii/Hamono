@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1271315446157714}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.68, y: 3, z: -1}
+  m_LocalPosition: {x: -10, y: 1.6, z: -1}
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -60,6 +60,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!108 &108400632133893596
 Light:
   m_ObjectHideFlags: 1
@@ -104,12 +105,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1271315446157714}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec7c7709582b6ae4699afa0d232da8ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 141577ba42657c1429e8b7445bd30797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amplitude: 0.14
-  frequency: 20
-  offset: 2
+  amplitude: 0.5
+  frequency: 0.1
+  offset: 1
 --- !u!212 &212478170802356950
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -123,6 +124,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

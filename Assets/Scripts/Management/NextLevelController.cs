@@ -6,19 +6,22 @@ using UnityEngine.UI;
 
 public class NextLevelController : MonoBehaviour {
 
-  public int nextLevel;
+  	public int nextLevel;
 	public GameObject fadeToBlackEffect;
+	public Animator fadeToBlackAnimator;
 	private Player player;
 
 	void Start() {
 		Debug.Log("next door!");
 		fadeToBlackEffect = GameObject.Find("FadeToBlack");
-		fadeToBlackEffect.SetActive(false);
+		fadeToBlackAnimator = fadeToBlackEffect.GetComponentInChildren<Animator>();
+		
+		Debug.Log("fade to black = " + fadeToBlackEffect.ToString());
 	}
 
 	private IEnumerator NextScene() {
 		player = FindObjectOfType<Player>();
-		fadeToBlackEffect.SetActive(true);
+		
 		yield return new WaitForSeconds(0.6f);
 		PlayerPrefs.SetFloat("health", player.healthAmount);
 		PlayerPrefs.SetInt("coin_count", player.coinCount);
