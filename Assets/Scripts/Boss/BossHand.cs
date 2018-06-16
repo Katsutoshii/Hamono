@@ -12,6 +12,8 @@ public class BossHand : Enemy
     public float speedX;
     private Vector2 target;
     private BoxCollider2D boxCollider2D;
+    public float damageAmount;
+
     // Use this for initialization
     public override void Start()
     {
@@ -22,6 +24,7 @@ public class BossHand : Enemy
         animator = GetComponent<Animator>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         boss = GetComponentInParent<BossLaserHands>().boss;
+        boxCollider2D = GetComponent<BoxCollider2D>();
 
         player = FindObjectOfType<Player>();
 
@@ -88,7 +91,7 @@ public class BossHand : Enemy
         // animator.SetBool("damaged", state == State.damaged);
         // animator.SetBool("idle", state == State.idle);
         // animator.SetBool("walking", state == State.walking);
-        // animator.SetBool("dead", state == State.dead);
+        animator.SetBool("dead", state == State.dead);
         // animator.SetBool("noticed", lockOnPlayer);
         // animator.SetBool("grounded", grounded);
         // animator.SetBool("blocking", state == State.blocking);
@@ -137,7 +140,9 @@ public class BossHand : Enemy
         base.Damage(trivialDamage, knockback, source);
 
         healthAmount += trivialDamage;
-        boss.healthAmount -= 5;
+        boss.healthAmount -= this.damageAmount;
+        
+        boss.laserHands.interrupted = true;
     }
 
     protected override void Idle()

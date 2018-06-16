@@ -6,7 +6,7 @@ public class ElectricitySpark : MonoBehaviour {
 
   void Awake() {
     Light lightSource = transform.GetChild(0).gameObject.AddComponent<Light>() as Light;
-    Debug.Log("ijemma: " + gameObject);
+    // Debug.Log("ijemma: " + gameObject);
     lightSource.type = LightType.Point;
     lightSource.range = 10f; 
     lightSource.color = new Color(0, .31f, .83f, 1f);

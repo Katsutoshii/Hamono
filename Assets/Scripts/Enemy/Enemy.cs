@@ -323,11 +323,11 @@ public class Enemy : MonoBehaviour
     public void Dying()
     {
         stunned = true;
-        healthBar.SetActive(false);
+        if (healthBar != null) healthBar.SetActive(false);
 
         state = State.dead;
         gameObject.layer = LayerMask.NameToLayer("Debris");
-        rb.velocity = Vector2.zero;
+        if (rb != null) rb.velocity = Vector2.zero;
         foreach (BoxCollider2D box in hurtBox)
             box.enabled = false;
     }

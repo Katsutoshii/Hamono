@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 
 public class Boss : MonoBehaviour {
@@ -14,7 +15,7 @@ public class Boss : MonoBehaviour {
 	public Player player;			// player
 	private BossFist leftFist;		// the left fist for phase 1
 	private BossFist rightFist;		// the right fist for phase 1
-	private BossLaserHands laserHands;
+	public BossLaserHands laserHands;
 
 	private int phase;			// which phase we are on
 	private Rigidbody2D rb;
@@ -46,8 +47,8 @@ public class Boss : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		 HandleState();
-		 HandleNextLevel();
+		HandleState();
+		CheckForBossPhaseChange();
 	}
 
 	private void HandleState() {
@@ -60,15 +61,23 @@ public class Boss : MonoBehaviour {
 			case State.autoPathing:
 				AutoPath();
 				break;
+
+			default:
+				break;
 		}
 	}
 
-	private void HandleNextLevel() {
+	private void CheckForBossPhaseChange() {
 		if (leftFist == null && rightFist == null && phase < 1) {
 			// introduces the laser hands
 			Debug.Log("handle next level");
 			phase += 1;
 			laserHands.Activate();
+		}
+
+		else if (healthAmount <= 0) {
+			StartCoroutine("Death");
+			state = State.dead;
 		}
 	}
 
@@ -150,5 +159,23 @@ public class Boss : MonoBehaviour {
 		// Debug.Log("Level reached");
 		StartBattle();
 		yield return null;
+	}
+
+	private IEnumerator Death() {
+		// Debug.Log("Rising to level");
+		target = new Vector2(transform.position.x, -1f);
+
+		rb.velocity = Vector2.down * speedY;
+		laserHands.Die();
+		yield return new WaitUntil(TargetReachedY);
+
+		EndGame();
+		// Debug.Log("Level reached");
+		yield return null;
+	}
+
+	private void EndGame() {
+		// TODO end the game!
+		SceneManager.LoadScene(0);	// loads title screen
 	}
 }

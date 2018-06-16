@@ -11,7 +11,6 @@ public class BossLaserHands : Enemy
     public Boss boss;
     public float speedX;
     private Vector2 target;
-    private BoxCollider2D boxCollider2D;
     private BossHand leftHand;
     private BossHand rightHand;
     private BossHandLaser handLaser;
@@ -45,7 +44,6 @@ public class BossLaserHands : Enemy
         Debug.Log("hands ready");
         spriteRenderer.sortingLayerName = "Foreground";
         gameObject.layer = LayerMask.NameToLayer("Enemies");
-        boxCollider2D.enabled = true;
     }
 
     public override void Update()
@@ -155,5 +153,13 @@ public class BossLaserHands : Enemy
     protected override void Noticed()
     {
         state = State.walking;
+    }
+
+    public void Die() {
+        state = State.dead;
+
+        // kill the hands too
+        leftHand.state = State.dead;
+        rightHand.state = State.dead;
     }
 }
