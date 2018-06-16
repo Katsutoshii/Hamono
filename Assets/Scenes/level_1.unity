@@ -208,15 +208,6 @@ Prefab:
       propertyPath: m_Name
       value: Light (10)
       objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Range
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
   m_IsPrefabParent: 0
@@ -538,20 +529,6 @@ Prefab:
     - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
       propertyPath: m_Name
       value: Light (12)
-      objectReference: {fileID: 0}
-    - target: {fileID: 114453191995050216, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: offset
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Intensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
@@ -15148,11 +15125,6 @@ Prefab:
       propertyPath: m_Name
       value: Light (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 114453191995050216, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: frequency
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
   m_IsPrefabParent: 0
@@ -15313,10 +15285,6 @@ Prefab:
     - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
       propertyPath: m_Name
       value: Light (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
@@ -26288,15 +26256,6 @@ Prefab:
       propertyPath: m_Name
       value: Light (9)
       objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Range
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
   m_IsPrefabParent: 0
@@ -26503,10 +26462,6 @@ Prefab:
     - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
       propertyPath: m_Name
       value: Light (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
@@ -26933,20 +26888,6 @@ Prefab:
       propertyPath: m_Name
       value: Light (11)
       objectReference: {fileID: 0}
-    - target: {fileID: 114453191995050216, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: offset
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 108400632133893596, guid: aacf771ba3d6d4c05a6377be46bcf02d,
-        type: 2}
-      propertyPath: m_Intensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
   m_IsPrefabParent: 0
@@ -27265,10 +27206,6 @@ Prefab:
     - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
       propertyPath: m_Name
       value: Light (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271315446157714, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aacf771ba3d6d4c05a6377be46bcf02d, type: 2}

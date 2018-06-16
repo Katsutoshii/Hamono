@@ -54,7 +54,7 @@ public class Story : MonoBehaviour
 
         storyImage = GameObject.Find("StoryImage").GetComponent<Image>();
         anim = fadeToBlackEffect.transform.GetChild(0).GetComponent<Animator>();
-        musicAudio = GameObject.Find("MusicPlayer").GetComponent<AudioSource>();
+        musicAudio = GameObject.Find("Music Player").GetComponent<AudioSource>();
         storyText = GameObject.Find("StoryText").GetComponent<TextTyper>();
 
         StartStory();

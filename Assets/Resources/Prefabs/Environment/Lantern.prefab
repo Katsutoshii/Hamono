@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141577ba42657c1429e8b7445bd30797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amplitude: 0.5
-  frequency: 0.1
+  amplitude: 0.1
+  frequency: 30
   offset: 1
 --- !u!212 &212478170802356950
 SpriteRenderer:

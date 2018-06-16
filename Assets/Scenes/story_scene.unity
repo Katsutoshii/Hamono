@@ -146,7 +146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.38869968}
   m_AnchorMax: {x: 0.99271846, y: 1}
-  m_AnchoredPosition: {x: 7.636505, y: -46.25}
+  m_AnchoredPosition: {x: 7.6364746, y: -46.25}
   m_SizeDelta: {x: -45.3, y: -92.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &65357096
@@ -400,54 +400,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0aa0d1d5e8f83c9448822babe119923d, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &183796274 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4583521384042448, guid: 0aa0d1d5e8f83c9448822babe119923d,
-    type: 2}
-  m_PrefabInternal: {fileID: 183796273}
---- !u!1 &300910594
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 300910595}
-  - component: {fileID: 300910596}
-  m_Layer: 0
-  m_Name: EndScene
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &300910595
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 300910594}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5.110845}
-  m_LocalScale: {x: 0, y: 0, z: 1}
-  m_Children: []
-  m_Father: {fileID: 183796274}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &300910596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 300910594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9ea81d66d967453797b60864bc80750, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextLevel: 0
-  fadeToBlackEffect: {fileID: 0}
-  fadeToBlackAnimator: {fileID: 0}
 --- !u!1001 &379933534
 Prefab:
   m_ObjectHideFlags: 0
