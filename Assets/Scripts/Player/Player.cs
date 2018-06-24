@@ -87,6 +87,7 @@ public partial class Player : MonoBehaviour {
 		animator = gameObject.GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 		slashHurtBox = GetComponentInChildren<PlayerSlashHurtBox>();
+
 		
 		rb.isKinematic = false;
 
@@ -96,7 +97,7 @@ public partial class Player : MonoBehaviour {
 		healthAmount = SetHealth();
 
 		// get UI objects
-		staminaBar = FindObjectOfType<StaminaBar>();
+		staminaBar = GameObject.Find("StaminaBar").GetComponent<StaminaBar>();
 		healthBar = FindObjectOfType<HealthBar>();
 		coinCountText = GameObject.Find("CoinCount").GetComponent<Text>();
 		coinCount = PlayerPrefs.GetInt("coin_count");
@@ -138,7 +139,7 @@ public partial class Player : MonoBehaviour {
 	public float autoPathStartTime;
 	// method to handle all control inputs inside main loop
 	private void Controls() {
-		if (state == State.talking || state == State.finishedTalking || GameManager.paused) return;
+		if (state == State.talking || state == State.finishedTalking || flattened || GameManager.paused) return;
 
 		// for initiating action
 		if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(1))) {
@@ -162,6 +163,9 @@ public partial class Player : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Method to update the variables of the attached animator based on state variables
+	/// </summary>
 	public void UpdateAnimatorVariables() {
 		// update animator variables
     	animator.SetBool("grounded", grounded);
@@ -200,6 +204,7 @@ public partial class Player : MonoBehaviour {
 		healthAmount -= damageAmount;
 		if ( healthAmount < 0) healthAmount = 0;
 
+		gameObject.layer = LayerMask.NameToLayer("Dashing");
 		healthBar.HandleHealth(healthAmount);
 	}
 

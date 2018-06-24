@@ -1,0 +1,548 @@
+fileFormatVersion: 2
+guid: ecdf53a8d24f2488f9f6d09730b2d759
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Boss_Robot_Left_Claw_Death_0
+    21300002: Boss_Robot_Left_Claw_Death_1
+    21300004: Boss_Robot_Left_Claw_Death_2
+    21300006: Boss_Robot_Left_Claw_Death_3
+    21300008: Boss_Robot_Left_Claw_Death_4
+    21300010: Boss_Robot_Left_Claw_Death_5
+    21300012: Boss_Robot_Left_Claw_Death_6
+    21300014: Boss_Robot_Left_Claw_Death_7
+    21300016: Boss_Robot_Left_Claw_Death_8
+    21300018: Boss_Robot_Left_Claw_Death_9
+    21300020: Boss_Robot_Left_Claw_Death_10
+    21300022: Boss_Robot_Left_Claw_Death_11
+    21300024: Boss_Robot_Left_Claw_Death_12
+    21300026: Boss_Robot_Left_Claw_Death_13
+    21300028: Boss_Robot_Left_Claw_Death_14
+    21300030: Boss_Robot_Left_Claw_Death_15
+    21300032: Boss_Robot_Left_Claw_Death_16
+    21300034: Boss_Robot_Left_Claw_Death_17
+    21300036: Boss_Robot_Left_Claw_Death_18
+    21300038: Boss_Robot_Left_Claw_Death_19
+  externalObjects: {}
+  serializedVersion: 5
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 50
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 691.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17237e05ca45833449415927c1bc1a85
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_1
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 691.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b623be7fd473e954ba2a6e6cf780a5a1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_2
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 691.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f89b730f58dbc1b4eb0ef7c50bbd16c7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_3
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 691.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eefab1ff8b29a33428863932a3b7be3e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_4
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 691.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4604db7199a1b5d4c831ade49a8a0791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 461.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75516eeb8db432f4294d6e05c60e213b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_6
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 461.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 008c298c15aeaf04fa7feae4cf994e02
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_7
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 461.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa313b0c879653c4cade838502eea10d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_8
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 461.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4e3c71c0c9167046b82a3cbd9ecd1c9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_9
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 461.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a62213b17797bb544b4b8dc82d988027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 231.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bf1124b1aab5734fbe9f00c36c601b9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_11
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 231.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03d73f0ed39723246ab812ca6f01d7e6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_12
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 231.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e26b286d25f5fa44587d85fa4a47a92d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_13
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 231.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6c6ac919ab7ba04fa4366dfb553bfbb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_14
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 231.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4d3ac05b6ce6443b1cf3e479f628bc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66b2104380f2918408eaf73050271c4f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_16
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 1.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27ef07f19bd96cb4499351a397c0211c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_17
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 1.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a83f8a20f1385a44d8adcd99dcd33bb9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_18
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 1.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e9a628bd8ff5964d82af51ad80c42dd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Robot_Left_Claw_Death_19
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 1.5
+        width: 204.8
+        height: 230.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98d7e2a5952737c45bea25aedb3ce894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
