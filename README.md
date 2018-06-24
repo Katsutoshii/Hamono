@@ -51,7 +51,7 @@ This project was completely scripted in C#.
 [Unity](https://unity3d.com/) - a free game engine that has a massive and active community
 
 ## Dependencies
-[Text Typer](https://github.com/redbluegames/unity-text-typer/releases) - a package that makes dialogue typing a lot simplier🙏🏾.
+[Text Typer](https://github.com/redbluegames/unity-text-typer/releases) - a package that makes dialogue typing a lot simplier🙏🏾
 
 
 ## Team
