@@ -29,17 +29,29 @@ The team met twice a week to ensure that every member was on the same page durin
 * The loading screen was created
 
 **Week 5**
+* Basic structure of the first level was implemented
+* New enemies were introduced
+* Boss assets were created
 
 **Week 6**
+* The first and second levels were completely implemented
+* Development for the boss level started
+* All versions of the game's theme were composed
+
+**Post break**
+* Tied up loose-ends
+  * Updated title and ending cards
+  * Persisted data like the player's health and coin count
+  * Optimized for mobile gaming
 
 ## Development Notes
 This project was completely scripted in C#.
 
 ## Built With
-![Unity](https://unity3d.com/) - a free game engine that has a massive and active community
+[Unity](https://unity3d.com/) - a free game engine that has a massive and active community
 
 ## Dependencies
-![Text Typer](https://github.com/redbluegames/unity-text-typer/releases) - a package that makes dialogue typing a lot simplier🙏🏾.
+[Text Typer](https://github.com/redbluegames/unity-text-typer/releases) - a package that makes dialogue typing a lot simplier🙏🏾.
 
 
 ## Team
