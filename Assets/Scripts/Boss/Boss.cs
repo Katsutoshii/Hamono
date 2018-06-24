@@ -175,15 +175,14 @@ public class Boss : MonoBehaviour {
 
 	private IEnumerator Death() {
 		// Debug.Log("Rising to level");
-		// target = new Vector2(transform.position.x, -1f);
-
-		// rb.velocity = Vector2.down * speedY;
 		laserHands.Die();
 		shake.enabled = true;
 		PoolManager.instance.ReuseObject(explosionFirst, 
 				HamonoLib.RandomOffset(transform.position, -3f, 3f), explosionFirst.transform.rotation, explosionFirst.transform.localScale);
 		PoolManager.instance.ReuseObject(explosionSecond, 
 				HamonoLib.RandomOffset(transform.position, -3f, 3f), explosionSecond.transform.rotation, explosionSecond.transform.localScale);
+		// target = new Vector2(transform.position.x, -1f);
+		// rb.velocity = Vector2.down * speedY;
 		// yield return new WaitUntil(TargetReachedY);
 
 		if (!endingGame) {
