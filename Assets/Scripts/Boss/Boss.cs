@@ -16,6 +16,13 @@ public class Boss : MonoBehaviour {
 	private BossFist leftFist;		// the left fist for phase 1
 	private BossFist rightFist;		// the right fist for phase 1
 	public BossLaserHands laserHands;
+	private NPC finalMessage;
+	private bool endingGame;
+	public GameObject explosionFirst;
+	public GameObject explosionSecond;
+	private CameraShake shake;
+	private GameObject fadeToBlackEffectScreen;
+	public Animator fadeAnimator;
 
 	private int phase;			// which phase we are on
 	private Rigidbody2D rb;
@@ -29,11 +36,17 @@ public class Boss : MonoBehaviour {
 
 	public State state;
 
+	void Awake () {
+		fadeToBlackEffectScreen = GameObject.Find("FadeToBlack_Screen");
+		fadeToBlackEffectScreen.SetActive(false);
+	}
+
 	// Use this for initialization
 	void Start () {
 		phase = 0;
 		state = State.entering;
 		healthAmount = 100;
+		endingGame = false;
 
 		player = FindObjectOfType<Player>();
 		rb = GetComponent<Rigidbody2D>();
@@ -41,6 +54,11 @@ public class Boss : MonoBehaviour {
 		leftFist = transform.Find("LeftFist").GetComponent<BossFist>();
 		rightFist = transform.Find("RightFist").GetComponent<BossFist>();
 		laserHands = transform.Find("LaserHands").GetComponent<BossLaserHands>();
+		finalMessage = GameObject.Find("Speech").GetComponent<NPC>();
+		shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
+
+		PoolManager.instance.CreatePool(explosionFirst, 5);
+		PoolManager.instance.CreatePool(explosionSecond, 5);
 
 		StartCoroutine(RiseToLevel());
 	}
@@ -76,6 +94,7 @@ public class Boss : MonoBehaviour {
 		}
 
 		else if (healthAmount <= 0) {
+			healthAmount = 0;
 			StartCoroutine("Death");
 			state = State.dead;
 		}
@@ -163,19 +182,32 @@ public class Boss : MonoBehaviour {
 
 	private IEnumerator Death() {
 		// Debug.Log("Rising to level");
-		target = new Vector2(transform.position.x, -1f);
-
-		rb.velocity = Vector2.down * speedY;
 		laserHands.Die();
-		yield return new WaitUntil(TargetReachedY);
+		shake.enabled = true;
+		PoolManager.instance.ReuseObject(explosionFirst, 
+				HamonoLib.RandomOffset(transform.position, -3f, 3f), explosionFirst.transform.rotation, explosionFirst.transform.localScale);
+		PoolManager.instance.ReuseObject(explosionSecond, 
+				HamonoLib.RandomOffset(transform.position, -3f, 3f), explosionSecond.transform.rotation, explosionSecond.transform.localScale);
 
-		EndGame();
+		if (!endingGame) {
+			endingGame = true;
+			finalMessage.StartTextTyper();
+			yield return new WaitUntil(DoneTalking);
+			StartCoroutine("EndGame");
+		}
 		// Debug.Log("Level reached");
 		yield return null;
 	}
 
-	private void EndGame() {
-		// TODO end the game!
+	private bool DoneTalking() {
+		return player.state == Player.State.idle;
+	}
+
+	private IEnumerator EndGame() {
+		fadeToBlackEffectScreen.SetActive(true);
+		fadeAnimator.SetBool("active", true);
+
+		yield return new WaitForSeconds(1f);
 		SceneManager.LoadScene(0);	// loads title screen
 	}
 }

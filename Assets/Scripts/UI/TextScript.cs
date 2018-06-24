@@ -42,6 +42,7 @@ public class TextScript : MonoBehaviour {
 
 		if (completedSpeech) {
 			// ending conversation
+			Debug.Log("ending dialogue");
 			dialogStarted = false;
 			completedSpeech = false;
       ResetTextOutput();

@@ -34,6 +34,10 @@ public class NPC : TextScript {
 		}
 	}
 
+	public void StartTextTyper() {
+		StartText();
+	}
+
 	/// <summary>
 	/// Called when the mouse is not any longer over the GUIElement or Collider.
 	/// </summary>
