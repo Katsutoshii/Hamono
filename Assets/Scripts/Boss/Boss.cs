@@ -188,9 +188,6 @@ public class Boss : MonoBehaviour {
 				HamonoLib.RandomOffset(transform.position, -3f, 3f), explosionFirst.transform.rotation, explosionFirst.transform.localScale);
 		PoolManager.instance.ReuseObject(explosionSecond, 
 				HamonoLib.RandomOffset(transform.position, -3f, 3f), explosionSecond.transform.rotation, explosionSecond.transform.localScale);
-		// target = new Vector2(transform.position.x, -1f);
-		// rb.velocity = Vector2.down * speedY;
-		// yield return new WaitUntil(TargetReachedY);
 
 		if (!endingGame) {
 			endingGame = true;
