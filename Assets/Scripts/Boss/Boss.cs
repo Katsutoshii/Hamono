@@ -196,7 +196,7 @@ public class Boss : MonoBehaviour {
 			endingGame = true;
 			finalMessage.StartTextTyper();
 			yield return new WaitUntil(DoneTalking);
-			EndGame();
+			StartCoroutine("EndGame");
 		}
 		// Debug.Log("Level reached");
 		yield return null;
@@ -206,11 +206,11 @@ public class Boss : MonoBehaviour {
 		return player.state == Player.State.idle;
 	}
 
-	private void EndGame() {
-		// TODO: end the game!
-		// SceneManager.LoadScene(0);	// loads title screen
-
+	private IEnumerator EndGame() {
 		fadeToBlackEffectScreen.SetActive(true);
 		fadeAnimator.SetBool("active", true);
+
+		yield return new WaitForSeconds(1f);
+		SceneManager.LoadScene(0);	// loads title screen
 	}
 }
