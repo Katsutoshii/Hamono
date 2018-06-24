@@ -194,16 +194,22 @@ public class Boss : MonoBehaviour {
 
 		if (!endingGame) {
 			endingGame = true;
+			finalMessage.StartTextTyper();
+			yield return new WaitUntil(DoneTalking);
 			EndGame();
 		}
 		// Debug.Log("Level reached");
 		yield return null;
 	}
 
+	private bool DoneTalking() {
+		return player.state == Player.State.idle;
+	}
+
 	private void EndGame() {
 		// TODO: end the game!
 		// SceneManager.LoadScene(0);	// loads title screen
-		finalMessage.StartTextTyper();
+
 		fadeToBlackEffectScreen.SetActive(true);
 		fadeAnimator.SetBool("active", true);
 	}
