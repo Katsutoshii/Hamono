@@ -17,6 +17,9 @@ public class Boss : MonoBehaviour {
 	private BossFist rightFist;		// the right fist for phase 1
 	public BossLaserHands laserHands;
 	private NPC finalMessage;
+	private bool endingGame;
+	public GameObject explosionFirst;
+	public GameObject explosionSecond;
 
 	private int phase;			// which phase we are on
 	private Rigidbody2D rb;
@@ -35,6 +38,7 @@ public class Boss : MonoBehaviour {
 		phase = 0;
 		state = State.entering;
 		healthAmount = 100;
+		endingGame = false;
 
 		player = FindObjectOfType<Player>();
 		rb = GetComponent<Rigidbody2D>();
@@ -43,6 +47,9 @@ public class Boss : MonoBehaviour {
 		rightFist = transform.Find("RightFist").GetComponent<BossFist>();
 		laserHands = transform.Find("LaserHands").GetComponent<BossLaserHands>();
 		finalMessage = GameObject.Find("Speech").GetComponent<NPC>();
+
+		PoolManager.instance.CreatePool(explosionFirst, 5);
+		PoolManager.instance.CreatePool(explosionSecond, 5);
 
 		StartCoroutine(RiseToLevel());
 	}
@@ -78,6 +85,7 @@ public class Boss : MonoBehaviour {
 		}
 
 		else if (healthAmount <= 0) {
+			healthAmount = 0;
 			StartCoroutine("Death");
 			state = State.dead;
 		}
@@ -165,13 +173,20 @@ public class Boss : MonoBehaviour {
 
 	private IEnumerator Death() {
 		// Debug.Log("Rising to level");
-		target = new Vector2(transform.position.x, -1f);
+		// target = new Vector2(transform.position.x, -1f);
 
-		rb.velocity = Vector2.down * speedY;
+		// rb.velocity = Vector2.down * speedY;
 		laserHands.Die();
-		yield return new WaitUntil(TargetReachedY);
+		PoolManager.instance.ReuseObject(explosionFirst, 
+				HamonoLib.RandomOffset(transform.position, -3f, 3f), explosionFirst.transform.rotation, explosionFirst.transform.localScale);
+		PoolManager.instance.ReuseObject(explosionSecond, 
+				HamonoLib.RandomOffset(transform.position, -3f, 3f), explosionSecond.transform.rotation, explosionSecond.transform.localScale);
+		// yield return new WaitUntil(TargetReachedY);
 
-		EndGame();
+		if (!endingGame) {
+			endingGame = true;
+			EndGame();
+		}
 		// Debug.Log("Level reached");
 		yield return null;
 	}
