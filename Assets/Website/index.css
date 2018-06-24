@@ -1,169 +1,122 @@
-@font-face {
-  font-family: 'pixelSix';
-  src: url('./fonts/pixelsix00.ttf');
-}
-
-@font-face {
-  font-family: 'M';
-  src: url('./fonts/m3x6.ttf');
-}
-
 body {
   margin: 0 auto;
-  padding: 0;
-  background: #021c2f;
-}
-
-h1, h2, h3 {
-  font-family: 'M', Helvetica, sans-serif;
-  text-shadow: 2px 2px rgb(187, 187, 187);
-}
-
-.header-text {
+  background-color: black;
   color: white;
-  text-shadow: none;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  width: 80%;
 }
 
-h1 {
-  font-size: 4em;
-}
-
-h4, h5, h6 {
-  font-family: 'pixelSix', Helvetica, sans-serif;
-  color: white;
-  margin: 1em 0 0 0;
+h2, h3 {
+  text-transform: uppercase;
 }
 
 h4 {
-  text-shadow: 1px 1px rgb(95, 95, 95);
+  text-align: left;
 }
 
-h5 {
-  color: rgb(255, 255, 255);
+.title {
+  height: 75px;
+  margin-bottom: 8px;
 }
 
-.main-container {
-  margin: 0 auto;
+nav {
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  width: 100%;
-  background: #021c2f;
-  padding-bottom: 5em;
 }
 
-.container {
-  margin: 0 auto;
-  width: 80%;
-}
-
-#header-container {
+ul {
+  list-style: none;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+li {
+  margin: 0 20px;
+}
+
+a {
+  text-decoration: none;
+  color: gray;
+}
+
+a:hover {
+  color: #aaa;
+}
+
+.opener {
   width: 100%;
-  background-image: url('./assets/boss_room_background.png');
-  background-size: cover;
-  background-position-x: center;
-  background-position-y: 50%;
-  background-repeat: no-repeat;
 }
 
-header {
-  font-family: 'M', Arial, Helvetica, sans-serif;
-  font-size: 20em;
-  text-shadow: 2px 2px rgb(187, 187, 187);
-}
-
-.background-information {
-  display: flex;
-}
-
-.reverse-row {
-  flex-direction: row-reverse;
-}
-
-.background-image {
-  height: 200px;
+button {
+  background: none;
+  border: 1px solid white;
+  border-radius: 3px;
+  height: 50px;
   width: 200px;
-  background-color: transparent;
-}
-
-.background-text {
-  font-family: 'pixelSix', Arial, Helvetica, sans-serif;
-  font-size: 18px;
   color: white;
-}
-
-.unity-demo {
-  margin: 0 auto;
-  height: 33%;
-  width: 90%;
-  background-color: rgb(4, 0, 58);
-  color: white;
-}
-
-.download-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  height: 35%;
-  width: 80%;
-  background-color: rgb(241, 241, 241);
-  color: black;
-  box-shadow: 0 0 0 2px rgb(54, 54, 54),
-  0 0 0 3px rgb(255, 254, 254),
-  0 0 0 9px rgb(214, 214, 214),
-  0 0 0 12px rgb(161, 161, 161),
-  0 0 0 13px rgb(119, 119, 119),
-  0 0 0 14px rgb(68, 68, 68),
-  0 0 0 15px rgb(46, 46, 46);
-}
-
-.download {
-  height: 60px;
-  width: 60%;
-  font-family: 'M', 'pixelSix', Arial, Helvetica, sans-serif;
-  font-size: 3em;
-  color: rgb(255, 255, 255);
-  text-shadow: 2px 2px rgb(90, 89, 89);
-  background-color: #3a5869;
-  box-shadow: 0 7px 0 0 #1e2d36;
-  border: none;
+  font-weight: 500;
   outline: none;
-}
-
-.download:hover {
-  background-color: #5a87a1;
-  box-shadow: 0 7px 0 0 #2d4352;
   cursor: pointer;
 }
 
-.image-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.large-button {
+  text-transform: uppercase;
+  font-size: 26px;
+  width: 400px;
 }
 
-.member-container {
-  display: flex;
-  flex-direction: column;
-  margin: 3em 3em 0em 3em;
+.medium-button {
+  font-size: 22px;
+  width: 300px;
 }
 
-.member-image {
-  height: 250px;
-  width: 250px;
-  background-color: black;
-  margin-bottom: .5em;
-  box-shadow: 0 0 0 2px rgb(54, 54, 54),
-  0 0 0 3px rgb(255, 254, 254),
-  0 0 0 9px rgb(214, 214, 214),
-  0 0 0 12px rgb(161, 161, 161),
-  0 0 0 13px rgb(119, 119, 119),
-  0 0 0 14px rgb(68, 68, 68),
-  0 0 0 15px rgb(46, 46, 46);
+#intro {
+  background: linear-gradient(#4f3535, #000);
+  margin-top: -20px;
+}
+
+#intro p {
+  padding-top: 20px;
+}
+
+.animations {
+  height: 200px;
+  width: 400px;
+}
+
+.story {
+  height: 200px;
+}
+
+.features-container {
+  display: flex;
+  margin: 0 auto;
+  width: 70%;
+}
+
+.team-container {
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.name {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.role {
+  color: gray;
+}
+
+.headshot {
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.red {
+  color: red;
 }
