@@ -20,6 +20,7 @@ public class Boss : MonoBehaviour {
 	private bool endingGame;
 	public GameObject explosionFirst;
 	public GameObject explosionSecond;
+	private CameraShake shake;
 
 	private int phase;			// which phase we are on
 	private Rigidbody2D rb;
@@ -47,6 +48,7 @@ public class Boss : MonoBehaviour {
 		rightFist = transform.Find("RightFist").GetComponent<BossFist>();
 		laserHands = transform.Find("LaserHands").GetComponent<BossLaserHands>();
 		finalMessage = GameObject.Find("Speech").GetComponent<NPC>();
+		shake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
 
 		PoolManager.instance.CreatePool(explosionFirst, 5);
 		PoolManager.instance.CreatePool(explosionSecond, 5);
@@ -177,6 +179,7 @@ public class Boss : MonoBehaviour {
 
 		// rb.velocity = Vector2.down * speedY;
 		laserHands.Die();
+		shake.enabled = true;
 		PoolManager.instance.ReuseObject(explosionFirst, 
 				HamonoLib.RandomOffset(transform.position, -3f, 3f), explosionFirst.transform.rotation, explosionFirst.transform.localScale);
 		PoolManager.instance.ReuseObject(explosionSecond, 
