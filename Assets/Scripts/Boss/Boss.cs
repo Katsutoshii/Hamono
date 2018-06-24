@@ -21,6 +21,8 @@ public class Boss : MonoBehaviour {
 	public GameObject explosionFirst;
 	public GameObject explosionSecond;
 	private CameraShake shake;
+	private GameObject fadeToBlackEffectScreen;
+	public Animator fadeAnimator;
 
 	private int phase;			// which phase we are on
 	private Rigidbody2D rb;
@@ -33,6 +35,11 @@ public class Boss : MonoBehaviour {
 	}
 
 	public State state;
+
+	void Awake () {
+		fadeToBlackEffectScreen = GameObject.Find("FadeToBlack_Screen");
+		fadeToBlackEffectScreen.SetActive(false);
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -197,5 +204,7 @@ public class Boss : MonoBehaviour {
 		// TODO: end the game!
 		// SceneManager.LoadScene(0);	// loads title screen
 		finalMessage.StartTextTyper();
+		fadeToBlackEffectScreen.SetActive(true);
+		fadeAnimator.SetBool("active", true);
 	}
 }
