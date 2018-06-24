@@ -16,6 +16,7 @@ public class Boss : MonoBehaviour {
 	private BossFist leftFist;		// the left fist for phase 1
 	private BossFist rightFist;		// the right fist for phase 1
 	public BossLaserHands laserHands;
+	private NPC finalMessage;
 
 	private int phase;			// which phase we are on
 	private Rigidbody2D rb;
@@ -41,6 +42,7 @@ public class Boss : MonoBehaviour {
 		leftFist = transform.Find("LeftFist").GetComponent<BossFist>();
 		rightFist = transform.Find("RightFist").GetComponent<BossFist>();
 		laserHands = transform.Find("LaserHands").GetComponent<BossLaserHands>();
+		finalMessage = GameObject.Find("Speech").GetComponent<NPC>();
 
 		StartCoroutine(RiseToLevel());
 	}
@@ -175,7 +177,8 @@ public class Boss : MonoBehaviour {
 	}
 
 	private void EndGame() {
-		// TODO end the game!
-		SceneManager.LoadScene(0);	// loads title screen
+		// TODO: end the game!
+		// SceneManager.LoadScene(0);	// loads title screen
+		finalMessage.StartTextTyper();
 	}
 }
