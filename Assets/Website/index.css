@@ -105,20 +105,23 @@ button {
 }
 
 .story {
-  height: 200px;
+  height: 300px;
+}
+
+.story:first-child {
+  margin-right: 10px;
 }
 
 .features-container {
   display: flex;
   margin: 0 auto;
-  width: 80%;
+  width: 85%;
   text-align: left;
   line-height: 30px;
 }
 
 .animations {
-  height: 200px;
-  width: 400px;
+  width: 450px;
   margin-bottom: 10px;
 }
 
