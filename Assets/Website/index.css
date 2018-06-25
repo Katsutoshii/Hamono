@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 body {
   margin: 0 auto;
   background-color: black;
   color: white;
-  font-family: Arial, sans-serif;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 20px;
   text-align: center;
   width: 80%;
 }
@@ -45,6 +47,22 @@ a:hover {
   color: #aaa;
 }
 
+.fade-left {
+  height: 800px;
+  width: 300px;
+  position: absolute;
+  left: 0;
+  background: linear-gradient(to right, #000, rgb(12, 8, 8), rgba(53, 35, 35, 0));
+}
+
+.fade-right {
+  height: 800px;
+  width: 300px;
+  position: absolute;
+  right: 0;
+  background: linear-gradient(to left, #000, rgb(12, 8, 8), rgba(53, 35, 35, 0));
+}
+
 .opener {
   width: 100%;
 }
@@ -65,6 +83,7 @@ button {
   text-transform: uppercase;
   font-size: 26px;
   width: 400px;
+  height: 70px;
 }
 
 .medium-button {
@@ -81,9 +100,8 @@ button {
   padding-top: 20px;
 }
 
-.animations {
-  height: 200px;
-  width: 400px;
+#story p {
+  text-align: left;
 }
 
 .story {
@@ -93,7 +111,15 @@ button {
 .features-container {
   display: flex;
   margin: 0 auto;
-  width: 70%;
+  width: 80%;
+  text-align: left;
+  line-height: 30px;
+}
+
+.animations {
+  height: 200px;
+  width: 400px;
+  margin-bottom: 10px;
 }
 
 .team-container {
@@ -105,6 +131,9 @@ button {
 
 .name {
   text-transform: uppercase;
+  text-align: center;
+  margin: auto;
+  width: 120px;
   margin-bottom: 5px;
 }
 
@@ -119,4 +148,25 @@ button {
 
 .red {
   color: red;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.floor-turret {
+  position: relative;
+  height: 75px;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.flip {
+  transform: scaleX(-1);
 }
