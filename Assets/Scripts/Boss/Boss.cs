@@ -7,7 +7,8 @@ using System;
 public class Boss : MonoBehaviour {
 
 	public StaminaBar healthBar;	// health bar object
-	public float healthAmount;		// boss current hp amount
+	private float healthAmount;		// boss current hp amount
+	private float healthFactor; // health factor to relate to 100
 	public float maxHealthAmount; 	// boss total health
 	public float speedX;			// horizontal speed
 	public float speedY;			// vertical speed
@@ -15,7 +16,7 @@ public class Boss : MonoBehaviour {
 	public Player player;			// player
 	private BossFist leftFist;		// the left fist for phase 1
 	private BossFist rightFist;		// the right fist for phase 1
-	public BossLaserHands laserHands;
+	public BossLaserHands laserHands; // laser hands for phase 2
 	private NPC finalMessage;
 	private bool endingGame;
 	public GameObject explosionFirst;
@@ -45,7 +46,6 @@ public class Boss : MonoBehaviour {
 	void Start () {
 		phase = 0;
 		state = State.entering;
-		healthAmount = 100;
 		endingGame = false;
 
 		player = FindObjectOfType<Player>();
@@ -59,6 +59,10 @@ public class Boss : MonoBehaviour {
 
 		PoolManager.instance.CreatePool(explosionFirst, 5);
 		PoolManager.instance.CreatePool(explosionSecond, 5);
+
+		healthFactor = 100 / (leftFist.healthAmount + rightFist.healthAmount + laserHands.healthAmount);
+    healthAmount = (leftFist.healthAmount + rightFist.healthAmount + laserHands.healthAmount) * healthFactor;
+		Debug.Log("healthAmount: " + healthAmount);
 
 		StartCoroutine(RiseToLevel());
 	}
@@ -209,5 +213,17 @@ public class Boss : MonoBehaviour {
 
 		yield return new WaitForSeconds(1f);
 		SceneManager.LoadScene(0);	// loads title screen
+	}
+
+	public float GetHealth() {
+		return healthAmount;
+	}
+
+	public void SetHealth(float amount) {
+		healthAmount += amount;
+	}
+
+	public float GetHealthFactor() {
+		return healthFactor;
 	}
 }
