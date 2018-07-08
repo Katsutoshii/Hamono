@@ -64,11 +64,6 @@ public class Story : MonoBehaviour
     void Update()
     {
         ClearScript();
-        if (Input.GetMouseButtonDown(0))
-        {
-            clicked = true;
-            StartStory(); // continue dialog if we click anywhere
-        }
     }
 
     // if player doesn't click, the next script will automatically start
