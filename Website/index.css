@@ -80,6 +80,10 @@ button {
 }
 
 .large-button {
+  border: 1px solid white;
+  border-radius: 3px;
+  padding: 15px 30px;
+  color: white;
   text-transform: uppercase;
   font-size: 26px;
   width: 400px;

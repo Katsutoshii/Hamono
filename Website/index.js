@@ -6,8 +6,27 @@ if (navigator.appVersion.indexOf('Linux') != -1) OSName = 'Linux'
 
 window.onload = () => {
   const downloadButton = document.getElementById('download-game')
-  if (OSName === 'MacOS') downloadButton.href = 'game/Hamono_Mac.zip'
-  if (OSName === 'Windows') downloadButton.href = 'game/Hamono.exe'
-  console.log(downloadButton.href)
+  const downloadbuttonLarge = document.getElementById('download-game-large')
+  if (OSName === 'Unknown OS') { downloadButton.href = '#'; downloadButton.innerText = 'not available'; downloadbuttonLarge.innerText = 'not available' }
+  if (OSName !== 'Windows') { downloadButton.href = 'game/Hamono_Mac.zip'; downloadbuttonLarge.href = 'game/Hamono_Mac.zip' }
+  if (OSName === 'Windows') { downloadButton.href = 'game/Hamono.exe'; downloadbuttonLarge.href = 'game/Hamono.zip' }
+
+  document.getElementById('story-nav-button').onclick = (event) => {
+    document.getElementById('story').scrollIntoView({
+      behavior: 'smooth'
+    })
+  }
+
+  document.getElementById('features-nav-button').onclick = (event) => {
+    document.getElementById('features').scrollIntoView({
+      behavior: 'smooth'
+    })
+  }
+
+  document.getElementById('team-nav-button').onclick = (event) => {
+    document.getElementById('team').scrollIntoView({
+      behavior: 'smooth'
+    })
+  }
 }
 
