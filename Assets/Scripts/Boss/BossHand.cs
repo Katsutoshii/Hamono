@@ -140,7 +140,7 @@ public class BossHand : Enemy
         base.Damage(trivialDamage, knockback, source);
 
         healthAmount += trivialDamage;
-        boss.healthAmount -= this.damageAmount;
+        boss.SetHealth(-1 * boss.GetHealthFactor());
         
         boss.laserHands.interrupted = true;
     }

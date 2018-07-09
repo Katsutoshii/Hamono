@@ -3251,6 +3251,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224219377519974386, guid: 3c53a60cc04983040adac58efe4be6c8,
     type: 2}
   m_PrefabInternal: {fileID: 1711907931}
+--- !u!114 &1336074672 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114939929721723736, guid: 98b12cc210a78c24493ebf4e395d1f85,
+    type: 2}
+  m_PrefabInternal: {fileID: 1588261103}
+  m_Script: {fileID: 11500000, guid: e7715b437f37fa7409cbafcc4c42308c, type: 3}
 --- !u!4 &1406054421 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4817295620528606, guid: 98b12cc210a78c24493ebf4e395d1f85,
@@ -3560,12 +3566,12 @@ Prefab:
     - target: {fileID: 114754894584173410, guid: 98b12cc210a78c24493ebf4e395d1f85,
         type: 2}
       propertyPath: healthAmount
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114943252474320770, guid: 98b12cc210a78c24493ebf4e395d1f85,
         type: 2}
       propertyPath: healthAmount
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114377068356956372, guid: 98b12cc210a78c24493ebf4e395d1f85,
         type: 2}
@@ -3589,6 +3595,16 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 796804026}
+    - target: {fileID: 114939929721723736, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: healthAmount
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114377068356956372, guid: 98b12cc210a78c24493ebf4e395d1f85,
+        type: 2}
+      propertyPath: laserHands
+      value: 
+      objectReference: {fileID: 1336074672}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98b12cc210a78c24493ebf4e395d1f85, type: 2}
   m_IsPrefabParent: 0
@@ -3961,6 +3977,10 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1663272746397186, guid: 3c53a60cc04983040adac58efe4be6c8, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114631385847659038, guid: 3c53a60cc04983040adac58efe4be6c8, type: 2}

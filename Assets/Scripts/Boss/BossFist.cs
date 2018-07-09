@@ -114,7 +114,7 @@ public class BossFist : Enemy {
 		if (rising) damageAmount = 1;
 		if (grounded) {
 			base.Damage(damageAmount, knockback, source);
-			boss.healthAmount -= 5;
+			boss.SetHealth(-1 * boss.GetHealthFactor());
 		}
 	}
 
