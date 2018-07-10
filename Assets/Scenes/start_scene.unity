@@ -228,8 +228,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.060000002, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000022888184, y: -102}
-  m_SizeDelta: {x: 220.7, y: 106.6}
+  m_AnchoredPosition: {x: -0.0000076293945, y: 0}
+  m_SizeDelta: {x: 356.2, y: 236}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &446165906
 MonoBehaviour:
@@ -375,7 +375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.9207764, y: 89}
+  m_AnchoredPosition: {x: 4.9207764, y: -27}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &818528653
@@ -419,12 +419,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1073348225}
-        m_MethodName: LoadScene
-        m_Mode: 3
+        m_MethodName: QuitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -756,7 +756,7 @@ Prefab:
     - target: {fileID: 224164628887262988, guid: f9b5326f7da91ef4aa931d5d501ddd2a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 74.3
+      value: 83.509995
       objectReference: {fileID: 0}
     - target: {fileID: 114795349625478856, guid: f9b5326f7da91ef4aa931d5d501ddd2a,
         type: 2}
@@ -796,7 +796,7 @@ Prefab:
     - target: {fileID: 224726056263031376, guid: f9b5326f7da91ef4aa931d5d501ddd2a,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0000076293945
+      value: -0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 224726056263031376, guid: f9b5326f7da91ef4aa931d5d501ddd2a,
         type: 2}
@@ -919,7 +919,7 @@ Prefab:
     - target: {fileID: 224164628887262988, guid: f9b5326f7da91ef4aa931d5d501ddd2a,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 162.7
+      value: 168.89006
       objectReference: {fileID: 0}
     - target: {fileID: 224164628887262988, guid: f9b5326f7da91ef4aa931d5d501ddd2a,
         type: 2}
@@ -930,6 +930,11 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 49.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 224182412263641028, guid: f9b5326f7da91ef4aa931d5d501ddd2a,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114962608727058098, guid: f9b5326f7da91ef4aa931d5d501ddd2a, type: 2}
