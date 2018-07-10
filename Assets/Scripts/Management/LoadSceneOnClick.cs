@@ -19,4 +19,8 @@ public class LoadSceneOnClick : MonoBehaviour {
 		loadingBar.RunAnimation();
 		SceneManager.LoadSceneAsync(sceneID);
 	}
+	public void QuitGame() {
+		Debug.Log("quitting game");
+		Application.Quit();
+	}
 }
