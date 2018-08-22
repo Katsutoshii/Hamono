@@ -9,7 +9,8 @@ window.onload = () => {
   const downloadbuttonLarge = document.getElementById('download-game-large')
   if (OSName === 'Unknown OS') { downloadButton.href = '#'; downloadButton.innerText = 'not available'; downloadbuttonLarge.innerText = 'not available' }
   if (OSName !== 'Windows') { downloadButton.href = 'game/Hamono_Mac.zip'; downloadbuttonLarge.href = 'game/Hamono_Mac.zip' }
-  if (OSName === 'Windows') { downloadButton.href = 'game/Hamono.exe'; downloadbuttonLarge.href = 'game/Hamono.zip' }
+  // if (OSName === 'Windows') { downloadButton.href = 'game/Hamono.exe'; downloadbuttonLarge.href = 'game/Hamono.zip' }
+  if (OSName === 'Windows') { downloadButton.href = '#'; downloadButton.innerText = 'coming soon for windows'; downloadbuttonLarge.innerText = 'coming soon for windows' }
 
   document.getElementById('story-nav-button').onclick = (event) => {
     document.getElementById('story').scrollIntoView({
