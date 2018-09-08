@@ -15240,6 +15240,26 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: -0.08999634
       objectReference: {fileID: 0}
+    - target: {fileID: 114454765339784060, guid: 5a4fad508db384311b8c345a081f8098,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 114454765339784060, guid: 5a4fad508db384311b8c345a081f8098,
+        type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 161
+      objectReference: {fileID: 0}
+    - target: {fileID: 224407340308472434, guid: 5a4fad508db384311b8c345a081f8098,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224407340308472434, guid: 5a4fad508db384311b8c345a081f8098,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5a4fad508db384311b8c345a081f8098, type: 2}
   m_IsPrefabParent: 0
