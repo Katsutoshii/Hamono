@@ -212,7 +212,7 @@ public class Boss : MonoBehaviour {
 		fadeAnimator.SetBool("active", true);
 
 		yield return new WaitForSeconds(1f);
-		SceneManager.LoadScene(0);	// loads title screen
+		SceneManager.LoadScene(7);	// loads credits screen
 	}
 
 	public float GetHealth() {
