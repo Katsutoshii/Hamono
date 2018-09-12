@@ -252,7 +252,9 @@ public partial class Player : MonoBehaviour {
 		yield return new WaitForSecondsRealtime(1);
 
 		Time.timeScale = 1;
-		SceneManager.LoadScene(0);
+		
+    PlayerPrefs.SetInt("next_level", SceneManager.GetActiveScene().buildIndex);
+		SceneManager.LoadScene(5);
 	}
 
 	public IEnumerator AfterEventWait() {

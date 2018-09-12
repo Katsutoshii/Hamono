@@ -64,30 +64,41 @@ public class Story : MonoBehaviour
     void Update()
     {
         ClearScript();
+        if (Input.GetMouseButtonDown(0) && scriptIndex < text.Length) {
+            clicked = true;
+        }
     }
 
     // if player doesn't click, the next script will automatically start
     IEnumerator AutoNextScript()
     {
-        yield return new WaitForSeconds(readingTime);
-        if (!clicked)
+        if (!clicked) {
             StartStory();
-        else
-            yield return null;
+        } else {
+            NextSection();
+        }
+        yield return new WaitForSeconds(readingTime);
     }
 
     // clears the current script
-    private void ClearScript()
-    {
-        if (completedSpeech)
-        {
+    private void ClearScript() {
+        if (completedSpeech) {
             // clearing script
             // dialogStarted = false;
             completedSpeech = false;
             startedSpeech = false;
+            StartCoroutine(AutoNextScript());
+        } else if (clicked) {
             clicked = false;
             StartCoroutine(AutoNextScript());
         }
+    }
+
+    // Flips to the next image and text
+    void NextSection() {
+        StartCoroutine(NextImage());
+        
+        animationWait = 2f;
     }
 
     // moves to the next script
@@ -96,15 +107,10 @@ public class Story : MonoBehaviour
         // dialogStarted = true;
         Debug.Log("starting story");
         Debug.Log("completed speech?: " + completedSpeech);
-
+        anim.speed = 0.3f;
         if (!startedSpeech && !completedSpeech && scriptIndex < text.Length)
         {
-            storyText.TypeText(text[scriptIndex]);
-            StartCoroutine(NextImage());
-            completedSpeech = false;
-            startedSpeech = true;
-            scriptIndex++;
-            animationWait = 0.75f;
+            NextSection();
         }
         else if (startedSpeech && !completedSpeech)
         {
@@ -114,7 +120,7 @@ public class Story : MonoBehaviour
         else if (scriptIndex >= text.Length)
         {
             anim = fadeToBlackEffectScreen.transform.GetChild(0).GetComponent<Animator>();
-            anim.speed = .1f;
+            anim.SetFloat("direction", -1f);
             fadeToBlackEffectScreen.SetActive(true);
             StartCoroutine(MoveToNextScene());
         }
@@ -125,12 +131,20 @@ public class Story : MonoBehaviour
     {
         if (imageIndex < sprites.Length)
         {
-            fadeToBlackEffect.SetActive(true);
             yield return new WaitForSeconds(animationWait);
+            storyText.TypeText(text[scriptIndex]);
+            completedSpeech = false;
+            startedSpeech = true;
+            scriptIndex++;
+
+            fadeToBlackEffect.SetActive(true);
+            yield return new WaitForSeconds(0f);
+
+
             storyImage.sprite = sprites[imageIndex];
             imageIndex++;
 
-            yield return new WaitForSeconds(animationWait);
+            yield return new WaitForSeconds(3f);
             fadeToBlackEffect.SetActive(false);
         }
     }
