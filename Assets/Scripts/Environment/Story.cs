@@ -104,7 +104,7 @@ public class Story : MonoBehaviour
             completedSpeech = false;
             startedSpeech = true;
             scriptIndex++;
-            animationWait = 1f;
+            animationWait = 0.75f;
         }
         else if (startedSpeech && !completedSpeech)
         {
@@ -129,8 +129,7 @@ public class Story : MonoBehaviour
             yield return new WaitForSeconds(animationWait);
             storyImage.sprite = sprites[imageIndex];
             imageIndex++;
-            // reverses animation
-            anim.SetFloat("direction", -1f);
+
             yield return new WaitForSeconds(animationWait);
             fadeToBlackEffect.SetActive(false);
         }

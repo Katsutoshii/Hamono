@@ -261,7 +261,7 @@ Prefab:
         type: 2}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: ceca70d61568243cd9c3737d42f09966, type: 3}
+      objectReference: {fileID: 8300000, guid: 8d3c948cafbed41fe8fd8e2da4f6e3d1, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0aa0d1d5e8f83c9448822babe119923d, type: 2}
   m_IsPrefabParent: 0
@@ -3013,7 +3013,7 @@ Prefab:
     - target: {fileID: 224407340308472434, guid: 5a4fad508db384311b8c345a081f8098,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.08999634
+      value: -0.090026855
       objectReference: {fileID: 0}
     - target: {fileID: 224599504700952574, guid: 5a4fad508db384311b8c345a081f8098,
         type: 2}

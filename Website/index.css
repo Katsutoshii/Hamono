@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+body {
+  margin: 0 auto;
+  background-color: black;
+  color: white;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 20px;
+  text-align: center;
+  width: 80%;
+}
+
+h2, h3 {
+  text-transform: uppercase;
+}
+
+h4 {
+  text-align: left;
+}
+
+.game-banner {
+  height: 75px;
+  margin-bottom: 8px;
+}
+
+nav {
+  display: flex;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+li {
+  margin: 0 20px;
+}
+
+a {
+  text-decoration: none;
+  color: gray;
+}
+
+a:hover {
+  color: #aaa;
+}
+
+.fade-left {
+  height: 800px;
+  width: 300px;
+  position: absolute;
+  left: 0;
+  background: linear-gradient(to right, #000, rgb(12, 8, 8), rgba(53, 35, 35, 0));
+}
+
+.fade-right {
+  height: 800px;
+  width: 300px;
+  position: absolute;
+  right: 0;
+  background: linear-gradient(to left, #000, rgb(12, 8, 8), rgba(53, 35, 35, 0));
+}
+
+.opener {
+  width: 100%;
+}
+
+.content-container {
+  padding-top: 50px;
+}
+
+.large-button {
+  border: 1px solid white;
+  border-radius: 3px;
+  padding: 15px 30px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 26px;
+  width: 400px;
+  height: 70px;
+}
+
+.medium-button {
+  border: 1px solid gray;
+  padding: 10px 30px;
+  border-radius: 3px;
+  font-size: 22px;
+  width: 300px;
+}
+
+#intro {
+  background: linear-gradient(#4f3535, #000);
+  margin-top: -20px;
+}
+
+#intro p {
+  padding-top: 20px;
+}
+
+#story p {
+  text-align: left;
+}
+
+.story {
+  height: 300px;
+}
+
+.story:first-child {
+  margin-right: 10px;
+}
+
+.features-container {
+  display: flex;
+  margin: 0 auto;
+  width: 85%;
+  text-align: left;
+  line-height: 30px;
+}
+
+.features-images-container {
+  margin-right: 30px;
+}
+
+.animations {
+  width: 450px;
+  margin-bottom: 10px;
+}
+
+.team-container {
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.name {
+  text-transform: uppercase;
+  text-align: center;
+  margin: auto;
+  width: 120px;
+  margin-bottom: 5px;
+}
+
+.role {
+  color: gray;
+}
+
+.headshot {
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.red {
+  color: red;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.floor-turret {
+  position: relative;
+  height: 75px;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.flip {
+  transform: scaleX(-1);
+}
+
+@media (max-width: 1080px) {
+  body {
+    width: 95%;
+  }
+  .fade-left, .fade-right {
+    display: none;
+  }
+  
+  nav {
+    display: none;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h4 {
+    text-align: center;
+  }
+
+  .story {
+    height: 200px;
+    margin-bottom: 10px;
+  }
+
+  .features-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .animations {
+    width: 330px;
+    height: 180px;
+    margin-bottom: 10px;
+  }
+
+  .game-banner-large {
+    height: 50px;
+  }
+
+  .team-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: space-around;
+    margin-bottom: 30px;
+  }
+
+  .headshot {
+    padding-top: 30px;
+    height: 175px;
+  }
+
+  .name {
+    font-size: 16px;
+  }
+
+  .role {
+    font-size: 16px;
+  }
+
+  .large-button {
+    font-size: 16px;
+  }
+
+  .floor-turret {
+    display: none;
+  }
+}
