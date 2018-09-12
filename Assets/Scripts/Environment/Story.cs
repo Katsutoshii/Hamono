@@ -120,7 +120,6 @@ public class Story : MonoBehaviour
         else if (scriptIndex >= text.Length)
         {
             anim = fadeToBlackEffectScreen.transform.GetChild(0).GetComponent<Animator>();
-            anim.SetFloat("direction", -1f);
             fadeToBlackEffectScreen.SetActive(true);
             StartCoroutine(MoveToNextScene());
         }

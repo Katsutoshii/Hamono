@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class NextLevelController : MonoBehaviour {
 
-  	public int nextLevel;
+  public int nextLevel;
 	public GameObject fadeToBlackEffect;
 	public Animator fadeToBlackAnimator;
 	private Player player;
