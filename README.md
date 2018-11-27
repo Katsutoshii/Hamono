@@ -2,6 +2,8 @@
 
 Hamono is a side-scrolling platformer game that is based on fluid and intuitive swordfighting combat. The player uses only their mouse to draw attacks on the screen, and the main character automatically moves to the start location of the swing and makes the appropriate attack.
 
+http://hamono.surge.sh/
+
 ## Development Timeline
 
 The team met twice a week to ensure that every member was on the same page during the six week period. During each meeting, we would talk about major factors that would ultimately affect the entire game. Everything from the story, game mechanics, to even music, were discussed in much detail.
